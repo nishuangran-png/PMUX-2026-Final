@@ -1,0 +1,12 @@
+* text=auto
+
+# 与上游 Yosys 保持一致，避免 Windows 上换行被改写
+*.cc text eol=lf
+*.h  text eol=lf
+*.md text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# 二进制资料不做换行转换
+*.pdf binary
+*.png binary
