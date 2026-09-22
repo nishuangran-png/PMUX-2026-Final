@@ -1,0 +1,107 @@
+<div id="pmux-opt-root">
+  <style>
+    #pmux-opt-root .opt-title { margin: 0 0 2px; }
+    #pmux-opt-root .opt-sub { margin: 0 0 14px; }
+    #pmux-opt-root .opt-row { padding: 13px 0; }
+    #pmux-opt-root .opt-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    #pmux-opt-root .opt-name { font-weight: 500; }
+    #pmux-opt-root .opt-total { display: flex; align-items: baseline; gap: 8px; }
+    #pmux-opt-root .opt-bar { display: block; margin: 9px 0 7px; }
+    #pmux-opt-root .opt-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; }
+    #pmux-opt-root .opt-swatch { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: 2px; margin-inline-end: 6px; vertical-align: baseline; }
+    #pmux-opt-root .opt-sep { margin: 0; }
+  </style>
+
+  <h2 class="opt-title">同一个 8 选 1，三种下场</h2>
+  <p class="opt-sub text-small text-muted">Yosys 0.69 综合后的门级单元数，数据宽度 8 位，条长共用同一标尺</p>
+
+  <div class="opt-row" data-seg="other:132" data-label="默认综合流程：132 个单元，其中选择器单元 0 个，其它逻辑门 132 个">
+    <div class="opt-head">
+      <span class="opt-name">默认综合流程</span>
+      <span class="opt-total"><span class="tabular-nums">132</span> <span class="text-small text-muted">基准</span></span>
+    </div>
+    <div class="opt-bar"></div>
+    <div class="text-small text-muted">选择器单元 0 · 其它逻辑门 132</div>
+  </div>
+
+  <hr class="opt-sep">
+
+  <div class="opt-row" data-seg="mux:44,other:44" data-label="只补一步 pmuxtree：88 个单元，其中选择器单元 44 个，其它逻辑门 44 个">
+    <div class="opt-head">
+      <span class="opt-name">只补一步 pmuxtree</span>
+      <span class="opt-total"><span class="tabular-nums">88</span> <span class="text-small text-muted">比基准 −33%</span></span>
+    </div>
+    <div class="opt-bar"></div>
+    <div class="text-small text-muted">选择器单元 44 · 其它逻辑门 44</div>
+  </div>
+
+  <hr class="opt-sep">
+
+  <div class="opt-row" data-seg="mux:56" data-label="显式 mux 树：56 个单元，全部是选择器单元">
+    <div class="opt-head">
+      <span class="opt-name">显式 mux 树（理想参照）</span>
+      <span class="opt-total"><span class="tabular-nums">56</span> <span class="text-small text-muted">比基准 −58%</span></span>
+    </div>
+    <div class="opt-bar"></div>
+    <div class="text-small text-muted">选择器单元 56 · 其它逻辑门 0</div>
+  </div>
+
+  <div class="opt-legend text-small">
+    <span><span class="opt-swatch" style="background: var(--viz-series-1)"></span>选择器单元（$_MUX_）</span>
+    <span><span class="opt-swatch" style="background: var(--viz-series-2)"></span>其它逻辑门（与 / 与非 / 或 / 非 等）</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('pmux-opt-root');
+  if (!root) return;
+
+  var FULL_SCALE = 132;
+  var HEIGHT = 20;
+  var COLORS = { mux: 'var(--viz-series-1)', other: 'var(--viz-series-2)' };
+
+  function parseSegments(spec) {
+    return spec.split(',').map(function (piece) {
+      var parts = piece.split(':');
+      return { kind: parts[0], value: Number(parts[1]) };
+    });
+  }
+
+  function drawRow(row) {
+    var host = row.querySelector('.opt-bar');
+    if (!host) return;
+    var width = Math.max(160, Math.round(host.clientWidth || root.clientWidth || 640));
+    var scale = width / FULL_SCALE;
+    var x = 0;
+    var shapes = '';
+
+    parseSegments(row.getAttribute('data-seg')).forEach(function (seg) {
+      var w = seg.value * scale;
+      shapes += '<rect x="' + x.toFixed(1) + '" y="0" width="' + w.toFixed(1) +
+                '" height="' + HEIGHT + '" fill="' + COLORS[seg.kind] + '"></rect>';
+      x += w;
+    });
+
+    host.innerHTML = '<svg width="100%" height="' + HEIGHT + '" viewBox="0 0 ' + width + ' ' + HEIGHT +
+                     '" preserveAspectRatio="none" role="img" aria-label="' +
+                     row.getAttribute('data-label') + '"><title>' +
+                     row.getAttribute('data-label') + '</title>' + shapes + '</svg>';
+  }
+
+  function drawAll() {
+    root.querySelectorAll('.opt-row').forEach(drawRow);
+  }
+
+  drawAll();
+
+  if (typeof ResizeObserver === 'function') {
+    var last = root.clientWidth;
+    new ResizeObserver(function () {
+      if (Math.abs(root.clientWidth - last) < 2) return;
+      last = root.clientWidth;
+      drawAll();
+    }).observe(root);
+  }
+})();
+</script>
