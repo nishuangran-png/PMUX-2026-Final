@@ -46,3 +46,7 @@ build/
 # --- 本地工具链与临时文件（不入库） ---
 tools/
 _待删除/
+
+# --- EQY 运行产物 ---
+experiments/eqy-demo/eq_ok/
+experiments/eqy-demo/eq_bad/

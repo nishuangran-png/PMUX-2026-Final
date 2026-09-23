@@ -1,0 +1,13 @@
+# 等价验证配置：基准实现 vs 正确的优化实现
+# 期望结果：PASS（两份网表功能完全一致）
+
+[gold]
+read_verilog gold.v
+prep -top pmux_demo
+
+[gate]
+read_verilog gate_ok.v
+prep -top pmux_demo
+
+[strategy sat]
+use sat

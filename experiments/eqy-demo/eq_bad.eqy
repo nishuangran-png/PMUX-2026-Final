@@ -1,0 +1,13 @@
+# 等价验证配置：基准实现 vs 写错的优化实现
+# 期望结果：FAIL（工具应当找出反例）
+
+[gold]
+read_verilog gold.v
+prep -top pmux_demo
+
+[gate]
+read_verilog gate_bad.v
+prep -top pmux_demo
+
+[strategy sat]
+use sat
