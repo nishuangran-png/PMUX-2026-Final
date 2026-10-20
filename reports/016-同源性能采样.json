@@ -1,0 +1,118 @@
+{
+  "n": 15,
+  "rows": [
+    {
+      "case": "test1",
+      "baseline": {
+        "logic": 288,
+        "dff": 222,
+        "cpu_s_median": 0.25,
+        "cpu_s_min": 0.24000000000000002,
+        "cpu_s_max": 0.26,
+        "mem_bytes_median": 27557888,
+        "mem_mb_median": 26.28,
+        "mem_mb_min": 24.17,
+        "mem_mb_max": 27.64
+      },
+      "candidate": {
+        "logic": 202,
+        "dff": 222,
+        "cpu_s_median": 0.22,
+        "cpu_s_min": 0.22,
+        "cpu_s_max": 0.22999999999999998,
+        "mem_bytes_median": 27017216,
+        "mem_mb_median": 25.77,
+        "mem_mb_min": 22.97,
+        "mem_mb_max": 27.5
+      },
+      "reduction_pct": 29.86111111111111,
+      "mem_delta_pct": -1.9619500594530321,
+      "cpu_delta_pct": -12.0
+    },
+    {
+      "case": "test2",
+      "baseline": {
+        "logic": 25,
+        "dff": 0,
+        "cpu_s_median": 0.08,
+        "cpu_s_min": 0.07,
+        "cpu_s_max": 0.08,
+        "mem_bytes_median": 19857408,
+        "mem_mb_median": 18.94,
+        "mem_mb_min": 18.02,
+        "mem_mb_max": 19.31
+      },
+      "candidate": {
+        "logic": 16,
+        "dff": 0,
+        "cpu_s_median": 0.08,
+        "cpu_s_min": 0.08,
+        "cpu_s_max": 0.08,
+        "mem_bytes_median": 24117248,
+        "mem_mb_median": 23.0,
+        "mem_mb_min": 21.67,
+        "mem_mb_max": 25.56
+      },
+      "reduction_pct": 36.0,
+      "mem_delta_pct": 21.45214521452145,
+      "cpu_delta_pct": 0.0
+    },
+    {
+      "case": "test3",
+      "baseline": {
+        "logic": 12,
+        "dff": 17,
+        "cpu_s_median": 0.09,
+        "cpu_s_min": 0.09,
+        "cpu_s_max": 0.09,
+        "mem_bytes_median": 24199168,
+        "mem_mb_median": 23.08,
+        "mem_mb_min": 18.23,
+        "mem_mb_max": 24.23
+      },
+      "candidate": {
+        "logic": 10,
+        "dff": 17,
+        "cpu_s_median": 0.09,
+        "cpu_s_min": 0.09,
+        "cpu_s_max": 0.09,
+        "mem_bytes_median": 24068096,
+        "mem_mb_median": 22.95,
+        "mem_mb_min": 21.47,
+        "mem_mb_max": 24.52
+      },
+      "reduction_pct": 16.666666666666664,
+      "mem_delta_pct": -0.5416384563303994,
+      "cpu_delta_pct": 0.0
+    },
+    {
+      "case": "test4",
+      "baseline": {
+        "logic": 31,
+        "dff": 10,
+        "cpu_s_median": 0.11,
+        "cpu_s_min": 0.09999999999999999,
+        "cpu_s_max": 0.11,
+        "mem_bytes_median": 25329664,
+        "mem_mb_median": 24.16,
+        "mem_mb_min": 21.22,
+        "mem_mb_max": 27.75
+      },
+      "candidate": {
+        "logic": 31,
+        "dff": 10,
+        "cpu_s_median": 0.11,
+        "cpu_s_min": 0.09999999999999999,
+        "cpu_s_max": 0.11,
+        "mem_bytes_median": 26460160,
+        "mem_mb_median": 25.23,
+        "mem_mb_min": 21.3,
+        "mem_mb_max": 26.59
+      },
+      "reduction_pct": 0.0,
+      "mem_delta_pct": 4.463130659767141,
+      "cpu_delta_pct": 0.0
+    }
+  ],
+  "avg_reduction_pct": 20.631944444444443
+}

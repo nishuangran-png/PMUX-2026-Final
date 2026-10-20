@@ -1,0 +1,5 @@
+&sweep
+&dc2
+&dch -f -r
+&ps
+&if -W 300 -v

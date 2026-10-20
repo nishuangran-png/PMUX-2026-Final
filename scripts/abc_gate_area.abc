@@ -1,0 +1,3 @@
+# 面积导向的门级映射（标准单元库，不做 LUT 映射）
+# 与 synth 内置 abc 的区别：内置用 &nf {D} 是延迟导向，这里用 &nf -a 做面积导向。
+strash; &get -n; &fraig -x; &put; scorr; dc2; dretime; strash; &get -n; &nf -a; &put

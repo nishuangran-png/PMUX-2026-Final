@@ -1,0 +1,2 @@
+# 面积导向的 LUT 映射（K=6 LUT，对应 FPGA 实现的 LUT 口径）
+strash; &get -n; &if -a; &put

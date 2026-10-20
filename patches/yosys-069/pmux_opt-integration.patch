@@ -1,0 +1,24 @@
+diff --git a/passes/CMakeLists.txt b/passes/CMakeLists.txt
+index 8e0c4a1..aca0cd7 100644
+--- a/passes/CMakeLists.txt
++++ b/passes/CMakeLists.txt
+@@ -4,6 +4,7 @@ add_subdirectory(fsm)
+ add_subdirectory(hierarchy)
+ add_subdirectory(memory)
+ add_subdirectory(opt)
++add_subdirectory(pmux)
+ add_subdirectory(pmgen)
+ add_subdirectory(proc)
+ add_subdirectory(sat)
+diff --git a/techlibs/intel/synth_intel.cc b/techlibs/intel/synth_intel.cc
+index 3a229fb..b3a4a93 100644
+--- a/techlibs/intel/synth_intel.cc
++++ b/techlibs/intel/synth_intel.cc
+@@ -209,6 +209,7 @@ struct SynthIntelPass : public ScriptPass {
+ 			run("opt -nodffe -nosdff");
+ 			run("fsm");
+ 			run("opt");
++			run("pmux_opt");
+ 			run("wreduce");
+ 			run("peepopt");
+ 			run("opt_clean");
