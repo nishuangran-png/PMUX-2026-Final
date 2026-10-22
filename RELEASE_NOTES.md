@@ -94,6 +94,8 @@ python3 scripts/eval_efficiency.py --repeat 15
 - 官方复测：`reports/018-最新官方答疑与官网v069复测.md`
 - test2 内存修复：`reports/019-test2平衡mux树.md`
 - test4 定位与阶段修复：`reports/020-test4零收益定位.md`
+- test4 阶段面积原始数据：`reports/020-test4阶段修复-面积.json`
+- test4 阶段效率原始数据：`reports/020-test4阶段修复-效率采样.json`
 - 面积原始数据：`reports/019-官网v069修复后面积.json`
 - 效率原始数据：`reports/019-官网v069修复后效率采样.json`
 - 核心源码：`src/yosys-069/passes/pmux/pmux_opt.cc`
