@@ -1,0 +1,12 @@
+diff --git a/techlibs/intel/synth_intel.cc b/techlibs/intel/synth_intel.cc
+--- a/techlibs/intel/synth_intel.cc
++++ b/techlibs/intel/synth_intel.cc
+@@ -264,6 +264,8 @@ struct SynthIntelPass : public ScriptPass {
+ 		}
+ 
+ 		if (check_label("map_luts")) {
++			run("autoname");
++			run("sort");
+ 			run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
+ 			run("clean");
+ 			run("opt -fast");

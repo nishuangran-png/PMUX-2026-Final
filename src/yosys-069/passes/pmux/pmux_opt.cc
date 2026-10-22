@@ -9,6 +9,8 @@
  *   3. sparse partial-update PMUX collapse;
  *   4. gated equality-decoder narrowing;
  *   5. adjacent equality-code factorization and shared enable factoring.
+ *   6. small combinational constant-ROM lowering to LUTs, folding a
+ *      following constant-vs-ROM mux (for example a clock-enable gate).
  *
  * Pattern: two $pmux cells that
  *   - share the exact same select vector S, which decodes a bus into one-hot
@@ -30,12 +32,198 @@
 #include "kernel/yosys.h"
 #include "kernel/sigtools.h"
 #include "kernel/celltypes.h"
+#include "kernel/mem.h"
 #include "kernel/register.h"
 
 USING_YOSYS_NAMESPACE
 PRIVATE_NAMESPACE_BEGIN
 
 namespace {
+
+// proc_rom turns complete constant switches into $mem_v2 before this pass
+// runs.  A small, write-free ROM with fully-defined contents is a truth table,
+// so exposing it as $lut lets ABC optimize the table directly instead of first
+// materializing memory_map's mux tree.  Keep the rule deliberately narrow:
+// synchronous ports, partial address spaces and X-valued entries stay in the
+// normal memory flow.
+struct InputLoad {
+	Cell *cell;
+	IdString port;
+	int offset;
+};
+
+int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, bool verbose)
+{
+	int lowered = 0;
+
+	for (auto &mem : Mem::get_selected_memories(module)) {
+		if (!mem.wr_ports.empty() || mem.rd_ports.empty())
+			continue;
+		if (mem.attributes.count(ID::keep))
+			continue;
+		if (mem.width <= 0 || mem.size <= 0 || mem.start_offset != 0)
+			continue;
+		if (mem.size > (1 << 8))
+			continue;
+		if ((mem.size & (mem.size - 1)) != 0)
+			continue;
+
+		int addr_bits = ceil_log2(mem.size);
+		if (addr_bits > 8 || mem.width > 256)
+			continue;
+		if ((1 << addr_bits) * mem.width > 16384)
+			continue;
+
+		Const init_data = mem.get_init_data();
+		if (!init_data.is_fully_def())
+			continue;
+
+		bool convertible = true;
+		for (auto &port : mem.rd_ports) {
+			if (port.removed || port.clk_enable || port.wide_log2 != 0 ||
+			    !port.en.is_fully_ones() || !port.arst.is_fully_zero() ||
+			    !port.srst.is_fully_zero() || GetSize(port.addr) != addr_bits ||
+			    GetSize(port.data) != mem.width) {
+				convertible = false;
+				break;
+			}
+		}
+		if (!convertible)
+			continue;
+
+		dict<SigBit, std::vector<InputLoad>> bit2loads;
+		for (auto cell : module->cells())
+			for (auto &conn : cell->connections()) {
+				if (ct.cell_output(cell->type, conn.first))
+					continue;
+				if (cell->type.in(ID($memrd), ID($memrd_v2)) && conn.first == ID::DATA)
+					continue;
+				if (cell->type == ID($mem_v2) && conn.first == ID::RD_DATA)
+					continue;
+				int offset = 0;
+				for (auto bit : sigmap(conn.second))
+					bit2loads[bit].push_back({cell, conn.first, offset++});
+			}
+
+		for (auto &port : mem.rd_ports) {
+			if (addr_bits == 0) {
+				module->connect(port.data, init_data.extract(0, mem.width));
+				continue;
+			}
+
+			dict<SigBit, int> rom_bit_index;
+			for (int bit = 0; bit < mem.width; bit++)
+				rom_bit_index[sigmap(port.data[bit])] = bit;
+			if (verbose)
+				log("  constant ROM %s port has %d mapped data bit(s), %d loads\n",
+				    log_id(mem.memid), GetSize(rom_bit_index), GetSize(bit2loads));
+
+			pool<int> folded_bits;
+			std::vector<Cell *> folded_muxes;
+			std::vector<Cell *> candidates;
+			for (auto cell : module->cells())
+				if (cell->type == ID($mux))
+					candidates.push_back(cell);
+			if (verbose)
+				log("  considered %d mux candidate(s)\n", GetSize(candidates));
+			for (auto cell : candidates) {
+				if (cell->type != ID($mux))
+					continue;
+				int width = GetSize(cell->getPort(ID::Y));
+				if (width < 1 || GetSize(cell->getPort(ID::A)) != width ||
+				    GetSize(cell->getPort(ID::B)) != width ||
+				    GetSize(cell->getPort(ID::S)) != 1)
+					continue;
+				SigSpec a_data = sigmap(cell->getPort(ID::A));
+				if (!a_data.is_fully_const())
+					continue;
+
+				std::vector<int> indices;
+				pool<int> unique;
+				bool convertible = true;
+				SigSpec b_data = sigmap(cell->getPort(ID::B));
+				bool touches_rom = false;
+				for (auto bit : b_data)
+					if (rom_bit_index.count(bit))
+						touches_rom = true;
+				for (int bit = 0; bit < width && convertible; bit++) {
+					auto it = rom_bit_index.find(b_data[bit]);
+					if (it == rom_bit_index.end() || folded_bits.count(it->second) ||
+					    unique.count(it->second)) {
+						if (verbose && touches_rom)
+							log("  cannot fold mux %s bit %d: rom index unavailable/duplicate\n",
+							    log_id(cell->name), bit);
+						convertible = false;
+						break;
+					}
+					unique.insert(it->second);
+					auto load_it = bit2loads.find(b_data[bit]);
+					if (load_it == bit2loads.end() || load_it->second.size() != 1 ||
+					    load_it->second[0].cell != cell || load_it->second[0].port != ID::B ||
+					    load_it->second[0].offset != bit) {
+						if (verbose && touches_rom)
+							log("  cannot fold mux %s bit %d: loads=%d first=%s/%s/%d\n",
+							    log_id(cell->name), bit,
+							    load_it == bit2loads.end() ? -1 : GetSize(load_it->second),
+							    load_it == bit2loads.end() || load_it->second.empty() ? "" : log_id(load_it->second[0].cell->name),
+							    load_it == bit2loads.end() || load_it->second.empty() ? "" : log_id(load_it->second[0].port),
+							    load_it == bit2loads.end() || load_it->second.empty() ? -1 : load_it->second[0].offset);
+						if (verbose && load_it != bit2loads.end())
+							for (auto &load : load_it->second)
+								log("    load from %s/%s/%d\n", log_id(load.cell->name),
+								    log_id(load.port), load.offset);
+						convertible = false;
+						break;
+					}
+					indices.push_back(it->second);
+				}
+				if (!convertible)
+					continue;
+
+				SigSpec lut_input = port.addr;
+				lut_input.append(sigmap(cell->getPort(ID::S)));
+				SigSpec lut_output = module->addWire(NEW_ID, width);
+				for (int bit = 0; bit < width; bit++) {
+					Const lut(State::S0, 1 << (addr_bits + 1));
+					for (int addr = 0; addr < mem.size; addr++) {
+						lut.set(addr, init_data[addr * mem.width + indices[bit]]);
+						lut.set(addr + mem.size, init_data[addr * mem.width + indices[bit]]);
+					}
+					for (int addr = 0; addr < mem.size; addr++)
+						lut.set(addr, a_data[bit].data);
+					module->addLut(NEW_ID, lut_input, lut_output[bit], std::move(lut));
+					folded_bits.insert(indices[bit]);
+				}
+				module->connect(cell->getPort(ID::Y), lut_output);
+				folded_muxes.push_back(cell);
+
+				if (verbose)
+					log("  folded enable mux %s into constant ROM %s\n",
+					    log_id(cell->name), log_id(mem.memid));
+			}
+			for (auto cell : folded_muxes)
+				module->remove(cell);
+
+			for (int bit = 0; bit < mem.width; bit++) {
+				if (folded_bits.count(bit))
+					continue;
+				Const lut(State::S0, 1 << addr_bits);
+				for (int addr = 0; addr < mem.size; addr++)
+					lut.set(addr, init_data[addr * mem.width + bit]);
+				module->addLut(NEW_ID, port.addr, port.data[bit], std::move(lut));
+			}
+		}
+
+		if (verbose)
+			log("  lowered constant ROM %s: %d x %d -> %d LUT input(s)\n",
+			    log_id(mem.memid), mem.size, mem.width, addr_bits);
+
+		mem.remove();
+		lowered++;
+	}
+
+	return lowered;
+}
 
 struct DecodeBit {
 	SigSpec bus;   // common decoded bus (sigmap'ed)
@@ -216,12 +404,6 @@ SigBit make_or(Module *module, const std::vector<SigBit> &inputs)
 	module->addReduceBool(NEW_ID, sig, y);
 	return y;
 }
-
-struct InputLoad {
-	Cell *cell;
-	IdString port;
-	int offset;
-};
 
 void build_load_maps(Module *module, SigMap &sigmap, CellTypes &ct,
                      dict<SigBit, Cell *> &bit2cell,
@@ -1030,10 +1212,12 @@ struct PmuxOptPass : public Pass {
 		ct.setup_internals();
 		ct.setup_design(design);
 
-		int n_pmux = 0, n_pairs = 0, n_skip = 0;
+		int n_pmux = 0, n_pairs = 0, n_skip = 0, n_rom = 0;
 
 		for (auto module : design->selected_modules()) {
 			SigMap sigmap(module);
+
+			n_rom += lower_constant_roms_to_luts(module, sigmap, ct, verbose);
 
 			dict<SigBit, Cell *> bit2cell;
 				for (auto cell : module->cells())
@@ -1179,8 +1363,8 @@ struct PmuxOptPass : public Pass {
 			factor_common_enable_terms(module, enable_map, ct, verbose);
 		}
 
-		log("pmux_opt: %d $pmux cell(s), merged %d pair(s), skipped %d.\n",
-		    n_pmux, n_pairs, n_skip);
+		log("pmux_opt: %d $pmux cell(s), merged %d pair(s), skipped %d, lowered %d constant ROM(s).\n",
+		    n_pmux, n_pairs, n_skip, n_rom);
 	}
 } PmuxOptPass;
 

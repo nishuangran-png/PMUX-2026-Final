@@ -4,6 +4,7 @@
 # 用法：
 #   bash scripts/install_pmux_069.sh [YOSYS_SRC_ROOT]
 #
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEFAULT_SRC="$ROOT/tools/build/official-v069-opt"
 [ -d "$DEFAULT_SRC" ] || DEFAULT_SRC="$ROOT/tools/build/yosys-069-src"
 
@@ -17,10 +18,10 @@ DEFAULT_SRC="$ROOT/tools/build/official-v069-opt"
 #   cmake --build <YOSYS_SRC_ROOT>/build --target yosys -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc)"
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC_ROOT="${1:-$DEFAULT_SRC}"
 SRC_ROOT="$(cd "$SRC_ROOT" && pwd -P)"
 PATCH="$ROOT/patches/yosys-069/pmux_opt-integration.patch"
+NORMALIZE_PATCH="$ROOT/patches/yosys-069/abc9-input-canonicalization.patch"
 PASS_SRC="$ROOT/src/yosys-069/passes/pmux"
 PASS_DST="$SRC_ROOT/passes/pmux"
 CMAKE_FILE="$SRC_ROOT/passes/CMakeLists.txt"
@@ -34,6 +35,7 @@ die() {
 [ -f "$PASS_SRC/pmux_opt.cc" ] || die "缺少 $PASS_SRC/pmux_opt.cc"
 [ -f "$PASS_SRC/CMakeLists.txt" ] || die "缺少 $PASS_SRC/CMakeLists.txt"
 [ -f "$PATCH" ] || die "缺少 $PATCH"
+[ -f "$NORMALIZE_PATCH" ] || die "缺少 $NORMALIZE_PATCH"
 [ -f "$CMAKE_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
 [ -f "$SYNTH_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
 
@@ -52,11 +54,16 @@ fi
 
 cmake_hits="$(grep -c '^add_subdirectory(pmux)$' "$CMAKE_FILE" || true)"
 synth_hits="$(grep -c 'run("pmux_opt");' "$SYNTH_FILE" || true)"
+sort_hits="$(grep -c 'run("sort");' "$SYNTH_FILE" || true)"
 
 if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ]; then
   mkdir -p "$PASS_DST"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
+  if [ "$sort_hits" = "0" ]; then
+    patch -p1 -d "$SRC_ROOT" --dry-run < "$NORMALIZE_PATCH" >/dev/null || die "ABC9 输入规范化补丁无法应用"
+    patch -p1 -d "$SRC_ROOT" < "$NORMALIZE_PATCH" >/dev/null
+  fi
   echo "pmux_opt 已集成：$SRC_ROOT"
   exit 0
 fi
@@ -77,6 +84,8 @@ else
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
   patch -p1 -d "$SRC_ROOT" < "$PATCH" >/dev/null
 fi
+
+patch -p1 -d "$SRC_ROOT" < "$NORMALIZE_PATCH" >/dev/null
 
 echo "安装完成：$SRC_ROOT"
 echo "下一步：cmake -S \"$SRC_ROOT\" -B \"$SRC_ROOT/build\" -DCMAKE_BUILD_TYPE=Release"
