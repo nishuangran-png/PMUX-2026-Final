@@ -1,0 +1,50 @@
+{
+  "rows": [
+    {
+      "case": "test4",
+      "baseline": {
+        "case": "test4",
+        "lcell": 33,
+        "not": 1,
+        "logic": 34,
+        "dff": 10,
+        "cpu_s": 0.09,
+        "mem_bytes": 18776064,
+        "cells": {
+          "$_MUX_": 43,
+          "$_OR_": 9,
+          "$_AND_": 15,
+          "$_NOT_": 6,
+          "dffeas": 10,
+          "wires": 38,
+          "ports": 9,
+          "cells": 44,
+          "$not": 1,
+          "cycloneiv_lcell_comb": 33
+        }
+      },
+      "candidate": {
+        "case": "test4",
+        "lcell": 27,
+        "not": 1,
+        "logic": 28,
+        "dff": 10,
+        "cpu_s": 0.06,
+        "mem_bytes": 17285120,
+        "cells": {
+          "$_MUX_": 1,
+          "$_NOT_": 1,
+          "$lut": 26,
+          "dffeas": 10,
+          "wires": 32,
+          "ports": 9,
+          "cells": 38,
+          "$not": 1,
+          "cycloneiv_lcell_comb": 27
+        }
+      },
+      "reduction_pct": 17.647058823529413
+    }
+  ],
+  "avg_reduction_pct": 17.647058823529413
+}

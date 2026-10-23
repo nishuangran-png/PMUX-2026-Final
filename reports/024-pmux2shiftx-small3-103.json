@@ -1,0 +1,723 @@
+[
+  {
+    "file": "rtl/fuzz/fuzz_000.v",
+    "top": "fuzz_000",
+    "area": 192,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_001.v",
+    "top": "fuzz_001",
+    "area": 105,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_002.v",
+    "top": "fuzz_002",
+    "area": 169,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_003.v",
+    "top": "fuzz_003",
+    "area": 61,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_004.v",
+    "top": "fuzz_004",
+    "area": 127,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_005.v",
+    "top": "fuzz_005",
+    "area": 17,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_006.v",
+    "top": "fuzz_006",
+    "area": 70,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_007.v",
+    "top": "fuzz_007",
+    "area": 40,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_008.v",
+    "top": "fuzz_008",
+    "area": 9,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_009.v",
+    "top": "fuzz_009",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_010.v",
+    "top": "fuzz_010",
+    "area": 17,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_011.v",
+    "top": "fuzz_011",
+    "area": 4,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_012.v",
+    "top": "fuzz_012",
+    "area": 153,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_013.v",
+    "top": "fuzz_013",
+    "area": 32,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_014.v",
+    "top": "fuzz_014",
+    "area": 8,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_015.v",
+    "top": "fuzz_015",
+    "area": 258,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_016.v",
+    "top": "fuzz_016",
+    "area": 8,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_017.v",
+    "top": "fuzz_017",
+    "area": 136,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_018.v",
+    "top": "fuzz_018",
+    "area": 64,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_019.v",
+    "top": "fuzz_019",
+    "area": 9,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_020.v",
+    "top": "fuzz_020",
+    "area": 71,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_021.v",
+    "top": "fuzz_021",
+    "area": 16,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_022.v",
+    "top": "fuzz_022",
+    "area": 70,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_023.v",
+    "top": "fuzz_023",
+    "area": 274,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_024.v",
+    "top": "fuzz_024",
+    "area": 115,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_025.v",
+    "top": "fuzz_025",
+    "area": 28,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_026.v",
+    "top": "fuzz_026",
+    "area": 153,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_027.v",
+    "top": "fuzz_027",
+    "area": 275,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_028.v",
+    "top": "fuzz_028",
+    "area": 15,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_029.v",
+    "top": "fuzz_029",
+    "area": 583,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_030.v",
+    "top": "fuzz_030",
+    "area": 129,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_031.v",
+    "top": "fuzz_031",
+    "area": 18,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_032.v",
+    "top": "fuzz_032",
+    "area": 25,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_033.v",
+    "top": "fuzz_033",
+    "area": 12,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_034.v",
+    "top": "fuzz_034",
+    "area": 88,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_035.v",
+    "top": "fuzz_035",
+    "area": 16,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_036.v",
+    "top": "fuzz_036",
+    "area": 72,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_037.v",
+    "top": "fuzz_037",
+    "area": 17,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_038.v",
+    "top": "fuzz_038",
+    "area": 52,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_039.v",
+    "top": "fuzz_039",
+    "area": 9,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_040.v",
+    "top": "fuzz_040",
+    "area": 32,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_041.v",
+    "top": "fuzz_041",
+    "area": 57,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_042.v",
+    "top": "fuzz_042",
+    "area": 109,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_043.v",
+    "top": "fuzz_043",
+    "area": 33,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_044.v",
+    "top": "fuzz_044",
+    "area": 71,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_045.v",
+    "top": "fuzz_045",
+    "area": 16,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_046.v",
+    "top": "fuzz_046",
+    "area": 11,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_047.v",
+    "top": "fuzz_047",
+    "area": 32,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_048.v",
+    "top": "fuzz_048",
+    "area": 116,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_049.v",
+    "top": "fuzz_049",
+    "area": 192,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_050.v",
+    "top": "fuzz_050",
+    "area": 485,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_051.v",
+    "top": "fuzz_051",
+    "area": 85,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_052.v",
+    "top": "fuzz_052",
+    "area": 78,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_053.v",
+    "top": "fuzz_053",
+    "area": 25,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_054.v",
+    "top": "fuzz_054",
+    "area": 173,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_055.v",
+    "top": "fuzz_055",
+    "area": 17,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_056.v",
+    "top": "fuzz_056",
+    "area": 232,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_057.v",
+    "top": "fuzz_057",
+    "area": 16,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_058.v",
+    "top": "fuzz_058",
+    "area": 148,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_059.v",
+    "top": "fuzz_059",
+    "area": 10,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_060.v",
+    "top": "fuzz_060",
+    "area": 372,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_061.v",
+    "top": "fuzz_061",
+    "area": 33,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_062.v",
+    "top": "fuzz_062",
+    "area": 24,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_063.v",
+    "top": "fuzz_063",
+    "area": 66,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_064.v",
+    "top": "fuzz_064",
+    "area": 15,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_065.v",
+    "top": "fuzz_065",
+    "area": 66,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_066.v",
+    "top": "fuzz_066",
+    "area": 33,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_067.v",
+    "top": "fuzz_067",
+    "area": 47,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_068.v",
+    "top": "fuzz_068",
+    "area": 60,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_069.v",
+    "top": "fuzz_069",
+    "area": 8,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_070.v",
+    "top": "fuzz_070",
+    "area": 139,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_071.v",
+    "top": "fuzz_071",
+    "area": 16,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_072.v",
+    "top": "fuzz_072",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_073.v",
+    "top": "fuzz_073",
+    "area": 73,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_074.v",
+    "top": "fuzz_074",
+    "area": 88,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_075.v",
+    "top": "fuzz_075",
+    "area": 31,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_076.v",
+    "top": "fuzz_076",
+    "area": 295,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_077.v",
+    "top": "fuzz_077",
+    "area": 33,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_078.v",
+    "top": "fuzz_078",
+    "area": 32,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/fuzz/fuzz_079.v",
+    "top": "fuzz_079",
+    "area": 28,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/mixed/pmux_in_alu.v",
+    "top": "pmux_in_alu",
+    "area": 79,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/mixed/pmux_nested.v",
+    "top": "pmux_nested",
+    "area": 41,
+    "used": true,
+    "error": null
+  },
+  {
+    "file": "rtl/official/test1/test1.v",
+    "top": "test1",
+    "area": 180,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/official/test2/test2.v",
+    "top": "test2",
+    "area": 16,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/official/test3/test3.v",
+    "top": "test3",
+    "area": 10,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/official/test4/test4.v",
+    "top": "test4",
+    "area": 26,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/realistic/cpu_datapath.v",
+    "top": "cpu_datapath",
+    "area": 313,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/realistic/fsm_ctrl.v",
+    "top": "fsm_ctrl",
+    "area": 18,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_alu.v",
+    "top": "scale_alu",
+    "area": 268,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_case16.v",
+    "top": "scale_case16",
+    "area": 192,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_case64.v",
+    "top": "scale_case64",
+    "area": 435,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_case8.v",
+    "top": "scale_case8",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_multi6.v",
+    "top": "scale_multi6",
+    "area": 248,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_nested.v",
+    "top": "scale_nested",
+    "area": 416,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/scale/scale_sparse32.v",
+    "top": "scale_sparse32",
+    "area": 176,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/single/mux_tree_8to1.v",
+    "top": "mux_tree_8to1",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/single/pmux_basic.v",
+    "top": "pmux_basic",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/single/pmux_onehot.v",
+    "top": "pmux_onehot",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/single/pmux_priority.v",
+    "top": "pmux_priority",
+    "area": 66,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/reference/ref_pmux_basic.v",
+    "top": "pmux_basic",
+    "area": 48,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/reference/ref_pmux_in_alu.v",
+    "top": "pmux_in_alu",
+    "area": 72,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/reference/ref_pmux_nested.v",
+    "top": "pmux_nested",
+    "area": 39,
+    "used": false,
+    "error": null
+  },
+  {
+    "file": "rtl/reference/ref_pmux_onehot.v",
+    "top": "pmux_onehot",
+    "area": 48,
+    "used": false,
+    "error": null
+  }
+]

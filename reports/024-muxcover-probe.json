@@ -1,0 +1,236 @@
+{
+  "method": "Yosys 0.69 optimized clean build; stage-split probe before map_luts; lcell + $not",
+  "note": "muxcover_raw leaves wide $_MUX{4,8,16}_ cells. Those cells are not counted by the official lcell+$not metric and therefore must not be treated as an area win. muxcover_expanded lowers them through simcells before ABC9.",
+  "summary": {
+    "full_candidate": {
+      "logic": {
+        "test1": 180,
+        "test2": 16,
+        "test3": 10,
+        "test4": 26
+      },
+      "wide_mux_cells": 0
+    },
+    "split_baseline": {
+      "logic": {
+        "test1": 180,
+        "test2": 16,
+        "test3": 10,
+        "test4": 26
+      },
+      "wide_mux_cells": 0
+    },
+    "muxcover_raw": {
+      "logic": {
+        "test1": 57,
+        "test2": 16,
+        "test3": 10,
+        "test4": 26
+      },
+      "wide_mux_cells": 24
+    },
+    "muxcover_expanded": {
+      "logic": {
+        "test1": 180,
+        "test2": 16,
+        "test3": 10,
+        "test4": 26
+      },
+      "wide_mux_cells": 0
+    }
+  },
+  "rows": [
+    {
+      "variant": "full_candidate",
+      "case": "test1",
+      "lcell": 178,
+      "not": 2,
+      "logic": 180,
+      "dff": 222,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 402
+    },
+    {
+      "variant": "full_candidate",
+      "case": "test2",
+      "lcell": 16,
+      "not": 0,
+      "logic": 16,
+      "dff": 0,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 16
+    },
+    {
+      "variant": "full_candidate",
+      "case": "test3",
+      "lcell": 9,
+      "not": 1,
+      "logic": 10,
+      "dff": 17,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 27
+    },
+    {
+      "variant": "full_candidate",
+      "case": "test4",
+      "lcell": 26,
+      "not": 0,
+      "logic": 26,
+      "dff": 10,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 36
+    },
+    {
+      "variant": "split_baseline",
+      "case": "test1",
+      "lcell": 178,
+      "not": 2,
+      "logic": 180,
+      "dff": 222,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 402
+    },
+    {
+      "variant": "split_baseline",
+      "case": "test2",
+      "lcell": 16,
+      "not": 0,
+      "logic": 16,
+      "dff": 0,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 16
+    },
+    {
+      "variant": "split_baseline",
+      "case": "test3",
+      "lcell": 9,
+      "not": 1,
+      "logic": 10,
+      "dff": 17,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 27
+    },
+    {
+      "variant": "split_baseline",
+      "case": "test4",
+      "lcell": 26,
+      "not": 0,
+      "logic": 26,
+      "dff": 10,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 36
+    },
+    {
+      "variant": "muxcover_raw",
+      "case": "test1",
+      "lcell": 55,
+      "not": 2,
+      "logic": 57,
+      "dff": 222,
+      "mux4": 0,
+      "mux8": 24,
+      "mux16": 0,
+      "cells": 303
+    },
+    {
+      "variant": "muxcover_raw",
+      "case": "test2",
+      "lcell": 16,
+      "not": 0,
+      "logic": 16,
+      "dff": 0,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 16
+    },
+    {
+      "variant": "muxcover_raw",
+      "case": "test3",
+      "lcell": 9,
+      "not": 1,
+      "logic": 10,
+      "dff": 17,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 27
+    },
+    {
+      "variant": "muxcover_raw",
+      "case": "test4",
+      "lcell": 26,
+      "not": 0,
+      "logic": 26,
+      "dff": 10,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 36
+    },
+    {
+      "variant": "muxcover_expanded",
+      "case": "test1",
+      "lcell": 178,
+      "not": 2,
+      "logic": 180,
+      "dff": 222,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 402
+    },
+    {
+      "variant": "muxcover_expanded",
+      "case": "test2",
+      "lcell": 16,
+      "not": 0,
+      "logic": 16,
+      "dff": 0,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 16
+    },
+    {
+      "variant": "muxcover_expanded",
+      "case": "test3",
+      "lcell": 9,
+      "not": 1,
+      "logic": 10,
+      "dff": 17,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 27
+    },
+    {
+      "variant": "muxcover_expanded",
+      "case": "test4",
+      "lcell": 26,
+      "not": 0,
+      "logic": 26,
+      "dff": 10,
+      "mux4": 0,
+      "mux8": 0,
+      "mux16": 0,
+      "cells": 36
+    }
+  ]
+}

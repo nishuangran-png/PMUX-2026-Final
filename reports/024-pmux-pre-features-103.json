@@ -1,0 +1,1706 @@
+[
+  {
+    "file": "rtl/fuzz/fuzz_000.v",
+    "top": "fuzz_000",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 256,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_001.v",
+    "top": "fuzz_001",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_002.v",
+    "top": "fuzz_002",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 176,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      6,
+      16
+    ],
+    "eq": 22,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_003.v",
+    "top": "fuzz_003",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 56,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      3,
+      4
+    ],
+    "eq": 7,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_004.v",
+    "top": "fuzz_004",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 4,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 108,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      11,
+      16
+    ],
+    "eq": 25,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_005.v",
+    "top": "fuzz_005",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_006.v",
+    "top": "fuzz_006",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_007.v",
+    "top": "fuzz_007",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 4,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 44,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      3,
+      8
+    ],
+    "eq": 9,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_008.v",
+    "top": "fuzz_008",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_009.v",
+    "top": "fuzz_009",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_010.v",
+    "top": "fuzz_010",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 3,
+    "pmux_sum_bits": 24,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      3
+    ],
+    "eq": 3,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_011.v",
+    "top": "fuzz_011",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 8,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 1,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_012.v",
+    "top": "fuzz_012",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_013.v",
+    "top": "fuzz_013",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 7,
+    "pmux_sum_bits": 28,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      7
+    ],
+    "eq": 6,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_014.v",
+    "top": "fuzz_014",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_015.v",
+    "top": "fuzz_015",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 208,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      10,
+      16
+    ],
+    "eq": 24,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_016.v",
+    "top": "fuzz_016",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_017.v",
+    "top": "fuzz_017",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 7,
+    "pmux_sum_bits": 144,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2,
+      7
+    ],
+    "eq": 9,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_018.v",
+    "top": "fuzz_018",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 6,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_019.v",
+    "top": "fuzz_019",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 8,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 1,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_020.v",
+    "top": "fuzz_020",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_021.v",
+    "top": "fuzz_021",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_022.v",
+    "top": "fuzz_022",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 7,
+    "pmux_sum_bits": 56,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      7
+    ],
+    "eq": 7,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_023.v",
+    "top": "fuzz_023",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 224,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      12,
+      16
+    ],
+    "eq": 26,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_024.v",
+    "top": "fuzz_024",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 13,
+    "pmux_sum_bits": 104,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      13
+    ],
+    "eq": 14,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_025.v",
+    "top": "fuzz_025",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_026.v",
+    "top": "fuzz_026",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 192,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      4,
+      8
+    ],
+    "eq": 10,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_027.v",
+    "top": "fuzz_027",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 256,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      32
+    ],
+    "eq": 31,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_028.v",
+    "top": "fuzz_028",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 3,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_029.v",
+    "top": "fuzz_029",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 688,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      11,
+      32
+    ],
+    "eq": 41,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_030.v",
+    "top": "fuzz_030",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 10,
+    "pmux_sum_bits": 160,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      10
+    ],
+    "eq": 10,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_031.v",
+    "top": "fuzz_031",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 1,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_032.v",
+    "top": "fuzz_032",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_033.v",
+    "top": "fuzz_033",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 3,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_034.v",
+    "top": "fuzz_034",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 8,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_035.v",
+    "top": "fuzz_035",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_036.v",
+    "top": "fuzz_036",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 8,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_037.v",
+    "top": "fuzz_037",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 3,
+    "pmux_sum_bits": 24,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      3
+    ],
+    "eq": 2,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_038.v",
+    "top": "fuzz_038",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_039.v",
+    "top": "fuzz_039",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_040.v",
+    "top": "fuzz_040",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_041.v",
+    "top": "fuzz_041",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 8,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_042.v",
+    "top": "fuzz_042",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_043.v",
+    "top": "fuzz_043",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_044.v",
+    "top": "fuzz_044",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 6,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_045.v",
+    "top": "fuzz_045",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 1,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_046.v",
+    "top": "fuzz_046",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 8,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_047.v",
+    "top": "fuzz_047",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 3,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_048.v",
+    "top": "fuzz_048",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 96,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2,
+      4
+    ],
+    "eq": 4,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_049.v",
+    "top": "fuzz_049",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 256,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_050.v",
+    "top": "fuzz_050",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 400,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      18,
+      32
+    ],
+    "eq": 48,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_051.v",
+    "top": "fuzz_051",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 96,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2,
+      4
+    ],
+    "eq": 6,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_052.v",
+    "top": "fuzz_052",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 6,
+    "pmux_sum_bits": 48,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      6
+    ],
+    "eq": 5,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_053.v",
+    "top": "fuzz_053",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_054.v",
+    "top": "fuzz_054",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      32
+    ],
+    "eq": 31,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_055.v",
+    "top": "fuzz_055",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_056.v",
+    "top": "fuzz_056",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 232,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      13,
+      16
+    ],
+    "eq": 27,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_057.v",
+    "top": "fuzz_057",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_058.v",
+    "top": "fuzz_058",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_059.v",
+    "top": "fuzz_059",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_060.v",
+    "top": "fuzz_060",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 512,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      32
+    ],
+    "eq": 31,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_061.v",
+    "top": "fuzz_061",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 4,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 6,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_062.v",
+    "top": "fuzz_062",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 3,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_063.v",
+    "top": "fuzz_063",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_064.v",
+    "top": "fuzz_064",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 16,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_065.v",
+    "top": "fuzz_065",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 9,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_066.v",
+    "top": "fuzz_066",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 3,
+    "pmux_sum_bits": 48,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      3
+    ],
+    "eq": 3,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_067.v",
+    "top": "fuzz_067",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 4,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 44,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      3,
+      8
+    ],
+    "eq": 11,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_068.v",
+    "top": "fuzz_068",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_069.v",
+    "top": "fuzz_069",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_070.v",
+    "top": "fuzz_070",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 12,
+    "pmux_sum_bits": 136,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      5,
+      12
+    ],
+    "eq": 17,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_071.v",
+    "top": "fuzz_071",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/fuzz/fuzz_072.v",
+    "top": "fuzz_072",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 3,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_073.v",
+    "top": "fuzz_073",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 6,
+    "pmux_sum_bits": 96,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      6
+    ],
+    "eq": 6,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_074.v",
+    "top": "fuzz_074",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_075.v",
+    "top": "fuzz_075",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 4,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      4
+    ],
+    "eq": 4,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_076.v",
+    "top": "fuzz_076",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 32,
+    "pmux_sum_bits": 256,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      32
+    ],
+    "eq": 31,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/fuzz/fuzz_077.v",
+    "top": "fuzz_077",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 3,
+    "pmux_sum_bits": 48,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      3
+    ],
+    "eq": 3,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_078.v",
+    "top": "fuzz_078",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 2,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      2
+    ],
+    "eq": 2,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/fuzz/fuzz_079.v",
+    "top": "fuzz_079",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 4,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 32,
+    "pmux_widths": [
+      4
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/mixed/pmux_in_alu.v",
+    "top": "pmux_in_alu",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 7,
+    "pmux_sum_bits": 56,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      7
+    ],
+    "eq": 6,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/mixed/pmux_nested.v",
+    "top": "pmux_nested",
+    "error": null,
+    "pmux_count": 3,
+    "pmux_max_w": 8,
+    "pmux_max_s": 3,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      2,
+      3
+    ],
+    "eq": 6,
+    "logic_not": 3
+  },
+  {
+    "file": "rtl/official/test1/test1.v",
+    "top": "test1",
+    "error": null,
+    "pmux_count": 3,
+    "pmux_max_w": 4,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 68,
+    "pmux_widths": [
+      1,
+      4
+    ],
+    "pmux_swidths": [
+      2,
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/official/test2/test2.v",
+    "top": "test2",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/official/test3/test3.v",
+    "top": "test3",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 1,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/official/test4/test4.v",
+    "top": "test4",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/realistic/cpu_datapath.v",
+    "top": "cpu_datapath",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 16,
+    "pmux_max_s": 9,
+    "pmux_sum_bits": 208,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      4,
+      9
+    ],
+    "eq": 11,
+    "logic_not": 3
+  },
+  {
+    "file": "rtl/realistic/fsm_ctrl.v",
+    "top": "fsm_ctrl",
+    "error": null,
+    "pmux_count": 2,
+    "pmux_max_w": 8,
+    "pmux_max_s": 7,
+    "pmux_sum_bits": 74,
+    "pmux_widths": [
+      3,
+      8
+    ],
+    "pmux_swidths": [
+      6,
+      7
+    ],
+    "eq": 6,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/scale/scale_alu.v",
+    "top": "scale_alu",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 128,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/scale/scale_case16.v",
+    "top": "scale_case16",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 16,
+    "pmux_sum_bits": 256,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      16
+    ],
+    "eq": 15,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/scale/scale_case64.v",
+    "top": "scale_case64",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 64,
+    "pmux_sum_bits": 512,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      64
+    ],
+    "eq": 63,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/scale/scale_case8.v",
+    "top": "scale_case8",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/scale/scale_multi6.v",
+    "top": "scale_multi6",
+    "error": null,
+    "pmux_count": 6,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 384,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/scale/scale_nested.v",
+    "top": "scale_nested",
+    "error": null,
+    "pmux_count": 9,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 576,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 14,
+    "logic_not": 2
+  },
+  {
+    "file": "rtl/scale/scale_sparse32.v",
+    "top": "scale_sparse32",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 16,
+    "pmux_max_s": 12,
+    "pmux_sum_bits": 192,
+    "pmux_widths": [
+      16
+    ],
+    "pmux_swidths": [
+      12
+    ],
+    "eq": 11,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/single/mux_tree_8to1.v",
+    "top": "mux_tree_8to1",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/single/pmux_basic.v",
+    "top": "pmux_basic",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/single/pmux_onehot.v",
+    "top": "pmux_onehot",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 7,
+    "logic_not": 1
+  },
+  {
+    "file": "rtl/single/pmux_priority.v",
+    "top": "pmux_priority",
+    "error": null,
+    "pmux_count": 1,
+    "pmux_max_w": 8,
+    "pmux_max_s": 8,
+    "pmux_sum_bits": 64,
+    "pmux_widths": [
+      8
+    ],
+    "pmux_swidths": [
+      8
+    ],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/reference/ref_pmux_basic.v",
+    "top": "pmux_basic",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/reference/ref_pmux_in_alu.v",
+    "top": "pmux_in_alu",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/reference/ref_pmux_nested.v",
+    "top": "pmux_nested",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  },
+  {
+    "file": "rtl/reference/ref_pmux_onehot.v",
+    "top": "pmux_onehot",
+    "error": null,
+    "pmux_count": 0,
+    "pmux_max_w": 0,
+    "pmux_max_s": 0,
+    "pmux_sum_bits": 0,
+    "pmux_widths": [],
+    "pmux_swidths": [],
+    "eq": 0,
+    "logic_not": 0
+  }
+]

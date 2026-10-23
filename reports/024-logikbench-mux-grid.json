@@ -1,0 +1,1699 @@
+{
+  "tool": "tools/build/official-v069-test4-20261023/build-clean/yosys",
+  "baseline": "synth_intel cycloneiv",
+  "variant": "pmux2shiftx inserted after begin:map_bram",
+  "summary": {
+    "cases": 80,
+    "valid": 80,
+    "errors": 0,
+    "better": 0,
+    "same": 80,
+    "worse": 0,
+    "total_delta": 0,
+    "max_abs_delta": 0,
+    "dff_changed": 0,
+    "elapsed_s": 90.62
+  },
+  "rows": [
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 2,
+      "base": {
+        "area": 1,
+        "lcell": 1,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "pmux2shiftx": {
+        "area": 1,
+        "lcell": 1,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 4,
+      "base": {
+        "area": 3,
+        "lcell": 3,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "pmux2shiftx": {
+        "area": 3,
+        "lcell": 3,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.067
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 8,
+      "base": {
+        "area": 6,
+        "lcell": 6,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "pmux2shiftx": {
+        "area": 6,
+        "lcell": 6,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.069
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 16,
+      "base": {
+        "area": 13,
+        "lcell": 13,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.075
+      },
+      "pmux2shiftx": {
+        "area": 13,
+        "lcell": 13,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.075
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 32,
+      "base": {
+        "area": 27,
+        "lcell": 27,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.082
+      },
+      "pmux2shiftx": {
+        "area": 27,
+        "lcell": 27,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.082
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 1,
+      "N": 64,
+      "base": {
+        "area": 54,
+        "lcell": 54,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.098
+      },
+      "pmux2shiftx": {
+        "area": 54,
+        "lcell": 54,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.098
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 2,
+      "base": {
+        "area": 8,
+        "lcell": 8,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.067
+      },
+      "pmux2shiftx": {
+        "area": 8,
+        "lcell": 8,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.065
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 4,
+      "base": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "pmux2shiftx": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.07
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 8,
+      "base": {
+        "area": 48,
+        "lcell": 48,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.079
+      },
+      "pmux2shiftx": {
+        "area": 48,
+        "lcell": 48,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.079
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 16,
+      "base": {
+        "area": 104,
+        "lcell": 104,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.099
+      },
+      "pmux2shiftx": {
+        "area": 104,
+        "lcell": 104,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.099
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 32,
+      "base": {
+        "area": 220,
+        "lcell": 220,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.137
+      },
+      "pmux2shiftx": {
+        "area": 220,
+        "lcell": 220,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.131
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 8,
+      "N": 64,
+      "base": {
+        "area": 432,
+        "lcell": 432,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.212
+      },
+      "pmux2shiftx": {
+        "area": 432,
+        "lcell": 432,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.21
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 2,
+      "base": {
+        "area": 32,
+        "lcell": 32,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.07
+      },
+      "pmux2shiftx": {
+        "area": 32,
+        "lcell": 32,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.069
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 4,
+      "base": {
+        "area": 96,
+        "lcell": 96,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.084
+      },
+      "pmux2shiftx": {
+        "area": 96,
+        "lcell": 96,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.084
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 8,
+      "base": {
+        "area": 192,
+        "lcell": 192,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.12
+      },
+      "pmux2shiftx": {
+        "area": 192,
+        "lcell": 192,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.12
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 16,
+      "base": {
+        "area": 416,
+        "lcell": 416,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.2
+      },
+      "pmux2shiftx": {
+        "area": 416,
+        "lcell": 416,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.2
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 32,
+      "base": {
+        "area": 881,
+        "lcell": 881,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.344
+      },
+      "pmux2shiftx": {
+        "area": 881,
+        "lcell": 881,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.337
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 32,
+      "N": 64,
+      "base": {
+        "area": 1747,
+        "lcell": 1747,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.742
+      },
+      "pmux2shiftx": {
+        "area": 1747,
+        "lcell": 1747,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.679
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 2,
+      "base": {
+        "area": 128,
+        "lcell": 128,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.089
+      },
+      "pmux2shiftx": {
+        "area": 128,
+        "lcell": 128,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.089
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 4,
+      "base": {
+        "area": 384,
+        "lcell": 384,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.15
+      },
+      "pmux2shiftx": {
+        "area": 384,
+        "lcell": 384,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.15
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 8,
+      "base": {
+        "area": 768,
+        "lcell": 768,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.305
+      },
+      "pmux2shiftx": {
+        "area": 768,
+        "lcell": 768,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.301
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 16,
+      "base": {
+        "area": 1664,
+        "lcell": 1664,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.617
+      },
+      "pmux2shiftx": {
+        "area": 1664,
+        "lcell": 1664,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.619
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 32,
+      "base": {
+        "area": 3328,
+        "lcell": 3328,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.23
+      },
+      "pmux2shiftx": {
+        "area": 3328,
+        "lcell": 3328,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.204
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "mux",
+      "DW": 128,
+      "N": 64,
+      "base": {
+        "area": 6974,
+        "lcell": 6974,
+        "not": 0,
+        "dff": 0,
+        "wall": 2.626
+      },
+      "pmux2shiftx": {
+        "area": 6974,
+        "lcell": 6974,
+        "not": 0,
+        "dff": 0,
+        "wall": 2.616
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 2,
+      "base": {
+        "area": 1,
+        "lcell": 1,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.065
+      },
+      "pmux2shiftx": {
+        "area": 1,
+        "lcell": 1,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.064
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 4,
+      "base": {
+        "area": 3,
+        "lcell": 3,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.066
+      },
+      "pmux2shiftx": {
+        "area": 3,
+        "lcell": 3,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.066
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 8,
+      "base": {
+        "area": 5,
+        "lcell": 5,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "pmux2shiftx": {
+        "area": 5,
+        "lcell": 5,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 16,
+      "base": {
+        "area": 11,
+        "lcell": 11,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.072
+      },
+      "pmux2shiftx": {
+        "area": 11,
+        "lcell": 11,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.072
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 32,
+      "base": {
+        "area": 21,
+        "lcell": 21,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.082
+      },
+      "pmux2shiftx": {
+        "area": 21,
+        "lcell": 21,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.082
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 1,
+      "N": 64,
+      "base": {
+        "area": 43,
+        "lcell": 43,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.107
+      },
+      "pmux2shiftx": {
+        "area": 43,
+        "lcell": 43,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.108
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 2,
+      "base": {
+        "area": 8,
+        "lcell": 8,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "pmux2shiftx": {
+        "area": 8,
+        "lcell": 8,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.067
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 4,
+      "base": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "pmux2shiftx": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 8,
+      "base": {
+        "area": 40,
+        "lcell": 40,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.079
+      },
+      "pmux2shiftx": {
+        "area": 40,
+        "lcell": 40,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.079
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 16,
+      "base": {
+        "area": 88,
+        "lcell": 88,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.095
+      },
+      "pmux2shiftx": {
+        "area": 88,
+        "lcell": 88,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.095
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 32,
+      "base": {
+        "area": 168,
+        "lcell": 168,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.128
+      },
+      "pmux2shiftx": {
+        "area": 168,
+        "lcell": 168,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.127
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 8,
+      "N": 64,
+      "base": {
+        "area": 344,
+        "lcell": 344,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.345
+      },
+      "pmux2shiftx": {
+        "area": 344,
+        "lcell": 344,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.344
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 2,
+      "base": {
+        "area": 32,
+        "lcell": 32,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.074
+      },
+      "pmux2shiftx": {
+        "area": 32,
+        "lcell": 32,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.072
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 4,
+      "base": {
+        "area": 96,
+        "lcell": 96,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.088
+      },
+      "pmux2shiftx": {
+        "area": 96,
+        "lcell": 96,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.086
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 8,
+      "base": {
+        "area": 160,
+        "lcell": 160,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.115
+      },
+      "pmux2shiftx": {
+        "area": 160,
+        "lcell": 160,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.114
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 16,
+      "base": {
+        "area": 352,
+        "lcell": 352,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.168
+      },
+      "pmux2shiftx": {
+        "area": 352,
+        "lcell": 352,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.168
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 32,
+      "base": {
+        "area": 672,
+        "lcell": 672,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.286
+      },
+      "pmux2shiftx": {
+        "area": 672,
+        "lcell": 672,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.283
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 32,
+      "N": 64,
+      "base": {
+        "area": 1376,
+        "lcell": 1376,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.316
+      },
+      "pmux2shiftx": {
+        "area": 1376,
+        "lcell": 1376,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.312
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 2,
+      "base": {
+        "area": 128,
+        "lcell": 128,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.1
+      },
+      "pmux2shiftx": {
+        "area": 128,
+        "lcell": 128,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.097
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 4,
+      "base": {
+        "area": 384,
+        "lcell": 384,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.151
+      },
+      "pmux2shiftx": {
+        "area": 384,
+        "lcell": 384,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.154
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 8,
+      "base": {
+        "area": 640,
+        "lcell": 640,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.259
+      },
+      "pmux2shiftx": {
+        "area": 640,
+        "lcell": 640,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.259
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 16,
+      "base": {
+        "area": 1408,
+        "lcell": 1408,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.461
+      },
+      "pmux2shiftx": {
+        "area": 1408,
+        "lcell": 1408,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.46
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 32,
+      "base": {
+        "area": 2688,
+        "lcell": 2688,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.02
+      },
+      "pmux2shiftx": {
+        "area": 2688,
+        "lcell": 2688,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.085
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxhot",
+      "DW": 128,
+      "N": 64,
+      "base": {
+        "area": 5504,
+        "lcell": 5504,
+        "not": 0,
+        "dff": 0,
+        "wall": 17.406
+      },
+      "pmux2shiftx": {
+        "area": 5504,
+        "lcell": 5504,
+        "not": 0,
+        "dff": 0,
+        "wall": 17.349
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 2,
+      "base": {
+        "area": 2,
+        "lcell": 2,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.067
+      },
+      "pmux2shiftx": {
+        "area": 2,
+        "lcell": 2,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.066
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 4,
+      "base": {
+        "area": 6,
+        "lcell": 6,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "pmux2shiftx": {
+        "area": 6,
+        "lcell": 6,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.071
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 8,
+      "base": {
+        "area": 14,
+        "lcell": 14,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.082
+      },
+      "pmux2shiftx": {
+        "area": 14,
+        "lcell": 14,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.079
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 16,
+      "base": {
+        "area": 23,
+        "lcell": 23,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.094
+      },
+      "pmux2shiftx": {
+        "area": 23,
+        "lcell": 23,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.094
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 32,
+      "base": {
+        "area": 47,
+        "lcell": 47,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.129
+      },
+      "pmux2shiftx": {
+        "area": 47,
+        "lcell": 47,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.129
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 1,
+      "N": 64,
+      "base": {
+        "area": 95,
+        "lcell": 95,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.213
+      },
+      "pmux2shiftx": {
+        "area": 95,
+        "lcell": 95,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.216
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 2,
+      "base": {
+        "area": 9,
+        "lcell": 9,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.069
+      },
+      "pmux2shiftx": {
+        "area": 9,
+        "lcell": 9,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.068
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 4,
+      "base": {
+        "area": 27,
+        "lcell": 27,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.077
+      },
+      "pmux2shiftx": {
+        "area": 27,
+        "lcell": 27,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.077
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 8,
+      "base": {
+        "area": 63,
+        "lcell": 63,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.094
+      },
+      "pmux2shiftx": {
+        "area": 63,
+        "lcell": 63,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.095
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 16,
+      "base": {
+        "area": 138,
+        "lcell": 138,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.131
+      },
+      "pmux2shiftx": {
+        "area": 138,
+        "lcell": 138,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.129
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 32,
+      "base": {
+        "area": 288,
+        "lcell": 288,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.209
+      },
+      "pmux2shiftx": {
+        "area": 288,
+        "lcell": 288,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.21
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 8,
+      "N": 64,
+      "base": {
+        "area": 604,
+        "lcell": 604,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.497
+      },
+      "pmux2shiftx": {
+        "area": 604,
+        "lcell": 604,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.42
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 2,
+      "base": {
+        "area": 33,
+        "lcell": 33,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.077
+      },
+      "pmux2shiftx": {
+        "area": 33,
+        "lcell": 33,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.076
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 4,
+      "base": {
+        "area": 99,
+        "lcell": 99,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.099
+      },
+      "pmux2shiftx": {
+        "area": 99,
+        "lcell": 99,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.099
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 8,
+      "base": {
+        "area": 231,
+        "lcell": 231,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.141
+      },
+      "pmux2shiftx": {
+        "area": 231,
+        "lcell": 231,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.141
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 16,
+      "base": {
+        "area": 498,
+        "lcell": 498,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.245
+      },
+      "pmux2shiftx": {
+        "area": 498,
+        "lcell": 498,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.244
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 32,
+      "base": {
+        "area": 1032,
+        "lcell": 1032,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.532
+      },
+      "pmux2shiftx": {
+        "area": 1032,
+        "lcell": 1032,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.534
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 32,
+      "N": 64,
+      "base": {
+        "area": 2116,
+        "lcell": 2116,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.3
+      },
+      "pmux2shiftx": {
+        "area": 2116,
+        "lcell": 2116,
+        "not": 0,
+        "dff": 0,
+        "wall": 1.297
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 2,
+      "base": {
+        "area": 129,
+        "lcell": 129,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.103
+      },
+      "pmux2shiftx": {
+        "area": 129,
+        "lcell": 129,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.102
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 4,
+      "base": {
+        "area": 386,
+        "lcell": 386,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.166
+      },
+      "pmux2shiftx": {
+        "area": 386,
+        "lcell": 386,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.167
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 8,
+      "base": {
+        "area": 903,
+        "lcell": 903,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.323
+      },
+      "pmux2shiftx": {
+        "area": 903,
+        "lcell": 903,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.315
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 16,
+      "base": {
+        "area": 1938,
+        "lcell": 1938,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.762
+      },
+      "pmux2shiftx": {
+        "area": 1938,
+        "lcell": 1938,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.758
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 32,
+      "base": {
+        "area": 4008,
+        "lcell": 4008,
+        "not": 0,
+        "dff": 0,
+        "wall": 2.155
+      },
+      "pmux2shiftx": {
+        "area": 4008,
+        "lcell": 4008,
+        "not": 0,
+        "dff": 0,
+        "wall": 2.156
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxpri",
+      "DW": 128,
+      "N": 64,
+      "base": {
+        "area": 8164,
+        "lcell": 8164,
+        "not": 0,
+        "dff": 0,
+        "wall": 5.799
+      },
+      "pmux2shiftx": {
+        "area": 8164,
+        "lcell": 8164,
+        "not": 0,
+        "dff": 0,
+        "wall": 5.728
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 2,
+      "N": null,
+      "base": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.076
+      },
+      "pmux2shiftx": {
+        "area": 24,
+        "lcell": 24,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.076
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 4,
+      "N": null,
+      "base": {
+        "area": 34,
+        "lcell": 34,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.08
+      },
+      "pmux2shiftx": {
+        "area": 34,
+        "lcell": 34,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.083
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 8,
+      "N": null,
+      "base": {
+        "area": 54,
+        "lcell": 54,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.087
+      },
+      "pmux2shiftx": {
+        "area": 54,
+        "lcell": 54,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.087
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 16,
+      "N": null,
+      "base": {
+        "area": 94,
+        "lcell": 94,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.102
+      },
+      "pmux2shiftx": {
+        "area": 94,
+        "lcell": 94,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.102
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 32,
+      "N": null,
+      "base": {
+        "area": 174,
+        "lcell": 174,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.133
+      },
+      "pmux2shiftx": {
+        "area": 174,
+        "lcell": 174,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.133
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 64,
+      "N": null,
+      "base": {
+        "area": 334,
+        "lcell": 334,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.194
+      },
+      "pmux2shiftx": {
+        "area": 334,
+        "lcell": 334,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.196
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 128,
+      "N": null,
+      "base": {
+        "area": 654,
+        "lcell": 654,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.381
+      },
+      "pmux2shiftx": {
+        "area": 654,
+        "lcell": 654,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.318
+      },
+      "delta": 0,
+      "dff_delta": 0
+    },
+    {
+      "kind": "muxcase",
+      "DW": 256,
+      "N": null,
+      "base": {
+        "area": 1294,
+        "lcell": 1294,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.606
+      },
+      "pmux2shiftx": {
+        "area": 1294,
+        "lcell": 1294,
+        "not": 0,
+        "dff": 0,
+        "wall": 0.599
+      },
+      "delta": 0,
+      "dff_delta": 0
+    }
+  ]
+}
