@@ -22,3 +22,20 @@ index 3a229fb..b3a4a93 100644
  			run("wreduce");
  			run("peepopt");
  			run("opt_clean");
+@@ -251,8 +252,9 @@ struct SynthIntelPass : public ScriptPass {
+ 		if (check_label("map_ffram")) {
+ 			run("opt -fast -mux_undef -undriven -fine -full");
+ 			run("memory_map");
+ 			run("opt -undriven -fine");
+-			run("techmap -map +/techmap.v");
++			run("select -set pmux_deferred_luts */a:pmux_deferred_lut");
++			run("techmap -map +/techmap.v * @pmux_deferred_luts %d");
+ 			run("opt -full");
+ 			run("clean -purge");
+ 			run("setundef -undriven -zero");
+@@ -260,4 +262,5 @@ struct SynthIntelPass : public ScriptPass {
+ 		if (check_label("map_ffs")) {
+ 			run("dfflegalize -cell $_DFFE_PN0P_ 01");
+ 			run("techmap -map +/intel/common/ff_map.v");
++			run("pmux_opt -fold_luts");
+ 		}

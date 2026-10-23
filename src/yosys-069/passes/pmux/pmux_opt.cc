@@ -35,6 +35,12 @@
 #include "kernel/mem.h"
 #include "kernel/register.h"
 
+#include <algorithm>
+#include <cstdint>
+#include <map>
+#include <utility>
+#include <vector>
+
 USING_YOSYS_NAMESPACE
 PRIVATE_NAMESPACE_BEGIN
 
@@ -51,6 +57,416 @@ struct InputLoad {
 	IdString port;
 	int offset;
 };
+
+struct LutNode {
+	bool is_const = false;
+	State value = State::S0;
+	SigSpec sig;
+	Cell *cell = nullptr;
+	int width = 0;
+};
+
+typedef std::pair<uint32_t, std::vector<uint8_t>> LutFunction;
+
+static int popcount32(uint32_t value)
+{
+	return __builtin_popcount(value);
+}
+
+static uint32_t function_support(const std::vector<uint8_t> &table, int input_count)
+{
+	uint32_t support = 0;
+	for (int input = 0; input < input_count; input++) {
+		uint32_t bit = 1u << input;
+		bool differs = false;
+		for (int index = 0; index < GetSize(table); index++)
+			if (!(index & bit) && table[index] != table[index | bit]) {
+				differs = true;
+				break;
+			}
+		if (differs)
+			support |= bit;
+	}
+	return support;
+}
+
+// memory_map followed by ABC is already very effective for sparse truth
+// tables and low-degree XOR/AND networks.  In those cases a fixed Shannon
+// decomposition can add one or two LUTs.  Only replace a ROM when at least
+// one output has a genuinely dense Boolean function.
+static bool function_is_cheap(const std::vector<uint8_t> &table)
+{
+	int size = GetSize(table);
+	int ones = 0;
+	for (uint8_t value : table)
+		ones += value != 0;
+	if (std::min(ones, size - ones) <= std::max(1, size / 4))
+		return true;
+
+	std::vector<uint8_t> anf = table;
+	int input_count = ceil_log2(size);
+	for (int input = 0; input < input_count; input++)
+		for (int index = 0; index < size; index++)
+			if (index & (1 << input))
+				anf[index] ^= anf[index ^ (1 << input)];
+
+	int terms = 0;
+	for (uint8_t value : anf)
+		terms += value != 0;
+	return terms <= 16;
+}
+
+static std::vector<uint8_t> compress_function(const std::vector<uint8_t> &table, uint32_t support)
+{
+	std::vector<int> positions;
+	for (int input = 0; input < 32; input++)
+		if (support & (1u << input))
+			positions.push_back(input);
+
+	std::vector<uint8_t> compressed(1u << GetSize(positions));
+	for (int index = 0; index < GetSize(compressed); index++) {
+		int full_index = 0;
+		for (int bit = 0; bit < GetSize(positions); bit++)
+			if (index & (1 << bit))
+				full_index |= 1 << positions[bit];
+		compressed[index] = table[full_index];
+	}
+	return compressed;
+}
+
+static LutFunction canonical_function(const std::vector<uint8_t> &table, int input_count)
+{
+	uint32_t support = function_support(table, input_count);
+	return {support, compress_function(table, support)};
+}
+
+static std::vector<uint8_t> expand_function(const LutFunction &fn, int input_count)
+{
+	std::vector<int> positions;
+	for (int input = 0; input < input_count; input++)
+		if (fn.first & (1u << input))
+			positions.push_back(input);
+
+	std::vector<uint8_t> table(1u << input_count);
+	for (int index = 0; index < GetSize(table); index++) {
+		int compressed_index = 0;
+		for (int bit = 0; bit < GetSize(positions); bit++)
+			if (index & (1 << positions[bit]))
+				compressed_index |= 1 << bit;
+		table[index] = fn.second[compressed_index];
+	}
+	return table;
+}
+
+static std::vector<uint8_t> cofactor(const std::vector<uint8_t> &table, int input, bool value)
+{
+	std::vector<uint8_t> result(table.size());
+	uint32_t bit = 1u << input;
+	for (int index = 0; index < GetSize(table); index++)
+		if (!(index & bit))
+			result[index] = result[index | bit] = table[index | (value ? bit : 0)];
+	return result;
+}
+
+static std::vector<int> choose_lut_order(const std::vector<std::vector<uint8_t>> &functions,
+                                         int input_count)
+{
+	std::vector<int> order;
+	std::vector<LutFunction> current;
+	for (auto &table : functions) {
+		LutFunction fn = canonical_function(table, input_count);
+		if (!fn.first)
+			continue;
+		current.push_back(std::move(fn));
+	}
+	std::sort(current.begin(), current.end());
+	current.erase(std::unique(current.begin(), current.end()), current.end());
+
+	std::vector<bool> used(input_count, false);
+	while (!current.empty()) {
+		int best_input = -1, best_nonconst = INT_MAX, best_unique = INT_MAX, best_users = -1;
+		for (int input = 0; input < input_count; input++) {
+			if (used[input])
+				continue;
+			std::vector<LutFunction> next;
+			int users = 0;
+			for (auto &fn : current) {
+				uint32_t bit = 1u << input;
+				if (!(fn.first & bit)) {
+					next.push_back(fn);
+					continue;
+				}
+				users++;
+				std::vector<uint8_t> full = expand_function(fn, input_count);
+				for (bool value : {false, true}) {
+					next.push_back(canonical_function(cofactor(full, input, value), input_count));
+				}
+			}
+			std::sort(next.begin(), next.end());
+			next.erase(std::unique(next.begin(), next.end()), next.end());
+			int unique_count = GetSize(next);
+			int nonconst_count = 0;
+			for (auto &fn : next)
+				if (fn.first)
+					nonconst_count++;
+			if (nonconst_count < best_nonconst ||
+			    (nonconst_count == best_nonconst && unique_count < best_unique) ||
+			    (nonconst_count == best_nonconst && unique_count == best_unique && users > best_users)) {
+				best_input = input;
+				best_nonconst = nonconst_count;
+				best_unique = unique_count;
+				best_users = users;
+			}
+		}
+		if (best_input < 0)
+			break;
+		used[best_input] = true;
+		order.push_back(best_input);
+
+		std::vector<LutFunction> next;
+		for (auto &fn : current) {
+			uint32_t bit = 1u << best_input;
+			if (!(fn.first & bit)) {
+				next.push_back(fn);
+				continue;
+			}
+			std::vector<uint8_t> full = expand_function(fn, input_count);
+			for (bool value : {false, true}) {
+				next.push_back(canonical_function(cofactor(full, best_input, value), input_count));
+			}
+		}
+		std::sort(next.begin(), next.end());
+		next.erase(std::unique(next.begin(), next.end()), next.end());
+		current = std::move(next);
+	}
+	for (int input = 0; input < input_count; input++)
+		if (!used[input])
+			order.push_back(input);
+	return order;
+}
+
+static int estimate_shannon_luts(const std::vector<uint8_t> &table, int input_count,
+                                 const std::vector<int> &order,
+                                 std::map<LutFunction, int> &memo)
+{
+	uint32_t support = function_support(table, input_count);
+	if (!support)
+		return 0;
+
+	LutFunction key = canonical_function(table, input_count);
+	if (memo.count(key))
+		return 0;
+	memo[key] = 1;
+	if (popcount32(support) <= 4)
+		return 1;
+
+	int split = -1;
+	for (int input : order)
+		if (support & (1u << input)) {
+			split = input;
+			break;
+		}
+	if (split < 0)
+		return 1;
+	return 1 + estimate_shannon_luts(cofactor(table, split, false), input_count, order, memo)
+	         + estimate_shannon_luts(cofactor(table, split, true), input_count, order, memo);
+}
+
+static int estimate_rom_lut_cost(const std::vector<std::vector<uint8_t>> &functions,
+                                 int input_count, const std::vector<int> &order)
+{
+	std::map<LutFunction, int> memo;
+	int cost = 0;
+	for (auto &table : functions)
+		cost += estimate_shannon_luts(table, input_count, order, memo);
+	return cost;
+}
+
+class ConstantRomSynthesizer
+{
+	Module *module;
+	SigSpec address;
+	int input_count;
+	std::vector<int> order;
+	std::map<LutFunction, LutNode> memo;
+
+	int choose_split(uint32_t support) const
+	{
+		for (int input : order)
+			if (support & (1u << input))
+				return input;
+		return -1;
+	}
+
+	LutNode make_constant(State value) const
+	{
+		LutNode node;
+		node.is_const = true;
+		node.value = value;
+		return node;
+	}
+
+	LutNode add_lut(const SigSpec &inputs, Const table)
+	{
+		LutNode node;
+		node.sig = module->addWire(NEW_ID);
+		node.cell = module->addLut(NEW_ID, inputs, node.sig, std::move(table));
+		node.cell->set_bool_attribute(ID(pmux_deferred_lut));
+		node.width = GetSize(inputs);
+		return node;
+	}
+
+	LutNode merge_children(const LutNode &low, const LutNode &high, int split);
+
+public:
+	ConstantRomSynthesizer(Module *module, SigSpec address, int input_count, std::vector<int> order)
+	    : module(module), address(std::move(address)), input_count(input_count), order(std::move(order))
+	{
+	}
+
+	LutNode synthesize(const std::vector<uint8_t> &table);
+	LutNode synthesize_gated(const std::vector<uint8_t> &table, SigBit gate, State base);
+};
+
+LutNode ConstantRomSynthesizer::merge_children(const LutNode &low, const LutNode &high, int split)
+{
+	SigSpec inputs;
+	std::vector<int> roles;
+	if (!low.is_const) {
+		inputs.append(low.sig);
+		roles.push_back(0);
+	}
+	if (!high.is_const) {
+		inputs.append(high.sig);
+		roles.push_back(1);
+	}
+	inputs.append(address[split]);
+	roles.push_back(2);
+
+	Const lut(State::S0, 1 << GetSize(inputs));
+	for (int index = 0; index < GetSize(lut); index++) {
+		bool low_value = low.is_const ? low.value == State::S1 : false;
+		bool high_value = high.is_const ? high.value == State::S1 : false;
+		bool select = false;
+		for (int pos = 0; pos < GetSize(roles); pos++) {
+			bool bit = index & (1 << pos);
+			if (roles[pos] == 0)
+				low_value = bit;
+			else if (roles[pos] == 1)
+				high_value = bit;
+			else
+				select = bit;
+		}
+		lut.set(index, (select ? high_value : low_value) ? State::S1 : State::S0);
+	}
+	return add_lut(inputs, std::move(lut));
+}
+
+LutNode ConstantRomSynthesizer::synthesize(const std::vector<uint8_t> &table)
+{
+	uint32_t support = function_support(table, input_count);
+	if (!support)
+		return make_constant(table[0] ? State::S1 : State::S0);
+
+	LutFunction key = {support, compress_function(table, support)};
+	auto found = memo.find(key);
+	if (found != memo.end())
+		return found->second;
+
+	LutNode node;
+	if (popcount32(support) <= 4) {
+		SigSpec inputs;
+		for (int input = 0; input < input_count; input++)
+			if (support & (1u << input))
+				inputs.append(address[input]);
+		Const lut(State::S0, 1 << GetSize(inputs));
+		for (int index = 0; index < GetSize(lut); index++)
+			lut.set(index, key.second[index] ? State::S1 : State::S0);
+		node = add_lut(inputs, std::move(lut));
+	} else {
+		int split = choose_split(support);
+		LutNode low = synthesize(cofactor(table, split, false));
+		LutNode high = synthesize(cofactor(table, split, true));
+		node = merge_children(low, high, split);
+	}
+	memo[key] = node;
+	return node;
+}
+
+LutNode ConstantRomSynthesizer::synthesize_gated(const std::vector<uint8_t> &table,
+                                                 SigBit gate, State base)
+{
+	uint32_t support = function_support(table, input_count);
+	LutNode data;
+	if (!support) {
+		data = make_constant(table[0] ? State::S1 : State::S0);
+	} else if (popcount32(support) > 4) {
+		int split = choose_split(support);
+		LutNode low = synthesize(cofactor(table, split, false));
+		LutNode high = synthesize(cofactor(table, split, true));
+
+		SigSpec inputs;
+		std::vector<int> roles;
+		if (!low.is_const) {
+			inputs.append(low.sig);
+			roles.push_back(0);
+		}
+		if (!high.is_const) {
+			inputs.append(high.sig);
+			roles.push_back(1);
+		}
+		inputs.append(address[split]);
+		roles.push_back(2);
+		inputs.append(gate);
+		roles.push_back(3);
+
+		Const lut(State::S0, 1 << GetSize(inputs));
+		for (int index = 0; index < GetSize(lut); index++) {
+			bool low_value = low.is_const ? low.value == State::S1 : false;
+			bool high_value = high.is_const ? high.value == State::S1 : false;
+			bool select = false, enable = false;
+			for (int pos = 0; pos < GetSize(roles); pos++) {
+				bool bit = index & (1 << pos);
+				if (roles[pos] == 0)
+					low_value = bit;
+				else if (roles[pos] == 1)
+					high_value = bit;
+				else if (roles[pos] == 2)
+					select = bit;
+				else
+					enable = bit;
+			}
+			lut.set(index, (enable ? (select ? high_value : low_value) : base == State::S1)
+			                   ? State::S1 : State::S0);
+		}
+		return add_lut(inputs, std::move(lut));
+	} else {
+		data = synthesize(table);
+	}
+
+	if (data.is_const) {
+		State enabled = data.value;
+		if (enabled == base)
+			return make_constant(base);
+		Const lut(State::S0, 2);
+		lut.set(0, base);
+		lut.set(1, enabled);
+		SigSpec inputs;
+		inputs.append(gate);
+		return add_lut(inputs, std::move(lut));
+	}
+
+	Const lut(State::S0, 4);
+	for (int index = 0; index < 4; index++) {
+		bool data_value = index & 1;
+		bool enable = index & 2;
+		lut.set(index, (enable ? data_value : base == State::S1) ? State::S1 : State::S0);
+	}
+	SigSpec inputs;
+	inputs.append(data.sig);
+	inputs.append(gate);
+	return add_lut(inputs, std::move(lut));
+}
 
 int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, bool verbose)
 {
@@ -91,6 +507,54 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 		if (!convertible)
 			continue;
 
+		bool synthesizable = true;
+		for (auto &port : mem.rd_ports) {
+			SigSpec addr = sigmap(port.addr);
+			pool<SigBit> seen;
+			for (auto bit : addr)
+				if (bit.wire == nullptr || seen.count(bit)) {
+					synthesizable = false;
+					break;
+				}
+			if (!synthesizable)
+				break;
+		}
+		if (!synthesizable) {
+			if (verbose)
+				log("  constant ROM %s has a constant or aliased address bit; leaving it to memory_map\n",
+				    log_id(mem.memid));
+			continue;
+		}
+
+		std::vector<std::vector<uint8_t>> output_functions(mem.width);
+		for (int bit = 0; bit < mem.width; bit++) {
+			output_functions[bit].resize(1 << addr_bits);
+			for (int addr = 0; addr < mem.size; addr++)
+				output_functions[bit][addr] = init_data[addr * mem.width + bit] == State::S1;
+		}
+		bool needs_decomposition = false, all_cheap = true;
+		for (auto &table : output_functions) {
+			if (popcount32(function_support(table, addr_bits)) > 4) {
+				needs_decomposition = true;
+			}
+			if (!function_is_cheap(table))
+				all_cheap = false;
+		}
+		if (!needs_decomposition || all_cheap) {
+			if (verbose)
+				log("  constant ROM %s is already cheap for memory_map/ABC; leaving it unchanged\n",
+				    log_id(mem.memid));
+			continue;
+		}
+		std::vector<int> lut_order = choose_lut_order(output_functions, addr_bits);
+		int estimated_luts = estimate_rom_lut_cost(output_functions, addr_bits, lut_order);
+		if (estimated_luts <= 2 * mem.width) {
+			if (verbose)
+				log("  constant ROM %s estimated at %d LUTs, not enough margin over %d outputs; leaving it unchanged\n",
+				    log_id(mem.memid), estimated_luts, mem.width);
+			continue;
+		}
+
 		dict<SigBit, std::vector<InputLoad>> bit2loads;
 		for (auto cell : module->cells())
 			for (auto &conn : cell->connections()) {
@@ -110,6 +574,9 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 				module->connect(port.data, init_data.extract(0, mem.width));
 				continue;
 			}
+
+			SigSpec port_addr = sigmap(port.addr);
+			ConstantRomSynthesizer synthesizer(module, port_addr, addr_bits, lut_order);
 
 			dict<SigBit, int> rom_bit_index;
 			for (int bit = 0; bit < mem.width; bit++)
@@ -180,18 +647,15 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 				if (!convertible)
 					continue;
 
-				SigSpec lut_input = port.addr;
-				lut_input.append(sigmap(cell->getPort(ID::S)));
 				SigSpec lut_output = module->addWire(NEW_ID, width);
+				SigBit select = sigmap(cell->getPort(ID::S))[0];
 				for (int bit = 0; bit < width; bit++) {
-					Const lut(State::S0, 1 << (addr_bits + 1));
-					for (int addr = 0; addr < mem.size; addr++) {
-						lut.set(addr, init_data[addr * mem.width + indices[bit]]);
-						lut.set(addr + mem.size, init_data[addr * mem.width + indices[bit]]);
-					}
-					for (int addr = 0; addr < mem.size; addr++)
-						lut.set(addr, a_data[bit].data);
-					module->addLut(NEW_ID, lut_input, lut_output[bit], std::move(lut));
+					LutNode node = synthesizer.synthesize_gated(output_functions[indices[bit]],
+					                                                 select, a_data[bit].data);
+					if (node.is_const)
+						module->connect(lut_output[bit], Const(node.value, 1));
+					else
+						module->connect(lut_output[bit], node.sig);
 					folded_bits.insert(indices[bit]);
 				}
 				module->connect(cell->getPort(ID::Y), lut_output);
@@ -207,10 +671,11 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 			for (int bit = 0; bit < mem.width; bit++) {
 				if (folded_bits.count(bit))
 					continue;
-				Const lut(State::S0, 1 << addr_bits);
-				for (int addr = 0; addr < mem.size; addr++)
-					lut.set(addr, init_data[addr * mem.width + bit]);
-				module->addLut(NEW_ID, port.addr, port.data[bit], std::move(lut));
+				LutNode node = synthesizer.synthesize(output_functions[bit]);
+				if (node.is_const)
+					module->connect(port.data[bit], Const(node.value, 1));
+				else
+					module->connect(port.data[bit], node.sig);
 			}
 		}
 
@@ -223,6 +688,229 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 	}
 
 	return lowered;
+}
+
+// dfflegalize implements a high-reset FF by keeping the complemented state
+// and inserting inverters on both sides of the register.  The input inverter
+// can be absorbed for free when it is the only load of a LUT: complementing
+// the LUT truth table changes no other user and leaves the register's reset
+// semantics untouched.
+pool<SigBit> collect_output_bits(Module *module, SigMap &sigmap);
+
+bool combinational_depends_on(SigBit target, SigBit start, SigMap &sigmap, CellTypes &ct,
+                              const dict<SigBit, Cell *> &bit_driver)
+{
+	pool<SigBit> visited;
+	std::vector<SigBit> pending = {start};
+	while (!pending.empty()) {
+		SigBit bit = sigmap(pending.back());
+		pending.pop_back();
+		if (!visited.insert(bit).second)
+			continue;
+		if (bit == target)
+			return true;
+
+		auto it = bit_driver.find(bit);
+		if (it == bit_driver.end())
+			continue;
+		Cell *driver = it->second;
+		if (driver->is_builtin_ff())
+			continue;
+		for (auto &conn : driver->connections())
+			if (ct.cell_input(driver->type, conn.first))
+				for (auto input : sigmap(conn.second))
+					pending.push_back(input);
+	}
+	return false;
+}
+
+int fold_not_into_luts(Module *module, CellTypes &ct, bool verbose)
+{
+	int folded = 0;
+
+	while (true) {
+		SigMap sigmap(module);
+		pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+		dict<SigBit, int> loads;
+		dict<SigBit, Cell *> lut_driver;
+
+		for (auto cell : module->cells()) {
+			for (auto &conn : cell->connections()) {
+				if (ct.cell_input(cell->type, conn.first))
+					for (auto bit : sigmap(conn.second))
+						loads[bit]++;
+				if (cell->type == ID($lut) && ct.cell_output(cell->type, conn.first))
+					for (auto bit : sigmap(conn.second))
+						lut_driver[bit] = cell;
+			}
+		}
+
+		Cell *candidate = nullptr;
+		Cell *driver = nullptr;
+		for (auto cell : module->cells()) {
+			if (!cell->type.in(ID($not), ID($_NOT_)))
+				continue;
+			if (GetSize(cell->getPort(ID::A)) != 1 || GetSize(cell->getPort(ID::Y)) != 1)
+				continue;
+
+			SigBit input = sigmap(cell->getPort(ID::A)[0]);
+			if (output_bits.count(input) || loads[input] != 1)
+				continue;
+
+			auto it = lut_driver.find(input);
+			if (it == lut_driver.end())
+				continue;
+
+			Cell *lut = it->second;
+			if (GetSize(lut->getPort(ID::Y)) != 1)
+				continue;
+
+			Const table = lut->getParam(ID::LUT);
+			int width = lut->getParam(ID::WIDTH).as_int();
+			if (!table.is_fully_def() || GetSize(table) != (1 << width) ||
+			    GetSize(lut->getPort(ID::A)) != width)
+				continue;
+
+			candidate = cell;
+			driver = lut;
+			break;
+		}
+
+		if (candidate == nullptr)
+			break;
+
+		Const table = driver->getParam(ID::LUT);
+		std::vector<State> table_bits = table.to_bits();
+		for (auto &bit : table_bits)
+			bit = bit == State::S1 ? State::S0 : State::S1;
+		driver->setParam(ID::LUT, Const(std::move(table_bits)));
+
+		if (verbose)
+			log("  folded %s into LUT %s\n", log_id(candidate->name), log_id(driver->name));
+
+		module->connect(candidate->getPort(ID::Y), driver->getPort(ID::Y));
+		module->remove(candidate);
+		folded++;
+	}
+
+	return folded;
+}
+
+// A constant-data mux can be absorbed by the LUT that drives its other data
+// input.  This is the same boolean operation as extending the LUT's truth
+// table with the select signal; no physical LUT is added as long as the result
+// still fits in the technology's four-input LUT.  Requiring the LUT output to
+// have exactly one load keeps the rewrite local and preserves every other fanout.
+int fold_mux_into_luts(Module *module, CellTypes &ct, bool verbose)
+{
+	int folded = 0;
+
+	while (true) {
+		SigMap sigmap(module);
+		pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+		dict<SigBit, int> loads;
+		dict<SigBit, Cell *> bit_driver;
+		dict<SigBit, Cell *> lut_driver;
+
+		for (auto cell : module->cells()) {
+			for (auto &conn : cell->connections()) {
+				if (ct.cell_input(cell->type, conn.first))
+					for (auto bit : sigmap(conn.second))
+						loads[bit]++;
+				if (ct.cell_output(cell->type, conn.first))
+					for (auto bit : sigmap(conn.second)) {
+						bit_driver[bit] = cell;
+						if (cell->type == ID($lut))
+							lut_driver[bit] = cell;
+					}
+			}
+		}
+
+		Cell *candidate = nullptr;
+		Cell *driver = nullptr;
+		bool lut_on_b = false;
+		State constant = State::S0;
+		SigBit select;
+
+		for (auto cell : module->cells()) {
+			if (!cell->type.in(ID($mux), ID($_MUX_)))
+				continue;
+			if (GetSize(cell->getPort(ID::A)) != 1 ||
+			    GetSize(cell->getPort(ID::B)) != 1 ||
+			    GetSize(cell->getPort(ID::Y)) != 1 ||
+			    GetSize(cell->getPort(ID::S)) != 1)
+				continue;
+
+			SigBit a = sigmap(cell->getPort(ID::A)[0]);
+			SigBit b = sigmap(cell->getPort(ID::B)[0]);
+			SigBit s = sigmap(cell->getPort(ID::S)[0]);
+			if (s.wire == nullptr)
+				continue;
+
+			SigBit lut_input;
+			if ((a == State::S0 || a == State::S1) && b.wire != nullptr) {
+				constant = a.data;
+				lut_input = b;
+				lut_on_b = true;
+			} else if ((b == State::S0 || b == State::S1) && a.wire != nullptr) {
+				constant = b.data;
+				lut_input = a;
+				lut_on_b = false;
+			} else {
+				continue;
+			}
+
+			if (output_bits.count(lut_input) || loads[lut_input] != 1 ||
+			    combinational_depends_on(lut_input, s, sigmap, ct, bit_driver))
+				continue;
+
+			auto it = lut_driver.find(lut_input);
+			if (it == lut_driver.end())
+				continue;
+
+			Cell *lut = it->second;
+			int width = lut->getParam(ID::WIDTH).as_int();
+			Const table = lut->getParam(ID::LUT);
+			if (width < 0 || width >= 4 || GetSize(lut->getPort(ID::Y)) != 1 ||
+			    GetSize(lut->getPort(ID::A)) != width || !table.is_fully_def() ||
+			    GetSize(table) != (1 << width))
+				continue;
+
+			candidate = cell;
+			driver = lut;
+			select = s;
+			break;
+		}
+
+		if (candidate == nullptr)
+			break;
+
+		int width = driver->getParam(ID::WIDTH).as_int();
+		Const old_table = driver->getParam(ID::LUT);
+		Const new_table(State::S0, 1 << (width + 1));
+		for (int index = 0; index < GetSize(old_table); index++) {
+			bool original = old_table[index] == State::S1;
+			bool constant_value = constant == State::S1;
+			new_table.set(index, (lut_on_b ? constant_value : original) ? State::S1 : State::S0);
+			new_table.set(index | (1 << width),
+			              (lut_on_b ? original : constant_value) ? State::S1 : State::S0);
+		}
+
+		SigSpec inputs = driver->getPort(ID::A);
+		inputs.append(select);
+		driver->setPort(ID::A, inputs);
+		driver->setParam(ID::WIDTH, width + 1);
+		driver->setParam(ID::LUT, std::move(new_table));
+
+		if (verbose)
+			log("  folded mux %s into LUT %s\n", log_id(candidate->name), log_id(driver->name));
+
+		module->connect(candidate->getPort(ID::Y), driver->getPort(ID::Y));
+		module->remove(candidate);
+		folded++;
+	}
+
+	return folded;
 }
 
 struct DecodeBit {
@@ -1191,15 +1879,23 @@ struct PmuxOptPass : public Pass {
 		log("    -v\n");
 		log("        print details about matched cells\n");
 		log("\n");
+		log("    -fold_luts\n");
+		log("        fold single-load NOT cells and constant-data MUX cells into LUT truth tables\n");
+		log("\n");
 	}
 
 	void execute(std::vector<std::string> args, RTLIL::Design *design) override
 	{
 		bool verbose = false;
+		bool fold_luts = false;
 		size_t argidx;
 		for (argidx = 1; argidx < args.size(); argidx++) {
 			if (args[argidx] == "-v") {
 				verbose = true;
+				continue;
+			}
+			if (args[argidx] == "-fold_luts") {
+				fold_luts = true;
 				continue;
 			}
 			break;
@@ -1211,6 +1907,19 @@ struct PmuxOptPass : public Pass {
 		CellTypes ct;
 		ct.setup_internals();
 		ct.setup_design(design);
+
+		if (fold_luts) {
+			ct.setup_stdcells();
+			int n_folded = 0;
+			int n_mux_folded = 0;
+			for (auto module : design->selected_modules())
+				n_folded += fold_not_into_luts(module, ct, verbose);
+			for (auto module : design->selected_modules())
+				n_mux_folded += fold_mux_into_luts(module, ct, verbose);
+			log("pmux_opt: folded %d NOT cell(s) into LUTs.\n", n_folded);
+			log("pmux_opt: folded %d constant-data MUX cell(s) into LUTs.\n", n_mux_folded);
+			return;
+		}
 
 		int n_pmux = 0, n_pairs = 0, n_skip = 0, n_rom = 0;
 

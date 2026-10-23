@@ -11,7 +11,10 @@ DEFAULT_SRC="$ROOT/tools/build/official-v069-opt"
 # 默认安装到官网 v0.69 的优化源码树（若尚未创建则回退到旧工作树）。脚本会：
 #   1. 校验源码树是 Yosys 0.69；
 #   2. 复制 passes/pmux/；
-#   3. 只在尚未集成时应用 passes/CMakeLists.txt 与 synth_intel.cc 的补丁。
+#   3. 只在尚未集成时应用 passes/CMakeLists.txt 与 synth_intel.cc 的补丁；
+#   4. 已集成树会同步最新的 pmux_opt.cc，并校验 LUT 折叠接线不可缺失。
+#
+# 安装只包含 PMUX/ROM 算法及其必要的 synth_intel 接线，不修改 ABC9 输入顺序。
 #
 # 安装后编译：
 #   cmake -S <YOSYS_SRC_ROOT> -B <YOSYS_SRC_ROOT>/build -DCMAKE_BUILD_TYPE=Release
@@ -21,7 +24,6 @@ set -euo pipefail
 SRC_ROOT="${1:-$DEFAULT_SRC}"
 SRC_ROOT="$(cd "$SRC_ROOT" && pwd -P)"
 PATCH="$ROOT/patches/yosys-069/pmux_opt-integration.patch"
-NORMALIZE_PATCH="$ROOT/patches/yosys-069/abc9-input-canonicalization.patch"
 PASS_SRC="$ROOT/src/yosys-069/passes/pmux"
 PASS_DST="$SRC_ROOT/passes/pmux"
 CMAKE_FILE="$SRC_ROOT/passes/CMakeLists.txt"
@@ -35,7 +37,6 @@ die() {
 [ -f "$PASS_SRC/pmux_opt.cc" ] || die "缺少 $PASS_SRC/pmux_opt.cc"
 [ -f "$PASS_SRC/CMakeLists.txt" ] || die "缺少 $PASS_SRC/CMakeLists.txt"
 [ -f "$PATCH" ] || die "缺少 $PATCH"
-[ -f "$NORMALIZE_PATCH" ] || die "缺少 $NORMALIZE_PATCH"
 [ -f "$CMAKE_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
 [ -f "$SYNTH_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
 
@@ -52,23 +53,25 @@ else
   echo "提示：源码树不是 git 仓库，跳过版本标签检查。" >&2
 fi
 
-cmake_hits="$(grep -c '^add_subdirectory(pmux)$' "$CMAKE_FILE" || true)"
-synth_hits="$(grep -c 'run("pmux_opt");' "$SYNTH_FILE" || true)"
-sort_hits="$(grep -c 'run("sort");' "$SYNTH_FILE" || true)"
+cmake_hits="$(grep -cF 'add_subdirectory(pmux)' "$CMAKE_FILE" || true)"
+synth_hits="$(grep -cF 'run("pmux_opt");' "$SYNTH_FILE" || true)"
+deferred_select_hits="$(grep -cF 'select -set pmux_deferred_luts' "$SYNTH_FILE" || true)"
+deferred_techmap_hits="$(grep -cF 'techmap -map +/techmap.v * @pmux_deferred_luts %d' "$SYNTH_FILE" || true)"
+fold_luts_hits="$(grep -cF 'run("pmux_opt -fold_luts");' "$SYNTH_FILE" || true)"
 
-if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ]; then
+if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ] && \
+   [ "$deferred_select_hits" = "1" ] && [ "$deferred_techmap_hits" = "1" ] && \
+   [ "$fold_luts_hits" = "1" ]; then
   mkdir -p "$PASS_DST"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
-  if [ "$sort_hits" = "0" ]; then
-    patch -p1 -d "$SRC_ROOT" --dry-run < "$NORMALIZE_PATCH" >/dev/null || die "ABC9 输入规范化补丁无法应用"
-    patch -p1 -d "$SRC_ROOT" < "$NORMALIZE_PATCH" >/dev/null
-  fi
   echo "pmux_opt 已集成：$SRC_ROOT"
   exit 0
 fi
-if [ "$cmake_hits" != "0" ] || [ "$synth_hits" != "0" ]; then
-  die "集成状态不完整（CMake 命中 $cmake_hits，synth_intel 命中 $synth_hits），请先检查源码树"
+if [ "$cmake_hits" != "0" ] || [ "$synth_hits" != "0" ] || \
+   [ "$deferred_select_hits" != "0" ] || [ "$deferred_techmap_hits" != "0" ] || \
+   [ "$fold_luts_hits" != "0" ]; then
+  die "集成状态不完整（CMake=$cmake_hits，pass=$synth_hits，select=$deferred_select_hits，techmap=$deferred_techmap_hits，fold_luts=$fold_luts_hits），请使用干净的 Yosys 0.69 源码树"
 fi
 
 if [ "$git_root" = "$SRC_ROOT" ]; then
@@ -84,8 +87,6 @@ else
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
   patch -p1 -d "$SRC_ROOT" < "$PATCH" >/dev/null
 fi
-
-patch -p1 -d "$SRC_ROOT" < "$NORMALIZE_PATCH" >/dev/null
 
 echo "安装完成：$SRC_ROOT"
 echo "下一步：cmake -S \"$SRC_ROOT\" -B \"$SRC_ROOT/build\" -DCMAKE_BUILD_TYPE=Release"
