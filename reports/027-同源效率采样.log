@@ -1,0 +1,14 @@
+baseline : /tmp/fpga-yosys-baseline-069.IdEpLa/build-repro/yosys
+candidate: /tmp/fpga-yosys-repro-069.KzR8np/build-repro2/yosys
+计时口径 : wall time（类比 PowerShell Measure-Command），31 次中位数
+
+case    wall base  wall cand    ratio  mem base MB  mem cand MB    ratio
+test1       0.210      0.170    0.810        21.94        20.97    0.956
+test2       0.060      0.060    1.000        14.53        14.69    1.011
+test3       0.070      0.070    1.000        16.45        15.61    0.949
+test4       0.090      0.060    0.667        17.02        15.48    0.910
+
+最大墙钟比: test2 1.000
+最大内存比: test2 1.011
+效率满分线: 所有用例均 <= 1.05；任一项 > 1.15 则效率项为 0。
+JSON -> reports/027-同源效率采样.json
