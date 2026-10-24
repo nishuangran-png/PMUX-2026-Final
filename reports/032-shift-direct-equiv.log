@@ -1,0 +1,6 @@
+case                                       base   cand   reduct  gold_lut  gate_lut   delta   proof_s  result
+verilog_axi_priority_encoder_16              35     35    0.00%        35        35       0      0.04  PASS
+verilog_axi_priority_encoder_128            323    316    2.17%       323       316       7      2.00  PASS
+verilog_axi_priority_encoder_512           1315   1208    8.14%      1315      1208     107     46.35  PASS
+verilog_axi_arbiter_64                      173    163    5.78%       164       155       9      0.66  PASS
+JSON -> reports/032-shift-direct-equiv.json

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """常量 ROM 转 LUT 的泛化回归。
 
-默认生成 4～7 位地址、1～16 位输出的随机、仿射、低次、稀疏和混合真值表，
+默认生成 4～8 位地址、1～16 位输出的随机、仿射、低次、稀疏和混合真值表，
 分别用官方 Yosys 0.69 与优化版综合，要求：
 
   1. 优化后的 `cycloneiv_lcell_comb + $not` 不得高于官方基线；
@@ -24,13 +24,14 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-BASELINE = ROOT / "tools/build/official-v069/build/yosys"
-CANDIDATE = ROOT / "tools/build/official-v069-opt/build/yosys"
+BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
+CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
 EQY = ROOT / "tools/oss-cad-suite/bin/eqy"
 CELL_RE = re.compile(r"^\s+(\d+)\s+(\S+)\s*$")
 
 SHAPES = [(4, 1), (4, 4), (5, 2), (5, 4), (5, 16),
-          (6, 1), (6, 8), (6, 16), (7, 2), (7, 8), (7, 16)]
+          (6, 1), (6, 8), (6, 16), (7, 2), (7, 8), (7, 16),
+          (8, 8), (8, 10), (8, 12), (8, 16)]
 MODES = ["random", "affine", "degree2", "sparse10", "sparse25", "mixed"]
 
 # 每种结构至少覆盖一次 EQY，避免只做面积比较。
@@ -41,6 +42,7 @@ EQY_SAMPLE = {
     (6, 16): {"random", "affine"},
     (7, 8): {"sparse10", "mixed"},
     (7, 16): {"random"},
+    (8, 10): {"random"},
 }
 
 

@@ -1,0 +1,196 @@
+临时目录: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_rom_regress_9kv58anf
+case                                   base   cand   delta  EQY
+rom_addr1                                 0      0      +0  -
+rom_nonpow2                               3      3      +0  -
+rom_multiread                             8      8      +0  -
+rom_xinit                                 1      1      +0  -
+rom_const_addr                            3      3      +0  -
+rom_enable                               13     13      +0  -
+rom_4_1_random_0                          1      1      +0  -
+rom_4_1_random_1                          1      1      +0  -
+rom_4_1_affine_0                          1      1      +0  -
+rom_4_1_affine_1                          1      1      +0  -
+rom_4_1_degree2_0                         1      1      +0  -
+rom_4_1_degree2_1                         1      1      +0  -
+rom_4_1_sparse10_0                        1      1      +0  -
+rom_4_1_sparse10_1                        1      1      +0  -
+rom_4_1_sparse25_0                        1      1      +0  -
+rom_4_1_sparse25_1                        1      1      +0  -
+rom_4_1_mixed_0                           1      1      +0  -
+rom_4_1_mixed_1                           1      1      +0  -
+rom_4_4_random_0                          4      4      +0  -
+rom_4_4_random_1                          4      4      +0  -
+rom_4_4_affine_0                          3      3      +0  -
+rom_4_4_affine_1                          3      3      +0  -
+rom_4_4_degree2_0                         4      4      +0  -
+rom_4_4_degree2_1                         4      4      +0  -
+rom_4_4_sparse10_0                        4      4      +0  -
+rom_4_4_sparse10_1                        4      4      +0  -
+rom_4_4_sparse25_0                        4      4      +0  -
+rom_4_4_sparse25_1                        4      4      +0  -
+rom_4_4_mixed_0                           4      4      +0  -
+rom_4_4_mixed_1                           4      4      +0  -
+rom_5_2_random_0                          7      7      +0  -
+rom_5_2_random_1                          7      6      -1  -
+rom_5_2_affine_0                          1      1      +0  -
+rom_5_2_affine_1                          2      2      +0  -
+rom_5_2_degree2_0                         3      3      +0  -
+rom_5_2_degree2_1                         3      3      +0  -
+rom_5_2_sparse10_0                        7      7      +0  -
+rom_5_2_sparse10_1                        7      7      +0  -
+rom_5_2_sparse25_0                        6      6      +0  -
+rom_5_2_sparse25_1                        9      9      +0  -
+rom_5_2_mixed_0                           8      8      +0  -
+rom_5_2_mixed_1                           4      4      +0  -
+rom_5_4_random_0                         18     12      -6  PASS (18->16 $lut)
+rom_5_4_random_1                         16     16      +0  -
+rom_5_4_affine_0                          4      4      +0  PASS (4->4 $lut)
+rom_5_4_affine_1                          5      5      +0  -
+rom_5_4_degree2_0                         7      7      +0  PASS (7->7 $lut)
+rom_5_4_degree2_1                         3      3      +0  -
+rom_5_4_sparse10_0                       13     13      +0  -
+rom_5_4_sparse10_1                        9      9      +0  -
+rom_5_4_sparse25_0                       16     12      -4  -
+rom_5_4_sparse25_1                       16     12      -4  -
+rom_5_4_mixed_0                          11      9      -2  -
+rom_5_4_mixed_1                          10     10      +0  -
+rom_5_16_random_0                        67     48     -19  -
+rom_5_16_random_1                        57     48      -9  -
+rom_5_16_affine_0                        12     12      +0  -
+rom_5_16_affine_1                        14     14      +0  -
+rom_5_16_degree2_0                       22     22      +0  -
+rom_5_16_degree2_1                       20     20      +0  -
+rom_5_16_sparse10_0                      37     37      +0  PASS (37->37 $lut)
+rom_5_16_sparse10_1                      39     39      +0  -
+rom_5_16_sparse25_0                      68     68      +0  -
+rom_5_16_sparse25_1                      56     47      -9  -
+rom_5_16_mixed_0                         45     45      +0  PASS (45->45 $lut)
+rom_5_16_mixed_1                         47     38      -9  -
+rom_6_1_random_0                          8      7      -1  -
+rom_6_1_random_1                          9      7      -2  -
+rom_6_1_affine_0                          1      1      +0  -
+rom_6_1_affine_1                          1      1      +0  -
+rom_6_1_degree2_0                         3      3      +0  -
+rom_6_1_degree2_1                         2      2      +0  -
+rom_6_1_sparse10_0                        5      5      +0  -
+rom_6_1_sparse10_1                        6      6      +0  -
+rom_6_1_sparse25_0                        7      7      +0  -
+rom_6_1_sparse25_1                        8      8      +0  -
+rom_6_1_mixed_0                          10      7      -3  -
+rom_6_1_mixed_1                          12      7      -5  -
+rom_6_8_random_0                         73     56     -17  PASS (73->59 $lut)
+rom_6_8_random_1                         73     56     -17  -
+rom_6_8_affine_0                          8      8      +0  -
+rom_6_8_affine_1                          8      8      +0  -
+rom_6_8_degree2_0                        16     16      +0  -
+rom_6_8_degree2_1                        15     15      +0  -
+rom_6_8_sparse10_0                       49     49      +0  -
+rom_6_8_sparse10_1                       45     45      +0  -
+rom_6_8_sparse25_0                       63     55      -8  -
+rom_6_8_sparse25_1                       66     55     -11  -
+rom_6_8_mixed_0                          50     36     -14  PASS (50->37 $lut)
+rom_6_8_mixed_1                          44     36      -8  -
+rom_6_16_random_0                       140    111     -29  PASS (140->119 $lut)
+rom_6_16_random_1                       149    111     -38  -
+rom_6_16_affine_0                        17     17      +0  PASS (17->17 $lut)
+rom_6_16_affine_1                        17     17      +0  -
+rom_6_16_degree2_0                       24     24      +0  -
+rom_6_16_degree2_1                       26     26      +0  -
+rom_6_16_sparse10_0                      77     77      +0  -
+rom_6_16_sparse10_1                      83     83      +0  -
+rom_6_16_sparse25_0                     126    107     -19  -
+rom_6_16_sparse25_1                     139    108     -31  -
+rom_6_16_mixed_0                        101     74     -27  -
+rom_6_16_mixed_1                        102     79     -23  -
+rom_7_2_random_0                         42     30     -12  -
+rom_7_2_random_1                         44     30     -14  -
+rom_7_2_affine_0                          2      2      +0  -
+rom_7_2_affine_1                          2      2      +0  -
+rom_7_2_degree2_0                         4      4      +0  -
+rom_7_2_degree2_1                         4      4      +0  -
+rom_7_2_sparse10_0                       22     22      +0  -
+rom_7_2_sparse10_1                       28     28      +0  -
+rom_7_2_sparse25_0                       35     35      +0  -
+rom_7_2_sparse25_1                       40     40      +0  -
+rom_7_2_mixed_0                          21     16      -5  -
+rom_7_2_mixed_1                          23     16      -7  -
+rom_7_8_random_0                        148    120     -28  -
+rom_7_8_random_1                        154    119     -35  -
+rom_7_8_affine_0                          7      7      +0  -
+rom_7_8_affine_1                          9      9      +0  -
+rom_7_8_degree2_0                        16     16      +0  -
+rom_7_8_degree2_1                        12     12      +0  -
+rom_7_8_sparse10_0                       90     90      +0  PASS (90->90 $lut)
+rom_7_8_sparse10_1                       96     96      +0  -
+rom_7_8_sparse25_0                      136    118     -18  -
+rom_7_8_sparse25_1                      146    116     -30  -
+rom_7_8_mixed_0                          80     71      -9  PASS* (EQY FAIL; 整体 SAT PASS)
+rom_7_8_mixed_1                          98     75     -23  -
+rom_7_16_random_0                       316    239     -77  PASS (316->250 $lut)
+rom_7_16_random_1                       298    240     -58  -
+rom_7_16_affine_0                        15     15      +0  -
+rom_7_16_affine_1                        17     17      +0  -
+rom_7_16_degree2_0                       35     35      +0  -
+rom_7_16_degree2_1                       34     34      +0  -
+rom_7_16_sparse10_0                     170    170      +0  -
+rom_7_16_sparse10_1                     151    151      +0  -
+rom_7_16_sparse25_0                     269    234     -35  -
+rom_7_16_sparse25_1                     274    234     -40  -
+rom_7_16_mixed_0                        178    153     -25  -
+rom_7_16_mixed_1                        187    158     -29  -
+rom_8_8_random_0                        315    247     -68  -
+rom_8_8_random_1                        315    248     -67  -
+rom_8_8_affine_0                         10     10      +0  -
+rom_8_8_affine_1                          9      9      +0  -
+rom_8_8_degree2_0                        18     18      +0  -
+rom_8_8_degree2_1                        13     13      +0  -
+rom_8_8_sparse10_0                      159    159      +0  -
+rom_8_8_sparse10_1                      167    167      +0  -
+rom_8_8_sparse25_0                      283    242     -41  -
+rom_8_8_sparse25_1                      280    241     -39  -
+rom_8_8_mixed_0                         180    151     -29  -
+rom_8_8_mixed_1                         174    143     -31  -
+rom_8_10_random_0                       381    309     -72  PASS (381->314 $lut)
+rom_8_10_random_1                       380    309     -71  -
+rom_8_10_affine_0                        13     13      +0  -
+rom_8_10_affine_1                        12     12      +0  -
+rom_8_10_degree2_0                       20     20      +0  -
+rom_8_10_degree2_1                       22     22      +0  -
+rom_8_10_sparse10_0                     206    206      +0  -
+rom_8_10_sparse10_1                     196    196      +0  -
+rom_8_10_sparse25_0                     331    302     -29  -
+rom_8_10_sparse25_1                     331    298     -33  -
+rom_8_10_mixed_0                        230    204     -26  -
+rom_8_10_mixed_1                        242    196     -46  -
+rom_8_12_random_0                       444    371     -73  -
+rom_8_12_random_1                       448    372     -76  -
+rom_8_12_affine_0                        13     13      +0  -
+rom_8_12_affine_1                        15     15      +0  -
+rom_8_12_degree2_0                       37     37      +0  -
+rom_8_12_degree2_1                       29     29      +0  -
+rom_8_12_sparse10_0                     229    229      +0  -
+rom_8_12_sparse10_1                     233    233      +0  -
+rom_8_12_sparse25_0                     394    364     -30  -
+rom_8_12_sparse25_1                     388    358     -30  -
+rom_8_12_mixed_0                        250    228     -22  -
+rom_8_12_mixed_1                        259    226     -33  -
+rom_8_16_random_0                       588    495     -93  -
+rom_8_16_random_1                       586    494     -92  -
+rom_8_16_affine_0                        18     18      +0  -
+rom_8_16_affine_1                        16     16      +0  -
+rom_8_16_degree2_0                       37     37      +0  -
+rom_8_16_degree2_1                       39     39      +0  -
+rom_8_16_sparse10_0                     298    298      +0  -
+rom_8_16_sparse10_1                     287    287      +0  -
+rom_8_16_sparse25_0                     497    480     -17  -
+rom_8_16_sparse25_1                     496    474     -22  -
+rom_8_16_mixed_0                        340    310     -30  -
+rom_8_16_mixed_1                        363    321     -42  -
+
+汇总
+  面积用例: 186，改善 65，持平 121，回归 0
+  最大改善: rom_8_16_random_0，减少 93 个逻辑单元
+  EQY: 13/13 PASS
+  其中 EQY 分区失败但整体 miter 通过: 1
+
+PASS：没有面积/DFF 回归，抽样的 EQY 全部通过。

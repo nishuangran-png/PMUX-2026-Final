@@ -1,0 +1,34 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_y3w7o27w
+phase 1/2: baseline
+chain_04_w16                 baseline done
+chain_07_w16                 baseline done
+chain_09_w16                 baseline done
+chain_15_w16                 baseline done
+chain_17_w16                 baseline done
+chain_24_w16                 baseline done
+chain_48_w16                 baseline done
+chain_64_w16                 baseline done
+chain_17_w2                  baseline done
+chain_32_w2                  baseline done
+phase 2/2: candidate
+chain_04_w16                 candidate done
+chain_07_w16                 candidate done
+chain_09_w16                 candidate done
+chain_15_w16                 candidate done
+chain_17_w16                 candidate done
+chain_24_w16                 candidate done
+chain_48_w16                 candidate done
+chain_64_w16                 candidate done
+chain_17_w2                  candidate done
+chain_32_w2                  candidate done
+chain_04_w16                 constructed    80 ->    65  +18.75% dff    0 EQY PASS
+chain_07_w16                 constructed   144 ->    98  +31.94% dff    0 EQY PASS
+chain_09_w16                 constructed   176 ->   146  +17.05% dff    0 EQY PASS
+chain_15_w16                 constructed   288 ->   245  +14.93% dff    0 EQY PASS
+chain_17_w16                 constructed   336 ->   262  +22.02% dff    0 EQY PASS
+chain_24_w16                 constructed   448 ->   386  +13.84% dff    0 EQY PASS
+chain_48_w16                 constructed   832 ->   716  +13.94% dff    0 EQY PASS
+chain_64_w16                 constructed  1104 ->   957  +13.32% dff    0 EQY PASS
+chain_17_w2                  constructed    42 ->    37  +11.90% dff    0 EQY PASS
+chain_32_w2                  constructed    72 ->    69   +4.17% dff    0 EQY PASS
+JSON -> /tmp/adaptive-chain-eqy.json

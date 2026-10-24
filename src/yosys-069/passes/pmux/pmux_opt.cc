@@ -5,7 +5,7 @@
  *
  * Implemented structural rewrites:
  *   1. dual-$pmux sharing;
- *   2. priority $mux-chain folding into a balanced mux tree or one $pmux;
+ *   2. priority $mux-chain folding into adaptive-width nested mux trees;
  *   3. sparse partial-update PMUX collapse;
  *   4. gated equality-decoder narrowing;
  *   5. adjacent equality-code factorization and shared enable factoring.
@@ -60,6 +60,7 @@ struct InputLoad {
 
 struct LutNode {
 	bool is_const = false;
+	bool inverted = false;
 	State value = State::S0;
 	SigSpec sig;
 	Cell *cell = nullptr;
@@ -138,6 +139,25 @@ static LutFunction canonical_function(const std::vector<uint8_t> &table, int inp
 {
 	uint32_t support = function_support(table, input_count);
 	return {support, compress_function(table, support)};
+}
+
+// Two LUTs that differ only by inversion can share one physical LUT when
+// every consumer can absorb the inversion into its own truth table.  This is
+// common for the cofactors of a multi-output ROM: the data LUT is shared and
+// each output mux chooses whether to invert its input bit.
+static std::pair<LutFunction, bool> canonical_function_polarity(
+		const std::vector<uint8_t> &table, int input_count)
+{
+	LutFunction key = canonical_function(table, input_count);
+	if (!key.first)
+		return {key, false};
+
+	LutFunction inverted = key;
+	for (auto &value : inverted.second)
+		value ^= 1;
+	if (inverted.second < key.second)
+		return {inverted, true};
+	return {key, false};
 }
 
 static std::vector<uint8_t> expand_function(const LutFunction &fn, int input_count)
@@ -282,18 +302,152 @@ static int estimate_rom_lut_cost(const std::vector<std::vector<uint8_t>> &functi
 	return cost;
 }
 
+// For small ROMs, choosing a separate split input for every output is a tiny
+// multi-output covering problem: each output contributes its two Shannon
+// cofactors, and cofactors that are equal (or complements) share one LUT.
+// Exhaustive search is useful here because a globally fixed split order can
+// miss a two-LUT saving.  Larger ROMs keep the linear fallback order.
+static std::map<LutFunction, int> choose_split_plan(
+		const std::vector<std::vector<uint8_t>> &functions,
+		int input_count, const std::vector<int> &order, bool verbose)
+{
+	std::map<LutFunction, int> plan;
+	if (input_count > 5)
+		return plan;
+
+	struct SplitItem {
+		LutFunction key;
+		std::vector<std::pair<int, std::vector<int>>> options;
+	};
+
+	std::map<LutFunction, int> node_ids;
+	std::map<LutFunction, SplitItem> items;
+	for (auto &table : functions) {
+		auto canonical = canonical_function_polarity(table, input_count);
+		if (!canonical.first.first || popcount32(canonical.first.first) <= 4)
+			continue;
+		if (items.count(canonical.first))
+			continue;
+
+		SplitItem item;
+		item.key = canonical.first;
+		std::vector<uint8_t> expanded = expand_function(item.key, input_count);
+		for (int split : order) {
+			if (!(item.key.first & (1u << split)))
+				continue;
+			std::vector<int> ids;
+			for (bool value : {false, true}) {
+				LutFunction child = canonical_function_polarity(
+						cofactor(expanded, split, value), input_count).first;
+				if (!child.first)
+					continue;
+				auto inserted = node_ids.emplace(child, GetSize(node_ids));
+				ids.push_back(inserted.first->second);
+			}
+			std::sort(ids.begin(), ids.end());
+			ids.erase(std::unique(ids.begin(), ids.end()), ids.end());
+			if (!ids.empty())
+				item.options.push_back({split, std::move(ids)});
+		}
+		if (!item.options.empty())
+			items.emplace(item.key, std::move(item));
+	}
+
+	if (items.empty())
+		return plan;
+
+	std::vector<SplitItem> roots;
+	for (auto &entry : items)
+		roots.push_back(entry.second);
+	std::sort(roots.begin(), roots.end(), [](const SplitItem &a, const SplitItem &b) {
+		if (a.options.size() != b.options.size())
+			return a.options.size() < b.options.size();
+		return a.key < b.key;
+	});
+
+	long long combinations = 1;
+	for (auto &root : roots) {
+		if (root.options.size() > 1000000 || combinations > 10000000 / GetSize(root.options))
+			return plan;
+		combinations *= GetSize(root.options);
+	}
+
+	int words = (GetSize(node_ids) + 63) / 64;
+	std::vector<uint64_t> used(words, 0), best_used(words, 0);
+	std::vector<int> choice(roots.size(), 0), best_choice(roots.size(), 0);
+	int best_count = INT_MAX;
+	for (auto &root : roots) {
+		log("  split candidate support=%d:", popcount32(root.key.first));
+		for (auto &option : root.options) {
+			log(" [bit%d:", option.first);
+			for (int id : option.second)
+				log(" %d", id);
+			log("]");
+		}
+		log("\n");
+	}
+
+	auto visit = [&](auto &&self, int pos, int count) -> void {
+		if (count >= best_count)
+			return;
+		if (pos == GetSize(roots)) {
+			best_count = count;
+			best_choice = choice;
+			best_used = used;
+			return;
+		}
+		for (int option = 0; option < GetSize(roots[pos].options); option++) {
+			choice[pos] = option;
+			int next_count = count;
+			std::vector<int> added;
+			for (int id : roots[pos].options[option].second) {
+				int word = id / 64;
+				uint64_t mask = uint64_t(1) << (id % 64);
+				if (!(used[word] & mask)) {
+					used[word] |= mask;
+					added.push_back(id);
+					next_count++;
+				}
+			}
+			self(self, pos + 1, next_count);
+			for (int id : added) {
+				int word = id / 64;
+				uint64_t mask = uint64_t(1) << (id % 64);
+				used[word] &= ~mask;
+			}
+		}
+	};
+	visit(visit, 0, 0);
+
+	if (best_count == INT_MAX)
+		return plan;
+	log("pmux_opt: split plan best=%d roots=%d\n", best_count, GetSize(roots));
+	for (int index = 0; index < GetSize(roots); index++) {
+		plan[roots[index].key] = roots[index].options[best_choice[index]].first;
+		if (verbose)
+			log("  split plan: support=%d -> address bit %d (%d nodes, %d choices)\n",
+			    popcount32(roots[index].key.first), plan[roots[index].key],
+			    best_count, GetSize(roots[index].options));
+	}
+	return plan;
+}
+
 class ConstantRomSynthesizer
 {
 	Module *module;
 	SigSpec address;
 	int input_count;
 	std::vector<int> order;
+	std::map<LutFunction, int> split_plan;
 	std::map<LutFunction, LutNode> memo;
 
-	int choose_split(uint32_t support) const
+	int choose_split(const LutFunction &key) const
 	{
+		auto planned = split_plan.find(key);
+		if (planned != split_plan.end())
+			return planned->second;
 		for (int input : order)
-			if (support & (1u << input))
+			if (key.first & (1u << input))
 				return input;
 		return -1;
 	}
@@ -310,8 +464,8 @@ class ConstantRomSynthesizer
 	{
 		LutNode node;
 		node.sig = module->addWire(NEW_ID);
-		node.cell = module->addLut(NEW_ID, inputs, node.sig, std::move(table));
-		node.cell->set_bool_attribute(ID(pmux_deferred_lut));
+		node.cell = module->addLut(module->uniquify("$pmux_deferred_lut"),
+		                           inputs, node.sig, std::move(table));
 		node.width = GetSize(inputs);
 		return node;
 	}
@@ -319,13 +473,16 @@ class ConstantRomSynthesizer
 	LutNode merge_children(const LutNode &low, const LutNode &high, int split);
 
 public:
-	ConstantRomSynthesizer(Module *module, SigSpec address, int input_count, std::vector<int> order)
-	    : module(module), address(std::move(address)), input_count(input_count), order(std::move(order))
+	ConstantRomSynthesizer(Module *module, SigSpec address, int input_count,
+	                       std::vector<int> order, std::map<LutFunction, int> split_plan)
+	    : module(module), address(std::move(address)), input_count(input_count),
+	      order(std::move(order)), split_plan(std::move(split_plan))
 	{
 	}
 
 	LutNode synthesize(const std::vector<uint8_t> &table);
 	LutNode synthesize_gated(const std::vector<uint8_t> &table, SigBit gate, State base);
+	LutNode synthesize_gated_wide(const std::vector<uint8_t> &table, SigBit gate, State base);
 };
 
 LutNode ConstantRomSynthesizer::merge_children(const LutNode &low, const LutNode &high, int split)
@@ -357,6 +514,10 @@ LutNode ConstantRomSynthesizer::merge_children(const LutNode &low, const LutNode
 			else
 				select = bit;
 		}
+		if (low.inverted)
+			low_value = !low_value;
+		if (high.inverted)
+			high_value = !high_value;
 		lut.set(index, (select ? high_value : low_value) ? State::S1 : State::S0);
 	}
 	return add_lut(inputs, std::move(lut));
@@ -368,10 +529,14 @@ LutNode ConstantRomSynthesizer::synthesize(const std::vector<uint8_t> &table)
 	if (!support)
 		return make_constant(table[0] ? State::S1 : State::S0);
 
-	LutFunction key = {support, compress_function(table, support)};
+	std::pair<LutFunction, bool> canonical = canonical_function_polarity(table, input_count);
+	LutFunction key = canonical.first;
 	auto found = memo.find(key);
-	if (found != memo.end())
-		return found->second;
+	if (found != memo.end()) {
+		LutNode node = found->second;
+		node.inverted = node.inverted != canonical.second;
+		return node;
+	}
 
 	LutNode node;
 	if (popcount32(support) <= 4) {
@@ -384,12 +549,17 @@ LutNode ConstantRomSynthesizer::synthesize(const std::vector<uint8_t> &table)
 			lut.set(index, key.second[index] ? State::S1 : State::S0);
 		node = add_lut(inputs, std::move(lut));
 	} else {
-		int split = choose_split(support);
-		LutNode low = synthesize(cofactor(table, split, false));
-		LutNode high = synthesize(cofactor(table, split, true));
+		int split = choose_split(key);
+		std::vector<uint8_t> canonical_table = expand_function(key, input_count);
+		LutNode low = synthesize(cofactor(canonical_table, split, false));
+		LutNode high = synthesize(cofactor(canonical_table, split, true));
 		node = merge_children(low, high, split);
 	}
+	// Cache only the physical, non-inverted LUT.  Polarity is a property of
+	// this particular use, not of the shared node stored in the memo table.
+	node.inverted = false;
 	memo[key] = node;
+	node.inverted = canonical.second;
 	return node;
 }
 
@@ -401,7 +571,8 @@ LutNode ConstantRomSynthesizer::synthesize_gated(const std::vector<uint8_t> &tab
 	if (!support) {
 		data = make_constant(table[0] ? State::S1 : State::S0);
 	} else if (popcount32(support) > 4) {
-		int split = choose_split(support);
+		auto canonical = canonical_function_polarity(table, input_count);
+		int split = choose_split(canonical.first);
 		LutNode low = synthesize(cofactor(table, split, false));
 		LutNode high = synthesize(cofactor(table, split, true));
 
@@ -436,6 +607,10 @@ LutNode ConstantRomSynthesizer::synthesize_gated(const std::vector<uint8_t> &tab
 				else
 					enable = bit;
 			}
+			if (low.inverted)
+				low_value = !low_value;
+			if (high.inverted)
+				high_value = !high_value;
 			lut.set(index, (enable ? (select ? high_value : low_value) : base == State::S1)
 			                   ? State::S1 : State::S0);
 		}
@@ -446,6 +621,8 @@ LutNode ConstantRomSynthesizer::synthesize_gated(const std::vector<uint8_t> &tab
 
 	if (data.is_const) {
 		State enabled = data.value;
+		if (data.inverted)
+			enabled = enabled == State::S1 ? State::S0 : State::S1;
 		if (enabled == base)
 			return make_constant(base);
 		Const lut(State::S0, 2);
@@ -459,12 +636,51 @@ LutNode ConstantRomSynthesizer::synthesize_gated(const std::vector<uint8_t> &tab
 	Const lut(State::S0, 4);
 	for (int index = 0; index < 4; index++) {
 		bool data_value = index & 1;
+		if (data.inverted)
+			data_value = !data_value;
 		bool enable = index & 2;
 		lut.set(index, (enable ? data_value : base == State::S1) ? State::S1 : State::S0);
 	}
 	SigSpec inputs;
 	inputs.append(data.sig);
 	inputs.append(gate);
+	return add_lut(inputs, std::move(lut));
+}
+
+LutNode ConstantRomSynthesizer::synthesize_gated_wide(const std::vector<uint8_t> &table,
+                                                       SigBit gate, State base)
+{
+	uint32_t support = function_support(table, input_count);
+	std::vector<int> used_inputs;
+	for (int input = 0; input < input_count; input++)
+		if (support & (1u << input))
+			used_inputs.push_back(input);
+
+	if (used_inputs.empty()) {
+		State enabled = table[0] ? State::S1 : State::S0;
+		if (enabled == base)
+			return make_constant(base);
+		Const lut(State::S0, 2);
+		lut.set(0, base);
+		lut.set(1, enabled);
+		return add_lut(SigSpec(gate), std::move(lut));
+	}
+
+	SigSpec inputs;
+	for (int input : used_inputs)
+		inputs.append(address[input]);
+	inputs.append(gate);
+
+	Const lut(State::S0, 1 << GetSize(inputs));
+	for (int index = 0; index < GetSize(lut); index++) {
+		int address_index = 0;
+		for (int pos = 0; pos < GetSize(used_inputs); pos++)
+			if (index & (1 << pos))
+				address_index |= 1 << used_inputs[pos];
+		bool enabled = (index >> GetSize(used_inputs)) & 1;
+		bool value = enabled ? table[address_index] != 0 : base == State::S1;
+		lut.set(index, value ? State::S1 : State::S0);
+	}
 	return add_lut(inputs, std::move(lut));
 }
 
@@ -532,6 +748,103 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 			for (int addr = 0; addr < mem.size; addr++)
 				output_functions[bit][addr] = init_data[addr * mem.width + bit] == State::S1;
 		}
+
+		dict<SigBit, std::vector<InputLoad>> gate_loads;
+		for (auto cell : module->cells())
+			for (auto &conn : cell->connections()) {
+				if (ct.cell_output(cell->type, conn.first))
+					continue;
+				if (cell->type.begins_with("$mem"))
+					continue;
+				int offset = 0;
+				for (auto bit : sigmap(conn.second))
+					gate_loads[bit].push_back({cell, conn.first, offset++});
+			}
+
+		bool prefer_plain_ff_flow = false;
+		const IdString port_d = RTLIL::escape_id("d");
+		for (auto &port : mem.rd_ports) {
+			dict<SigBit, int> rom_bit_index;
+			for (int bit = 0; bit < mem.width; bit++)
+				rom_bit_index[sigmap(port.data[bit])] = bit;
+
+			// A registered constant ROM is best left as a memory read until
+			// memory_map.  ABC then sees the complete mux tree and can choose
+			// global 4-input cuts; splitting the table into LUTs here freezes
+			// those cuts and can cost several cells.
+			bool all_direct_ff_loads = true;
+			for (int bit = 0; bit < mem.width; bit++) {
+				auto load_it = gate_loads.find(sigmap(port.data[bit]));
+				if (verbose && (load_it == gate_loads.end() || GetSize(load_it->second) != 1))
+					log("  direct-FF check bit %d: load_count=%d\n", bit,
+					    load_it == gate_loads.end() ? 0 : GetSize(load_it->second));
+				if (verbose && load_it != gate_loads.end() && GetSize(load_it->second) == 1)
+					log("  direct-FF check bit %d: port=%s type=%s\n", bit,
+					    log_id(load_it->second[0].port), log_id(load_it->second[0].cell->type));
+				if (verbose && load_it != gate_loads.end())
+					for (auto &load : load_it->second)
+						log("    bit %d load: %s/%s/%d\n", bit, log_id(load.cell->name),
+						    log_id(load.port), load.offset);
+				if (load_it == gate_loads.end() || GetSize(load_it->second) != 1 ||
+				    (load_it->second[0].port != ID::D && load_it->second[0].port != port_d) ||
+				    !load_it->second[0].cell->type.in(
+				        ID($dff), ID($adff), ID($dffce), ID($adffce),
+				        ID($sdff), ID($sdffe), ID($sdffce), ID(dffeas))) {
+					all_direct_ff_loads = false;
+					break;
+				}
+			}
+			if (all_direct_ff_loads) {
+				prefer_plain_ff_flow = true;
+				break;
+			}
+
+			for (auto cell : module->cells()) {
+				if (cell->type != ID($mux))
+					continue;
+				int width = GetSize(cell->getPort(ID::Y));
+				if (width < 2 || GetSize(cell->getPort(ID::S)) != 1 ||
+				    !sigmap(cell->getPort(ID::A)).is_fully_zero())
+					continue;
+
+				SigSpec b_data = sigmap(cell->getPort(ID::B));
+				pool<int> rom_bits;
+				bool all_rom_bits = true;
+				for (auto bit : b_data) {
+					auto it = rom_bit_index.find(bit);
+					if (it == rom_bit_index.end() || !rom_bits.insert(it->second).second) {
+						all_rom_bits = false;
+						break;
+					}
+				}
+				if (!all_rom_bits)
+					continue;
+
+				bool all_plain_dff_loads = true;
+				for (auto bit : sigmap(cell->getPort(ID::Y))) {
+					auto it = gate_loads.find(bit);
+					if (it == gate_loads.end() || GetSize(it->second) != 1 ||
+					    it->second[0].port != ID::D ||
+					    !it->second[0].cell->type.in(ID($dff), ID($adff))) {
+						all_plain_dff_loads = false;
+						break;
+					}
+				}
+				if (all_plain_dff_loads) {
+					prefer_plain_ff_flow = true;
+					break;
+				}
+			}
+			if (prefer_plain_ff_flow)
+				break;
+		}
+		if (prefer_plain_ff_flow) {
+			if (verbose)
+				log("  constant ROM %s has a shared zero-gated plain-DFF load; leaving it to ABC\n",
+				    log_id(mem.memid));
+			continue;
+		}
+
 		bool needs_decomposition = false, all_cheap = true;
 		for (auto &table : output_functions) {
 			if (popcount32(function_support(table, addr_bits)) > 4) {
@@ -547,6 +860,7 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 			continue;
 		}
 		std::vector<int> lut_order = choose_lut_order(output_functions, addr_bits);
+		std::map<LutFunction, int> split_plan = choose_split_plan(output_functions, addr_bits, lut_order, verbose);
 		int estimated_luts = estimate_rom_lut_cost(output_functions, addr_bits, lut_order);
 		if (estimated_luts <= 2 * mem.width) {
 			if (verbose)
@@ -576,7 +890,7 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 			}
 
 			SigSpec port_addr = sigmap(port.addr);
-			ConstantRomSynthesizer synthesizer(module, port_addr, addr_bits, lut_order);
+			ConstantRomSynthesizer synthesizer(module, port_addr, addr_bits, lut_order, split_plan);
 
 			dict<SigBit, int> rom_bit_index;
 			for (int bit = 0; bit < mem.width; bit++)
@@ -647,11 +961,27 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 				if (!convertible)
 					continue;
 
+				bool fold_into_dff_clear = a_data.is_fully_zero();
+				if (fold_into_dff_clear) {
+					for (int bit = 0; bit < width; bit++) {
+						auto load_it = bit2loads.find(sigmap(cell->getPort(ID::Y)[bit]));
+						if (load_it == bit2loads.end() || GetSize(load_it->second) != 1 ||
+						    load_it->second[0].port != ID::D ||
+						    !load_it->second[0].cell->type.in(ID($dff), ID($adff))) {
+							fold_into_dff_clear = false;
+							break;
+						}
+					}
+				}
+
 				SigSpec lut_output = module->addWire(NEW_ID, width);
 				SigBit select = sigmap(cell->getPort(ID::S))[0];
 				for (int bit = 0; bit < width; bit++) {
-					LutNode node = synthesizer.synthesize_gated(output_functions[indices[bit]],
-					                                                 select, a_data[bit].data);
+					LutNode node = fold_into_dff_clear
+					                   ? synthesizer.synthesize_gated_wide(
+					                         output_functions[indices[bit]], select, a_data[bit].data)
+					                   : synthesizer.synthesize_gated(
+					                         output_functions[indices[bit]], select, a_data[bit].data);
 					if (node.is_const)
 						module->connect(lut_output[bit], Const(node.value, 1));
 					else
@@ -671,12 +1001,19 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 			for (int bit = 0; bit < mem.width; bit++) {
 				if (folded_bits.count(bit))
 					continue;
-				LutNode node = synthesizer.synthesize(output_functions[bit]);
-				if (node.is_const)
-					module->connect(port.data[bit], Const(node.value, 1));
-				else
-					module->connect(port.data[bit], node.sig);
-			}
+					LutNode node = synthesizer.synthesize(output_functions[bit]);
+					if (node.is_const)
+						module->connect(port.data[bit], Const(node.value, 1));
+					else {
+						SigBit value = node.sig;
+						if (node.inverted) {
+							SigBit inverted = module->addWire(NEW_ID);
+							module->addNot(NEW_ID, value, inverted);
+							value = inverted;
+						}
+						module->connect(port.data[bit], value);
+					}
+				}
 		}
 
 		if (verbose)
@@ -696,6 +1033,8 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 // the LUT truth table changes no other user and leaves the register's reset
 // semantics untouched.
 pool<SigBit> collect_output_bits(Module *module, SigMap &sigmap);
+SigBit make_not(Module *module, SigBit bit);
+SigBit make_or(Module *module, const std::vector<SigBit> &inputs);
 
 bool combinational_depends_on(SigBit target, SigBit start, SigMap &sigmap, CellTypes &ct,
                               const dict<SigBit, Cell *> &bit_driver)
@@ -791,6 +1130,778 @@ int fold_not_into_luts(Module *module, CellTypes &ct, bool verbose)
 		module->connect(candidate->getPort(ID::Y), driver->getPort(ID::Y));
 		module->remove(candidate);
 		folded++;
+	}
+
+	return folded;
+}
+
+// A technology flip-flop can absorb an inverted clock enable without spending
+// a LUT: hold the register by synchronously loading its own Q, and enable that
+// load with the un-inverted signal.  This is only profitable when the inverter
+// exclusively drives DFF enables, so a shared inverter disappears completely.
+int fold_inverted_enable_into_dff(Module *module, CellTypes &ct, bool verbose)
+{
+	int folded = 0;
+	const IdString port_q = RTLIL::escape_id("q");
+	const IdString port_ena = RTLIL::escape_id("ena");
+	const IdString port_asdata = RTLIL::escape_id("asdata");
+	const IdString port_sload = RTLIL::escape_id("sload");
+	const IdString port_sclr = RTLIL::escape_id("sclr");
+	const IdString port_aload = RTLIL::escape_id("aload");
+
+	while (true) {
+		SigMap sigmap(module);
+		pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+		dict<SigBit, int> loads;
+		dict<SigBit, int> ena_loads;
+
+		for (auto cell : module->cells())
+			for (auto &conn : cell->connections()) {
+				bool is_input = cell->type == ID(dffeas) ? conn.first != port_q
+				                                         : ct.cell_input(cell->type, conn.first);
+				if (!is_input)
+					continue;
+				for (auto bit : sigmap(conn.second)) {
+					loads[bit]++;
+					if (cell->type == ID(dffeas) && conn.first == port_ena)
+						ena_loads[bit]++;
+				}
+			}
+
+		Cell *candidate = nullptr;
+		std::vector<Cell *> targets;
+		SigBit inverter_input;
+
+		for (auto cell : module->cells()) {
+			if (!cell->type.in(ID($not), ID($_NOT_)))
+				continue;
+			if (GetSize(cell->getPort(ID::A)) != 1 || GetSize(cell->getPort(ID::Y)) != 1)
+				continue;
+
+			SigBit output = sigmap(cell->getPort(ID::Y)[0]);
+			if (output_bits.count(output) || loads[output] == 0 ||
+			    loads[output] != ena_loads[output])
+				continue;
+
+			std::vector<Cell *> local_targets;
+			bool ok = true;
+			for (auto dff : module->cells()) {
+				if (dff->type != ID(dffeas) || !dff->hasPort(port_ena) ||
+				    GetSize(dff->getPort(port_ena)) != 1 ||
+				    sigmap(dff->getPort(port_ena)[0]) != output)
+					continue;
+				if (dff->get_bool_attribute(ID(pmux_rom_enable)))
+					continue;
+				if (!dff->hasPort(port_q) || GetSize(dff->getPort(port_q)) != 1 ||
+				    !dff->hasPort(port_asdata) || !dff->hasPort(port_sload) ||
+				    !dff->hasPort(port_sclr) || !dff->hasPort(port_aload) ||
+				    GetSize(dff->getPort(port_sload)) != 1 ||
+				    GetSize(dff->getPort(port_sclr)) != 1 ||
+				    GetSize(dff->getPort(port_aload)) != 1 ||
+				    sigmap(dff->getPort(port_sload)[0]) != State::S0 ||
+				    sigmap(dff->getPort(port_sclr)[0]) != State::S0 ||
+				    sigmap(dff->getPort(port_aload)[0]) != State::S0) {
+					ok = false;
+					break;
+				}
+				local_targets.push_back(dff);
+			}
+
+			if (!ok || local_targets.empty())
+				continue;
+			candidate = cell;
+			targets = std::move(local_targets);
+			inverter_input = sigmap(cell->getPort(ID::A)[0]);
+			break;
+		}
+
+		if (candidate == nullptr)
+			break;
+
+		for (auto dff : targets) {
+			dff->setPort(port_ena, State::S1);
+			dff->setPort(port_sload, inverter_input);
+			dff->setPort(port_asdata, dff->getPort(port_q));
+			if (verbose)
+				log("  moved inverted enable %s into DFF %s\n",
+				    log_id(candidate->name), log_id(dff->name));
+		}
+		module->remove(candidate);
+		folded += GetSize(targets);
+	}
+
+	return folded;
+}
+
+// A DFF next-state cone can contain a shared zero-gate, for example
+// next = enable ? rom_data : 0.  Move that shared gate to the DFF synchronous
+// clear and leave the ROM cone unconstrained for ABC.  This is structurally
+// better than embedding the enable in every output LUT: it avoids forcing an
+// early LUT decomposition of the ROM and lets ABC choose the cuts globally.
+int fold_zero_gate_into_dff_clear(Module *module, CellTypes &ct, bool verbose)
+{
+	struct Option {
+		Cell *dff;
+		Cell *gate;
+		SigBit control;
+		SigBit data;
+	};
+
+	const IdString port_d = RTLIL::escape_id("d");
+	const IdString port_ena = RTLIL::escape_id("ena");
+	const IdString port_sclr = RTLIL::escape_id("sclr");
+	const IdString port_sload = RTLIL::escape_id("sload");
+	const IdString port_aload = RTLIL::escape_id("aload");
+
+	SigMap sigmap(module);
+	dict<SigBit, Cell *> bit_driver;
+	for (auto cell : module->cells())
+		for (auto &conn : cell->connections())
+			if (ct.cell_output(cell->type, conn.first))
+				for (auto bit : sigmap(conn.second))
+					bit_driver[bit] = cell;
+
+	dict<SigBit, std::vector<Option>> options_by_control;
+	for (auto dff : module->cells()) {
+		if (dff->type != ID(dffeas) || !dff->hasPort(port_d) ||
+		    !dff->hasPort(port_ena) || !dff->hasPort(port_sclr) ||
+		    !dff->hasPort(port_sload) || !dff->hasPort(port_aload) ||
+		    GetSize(dff->getPort(port_d)) != 1 || GetSize(dff->getPort(port_ena)) != 1 ||
+		    GetSize(dff->getPort(port_sclr)) != 1 || GetSize(dff->getPort(port_sload)) != 1 ||
+		    GetSize(dff->getPort(port_aload)) != 1 ||
+		    sigmap(dff->getPort(port_ena)[0]) != State::S1 ||
+		    sigmap(dff->getPort(port_sclr)[0]) != State::S0 ||
+		    sigmap(dff->getPort(port_sload)[0]) != State::S0 ||
+		    sigmap(dff->getPort(port_aload)[0]) != State::S0)
+			continue;
+		if (dff->get_bool_attribute(ID(pmux_rom_enable)))
+			continue;
+
+		SigBit d = sigmap(dff->getPort(port_d)[0]);
+		auto driver_it = bit_driver.find(d);
+		if (driver_it == bit_driver.end())
+			continue;
+		Cell *gate = driver_it->second;
+		if (!gate->type.in(ID($and), ID($_AND_)) ||
+		    GetSize(gate->getPort(ID::A)) != 1 || GetSize(gate->getPort(ID::B)) != 1 ||
+		    GetSize(gate->getPort(ID::Y)) != 1)
+			continue;
+
+		SigBit a = sigmap(gate->getPort(ID::A)[0]);
+		SigBit b = sigmap(gate->getPort(ID::B)[0]);
+		options_by_control[a].push_back({dff, gate, a, b});
+		options_by_control[b].push_back({dff, gate, b, a});
+	}
+
+	std::vector<std::pair<SigBit, std::vector<Option>>> groups;
+	for (auto &entry : options_by_control)
+		groups.push_back(entry);
+	std::sort(groups.begin(), groups.end(),
+	          [](const std::pair<SigBit, std::vector<Option>> &a,
+	             const std::pair<SigBit, std::vector<Option>> &b) {
+		          if (a.second.size() != b.second.size())
+			          return a.second.size() > b.second.size();
+		          return a.first < b.first;
+	          });
+
+	pool<Cell *> assigned;
+	int folded = 0;
+	for (auto &entry : groups) {
+		std::vector<Option> selected;
+		pool<Cell *> seen_dffs;
+		for (auto &option : entry.second) {
+			if (assigned.count(option.dff) || !seen_dffs.insert(option.dff).second)
+				continue;
+			selected.push_back(option);
+		}
+		if (GetSize(selected) < 2)
+			continue;
+
+		SigBit synchronous_clear = make_not(module, entry.first);
+		for (auto &option : selected) {
+			option.dff->setPort(port_d, option.data);
+			option.dff->setPort(port_sclr, synchronous_clear);
+			assigned.insert(option.dff);
+			folded++;
+			if (verbose)
+				log("  moved shared zero-gate %s into DFF %s synchronous clear\n",
+				    log_signal(entry.first), log_id(option.dff->name));
+		}
+	}
+
+	return folded;
+}
+
+// proc represents a synchronous reset in a dedicated register cell before
+// technology mapping.  The Cyclone IV dffeas primitive already has both an
+// enable and a synchronous clear, so lowering an enabled RTL cell directly
+// avoids spending LUT inputs on the combined enable/reset condition.  Plain
+// $sdff cells are deliberately left to dfflegalize: they have no independent
+// enable to preserve, and splitting a wide reset group into one target FF per
+// bit destroys sharing that ABC otherwise exploits (observed on PicoRV32).
+// CEX over SRST is deliberately left for the normal dfflegalize path.  Only
+// zero resets and registers without an init value are accepted so the rewrite
+// cannot silently change state.
+int lower_sync_reset_dffs_to_target(Module *module, bool verbose)
+{
+	bool has_target = module->design != nullptr && module->design->module(ID(dffeas)) != nullptr;
+	if (verbose)
+		log("  synchronous-reset scan: target=%d\n", int(has_target));
+	if (!has_target)
+		return 0;
+
+	const IdString port_d = RTLIL::escape_id("d");
+	const IdString port_q = RTLIL::escape_id("q");
+	const IdString port_clk = RTLIL::escape_id("clk");
+	const IdString port_clrn = RTLIL::escape_id("clrn");
+	const IdString port_prn = RTLIL::escape_id("prn");
+	const IdString port_ena = RTLIL::escape_id("ena");
+	const IdString port_asdata = RTLIL::escape_id("asdata");
+	const IdString port_aload = RTLIL::escape_id("aload");
+	const IdString port_sclr = RTLIL::escape_id("sclr");
+	const IdString port_sload = RTLIL::escape_id("sload");
+
+	SigMap sigmap(module);
+	std::vector<Cell *> candidates;
+	for (auto cell : module->cells()) {
+		if (cell->type != ID($sdffce) ||
+		    !cell->hasParam(ID::WIDTH) || !cell->hasParam(ID::CLK_POLARITY) ||
+		    !cell->hasParam(ID::SRST_POLARITY) || !cell->hasParam(ID::SRST_VALUE) ||
+		    !cell->hasPort(ID::D) || !cell->hasPort(ID::Q) ||
+		    !cell->hasPort(ID::CLK) || !cell->hasPort(ID::SRST))
+			continue;
+
+		int width = cell->getParam(ID::WIDTH).as_int();
+		if (width <= 0 || GetSize(cell->getPort(ID::D)) != width ||
+		    GetSize(cell->getPort(ID::Q)) != width ||
+		    GetSize(cell->getPort(ID::CLK)) != 1 ||
+		    GetSize(cell->getPort(ID::SRST)) != 1 ||
+		    GetSize(cell->getParam(ID::SRST_VALUE)) != width)
+			continue;
+
+		if (cell->type == ID($sdffce) &&
+		    (!cell->hasParam(ID::EN_POLARITY) || !cell->hasPort(ID::EN) ||
+		     GetSize(cell->getPort(ID::EN)) != 1))
+			continue;
+
+		Const reset_values = cell->getParam(ID::SRST_VALUE);
+		bool zero_reset = true;
+		for (auto value : reset_values)
+			if (value != State::S0) {
+				zero_reset = false;
+				break;
+			}
+		if (!zero_reset)
+			continue;
+
+		bool has_init = false;
+		for (int bit = 0; bit < width && !has_init; bit++)
+			if (cell->getPort(ID::Q)[bit].wire != nullptr &&
+			    cell->getPort(ID::Q)[bit].wire->attributes.count(ID::init))
+				has_init = true;
+		if (!has_init)
+			candidates.push_back(cell);
+	}
+
+	int lowered = 0;
+	for (auto cell : candidates) {
+		if (!module->cells_.count(cell->name))
+			continue;
+
+		int width = cell->getParam(ID::WIDTH).as_int();
+		SigBit clock = sigmap(cell->getPort(ID::CLK))[0];
+		if (!cell->getParam(ID::CLK_POLARITY).as_bool())
+			clock = make_not(module, clock);
+
+		SigBit synchronous_clear = sigmap(cell->getPort(ID::SRST))[0];
+		if (!cell->getParam(ID::SRST_POLARITY).as_bool())
+			synchronous_clear = make_not(module, synchronous_clear);
+
+		SigBit enable = State::S1;
+		if (cell->type == ID($sdffce)) {
+			enable = sigmap(cell->getPort(ID::EN))[0];
+			if (!cell->getParam(ID::EN_POLARITY).as_bool())
+				enable = make_not(module, enable);
+		}
+
+		SigSpec data = cell->getPort(ID::D);
+		SigSpec output = cell->getPort(ID::Q);
+		for (int bit = 0; bit < width; bit++) {
+			Cell *ff = module->addCell(NEW_ID, ID(dffeas));
+			ff->setParam(ID(is_wysiwyg), Const("TRUE"));
+			ff->setPort(port_q, sigmap(output)[bit]);
+			ff->setPort(port_d, data[bit]);
+			ff->setPort(port_clk, clock);
+			ff->setPort(port_clrn, State::S1);
+			ff->setPort(port_prn, State::S1);
+			ff->setPort(port_ena, enable);
+			ff->setPort(port_asdata, State::S0);
+			ff->setPort(port_aload, State::S0);
+			ff->setPort(port_sclr, synchronous_clear);
+			ff->setPort(port_sload, State::S0);
+			lowered++;
+		}
+		if (verbose)
+			log("  lowered synchronous-reset DFF %s (%d bit(s)) to target clear\n",
+			    log_id(cell->name), width);
+		module->remove(cell);
+	}
+
+	return lowered;
+}
+
+// Before memory_map, an enabled register update is still represented as a
+// zero-data mux feeding a plain/async-reset DFF.  On Cyclone IV the target FF
+// has both asynchronous clear/set and a synchronous clear.  Move the shared
+// zero condition to SCLR and connect the DFF directly to the ROM read data.
+// The ROM then reaches memory_map untouched, leaving one complete mux tree for
+// ABC instead of a fixed, prematurely decomposed LUT network.
+int fold_zero_mux_into_target_dff_clear(Module *module, bool verbose)
+{
+	bool has_target = module->design != nullptr && module->design->module(ID(dffeas)) != nullptr;
+	if (verbose)
+		log("  target-clear scan: target=%d\n", int(has_target));
+	if (!has_target)
+		return 0;
+
+	const IdString port_d = RTLIL::escape_id("d");
+	const IdString port_q = RTLIL::escape_id("q");
+	const IdString port_clk = RTLIL::escape_id("clk");
+	const IdString port_clrn = RTLIL::escape_id("clrn");
+	const IdString port_prn = RTLIL::escape_id("prn");
+	const IdString port_ena = RTLIL::escape_id("ena");
+	const IdString port_asdata = RTLIL::escape_id("asdata");
+	const IdString port_aload = RTLIL::escape_id("aload");
+	const IdString port_sclr = RTLIL::escape_id("sclr");
+	const IdString port_sload = RTLIL::escape_id("sload");
+
+	struct BitBinding {
+		Cell *dff;
+		int index;
+		SigBit data;
+	};
+
+	SigMap sigmap(module);
+	dict<SigBit, std::vector<InputLoad>> loads;
+	for (auto cell : module->cells())
+		for (auto &conn : cell->connections())
+			if (cell->input(conn.first)) {
+				int offset = 0;
+				for (auto bit : sigmap(conn.second))
+					loads[bit].push_back({cell, conn.first, offset++});
+			}
+
+	std::vector<Cell *> muxes;
+	for (auto cell : module->cells())
+		if (cell->type == ID($mux))
+			muxes.push_back(cell);
+	if (verbose)
+		log("  target-clear scan: %d mux cell(s)\n", GetSize(muxes));
+
+	// A large memory read is represented as one shared mux tree.  Folding its
+	// output enable into DFF clear too early prevents memory_map/ABC from
+	// choosing cuts over the complete ROM cone.  Small tables do not suffer
+	// from that global-cutting effect and still benefit from target clear.
+	// Keep this decision structural: 128 or more entries means ABITS >= 7.
+	constexpr int large_rom_addr_bits = 7;
+	dict<SigBit, int> memory_addr_bits;
+	for (auto cell : module->cells()) {
+		IdString data_port;
+		if (cell->type.in(ID($memrd), ID($memrd_v2)))
+			data_port = ID::DATA;
+		else if (cell->type == ID($mem_v2))
+			data_port = ID::RD_DATA;
+		else
+			continue;
+		if (!cell->hasPort(data_port))
+			continue;
+		if (!cell->hasParam(ID::ABITS))
+			continue;
+		int addr_bits = cell->getParam(ID::ABITS).as_int();
+		for (auto bit : sigmap(cell->getPort(data_port)))
+			memory_addr_bits[bit] = std::max(memory_addr_bits.count(bit) ? memory_addr_bits[bit] : 0,
+			                                 addr_bits);
+	}
+
+	pool<Cell *> consumed_dffs;
+	dict<SigBit, SigBit> inverted_resets;
+	int folded = 0;
+	for (auto mux : muxes) {
+		if (!module->cells_.count(mux->name) || !mux->hasPort(ID::A) ||
+		    !mux->hasPort(ID::B) || !mux->hasPort(ID::S) || !mux->hasPort(ID::Y))
+			continue;
+		int width = GetSize(mux->getPort(ID::Y));
+		if (verbose)
+			log("    mux %s width=%d A=%s B=%s S=%s Y=%s\n", log_id(mux->name), width,
+			    log_signal(sigmap(mux->getPort(ID::A))), log_signal(sigmap(mux->getPort(ID::B))),
+			    log_signal(sigmap(mux->getPort(ID::S))), log_signal(sigmap(mux->getPort(ID::Y))));
+		if (width < 2 || GetSize(mux->getPort(ID::A)) != width ||
+		    GetSize(mux->getPort(ID::B)) != width ||
+		    GetSize(mux->getPort(ID::S)) != 1)
+			continue;
+
+		bool zero_on_a = sigmap(mux->getPort(ID::A)).is_fully_zero();
+		bool zero_on_b = sigmap(mux->getPort(ID::B)).is_fully_zero();
+		if (!zero_on_a && !zero_on_b)
+			continue;
+		SigSpec data = zero_on_a ? mux->getPort(ID::B) : mux->getPort(ID::A);
+		int memory_addr_width = 0;
+		for (auto bit : sigmap(data))
+			if (memory_addr_bits.count(bit))
+				memory_addr_width = std::max(memory_addr_width, memory_addr_bits[bit]);
+		if (memory_addr_width >= large_rom_addr_bits) {
+			if (verbose)
+				log("  zero mux %s drives a %d-bit-address memory read; leaving ROM cone to "
+				    "memory_map/ABC\n",
+				    log_id(mux->name), memory_addr_width);
+			pool<Cell *> rom_dffs;
+			for (int bit = 0; bit < width; bit++) {
+				auto load_it = loads.find(sigmap(mux->getPort(ID::Y)[bit]));
+				if (load_it == loads.end() || GetSize(load_it->second) != 1 ||
+				    load_it->second[0].port != ID::D)
+					continue;
+				Cell *dff = load_it->second[0].cell;
+				if (dff->type.in(ID($dff), ID($adff), ID($dffe), ID($adffe)))
+					rom_dffs.insert(dff);
+			}
+			for (auto dff : rom_dffs)
+				dff->set_bool_attribute(ID(pmux_rom_enable));
+			continue;
+		}
+
+		dict<Cell *, std::vector<BitBinding>> groups;
+		dict<Cell *, pool<int>> used_indices;
+		pool<SigBit> used_output_bits;
+		bool supported = true;
+		for (int bit = 0; bit < width && supported; bit++) {
+			SigBit y = sigmap(mux->getPort(ID::Y)[bit]);
+			if (!used_output_bits.insert(y).second) {
+				supported = false;
+				break;
+			}
+			auto load_it = loads.find(y);
+			if (verbose && (load_it == loads.end() || GetSize(load_it->second) != 1))
+				log("      bit %d load_count=%d\n", bit,
+				    load_it == loads.end() ? 0 : GetSize(load_it->second));
+			if (load_it == loads.end() || GetSize(load_it->second) != 1 ||
+			    load_it->second[0].port != ID::D) {
+				supported = false;
+				break;
+			}
+			Cell *dff = load_it->second[0].cell;
+			if (!dff->type.in(ID($dff), ID($adff), ID($dffe), ID($adffe)) ||
+			    consumed_dffs.count(dff) ||
+			    !dff->hasPort(ID::D) || !dff->hasPort(ID::Q) ||
+			    !dff->hasPort(ID::CLK) || !dff->hasParam(ID::WIDTH) ||
+			    !dff->hasParam(ID::CLK_POLARITY)) {
+				supported = false;
+				break;
+			}
+			int dff_width = dff->getParam(ID::WIDTH).as_int();
+			if (dff_width <= 0 || GetSize(dff->getPort(ID::D)) != dff_width ||
+			    GetSize(dff->getPort(ID::Q)) != dff_width ||
+			    GetSize(dff->getPort(ID::CLK)) != 1) {
+				supported = false;
+				break;
+			}
+			if (dff->type.in(ID($adff), ID($adffe)) &&
+			    (!dff->hasPort(ID::ARST) || !dff->hasParam(ID::ARST_POLARITY) ||
+			     !dff->hasParam(ID::ARST_VALUE) ||
+			     (GetSize(dff->getPort(ID::ARST)) != 1 &&
+			      GetSize(dff->getPort(ID::ARST)) != dff_width) ||
+			     GetSize(dff->getParam(ID::ARST_VALUE)) != dff_width)) {
+				supported = false;
+				break;
+			}
+			if (dff->type.in(ID($adff), ID($adffe))) {
+				Const values = dff->getParam(ID::ARST_VALUE);
+				for (auto value : values)
+					if (value != State::S0 && value != State::S1) {
+						supported = false;
+						break;
+					}
+				if (!supported)
+					break;
+			}
+			if (dff->type.in(ID($dffe), ID($adffe)) &&
+			    (!dff->hasPort(ID::EN) || !dff->hasParam(ID::EN_POLARITY) ||
+			     GetSize(dff->getPort(ID::EN)) != 1)) {
+				supported = false;
+				break;
+			}
+
+			int index = -1;
+			for (int j = 0; j < dff_width; j++)
+				if (sigmap(dff->getPort(ID::D)[j]) == y) {
+					index = j;
+					break;
+				}
+			if (index < 0 || !used_indices[dff].insert(index).second) {
+				supported = false;
+				break;
+			}
+			groups[dff].push_back({dff, index, data[bit]});
+		}
+		if (!supported)
+			continue;
+
+		for (auto &entry : groups) {
+			Cell *dff = entry.first;
+			int dff_width = dff->getParam(ID::WIDTH).as_int();
+			if (GetSize(entry.second) != dff_width ||
+			    GetSize(used_indices[dff]) != dff_width) {
+				supported = false;
+				break;
+			}
+			for (int bit = 0; bit < dff_width; bit++)
+				if (dff->getPort(ID::Q)[bit].wire != nullptr &&
+				    dff->getPort(ID::Q)[bit].wire->attributes.count(ID::init)) {
+					supported = false;
+					break;
+				}
+			if (!supported)
+				break;
+		}
+		if (!supported)
+			continue;
+
+		SigBit zero_select = sigmap(mux->getPort(ID::S))[0];
+		SigBit synchronous_clear = zero_on_a ? make_not(module, zero_select) : zero_select;
+		for (auto &entry : groups) {
+			Cell *dff = entry.first;
+			bool clk_positive = dff->getParam(ID::CLK_POLARITY).as_bool();
+			SigBit clock = sigmap(dff->getPort(ID::CLK))[0];
+			if (!clk_positive)
+				clock = make_not(module, clock);
+
+			SigBit load_enable = State::S1;
+			if (dff->type.in(ID($dffe), ID($adffe))) {
+				SigBit enable = sigmap(dff->getPort(ID::EN))[0];
+				if (!dff->getParam(ID::EN_POLARITY).as_bool())
+					enable = make_not(module, enable);
+				load_enable = enable;
+			}
+
+			Const reset_values;
+			SigSpec reset_signal;
+			bool reset_positive = false;
+			if (dff->type.in(ID($adff), ID($adffe))) {
+				reset_values = dff->getParam(ID::ARST_VALUE);
+				reset_signal = dff->getPort(ID::ARST);
+				reset_positive = dff->getParam(ID::ARST_POLARITY).as_bool();
+			}
+
+			for (auto &binding : entry.second) {
+				int bit = binding.index;
+				SigBit clrn = State::S1, prn = State::S1;
+				if (dff->type.in(ID($adff), ID($adffe))) {
+					SigBit reset_bit = sigmap(reset_signal[GetSize(reset_signal) == 1 ? 0 : bit]);
+					if (reset_positive) {
+						auto cached = inverted_resets.find(reset_bit);
+						if (cached == inverted_resets.end())
+							cached = inverted_resets.insert({reset_bit, make_not(module, reset_bit)}).first;
+						reset_bit = cached->second;
+					}
+					if (reset_values[bit] == State::S0)
+						clrn = reset_bit;
+					else if (reset_values[bit] == State::S1)
+						prn = reset_bit;
+					else {
+						supported = false;
+						break;
+					}
+				}
+
+				Cell *ff = module->addCell(NEW_ID, ID(dffeas));
+				ff->setParam(ID(is_wysiwyg), Const("TRUE"));
+				ff->setPort(port_q, sigmap(dff->getPort(ID::Q))[bit]);
+				ff->setPort(port_d, binding.data);
+				ff->setPort(port_clk, clock);
+				ff->setPort(port_clrn, clrn);
+				ff->setPort(port_prn, prn);
+				ff->setPort(port_ena, load_enable);
+				ff->setPort(port_asdata, State::S0);
+				ff->setPort(port_aload, State::S0);
+				ff->setPort(port_sclr, synchronous_clear);
+				ff->setPort(port_sload, State::S0);
+				if (verbose)
+					log("  moved zero mux %s into target DFF clear for %s[%d]\n",
+					    log_id(mux->name), log_id(dff->name), bit);
+				folded++;
+			}
+			if (!supported)
+				break;
+			consumed_dffs.insert(dff);
+			module->remove(dff);
+		}
+		if (!supported)
+			continue;
+		module->remove(mux);
+	}
+
+	return folded;
+}
+
+// A DFF whose next-state LUT is forced to zero by one control input can use
+// the technology FF's synchronous clear instead of spending LUT inputs on that
+// control.  The rewrite is only applied to a shared control bit: one inverter
+// then feeds all affected DFFs, while every DFF's LUT loses one input.  The
+// original DFF enable and reset ports are left untouched.
+int fold_disabled_lut_into_dff(Module *module, bool verbose)
+{
+	struct Candidate {
+		Cell *dff;
+		Cell *lut;
+		std::vector<int> control_positions;
+	};
+
+	const IdString port_d = RTLIL::escape_id("d");
+	const IdString port_ena = RTLIL::escape_id("ena");
+	const IdString port_sclr = RTLIL::escape_id("sclr");
+	const IdString port_sload = RTLIL::escape_id("sload");
+	const IdString port_aload = RTLIL::escape_id("aload");
+
+	SigMap sigmap(module);
+	pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+	dict<SigBit, Cell *> lut_driver;
+
+	for (auto cell : module->cells())
+		if (cell->type == ID($lut) && cell->hasPort(ID::Y))
+			for (auto bit : sigmap(cell->getPort(ID::Y)))
+				lut_driver[bit] = cell;
+
+	std::vector<Candidate> candidates;
+	for (auto dff : module->cells()) {
+		if (dff->type != ID(dffeas) || !dff->hasPort(port_d) ||
+		    !dff->hasPort(port_ena) || !dff->hasPort(port_sclr) ||
+		    !dff->hasPort(port_sload) || !dff->hasPort(port_aload) ||
+		    GetSize(dff->getPort(port_d)) != 1 || GetSize(dff->getPort(port_ena)) != 1 ||
+		    GetSize(dff->getPort(port_sclr)) != 1 || GetSize(dff->getPort(port_sload)) != 1 ||
+		    GetSize(dff->getPort(port_aload)) != 1 ||
+		    sigmap(dff->getPort(port_ena)[0]) != State::S1 ||
+		    sigmap(dff->getPort(port_sclr)[0]) != State::S0 ||
+		    sigmap(dff->getPort(port_sload)[0]) != State::S0 ||
+		    sigmap(dff->getPort(port_aload)[0]) != State::S0)
+			continue;
+		if (dff->get_bool_attribute(ID(pmux_rom_enable)))
+			continue;
+
+		SigBit d = sigmap(dff->getPort(port_d)[0]);
+		auto driver_it = lut_driver.find(d);
+		if (driver_it == lut_driver.end())
+			continue;
+
+		Cell *lut = driver_it->second;
+		if (!lut->hasPort(ID::A) || !lut->hasPort(ID::Y) ||
+		    GetSize(lut->getPort(ID::Y)) != 1 || !lut->hasParam(ID::WIDTH) ||
+		    !lut->hasParam(ID::LUT))
+			continue;
+
+		int width = lut->getParam(ID::WIDTH).as_int();
+		Const table = lut->getParam(ID::LUT);
+		if (width < 1 || GetSize(lut->getPort(ID::A)) != width ||
+		    !table.is_fully_def() || GetSize(table) != (1 << width))
+			continue;
+
+		Candidate candidate;
+		candidate.dff = dff;
+		candidate.lut = lut;
+		for (int pos = 0; pos < width; pos++) {
+			SigBit control = sigmap(lut->getPort(ID::A)[pos]);
+			if (control.wire == nullptr || output_bits.count(control))
+				continue;
+
+			bool disabled_is_zero = true, enabled_is_nonzero = false;
+			for (int index = 0; index < GetSize(table); index++) {
+				if (index & (1 << pos)) {
+					enabled_is_nonzero |= table[index] == State::S1;
+				} else if (table[index] != State::S0) {
+					disabled_is_zero = false;
+					break;
+				}
+			}
+			if (disabled_is_zero && enabled_is_nonzero)
+				candidate.control_positions.push_back(pos);
+		}
+		if (!candidate.control_positions.empty())
+			candidates.push_back(std::move(candidate));
+	}
+
+	dict<SigBit, int> control_users;
+	for (auto &candidate : candidates) {
+		pool<SigBit> seen;
+		for (int pos : candidate.control_positions) {
+			SigBit control = sigmap(candidate.lut->getPort(ID::A)[pos]);
+			if (seen.insert(control).second)
+				control_users[control]++;
+		}
+	}
+
+	std::vector<std::pair<SigBit, int>> ordered_controls;
+	for (auto &entry : control_users)
+		ordered_controls.push_back(entry);
+	std::sort(ordered_controls.begin(), ordered_controls.end(),
+	          [](const std::pair<SigBit, int> &a, const std::pair<SigBit, int> &b) {
+		          if (a.second != b.second)
+			          return a.second > b.second;
+		          return a.first < b.first;
+	          });
+
+	pool<int> assigned;
+	int folded = 0;
+	for (auto &entry : ordered_controls) {
+		SigBit control = entry.first;
+		std::vector<std::pair<int, int>> group;
+		for (int index = 0; index < GetSize(candidates); index++) {
+			if (assigned.count(index))
+				continue;
+			for (int pos : candidates[index].control_positions)
+				if (sigmap(candidates[index].lut->getPort(ID::A)[pos]) == control) {
+					group.push_back({index, pos});
+					break;
+				}
+		}
+		if (GetSize(group) < 2)
+			continue;
+
+		SigBit synchronous_clear = make_not(module, control);
+		for (auto &item : group) {
+			Candidate &candidate = candidates[item.first];
+			int control_pos = item.second;
+			int width = candidate.lut->getParam(ID::WIDTH).as_int();
+			Const old_table = candidate.lut->getParam(ID::LUT);
+			Const new_table(State::S0, 1 << (width - 1));
+			SigSpec new_inputs;
+
+			for (int old_pos = 0; old_pos < width; old_pos++) {
+				if (old_pos == control_pos)
+					continue;
+				new_inputs.append(candidate.lut->getPort(ID::A)[old_pos]);
+			}
+			for (int index = 0; index < GetSize(new_table); index++) {
+				int old_index = 1 << control_pos;
+				for (int src = 0, dst = 0; src < width; src++) {
+					if (src == control_pos)
+						continue;
+					if (index & (1 << dst))
+						old_index |= 1 << src;
+					dst++;
+				}
+				new_table.set(index, old_table[old_index]);
+			}
+
+			SigBit new_y = module->addWire(NEW_ID);
+			module->addLut(module->uniquify("$pmux_dff_clear_lut"), new_inputs,
+			               new_y, std::move(new_table));
+			candidate.dff->setPort(port_d, new_y);
+			candidate.dff->setPort(port_sclr, synchronous_clear);
+			assigned.insert(item.first);
+			folded++;
+
+			if (verbose)
+				log("  moved disabled-state LUT input %s into DFF %s\n",
+				    log_signal(control), log_id(candidate.dff->name));
+		}
 	}
 
 	return folded;
@@ -1049,28 +2160,6 @@ bool same_multiset(const SigSpec &a, const SigSpec &b)
 	return counts.empty();
 }
 
-SigBit make_and(Module *module, const std::vector<SigBit> &inputs)
-{
-	if (inputs.empty())
-		return State::S1;
-	if (inputs.size() == 1)
-		return inputs.front();
-	SigSpec sig(inputs);
-	for (auto cell : module->cells())
-		if (cell->type.in(ID($reduce_and), ID($and), ID($logic_and)) &&
-		    GetSize(cell->getPort(ID::Y)) == 1) {
-			SigSpec cell_inputs = cell->getPort(ID::A);
-			if (cell->hasPort(ID::B))
-				cell_inputs.append(cell->getPort(ID::B));
-			if (same_multiset(cell_inputs, sig))
-				return cell->getPort(ID::Y)[0];
-		}
-
-	SigBit y = module->addWire(NEW_ID);
-	module->addReduceAnd(NEW_ID, sig, y);
-	return y;
-}
-
 SigBit make_or(Module *module, const std::vector<SigBit> &inputs)
 {
 	if (inputs.empty())
@@ -1140,11 +2229,96 @@ bool only_consumed_by(const SigSpec &sig, Cell *allowed_cell, SigMap &sigmap,
 	return true;
 }
 
+// A constant power-of-two shift is a one-hot decoder.  ABC often maps the generic
+// $shl datapath less efficiently than the equivalent per-output equality
+// comparisons, especially once the decoded bus is wide.  Expose that form
+// before the coarse technology-mapping stages.  The rule is structural: it
+// checks only the shift operands and widths, not module or signal names.
+int lower_constant_power_shift_decoders(Module *module, SigMap &sigmap, bool verbose)
+{
+	std::vector<Cell *> candidates;
+	for (auto cell : module->cells())
+		if (cell->type == ID($shl))
+			candidates.push_back(cell);
+
+	int lowered = 0;
+	for (auto cell : candidates) {
+		if (cell->type != ID($shl) || !module->cells_.count(cell->name) ||
+		    !cell->hasPort(ID::A) ||
+		    !cell->hasPort(ID::B) || !cell->hasPort(ID::Y))
+			continue;
+
+		SigSpec a = sigmap(cell->getPort(ID::A));
+		SigSpec b = sigmap(cell->getPort(ID::B));
+		SigSpec y = sigmap(cell->getPort(ID::Y));
+		int b_width = GetSize(b);
+		int y_width = GetSize(y);
+		// Below a 5-bit index the native shift and a small decoder already map
+		// to the same number of LUTs; avoid neutral rewrites.  At 5 bits and
+		// above the explicit decode consistently improves or ties.
+		if (!a.is_fully_const() || b_width < 5 || b_width > 16 ||
+		    y_width < 32 || y_width > 65536)
+			continue;
+
+		// The shift amount must be an unsigned index.
+		if (cell->getParam(ID::B_SIGNED).as_bool())
+			continue;
+		Const value = a.as_const();
+		int one_bit = -1;
+		bool is_power_of_two = true;
+		for (int i = 0; i < GetSize(value); i++) {
+			if (value[i] != State::S0 && value[i] != State::S1) {
+				is_power_of_two = false;
+				break;
+			}
+			if (value[i] == State::S1) {
+				if (one_bit >= 0) {
+					is_power_of_two = false;
+					break;
+				}
+				one_bit = i;
+			}
+		}
+		if (one_bit < 0 || !is_power_of_two)
+			continue;
+
+		// $shl sign-extends a narrow signed A before shifting.  A one-bit
+		// signed value, or one whose only set bit is the sign bit, becomes a
+		// mask of ones above that bit rather than a one-hot value.  Leave
+		// that case to the native shift logic.
+		if (cell->getParam(ID::A_SIGNED).as_bool() &&
+		    GetSize(value) < y_width && one_bit == GetSize(value) - 1)
+			continue;
+
+		// A has one set bit at one_bit.  Output bit i is set exactly when
+		// B == i - one_bit; indices that cannot select that bit stay zero.
+		int64_t representable = int64_t(1) << b_width;
+		int64_t eq_limit = std::min<int64_t>(y_width, one_bit + representable);
+		int lowered_bits = int(std::max<int64_t>(0, eq_limit - one_bit));
+		for (int i = 0; i < y_width; i++) {
+			if (i < one_bit || i >= eq_limit) {
+				module->connect(y[i], State::S0);
+				continue;
+			}
+			Cell *eq = module->addEq(NEW_ID, b, Const(i - one_bit, b_width), y[i]);
+			eq->attributes = cell->attributes;
+		}
+
+		if (verbose)
+			log("  lowered constant power-of-two %d-bit shift decoder at %s into %d equality comparisons\n",
+			    b_width, log_signal(y), lowered_bits);
+		module->remove(cell);
+		lowered++;
+	}
+	return lowered;
+}
+
 // Turn a priority chain of scalar-select $mux cells into a lower-cost form.
-// Four-level chains become two priority pairs plus a group mux; longer chains
-// use one $pmux with masked priority selects.  This targets priority decoders
-// that proc leaves as a long mux chain, while deliberately ignoring short or
-// vector-select chains where the rewrite is unlikely to pay off.
+// Adjacent priorities are folded into small priority groups, and the groups
+// are combined from lowest to highest priority.  Two-wide groups win for short
+// chains; three-wide groups amortize the shared activity signal better once a
+// chain is long enough.  Keeping the select logic local avoids one long mask
+// network whose techmap/ABC cost grows with the chain length.
 int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, bool verbose)
 {
 	std::vector<Cell *> muxes;
@@ -1227,6 +2401,10 @@ int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, b
 
 		if (!ok || chain.size() < 4)
 			continue;
+		// Pairing adds one activity OR per pair.  For very narrow data paths and
+		// long chains that fixed control cost can exceed the saved mux logic.
+		if (width <= 2 && chain.size() > size_t(16 * width))
+			continue;
 
 		pool<SigBit> inner_bits;
 		for (size_t i = 1; i < chain.size(); i++)
@@ -1263,40 +2441,34 @@ int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, b
 		if (!ok)
 			continue;
 
-		SigSpec out = outer->getPort(ID::Y);
-		if (chain.size() == 4) {
-			// A four-level priority chain maps more cheaply as two priority
-			// pairs followed by a group mux.  The equivalent $pmux form needs
-			// a large masked-select network before ABC and raises peak memory.
-			SigBit s0 = selects[0][0], s1 = selects[1][0];
-			SigBit s2 = selects[2][0], s3 = selects[3][0];
-			SigBit upper_active = make_or(module, {s0, s1});
-			SigBit lower_active = make_or(module, {s2, s3});
-			SigSpec upper = module->Mux(NEW_ID, chain[1]->getPort(ID::B),
-			                             chain[0]->getPort(ID::B), s0);
-			SigSpec lower = module->Mux(NEW_ID, chain[3]->getPort(ID::B),
-			                             chain[2]->getPort(ID::B), s2);
-			SigSpec lower_or_base = module->Mux(NEW_ID, base, lower, lower_active);
-			module->connect(out, module->Mux(NEW_ID, lower_or_base, upper, upper_active));
-		} else {
-			SigSpec pmux_b, pmux_s;
-			std::vector<SigBit> inverted_prior;
-			for (size_t i = 0; i < chain.size(); i++) {
-				SigBit sel = selects[i][0];
-				if (i == 0) {
-					pmux_s.append(sel);
-				} else {
-					inverted_prior.push_back(make_not(module, selects[i - 1][0]));
-					std::vector<SigBit> terms = inverted_prior;
-					terms.push_back(sel);
-					pmux_s.append(make_and(module, terms));
-				}
-				pmux_b.append(chain[i]->getPort(ID::B));
-			}
+		// The chain's selects are independent scalar predicates, so a group of
+		// three can share one OR term without changing priority semantics.
+		// Cost sweeps over chain length, data width and group width put the
+		// crossover at length 7 for widths above one bit.  Narrow single-bit
+		// chains stay pairwise: their control logic dominates the data muxes.
+		const int group_size = (width >= 2 && chain.size() >= 7) ? 3 : 2;
 
-			Cell *pmux = module->addPmux(NEW_ID, base, pmux_b, pmux_s, out);
-			pmux->add_strpool_attribute(ID::src, outer->get_strpool_attribute(ID::src));
+		SigSpec out = outer->getPort(ID::Y);
+		std::vector<SigBit> group_active;
+		std::vector<SigSpec> group_value;
+		for (size_t start = 0; start < chain.size(); start += group_size) {
+			size_t end = std::min(start + group_size, chain.size());
+			SigSpec value = chain[end - 1]->getPort(ID::B);
+			for (size_t i = end - 1; i > start; i--)
+				value = module->Mux(NEW_ID, value, chain[i - 1]->getPort(ID::B),
+				                    selects[i - 1][0]);
+
+			std::vector<SigBit> active;
+			for (size_t i = start; i < end; i++)
+				active.push_back(selects[i][0]);
+			group_value.push_back(value);
+			group_active.push_back(make_or(module, active));
 		}
+
+		SigSpec result = base;
+		for (size_t i = group_value.size(); i > 0; i--)
+			result = module->Mux(NEW_ID, result, group_value[i - 1], group_active[i - 1]);
+		module->connect(out, result);
 
 		for (auto mux : chain) {
 			done.insert(mux->name);
@@ -1304,9 +2476,8 @@ int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, b
 		}
 		converted++;
 		if (verbose)
-			log("  converted %d-level priority $mux chain at %s into %s\n",
-			    GetSize(chain), log_signal(out),
-			    chain.size() == 4 ? "a balanced mux tree" : "one $pmux");
+			log("  converted %d-level priority $mux chain at %s into a %d-way nested mux tree\n",
+			    GetSize(chain), log_signal(out), group_size);
 	}
 
 	if (converted)
@@ -1880,7 +3051,9 @@ struct PmuxOptPass : public Pass {
 		log("        print details about matched cells\n");
 		log("\n");
 		log("    -fold_luts\n");
-		log("        fold single-load NOT cells and constant-data MUX cells into LUT truth tables\n");
+		log("        fold single-load NOT cells and constant-data MUX cells into LUT truth tables,\n");
+		log("        move shared inverted DFF enables into synchronous self-load mode,\n");
+		log("        and move shared disabled-state LUT inputs into DFF synchronous clear\n");
 		log("\n");
 	}
 
@@ -1912,21 +3085,41 @@ struct PmuxOptPass : public Pass {
 			ct.setup_stdcells();
 			int n_folded = 0;
 			int n_mux_folded = 0;
+			int n_dff_enable = 0;
+			int n_dff_clear = 0;
+			int n_dff_zero_gate = 0;
 			for (auto module : design->selected_modules())
 				n_folded += fold_not_into_luts(module, ct, verbose);
 			for (auto module : design->selected_modules())
+				n_dff_enable += fold_inverted_enable_into_dff(module, ct, verbose);
+			for (auto module : design->selected_modules())
+				n_dff_zero_gate += fold_zero_gate_into_dff_clear(module, ct, verbose);
+			for (auto module : design->selected_modules())
+				n_dff_clear += fold_disabled_lut_into_dff(module, verbose);
+			for (auto module : design->selected_modules())
 				n_mux_folded += fold_mux_into_luts(module, ct, verbose);
 			log("pmux_opt: folded %d NOT cell(s) into LUTs.\n", n_folded);
+			log("pmux_opt: moved %d inverted enable(s) into DFFs.\n", n_dff_enable);
+			log("pmux_opt: moved %d shared zero-gate(s) into DFF synchronous clear.\n",
+			    n_dff_zero_gate);
+			log("pmux_opt: moved %d disabled-state LUT input(s) into DFF synchronous clear.\n",
+			    n_dff_clear);
 			log("pmux_opt: folded %d constant-data MUX cell(s) into LUTs.\n", n_mux_folded);
 			return;
 		}
 
 		int n_pmux = 0, n_pairs = 0, n_skip = 0, n_rom = 0;
+		int n_target_clear = 0;
+		int n_sync_dff = 0;
+		int n_shift_decode = 0;
 
 		for (auto module : design->selected_modules()) {
 			SigMap sigmap(module);
 
+			n_sync_dff += lower_sync_reset_dffs_to_target(module, verbose);
+			n_target_clear += fold_zero_mux_into_target_dff_clear(module, verbose);
 			n_rom += lower_constant_roms_to_luts(module, sigmap, ct, verbose);
+			n_shift_decode += lower_constant_power_shift_decoders(module, sigmap, verbose);
 
 			dict<SigBit, Cell *> bit2cell;
 				for (auto cell : module->cells())
@@ -2072,8 +3265,16 @@ struct PmuxOptPass : public Pass {
 			factor_common_enable_terms(module, enable_map, ct, verbose);
 		}
 
+		if (n_sync_dff)
+			log("pmux_opt: lowered %d synchronous-reset DFF bit(s) to target clear.\n",
+			    n_sync_dff);
+		if (n_target_clear)
+			log("pmux_opt: moved %d zero-mux bit(s) into target DFF synchronous clear.\n",
+			    n_target_clear);
 		log("pmux_opt: %d $pmux cell(s), merged %d pair(s), skipped %d, lowered %d constant ROM(s).\n",
 		    n_pmux, n_pairs, n_skip, n_rom);
+		if (n_shift_decode)
+			log("pmux_opt: lowered %d constant power-of-two shift decoder(s).\n", n_shift_decode);
 	}
 } PmuxOptPass;
 

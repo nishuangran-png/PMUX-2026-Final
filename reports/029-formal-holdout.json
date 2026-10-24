@@ -1,0 +1,359 @@
+{
+  "manifest": "experiments/holdout-20261024/manifest.json",
+  "baseline": {
+    "path": "/tmp/fpga-yosys-baseline-069.IdEpLa/build-repro/yosys",
+    "sha256": "64c2b1f49272c5b5fa89be0c7d3f9460db86c34250321c1b75c3a557960df488"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "30400b32f4b42b79d3ceafd3d186f21fa67e2673ebe5f9859acd9121d4e5a274"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1
+  },
+  "rows": [
+    {
+      "id": "constructed_priority_chain_05",
+      "role": "constructed",
+      "top": "priority_chain_05",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_05.v",
+          "sha256": "989b0d182556806a382077c8fa429fa33717b171ef633fc30da2c1bebac3836f"
+        }
+      ],
+      "baseline": {
+        "lcell": 96,
+        "not": 0,
+        "logic": 96,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 17121280
+      },
+      "candidate": {
+        "lcell": 66,
+        "not": 0,
+        "logic": 66,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 24035328
+      },
+      "reduction_pct": 31.25,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 96,
+        "gate_luts": 66,
+        "log_tail": ".y.3'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.3' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.4'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.4' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.5'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.5' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.6'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.6' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.7'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.7' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.8'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.8' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Running strategy 'sat' on 'priority_chain_05.y.9'..\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: Proved equivalence of partition 'priority_chain_05.y.9' using strategy 'sat'\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 16:46:44 [eqy_constructed_priority_chain_05] run: finished (returncode=0)\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.15\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.14\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.13\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.12\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.11\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.10\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.9\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.8\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.7\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.6\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.5\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.4\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.3\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.2\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.1\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved equivalence of partition priority_chain_05.y.0\nEQY 16:46:44 [eqy_constructed_priority_chain_05] Successfully proved designs equivalent\nEQY 16:46:44 [eqy_constructed_priority_chain_05] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:44 [eqy_constructed_priority_chain_05] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:44 [eqy_constructed_priority_chain_05] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "constructed_priority_chain_06",
+      "role": "constructed",
+      "top": "priority_chain_06",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_06.v",
+          "sha256": "ae9f15a0ea5d9339611eb1d727097b603a37e6c529850d39caee4f588a3604d6"
+        }
+      ],
+      "baseline": {
+        "lcell": 112,
+        "not": 0,
+        "logic": 112,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 16859136
+      },
+      "candidate": {
+        "lcell": 83,
+        "not": 0,
+        "logic": 83,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 18415616
+      },
+      "reduction_pct": 25.892857142857146,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 112,
+        "gate_luts": 83,
+        "log_tail": ".y.3'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.3' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.4'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.4' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.5'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.5' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.6'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.6' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.7'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.7' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.8'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.8' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Running strategy 'sat' on 'priority_chain_06.y.9'..\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: Proved equivalence of partition 'priority_chain_06.y.9' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 16:46:45 [eqy_constructed_priority_chain_06] run: finished (returncode=0)\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.15\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.14\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.13\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.12\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.11\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.10\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.9\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.8\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.7\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.6\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.5\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.4\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.3\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.2\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.1\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved equivalence of partition priority_chain_06.y.0\nEQY 16:46:45 [eqy_constructed_priority_chain_06] Successfully proved designs equivalent\nEQY 16:46:45 [eqy_constructed_priority_chain_06] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:45 [eqy_constructed_priority_chain_06] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:45 [eqy_constructed_priority_chain_06] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "constructed_priority_chain_08",
+      "role": "constructed",
+      "top": "priority_chain_08",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_08.v",
+          "sha256": "29527aff965f4792b711a823c1bcfe71b0f6e29c0fb00175771e4f44545ef0a3"
+        }
+      ],
+      "baseline": {
+        "lcell": 160,
+        "not": 0,
+        "logic": 160,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 17940480
+      },
+      "candidate": {
+        "lcell": 131,
+        "not": 0,
+        "logic": 131,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 18481152
+      },
+      "reduction_pct": 18.125,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 160,
+        "gate_luts": 131,
+        "log_tail": ".y.3'..\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.3' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.4'..\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.4' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.5'..\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.5' using strategy 'sat'\nEQY 16:46:45 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.6'..\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.6' using strategy 'sat'\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.7'..\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.7' using strategy 'sat'\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.8'..\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.8' using strategy 'sat'\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Running strategy 'sat' on 'priority_chain_08.y.9'..\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: Proved equivalence of partition 'priority_chain_08.y.9' using strategy 'sat'\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 16:46:46 [eqy_constructed_priority_chain_08] run: finished (returncode=0)\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.15\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.14\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.13\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.12\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.11\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.10\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.9\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.8\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.7\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.6\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.5\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.4\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.3\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.2\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.1\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved equivalence of partition priority_chain_08.y.0\nEQY 16:46:46 [eqy_constructed_priority_chain_08] Successfully proved designs equivalent\nEQY 16:46:46 [eqy_constructed_priority_chain_08] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:46 [eqy_constructed_priority_chain_08] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:46 [eqy_constructed_priority_chain_08] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "constructed_priority_chain_16",
+      "role": "constructed",
+      "top": "priority_chain_16",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_16.v",
+          "sha256": "1cec40f8349cacde01921238a977ece3072a062064110c3987b31aca50f51170"
+        }
+      ],
+      "baseline": {
+        "lcell": 336,
+        "not": 0,
+        "logic": 336,
+        "dff": 0,
+        "wall_s": 0.14,
+        "cpu_s": 0.13,
+        "peak_rss_bytes": 19857408
+      },
+      "candidate": {
+        "lcell": 261,
+        "not": 0,
+        "logic": 261,
+        "dff": 0,
+        "wall_s": 0.15,
+        "cpu_s": 0.14,
+        "peak_rss_bytes": 24313856
+      },
+      "reduction_pct": 22.321428571428573,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 336,
+        "gate_luts": 261,
+        "log_tail": ".y.3'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.3' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.4'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.4' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.5'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.5' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.6'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.6' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.7'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.7' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.8'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.8' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Running strategy 'sat' on 'priority_chain_16.y.9'..\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: Proved equivalence of partition 'priority_chain_16.y.9' using strategy 'sat'\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 16:46:47 [eqy_constructed_priority_chain_16] run: finished (returncode=0)\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.15\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.14\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.13\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.12\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.11\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.10\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.9\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.8\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.7\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.6\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.5\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.4\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.3\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.2\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.1\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved equivalence of partition priority_chain_16.y.0\nEQY 16:46:47 [eqy_constructed_priority_chain_16] Successfully proved designs equivalent\nEQY 16:46:47 [eqy_constructed_priority_chain_16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:47 [eqy_constructed_priority_chain_16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:47 [eqy_constructed_priority_chain_16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_priority_encoder_16",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 16
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 34,
+        "not": 0,
+        "logic": 34,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 18251776
+      },
+      "candidate": {
+        "lcell": 35,
+        "not": 0,
+        "logic": 35,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 23412736
+      },
+      "reduction_pct": -2.941176470588235,
+      "eqy": {
+        "status": "FAIL",
+        "gold_luts": 34,
+        "gate_luts": 35,
+        "log_tail": " partition 'priority_encoder.output_unencoded.8' using strategy 'sat'\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: Running strategy 'sat' on 'priority_encoder.output_unencoded.9'..\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: Proved equivalence of partition 'priority_encoder.output_unencoded.9' using strategy 'sat'\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: Running strategy 'sat' on 'priority_encoder.output_valid'..\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: Could not prove equivalence of partition 'priority_encoder.output_valid' using strategy 'sat': partitions not equivalent\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] run: finished (returncode=0)\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.15\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.14\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.13\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.12\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.11\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.10\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.9\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.8\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.7\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.6\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.5\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.4\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.3\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.2\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.1\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_unencoded.0\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_encoded.3\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_encoded.2\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_encoded.1\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Successfully proved equivalence of partition priority_encoder.output_encoded.0\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Warning: Failed to prove equivalence for 1/21 partitions:\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] Failed to prove equivalence of partition priority_encoder.output_valid\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 16:46:48 [eqy_verilog_axi_priority_encoder_16] DONE (FAIL, rc=2)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 128
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 307,
+        "not": 0,
+        "logic": 307,
+        "dff": 0,
+        "wall_s": 0.26,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 24821760
+      },
+      "candidate": {
+        "lcell": 323,
+        "not": 0,
+        "logic": 323,
+        "dff": 0,
+        "wall_s": 0.3,
+        "cpu_s": 0.29000000000000004,
+        "peak_rss_bytes": 27164672
+      },
+      "reduction_pct": -5.211726384364821,
+      "eqy": {
+        "status": "FAIL",
+        "gold_luts": 307,
+        "gate_luts": 323,
+        "log_tail": "Failed to prove equivalence of partition priority_encoder.output_unencoded.28\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.27\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.26\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.25\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.24\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.23\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.22\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.21\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.20\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.19\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.18\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.17\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.16\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.15\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.14\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.13\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.12\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.11\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.10\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.9\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.8\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.7\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.6\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.5\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.4\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.3\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.2\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.1\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] Failed to prove equivalence of partition priority_encoder.output_unencoded.0\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:03 (3)\nEQY 16:46:52 [eqy_verilog_axi_priority_encoder_128] DONE (FAIL, rc=2)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 512
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 1346,
+        "not": 0,
+        "logic": 1346,
+        "dff": 0,
+        "wall_s": 1.34,
+        "cpu_s": 1.34,
+        "peak_rss_bytes": 51216384
+      },
+      "candidate": {
+        "lcell": 1315,
+        "not": 0,
+        "logic": 1315,
+        "dff": 0,
+        "wall_s": 2.07,
+        "cpu_s": 2.08,
+        "peak_rss_bytes": 50102272
+      },
+      "reduction_pct": 2.3031203566121845,
+      "eqy": {
+        "status": "FAIL",
+        "gold_luts": 1346,
+        "gate_luts": 1315,
+        "log_tail": "alence of partition priority_encoder.output_unencoded.151\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.150\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.149\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.148\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.147\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.146\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.145\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.144\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.143\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.142\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.141\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.140\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.139\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.138\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.137\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.136\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.135\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.134\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.133\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.132\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.131\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.130\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.129\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_unencoded.128\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_encoded.7\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_encoded.5\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_encoded.3\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_encoded.1\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] Failed to prove equivalence of partition priority_encoder.output_encoded.0\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:24 (24)\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:20 (20)\nEQY 16:47:20 [eqy_verilog_axi_priority_encoder_512] DONE (FAIL, rc=2)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "role": "external",
+      "top": "arbiter",
+      "params": {
+        "PORTS": 64
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        },
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/arbiter.v",
+          "sha256": "a001507c82843e36e133dea75491fc044f56660fac0aff0127cf3afec7f927e0"
+        }
+      ],
+      "baseline": {
+        "lcell": 172,
+        "not": 0,
+        "logic": 172,
+        "dff": 71,
+        "wall_s": 0.2,
+        "cpu_s": 0.19,
+        "peak_rss_bytes": 24231936
+      },
+      "candidate": {
+        "lcell": 173,
+        "not": 0,
+        "logic": 173,
+        "dff": 71,
+        "wall_s": 0.25,
+        "cpu_s": 0.24000000000000002,
+        "peak_rss_bytes": 27754496
+      },
+      "reduction_pct": -0.5813953488372093,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 163,
+        "gate_luts": 164,
+        "log_tail": "partition arbiter.grant.35\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.34\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.33\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.32\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.31\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.30\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.29\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.28\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.27\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.26\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.25\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.24\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.23\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.22\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.21\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.20\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.19\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.18\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.17\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.16\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.15\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.14\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.13\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.12\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.11\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.10\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.9\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.8\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.7\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.6\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.5\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.4\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.3\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.2\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.1\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.0\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] Successfully proved designs equivalent\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:06 (6)\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:05 (5)\nEQY 16:47:26 [eqy_verilog_axi_arbiter_64] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "picorv32_default",
+      "role": "external",
+      "top": "picorv32",
+      "params": {},
+      "sources": [
+        {
+          "path": "@HOLDOUT@/picorv32/picorv32.v",
+          "sha256": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622"
+        }
+      ],
+      "baseline": {
+        "lcell": 2109,
+        "not": 0,
+        "logic": 2109,
+        "dff": 597,
+        "wall_s": 1.67,
+        "cpu_s": 1.7200000000000002,
+        "peak_rss_bytes": 73449472
+      },
+      "candidate": {
+        "lcell": 2029,
+        "not": 0,
+        "logic": 2029,
+        "dff": 597,
+        "wall_s": 1.67,
+        "cpu_s": 1.73,
+        "peak_rss_bytes": 71352320
+      },
+      "reduction_pct": 3.793266951161688,
+      "eqy": null
+    }
+  ]
+}

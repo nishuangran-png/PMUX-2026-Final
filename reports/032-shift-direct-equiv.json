@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "id": "verilog_axi_priority_encoder_16",
+      "top": "priority_encoder",
+      "baseline_logic": 35,
+      "candidate_logic": 35,
+      "reduction_pct": 0.0,
+      "gold_luts": 35,
+      "gate_luts": 35,
+      "delta_luts": 0,
+      "proof_s": 0.04829699999999998,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "top": "priority_encoder",
+      "baseline_logic": 323,
+      "candidate_logic": 316,
+      "reduction_pct": 2.1671826625387,
+      "gold_luts": 323,
+      "gate_luts": 316,
+      "delta_luts": 7,
+      "proof_s": 1.9166811250000002,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "top": "priority_encoder",
+      "baseline_logic": 1315,
+      "candidate_logic": 1208,
+      "reduction_pct": 8.136882129277566,
+      "gold_luts": 1315,
+      "gate_luts": 1208,
+      "delta_luts": 107,
+      "proof_s": 46.809988,
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "top": "arbiter",
+      "baseline_logic": 173,
+      "candidate_logic": 163,
+      "reduction_pct": 5.780346820809249,
+      "gold_luts": 164,
+      "gate_luts": 155,
+      "delta_luts": 9,
+      "proof_s": 0.7165247499999978,
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "all_pass": true
+}

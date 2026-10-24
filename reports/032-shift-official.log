@@ -1,0 +1,12 @@
+baseline : tools/build/yosys-069-baseline-src/build/yosys
+candidate: tools/build/official-v069-formal-src/build-formal/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.310     0.350
+test2      25     16   36.00%     0     0.110     0.110
+test3      12      9   25.00%    17     0.130     0.120
+test4      31     23   25.81%    10     0.150     0.150
+
+平均缩减率（每用例先算再平均）: 29.17%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/032-shift-official.json

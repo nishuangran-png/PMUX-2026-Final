@@ -1,0 +1,80 @@
+=== PID 46959 start 2026-10-25 00:49:16 ===
+--- regression ---
+module                           hit   gold   gate   delta  result
+shift_decode_b5_y32                1     48     39       9  PASS
+shift_decode_b5_y64_oob            1     48     39       9  PASS
+shift_decode_b8_y256               1    400    288     112  PASS
+shift_decode_signed_a              1     48     39       9  PASS
+shift_decode_b4_skip               0     16     16       0  PASS
+shift_decode_y16_skip              0     18     18       0  PASS
+shift_decode_a2                    1     41     35       6  PASS
+shift_decode_a3_skip               0     38     38       0  PASS
+shift_decode_a4_signed_safe        1     40     34       6  PASS
+shift_decode_signed_msb_skip       0     31     31       0  PASS
+shift_decode_signed_b_normalized   1     48     39       9  PASS
+shift_decode_signed_width1_skip    0     33     33       0  PASS
+shift_decode_variable_a_skip       0    156    156       0  PASS
+shift_decode_b17_skip              0     77     77       0  PASS
+JSON -> reports/032-shift-regression.json
+--- official area ---
+baseline : /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys
+candidate: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.250     0.220
+test2      25     16   36.00%     0     0.080     0.080
+test3      12      9   25.00%    17     0.090     0.080
+test4      31     23   25.81%    10     0.100     0.100
+
+平均缩减率（每用例先算再平均）: 29.17%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/032-shift-official.json
+--- official eqy ---
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_eqy_hqqxtjw6
+case   lut_gold lut_gate   delta  eqy
+test1       287      201      86  PASS
+test2        25       16       9  PASS
+test3        12        9       3  PASS
+test4        30       34      -4  PASS
+
+EQY 全部通过
+--- holdout area ---
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_jv4kfnr1
+phase 1/2: baseline
+constructed_priority_chain_05 baseline done
+constructed_priority_chain_06 baseline done
+constructed_priority_chain_08 baseline done
+constructed_priority_chain_16 baseline done
+verilog_axi_priority_encoder_16 baseline done
+verilog_axi_priority_encoder_128 baseline done
+verilog_axi_priority_encoder_512 baseline done
+verilog_axi_arbiter_64       baseline done
+picorv32_default             baseline done
+phase 2/2: candidate
+constructed_priority_chain_05 candidate done
+constructed_priority_chain_06 candidate done
+constructed_priority_chain_08 candidate done
+constructed_priority_chain_16 candidate done
+verilog_axi_priority_encoder_16 candidate done
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_512 candidate done
+verilog_axi_arbiter_64       candidate done
+picorv32_default             candidate done
+constructed_priority_chain_05 constructed    96 ->    66  +31.25% dff    0 EQY SKIP
+constructed_priority_chain_06 constructed   112 ->    83  +25.89% dff    0 EQY SKIP
+constructed_priority_chain_08 constructed   160 ->   114  +28.75% dff    0 EQY SKIP
+constructed_priority_chain_16 constructed   336 ->   248  +26.19% dff    0 EQY SKIP
+verilog_axi_priority_encoder_16 external       35 ->    35   +0.00% dff    0 EQY SKIP
+verilog_axi_priority_encoder_128 external      323 ->   316   +2.17% dff    0 EQY SKIP
+verilog_axi_priority_encoder_512 external     1315 ->  1208   +8.14% dff    0 EQY SKIP
+verilog_axi_arbiter_64       external      173 ->   163   +5.78% dff   71 EQY SKIP
+picorv32_default             external     2029 ->  2017   +0.59% dff  597 EQY SKIP
+JSON -> reports/032-shift-holdout-area.json
+--- direct equivalence ---
+case                                       base   cand   reduct  gold_lut  gate_lut   delta   proof_s  result
+verilog_axi_priority_encoder_16              35     35    0.00%        35        35       0      0.05  PASS
+verilog_axi_priority_encoder_128            323    316    2.17%       323       316       7      1.92  PASS
+verilog_axi_priority_encoder_512           1315   1208    8.14%      1315      1208     107     46.81  PASS
+verilog_axi_arbiter_64                      173    163    5.78%       164       155       9      0.72  PASS
+JSON -> reports/032-shift-direct-equiv.json
+=== finished 2026-10-25 00:50:52 ===

@@ -1,0 +1,12 @@
+baseline : tools/build/yosys-069-baseline-src/build/yosys
+candidate: tools/build/official-v069-formal-src/build-formal/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.210     0.190
+test2      25     16   36.00%     0     0.060     0.060
+test3      12     10   16.67%    17     0.070     0.060
+test4      31     27   12.90%    10     0.080     0.060
+
+平均缩减率（每用例先算再平均）: 23.86%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> /tmp/strict-adaptive-official.json

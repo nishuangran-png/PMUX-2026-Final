@@ -1,0 +1,5 @@
+case                                       base   cand   reduct  gold_lut  gate_lut   delta   proof_s  result
+verilog_axi_priority_encoder_128            323    316    2.17%       323       316       7      2.07  PASS
+verilog_axi_priority_encoder_512           1315   1208    8.14%      1315      1208     107     43.72  PASS
+verilog_axi_arbiter_64                      173    163    5.78%       164       155       9      0.67  PASS
+JSON -> reports/033-holdout-lut-equivalence.json

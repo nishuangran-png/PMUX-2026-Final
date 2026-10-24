@@ -55,12 +55,14 @@ fi
 
 cmake_hits="$(grep -cF 'add_subdirectory(pmux)' "$CMAKE_FILE" || true)"
 synth_hits="$(grep -cF 'run("pmux_opt");' "$SYNTH_FILE" || true)"
-deferred_select_hits="$(grep -cF 'select -set pmux_deferred_luts' "$SYNTH_FILE" || true)"
+deferred_marker_hits="$(grep -cF 'cell->name.begins_with("$pmux_deferred_lut")' "$SYNTH_FILE" || true)"
+deferred_select_hits="$(grep -cF 'select -set pmux_deferred_luts */c:*pmux_deferred_lut*' "$SYNTH_FILE" || true)"
 deferred_techmap_hits="$(grep -cF 'techmap -map +/techmap.v * @pmux_deferred_luts %d' "$SYNTH_FILE" || true)"
 fold_luts_hits="$(grep -cF 'run("pmux_opt -fold_luts");' "$SYNTH_FILE" || true)"
 
 if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ] && \
-   [ "$deferred_select_hits" = "1" ] && [ "$deferred_techmap_hits" = "1" ] && \
+   [ "$deferred_marker_hits" = "1" ] && [ "$deferred_select_hits" = "1" ] && \
+   [ "$deferred_techmap_hits" = "1" ] && \
    [ "$fold_luts_hits" = "1" ]; then
   mkdir -p "$PASS_DST"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
@@ -69,9 +71,10 @@ if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ] && \
   exit 0
 fi
 if [ "$cmake_hits" != "0" ] || [ "$synth_hits" != "0" ] || \
-   [ "$deferred_select_hits" != "0" ] || [ "$deferred_techmap_hits" != "0" ] || \
+   [ "$deferred_marker_hits" != "0" ] || [ "$deferred_select_hits" != "0" ] || \
+   [ "$deferred_techmap_hits" != "0" ] || \
    [ "$fold_luts_hits" != "0" ]; then
-  die "集成状态不完整（CMake=$cmake_hits，pass=$synth_hits，select=$deferred_select_hits，techmap=$deferred_techmap_hits，fold_luts=$fold_luts_hits），请使用干净的 Yosys 0.69 源码树"
+  die "集成状态不完整（CMake=$cmake_hits，pass=$synth_hits，marker=$deferred_marker_hits，select=$deferred_select_hits，techmap=$deferred_techmap_hits，fold_luts=$fold_luts_hits），请使用干净的 Yosys 0.69 源码树"
 fi
 
 if [ "$git_root" = "$SRC_ROOT" ]; then

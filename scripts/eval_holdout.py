@@ -26,8 +26,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_BASELINE = Path("/tmp/fpga-yosys-baseline-069.IdEpLa/build-repro/yosys")
-DEFAULT_CANDIDATE = Path("/tmp/fpga-yosys-repro-069.KzR8np/build-repro2/yosys")
+DEFAULT_BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
+DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
 DEFAULT_EQY = ROOT / "tools/oss-cad-suite/bin/eqy"
 HOLDOUT_ROOT = Path(os.environ.get(
     "FPGA_HOLDOUT_ROOT", ROOT / "tools/holdout-20261024/sources"
@@ -216,6 +216,8 @@ def main() -> int:
     parser.add_argument("--candidate", type=Path, default=DEFAULT_CANDIDATE)
     parser.add_argument("--eqy", type=Path, default=DEFAULT_EQY)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--case", action="append", dest="cases")
+    parser.add_argument("--skip-eqy", action="store_true")
     parser.add_argument("--json", type=Path, default=None)
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--reps", type=int, default=1)
@@ -230,6 +232,12 @@ def main() -> int:
     workdir = Path(tempfile.mkdtemp(prefix="pmux_holdout_"))
     print(f"workdir: {workdir}")
     cases = manifest["cases"]
+    if args.cases:
+        by_id = {case["id"]: case for case in cases}
+        missing = [case_id for case_id in args.cases if case_id not in by_id]
+        if missing:
+            parser.error("unknown case(s): " + ", ".join(missing))
+        cases = [by_id[case_id] for case_id in args.cases]
     for case in cases:
         case["_resolved_sources"] = resolve_sources(case)
 
@@ -269,7 +277,7 @@ def main() -> int:
             "reduction_pct": reduction,
             "eqy": None,
         }
-        if case.get("eqy", True):
+        if case.get("eqy", True) and not args.skip_eqy:
             if not args.eqy.exists():
                 raise RuntimeError(f"缺少 EQY：{args.eqy}")
             try:

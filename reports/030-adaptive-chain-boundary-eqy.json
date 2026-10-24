@@ -1,0 +1,409 @@
+{
+  "manifest": "/tmp/adaptive-chain-eqy-manifest.json",
+  "baseline": {
+    "path": "tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "e0fa02e80b532c32325d3159c67d2c34b3eaeff3c34199ef7ee8e6751fd59de1"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1
+  },
+  "rows": [
+    {
+      "id": "chain_04_w16",
+      "role": "constructed",
+      "top": "priority_chain_04_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_04_chain.v",
+          "sha256": "64308637bba44052244b594c87488ee4837c68cd4643ca8e6066996857de16bd"
+        }
+      ],
+      "baseline": {
+        "lcell": 80,
+        "not": 0,
+        "logic": 80,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 19316736
+      },
+      "candidate": {
+        "lcell": 65,
+        "not": 0,
+        "logic": 65,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 18497536
+      },
+      "reduction_pct": 18.75,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 80,
+        "gate_luts": 65,
+        "log_tail": "Y 17:01:12 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.15' using strategy 'sat'\nEQY 17:01:12 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.2'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.2' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.3'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.3' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.4'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.4' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.5'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.5' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.6'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.6' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.7'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.7' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.8'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.8' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: Running strategy 'sat' on 'priority_chain_04_chain.y.9'..\nEQY 17:01:13 [eqy_chain_04_w16] run: Proved equivalence of partition 'priority_chain_04_chain.y.9' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_04_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:13 [eqy_chain_04_w16] run: finished (returncode=0)\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.15\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.14\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.13\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.12\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.11\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.10\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.9\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.8\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.7\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.6\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.5\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.4\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.3\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.2\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.1\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved equivalence of partition priority_chain_04_chain.y.0\nEQY 17:01:13 [eqy_chain_04_w16] Successfully proved designs equivalent\nEQY 17:01:13 [eqy_chain_04_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:13 [eqy_chain_04_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:13 [eqy_chain_04_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_07_w16",
+      "role": "constructed",
+      "top": "priority_chain_07_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_07_chain.v",
+          "sha256": "593298f12ad685b1f3466863b7969c4d936804da0566d2db91c30c5153bbf6fb"
+        }
+      ],
+      "baseline": {
+        "lcell": 144,
+        "not": 0,
+        "logic": 144,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 24379392
+      },
+      "candidate": {
+        "lcell": 98,
+        "not": 0,
+        "logic": 98,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 23560192
+      },
+      "reduction_pct": 31.944444444444443,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 144,
+        "gate_luts": 98,
+        "log_tail": "Y 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.15' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.2'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.2' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.3'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.3' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.4'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.4' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.5'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.5' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.6'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.6' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.7'..\nEQY 17:01:13 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.7' using strategy 'sat'\nEQY 17:01:13 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.8'..\nEQY 17:01:14 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.8' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_07_w16] run: Running strategy 'sat' on 'priority_chain_07_chain.y.9'..\nEQY 17:01:14 [eqy_chain_07_w16] run: Proved equivalence of partition 'priority_chain_07_chain.y.9' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_07_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:14 [eqy_chain_07_w16] run: finished (returncode=0)\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.15\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.14\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.13\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.12\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.11\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.10\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.9\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.8\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.7\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.6\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.5\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.4\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.3\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.2\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.1\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved equivalence of partition priority_chain_07_chain.y.0\nEQY 17:01:14 [eqy_chain_07_w16] Successfully proved designs equivalent\nEQY 17:01:14 [eqy_chain_07_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:14 [eqy_chain_07_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:14 [eqy_chain_07_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_09_w16",
+      "role": "constructed",
+      "top": "priority_chain_09_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_09_chain.v",
+          "sha256": "cc338b86aeb13371e82a1b126b2f06fcd75fdb9e4bf7e5784b7f9c65d727a3ae"
+        }
+      ],
+      "baseline": {
+        "lcell": 176,
+        "not": 0,
+        "logic": 176,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 20234240
+      },
+      "candidate": {
+        "lcell": 146,
+        "not": 0,
+        "logic": 146,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 19464192
+      },
+      "reduction_pct": 17.045454545454543,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 176,
+        "gate_luts": 146,
+        "log_tail": "Y 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.15' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.2'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.2' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.3'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.3' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.4'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.4' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.5'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.5' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.6'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.6' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.7'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.7' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.8'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.8' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: Running strategy 'sat' on 'priority_chain_09_chain.y.9'..\nEQY 17:01:14 [eqy_chain_09_w16] run: Proved equivalence of partition 'priority_chain_09_chain.y.9' using strategy 'sat'\nEQY 17:01:14 [eqy_chain_09_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:15 [eqy_chain_09_w16] run: finished (returncode=0)\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.15\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.14\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.13\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.12\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.11\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.10\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.9\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.8\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.7\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.6\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.5\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.4\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.3\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.2\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.1\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved equivalence of partition priority_chain_09_chain.y.0\nEQY 17:01:15 [eqy_chain_09_w16] Successfully proved designs equivalent\nEQY 17:01:15 [eqy_chain_09_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:15 [eqy_chain_09_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:15 [eqy_chain_09_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_15_w16",
+      "role": "constructed",
+      "top": "priority_chain_15_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_15_chain.v",
+          "sha256": "b44d44dbfc4ae3e1997aca36b26625b0eaeda9dc8f3fc30e8350c926a3b205be"
+        }
+      ],
+      "baseline": {
+        "lcell": 288,
+        "not": 0,
+        "logic": 288,
+        "dff": 0,
+        "wall_s": 0.13,
+        "cpu_s": 0.13,
+        "peak_rss_bytes": 21250048
+      },
+      "candidate": {
+        "lcell": 245,
+        "not": 0,
+        "logic": 245,
+        "dff": 0,
+        "wall_s": 0.14,
+        "cpu_s": 0.13,
+        "peak_rss_bytes": 22347776
+      },
+      "reduction_pct": 14.930555555555555,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 288,
+        "gate_luts": 245,
+        "log_tail": "Y 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.15' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.2'..\nEQY 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.2' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.3'..\nEQY 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.3' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.4'..\nEQY 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.4' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.5'..\nEQY 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.5' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.6'..\nEQY 17:01:15 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.6' using strategy 'sat'\nEQY 17:01:15 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.7'..\nEQY 17:01:16 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.7' using strategy 'sat'\nEQY 17:01:16 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.8'..\nEQY 17:01:16 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.8' using strategy 'sat'\nEQY 17:01:16 [eqy_chain_15_w16] run: Running strategy 'sat' on 'priority_chain_15_chain.y.9'..\nEQY 17:01:16 [eqy_chain_15_w16] run: Proved equivalence of partition 'priority_chain_15_chain.y.9' using strategy 'sat'\nEQY 17:01:16 [eqy_chain_15_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:16 [eqy_chain_15_w16] run: finished (returncode=0)\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.15\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.14\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.13\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.12\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.11\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.10\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.9\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.8\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.7\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.6\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.5\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.4\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.3\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.2\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.1\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved equivalence of partition priority_chain_15_chain.y.0\nEQY 17:01:16 [eqy_chain_15_w16] Successfully proved designs equivalent\nEQY 17:01:16 [eqy_chain_15_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:16 [eqy_chain_15_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:16 [eqy_chain_15_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_17_w16",
+      "role": "constructed",
+      "top": "priority_chain_17_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_17_chain.v",
+          "sha256": "9cb0ee79f835f6775b78d9f2e7f39312adfe376801f0793b92cd32600fee71eb"
+        }
+      ],
+      "baseline": {
+        "lcell": 336,
+        "not": 0,
+        "logic": 336,
+        "dff": 0,
+        "wall_s": 0.14,
+        "cpu_s": 0.14,
+        "peak_rss_bytes": 29523968
+      },
+      "candidate": {
+        "lcell": 262,
+        "not": 0,
+        "logic": 262,
+        "dff": 0,
+        "wall_s": 0.15,
+        "cpu_s": 0.14,
+        "peak_rss_bytes": 21970944
+      },
+      "reduction_pct": 22.023809523809522,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 336,
+        "gate_luts": 262,
+        "log_tail": "Y 17:01:16 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.15' using strategy 'sat'\nEQY 17:01:16 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.2'..\nEQY 17:01:16 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.2' using strategy 'sat'\nEQY 17:01:16 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.3'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.3' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.4'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.4' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.5'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.5' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.6'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.6' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.7'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.7' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.8'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.8' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: Running strategy 'sat' on 'priority_chain_17_chain.y.9'..\nEQY 17:01:17 [eqy_chain_17_w16] run: Proved equivalence of partition 'priority_chain_17_chain.y.9' using strategy 'sat'\nEQY 17:01:17 [eqy_chain_17_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:17 [eqy_chain_17_w16] run: finished (returncode=0)\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.15\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.14\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.13\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.12\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.11\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.10\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.9\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.8\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.7\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.6\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.5\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.4\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.3\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.2\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.1\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved equivalence of partition priority_chain_17_chain.y.0\nEQY 17:01:17 [eqy_chain_17_w16] Successfully proved designs equivalent\nEQY 17:01:17 [eqy_chain_17_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:17 [eqy_chain_17_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:17 [eqy_chain_17_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_24_w16",
+      "role": "constructed",
+      "top": "priority_chain_24_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_24_chain.v",
+          "sha256": "d9a08f18f3fe26fd74fed7e98f4d0018fb5f0b6183c80f2b629fe442394d1e0d"
+        }
+      ],
+      "baseline": {
+        "lcell": 448,
+        "not": 0,
+        "logic": 448,
+        "dff": 0,
+        "wall_s": 0.18,
+        "cpu_s": 0.18000000000000002,
+        "peak_rss_bytes": 23216128
+      },
+      "candidate": {
+        "lcell": 386,
+        "not": 0,
+        "logic": 386,
+        "dff": 0,
+        "wall_s": 0.19,
+        "cpu_s": 0.18000000000000002,
+        "peak_rss_bytes": 27131904
+      },
+      "reduction_pct": 13.839285714285715,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 448,
+        "gate_luts": 386,
+        "log_tail": "Y 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.15' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.2'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.2' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.3'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.3' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.4'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.4' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.5'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.5' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.6'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.6' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.7'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.7' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.8'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.8' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: Running strategy 'sat' on 'priority_chain_24_chain.y.9'..\nEQY 17:01:18 [eqy_chain_24_w16] run: Proved equivalence of partition 'priority_chain_24_chain.y.9' using strategy 'sat'\nEQY 17:01:18 [eqy_chain_24_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:18 [eqy_chain_24_w16] run: finished (returncode=0)\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.15\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.14\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.13\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.12\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.11\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.10\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.9\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.8\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.7\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.6\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.5\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.4\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.3\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.2\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.1\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved equivalence of partition priority_chain_24_chain.y.0\nEQY 17:01:18 [eqy_chain_24_w16] Successfully proved designs equivalent\nEQY 17:01:18 [eqy_chain_24_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 17:01:18 [eqy_chain_24_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:18 [eqy_chain_24_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_48_w16",
+      "role": "constructed",
+      "top": "priority_chain_48_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_48_chain.v",
+          "sha256": "179483dd1f8db742f9dd8368d84aebdee273e84f1afc3e2530be1fab50e8c65d"
+        }
+      ],
+      "baseline": {
+        "lcell": 832,
+        "not": 0,
+        "logic": 832,
+        "dff": 0,
+        "wall_s": 0.33,
+        "cpu_s": 0.32,
+        "peak_rss_bytes": 28590080
+      },
+      "candidate": {
+        "lcell": 716,
+        "not": 0,
+        "logic": 716,
+        "dff": 0,
+        "wall_s": 0.29,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 33865728
+      },
+      "reduction_pct": 13.942307692307693,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 832,
+        "gate_luts": 716,
+        "log_tail": "Y 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.15' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.2'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.2' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.3'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.3' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.4'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.4' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.5'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.5' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.6'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.6' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.7'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.7' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.8'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.8' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: Running strategy 'sat' on 'priority_chain_48_chain.y.9'..\nEQY 17:01:20 [eqy_chain_48_w16] run: Proved equivalence of partition 'priority_chain_48_chain.y.9' using strategy 'sat'\nEQY 17:01:20 [eqy_chain_48_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:20 [eqy_chain_48_w16] run: finished (returncode=0)\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.15\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.14\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.13\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.12\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.11\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.10\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.9\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.8\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.7\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.6\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.5\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.4\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.3\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.2\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.1\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved equivalence of partition priority_chain_48_chain.y.0\nEQY 17:01:20 [eqy_chain_48_w16] Successfully proved designs equivalent\nEQY 17:01:20 [eqy_chain_48_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 17:01:20 [eqy_chain_48_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 17:01:20 [eqy_chain_48_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_64_w16",
+      "role": "constructed",
+      "top": "priority_chain_64_chain",
+      "params": {
+        "W": 16
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_64_chain.v",
+          "sha256": "dd59137e428a1152f0b83e001c5c5742142baf9eee751d148166f728ade26a00"
+        }
+      ],
+      "baseline": {
+        "lcell": 1104,
+        "not": 0,
+        "logic": 1104,
+        "dff": 0,
+        "wall_s": 0.44,
+        "cpu_s": 0.44,
+        "peak_rss_bytes": 33832960
+      },
+      "candidate": {
+        "lcell": 957,
+        "not": 0,
+        "logic": 957,
+        "dff": 0,
+        "wall_s": 0.47,
+        "cpu_s": 0.4,
+        "peak_rss_bytes": 33095680
+      },
+      "reduction_pct": 13.31521739130435,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 1104,
+        "gate_luts": 957,
+        "log_tail": "Y 17:01:22 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.15' using strategy 'sat'\nEQY 17:01:22 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.2'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.2' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.3'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.3' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.4'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.4' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.5'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.5' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.6'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.6' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.7'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.7' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.8'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.8' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: Running strategy 'sat' on 'priority_chain_64_chain.y.9'..\nEQY 17:01:23 [eqy_chain_64_w16] run: Proved equivalence of partition 'priority_chain_64_chain.y.9' using strategy 'sat'\nEQY 17:01:23 [eqy_chain_64_w16] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:23 [eqy_chain_64_w16] run: finished (returncode=0)\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.15\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.14\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.13\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.12\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.11\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.10\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.9\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.8\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.7\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.6\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.5\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.4\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.3\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.2\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.1\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved equivalence of partition priority_chain_64_chain.y.0\nEQY 17:01:23 [eqy_chain_64_w16] Successfully proved designs equivalent\nEQY 17:01:23 [eqy_chain_64_w16] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 17:01:23 [eqy_chain_64_w16] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 17:01:23 [eqy_chain_64_w16] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_17_w2",
+      "role": "constructed",
+      "top": "priority_chain_17_chain",
+      "params": {
+        "W": 2
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_17_chain.v",
+          "sha256": "9cb0ee79f835f6775b78d9f2e7f39312adfe376801f0793b92cd32600fee71eb"
+        }
+      ],
+      "baseline": {
+        "lcell": 42,
+        "not": 0,
+        "logic": 42,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 27590656
+      },
+      "candidate": {
+        "lcell": 37,
+        "not": 0,
+        "logic": 37,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22839296
+      },
+      "reduction_pct": 11.904761904761903,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 42,
+        "gate_luts": 37,
+        "log_tail": "EQY 17:01:23 [eqy_chain_17_w2] read_gold: starting process \"yosys -ql eqy_chain_17_w2/gold.log eqy_chain_17_w2/gold.ys\"\nEQY 17:01:23 [eqy_chain_17_w2] read_gold: finished (returncode=0)\nEQY 17:01:23 [eqy_chain_17_w2] read_gate: starting process \"yosys -ql eqy_chain_17_w2/gate.log eqy_chain_17_w2/gate.ys\"\nEQY 17:01:24 [eqy_chain_17_w2] read_gate: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_17_w2] combine: starting process \"yosys -ql eqy_chain_17_w2/combine.log eqy_chain_17_w2/combine.ys\"\nEQY 17:01:24 [eqy_chain_17_w2] combine: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_17_w2] partition: starting process \"cd eqy_chain_17_w2; yosys -ql partition.log partition.ys\"\nEQY 17:01:24 [eqy_chain_17_w2] partition: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_17_w2] run: starting process \"make -C eqy_chain_17_w2 -f strategies.mk\"\nEQY 17:01:24 [eqy_chain_17_w2] run: Running strategy 'sat' on 'priority_chain_17_chain.y.0'..\nEQY 17:01:24 [eqy_chain_17_w2] run: Proved equivalence of partition 'priority_chain_17_chain.y.0' using strategy 'sat'\nEQY 17:01:24 [eqy_chain_17_w2] run: Running strategy 'sat' on 'priority_chain_17_chain.y.1'..\nEQY 17:01:24 [eqy_chain_17_w2] run: Proved equivalence of partition 'priority_chain_17_chain.y.1' using strategy 'sat'\nEQY 17:01:24 [eqy_chain_17_w2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:24 [eqy_chain_17_w2] run: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_17_w2] Successfully proved equivalence of partition priority_chain_17_chain.y.1\nEQY 17:01:24 [eqy_chain_17_w2] Successfully proved equivalence of partition priority_chain_17_chain.y.0\nEQY 17:01:24 [eqy_chain_17_w2] Successfully proved designs equivalent\nEQY 17:01:24 [eqy_chain_17_w2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:24 [eqy_chain_17_w2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:24 [eqy_chain_17_w2] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "chain_32_w2",
+      "role": "constructed",
+      "top": "priority_chain_32_chain",
+      "params": {
+        "W": 2
+      },
+      "sources": [
+        {
+          "path": "/Users/selina/Documents/ChatGPT/fpga比赛/experiments/chain-strategies-20261024/rtl/priority_chain_32_chain.v",
+          "sha256": "3513454047a1be2d34460bd9fa45fc0566d45f4695cc12cd4bb7c02a33f0c5e7"
+        }
+      ],
+      "baseline": {
+        "lcell": 72,
+        "not": 0,
+        "logic": 72,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 28082176
+      },
+      "candidate": {
+        "lcell": 69,
+        "not": 0,
+        "logic": 69,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 22396928
+      },
+      "reduction_pct": 4.166666666666666,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 72,
+        "gate_luts": 69,
+        "log_tail": "EQY 17:01:24 [eqy_chain_32_w2] read_gold: starting process \"yosys -ql eqy_chain_32_w2/gold.log eqy_chain_32_w2/gold.ys\"\nEQY 17:01:24 [eqy_chain_32_w2] read_gold: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_32_w2] read_gate: starting process \"yosys -ql eqy_chain_32_w2/gate.log eqy_chain_32_w2/gate.ys\"\nEQY 17:01:24 [eqy_chain_32_w2] read_gate: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_32_w2] combine: starting process \"yosys -ql eqy_chain_32_w2/combine.log eqy_chain_32_w2/combine.ys\"\nEQY 17:01:24 [eqy_chain_32_w2] combine: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_32_w2] partition: starting process \"cd eqy_chain_32_w2; yosys -ql partition.log partition.ys\"\nEQY 17:01:24 [eqy_chain_32_w2] partition: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_32_w2] run: starting process \"make -C eqy_chain_32_w2 -f strategies.mk\"\nEQY 17:01:24 [eqy_chain_32_w2] run: Running strategy 'sat' on 'priority_chain_32_chain.y.0'..\nEQY 17:01:24 [eqy_chain_32_w2] run: Proved equivalence of partition 'priority_chain_32_chain.y.0' using strategy 'sat'\nEQY 17:01:24 [eqy_chain_32_w2] run: Running strategy 'sat' on 'priority_chain_32_chain.y.1'..\nEQY 17:01:24 [eqy_chain_32_w2] run: Proved equivalence of partition 'priority_chain_32_chain.y.1' using strategy 'sat'\nEQY 17:01:24 [eqy_chain_32_w2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 17:01:24 [eqy_chain_32_w2] run: finished (returncode=0)\nEQY 17:01:24 [eqy_chain_32_w2] Successfully proved equivalence of partition priority_chain_32_chain.y.1\nEQY 17:01:24 [eqy_chain_32_w2] Successfully proved equivalence of partition priority_chain_32_chain.y.0\nEQY 17:01:24 [eqy_chain_32_w2] Successfully proved designs equivalent\nEQY 17:01:24 [eqy_chain_32_w2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:24 [eqy_chain_32_w2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 17:01:24 [eqy_chain_32_w2] DONE (PASS, rc=0)\n"
+      }
+    }
+  ]
+}

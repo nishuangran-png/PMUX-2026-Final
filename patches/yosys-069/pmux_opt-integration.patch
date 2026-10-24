@@ -22,14 +22,29 @@ index 3a229fb..b3a4a93 100644
  			run("wreduce");
  			run("peepopt");
  			run("opt_clean");
-@@ -251,8 +252,9 @@ struct SynthIntelPass : public ScriptPass {
+@@ -251,8 +252,24 @@ struct SynthIntelPass : public ScriptPass {
  		if (check_label("map_ffram")) {
  			run("opt -fast -mux_undef -undriven -fine -full");
  			run("memory_map");
  			run("opt -undriven -fine");
 -			run("techmap -map +/techmap.v");
-+			run("select -set pmux_deferred_luts */a:pmux_deferred_lut");
-+			run("techmap -map +/techmap.v * @pmux_deferred_luts %d");
++			bool has_deferred_luts = false;
++			if (!help_mode) {
++				for (auto module : active_design->selected_modules())
++					for (auto cell : module->cells())
++						if (cell->name.begins_with("$pmux_deferred_lut")) {
++							has_deferred_luts = true;
++							break;
++						}
++			}
++			if (!help_mode)
++				log("pmux_opt: deferred LUTs=%d\n", int(has_deferred_luts));
++			if (help_mode || has_deferred_luts) {
++				run("select -set pmux_deferred_luts */c:*pmux_deferred_lut*");
++				run("techmap -map +/techmap.v * @pmux_deferred_luts %d");
++			} else {
++				run("techmap -map +/techmap.v");
++			}
  			run("opt -full");
  			run("clean -purge");
  			run("setundef -undriven -zero");

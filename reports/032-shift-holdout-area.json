@@ -1,0 +1,319 @@
+{
+  "manifest": "experiments/holdout-20261024/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "f7ee166ff243c942afdd72ebfba125d644b3880624f9eca5d8ce78000dd7cd56"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1
+  },
+  "rows": [
+    {
+      "id": "constructed_priority_chain_05",
+      "role": "constructed",
+      "top": "priority_chain_05",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_05.v",
+          "sha256": "989b0d182556806a382077c8fa429fa33717b171ef633fc30da2c1bebac3836f"
+        }
+      ],
+      "baseline": {
+        "lcell": 96,
+        "not": 0,
+        "logic": 96,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 21741568
+      },
+      "candidate": {
+        "lcell": 66,
+        "not": 0,
+        "logic": 66,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 22380544
+      },
+      "reduction_pct": 31.25,
+      "eqy": null
+    },
+    {
+      "id": "constructed_priority_chain_06",
+      "role": "constructed",
+      "top": "priority_chain_06",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_06.v",
+          "sha256": "ae9f15a0ea5d9339611eb1d727097b603a37e6c529850d39caee4f588a3604d6"
+        }
+      ],
+      "baseline": {
+        "lcell": 112,
+        "not": 0,
+        "logic": 112,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23625728
+      },
+      "candidate": {
+        "lcell": 83,
+        "not": 0,
+        "logic": 83,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23379968
+      },
+      "reduction_pct": 25.892857142857146,
+      "eqy": null
+    },
+    {
+      "id": "constructed_priority_chain_08",
+      "role": "constructed",
+      "top": "priority_chain_08",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_08.v",
+          "sha256": "29527aff965f4792b711a823c1bcfe71b0f6e29c0fb00175771e4f44545ef0a3"
+        }
+      ],
+      "baseline": {
+        "lcell": 160,
+        "not": 0,
+        "logic": 160,
+        "dff": 0,
+        "wall_s": 0.12,
+        "cpu_s": 0.11,
+        "peak_rss_bytes": 26558464
+      },
+      "candidate": {
+        "lcell": 114,
+        "not": 0,
+        "logic": 114,
+        "dff": 0,
+        "wall_s": 0.12,
+        "cpu_s": 0.11,
+        "peak_rss_bytes": 24117248
+      },
+      "reduction_pct": 28.749999999999996,
+      "eqy": null
+    },
+    {
+      "id": "constructed_priority_chain_16",
+      "role": "constructed",
+      "top": "priority_chain_16",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/priority_chains/priority_chain_16.v",
+          "sha256": "1cec40f8349cacde01921238a977ece3072a062064110c3987b31aca50f51170"
+        }
+      ],
+      "baseline": {
+        "lcell": 336,
+        "not": 0,
+        "logic": 336,
+        "dff": 0,
+        "wall_s": 0.18,
+        "cpu_s": 0.16,
+        "peak_rss_bytes": 29687808
+      },
+      "candidate": {
+        "lcell": 248,
+        "not": 0,
+        "logic": 248,
+        "dff": 0,
+        "wall_s": 0.17,
+        "cpu_s": 0.16,
+        "peak_rss_bytes": 27164672
+      },
+      "reduction_pct": 26.190476190476193,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_priority_encoder_16",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 16
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 35,
+        "not": 0,
+        "logic": 35,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23216128
+      },
+      "candidate": {
+        "lcell": 35,
+        "not": 0,
+        "logic": 35,
+        "dff": 0,
+        "wall_s": 0.12,
+        "cpu_s": 0.11,
+        "peak_rss_bytes": 26902528
+      },
+      "reduction_pct": 0.0,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 128
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 323,
+        "not": 0,
+        "logic": 323,
+        "dff": 0,
+        "wall_s": 0.37,
+        "cpu_s": 0.36000000000000004,
+        "peak_rss_bytes": 29212672
+      },
+      "candidate": {
+        "lcell": 316,
+        "not": 0,
+        "logic": 316,
+        "dff": 0,
+        "wall_s": 0.51,
+        "cpu_s": 0.41000000000000003,
+        "peak_rss_bytes": 31834112
+      },
+      "reduction_pct": 2.1671826625387,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 512
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 1315,
+        "not": 0,
+        "logic": 1315,
+        "dff": 0,
+        "wall_s": 2.55,
+        "cpu_s": 2.53,
+        "peak_rss_bytes": 53035008
+      },
+      "candidate": {
+        "lcell": 1208,
+        "not": 0,
+        "logic": 1208,
+        "dff": 0,
+        "wall_s": 2.49,
+        "cpu_s": 2.49,
+        "peak_rss_bytes": 46907392
+      },
+      "reduction_pct": 8.136882129277566,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "role": "external",
+      "top": "arbiter",
+      "params": {
+        "PORTS": 64
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        },
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/arbiter.v",
+          "sha256": "a001507c82843e36e133dea75491fc044f56660fac0aff0127cf3afec7f927e0"
+        }
+      ],
+      "baseline": {
+        "lcell": 173,
+        "not": 0,
+        "logic": 173,
+        "dff": 71,
+        "wall_s": 0.3,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 32194560
+      },
+      "candidate": {
+        "lcell": 163,
+        "not": 0,
+        "logic": 163,
+        "dff": 71,
+        "wall_s": 0.29,
+        "cpu_s": 0.27,
+        "peak_rss_bytes": 30490624
+      },
+      "reduction_pct": 5.780346820809249,
+      "eqy": null
+    },
+    {
+      "id": "picorv32_default",
+      "role": "external",
+      "top": "picorv32",
+      "params": {},
+      "sources": [
+        {
+          "path": "@HOLDOUT@/picorv32/picorv32.v",
+          "sha256": "0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622"
+        }
+      ],
+      "baseline": {
+        "lcell": 2029,
+        "not": 0,
+        "logic": 2029,
+        "dff": 597,
+        "wall_s": 2.05,
+        "cpu_s": 2.1,
+        "peak_rss_bytes": 62570496
+      },
+      "candidate": {
+        "lcell": 2017,
+        "not": 0,
+        "logic": 2017,
+        "dff": 597,
+        "wall_s": 2.07,
+        "cpu_s": 2.12,
+        "peak_rss_bytes": 66125824
+      },
+      "reduction_pct": 0.5914243469689502,
+      "eqy": null
+    }
+  ]
+}

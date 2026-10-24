@@ -31,6 +31,10 @@ build/
 *.yslog
 *.vcd
 *.fst
+VSS
+abc.history
+netlist_synth_fpga.verilog
+output.aig
 
 # --- Xilinx Vivado / ISE ---
 *.jou

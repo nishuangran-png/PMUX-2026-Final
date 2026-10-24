@@ -21,10 +21,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ["test1", "test2", "test3", "test4"]
 SUITE = ROOT / "tools/oss-cad-suite"
-GOLD_YOSYS = ROOT / "tools/build/official-v069/build/yosys"
-GATE_YOSYS = ROOT / "tools/build/official-v069-opt/build/yosys"
+GOLD_YOSYS = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
+GATE_YOSYS = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
 EQY = SUITE / "bin/eqy"
 ABC_LUT = 4
+DFFEAS_MODEL = ROOT / "formal/intel_dffeas_formal.v"
 
 
 def keep_module(src: Path, dst: Path, name: str):
@@ -63,6 +64,7 @@ def synth_lut(binary: Path, case: str, out_il: Path, tmp: Path, arm: str):
     script = (
         f"read_verilog {v}; "
         f"synth_intel -family cycloneiv -top {case} -run begin:map_ffs; "
+        f"read_verilog {DFFEAS_MODEL}; proc; flatten; opt -full; "
         f"abc9 -lut {ABC_LUT} -W 300; clean; opt -fast; clean; "
         f"write_rtlil {raw_il}"
     )
