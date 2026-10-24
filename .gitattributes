@@ -9,6 +9,7 @@
 *.sh  text eol=lf
 *.json text eol=lf
 *.html text eol=lf
+*.patch text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
 .gitignore text eol=lf
 .gitattributes text eol=lf
 

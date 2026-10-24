@@ -11,6 +11,7 @@
       --json reports/018-效率采样.json
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -21,8 +22,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OFFICIAL_BASELINE = ROOT / "tools/build/official-v069/build/yosys"
-OFFICIAL_CANDIDATE = ROOT / "tools/build/official-v069-opt/build/yosys"
+OFFICIAL_CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 CASES = ["test1", "test2", "test3", "test4"]
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def version(binary: Path) -> str:
+    proc = subprocess.run([str(binary), "-V"], capture_output=True, text=True)
+    return (proc.stdout + proc.stderr).strip()
 
 
 def run_once(binary: Path, case: str):
@@ -37,30 +51,33 @@ def run_once(binary: Path, case: str):
     if proc.returncode != 0:
         raise RuntimeError(f"{case}: yosys failed\n{proc.stderr[-2000:]}")
 
-    mem = None
+    cpu = mem = None
     for line in proc.stderr.splitlines():
+        match = re.match(r"(\d+\.\d+) real\s+(\d+\.\d+) user\s+(\d+\.\d+) sys", line.strip())
+        if match:
+            cpu = float(match.group(2)) + float(match.group(3))
         match = re.match(r"\s*(\d+)\s+maximum resident set size", line)
         if match:
             mem = int(match.group(1))
-            break
-    # time(1) 的 real 更接近 Measure-Command；没有它时退回 Python 墙钟。
-    for line in proc.stderr.splitlines():
-        match = re.match(r"(\d+\.\d+) real\s+", line.strip())
-        if match:
-            wall = float(match.group(1))
-            break
-    return wall, mem
+    # time(1) 的 real 只有两位小数，不能覆盖 perf_counter 的高精度墙钟。
+    return wall, cpu, mem
 
 
 def summarize(samples):
     walls = [s[0] for s in samples]
-    mems = [s[1] for s in samples if s[1] is not None]
+    cpus = [s[1] for s in samples if s[1] is not None]
+    mems = [s[2] for s in samples if s[2] is not None]
     return {
         "wall_s": {
             "median": statistics.median(walls),
             "min": min(walls),
             "max": max(walls),
         },
+        "cpu_s": ({
+            "median": statistics.median(cpus),
+            "min": min(cpus),
+            "max": max(cpus),
+        } if cpus else None),
         "mem_bytes": ({
             "median": statistics.median(mems),
             "min": min(mems),
@@ -89,9 +106,10 @@ def main():
     rows = []
     print(f"baseline : {baseline}")
     print(f"candidate: {candidate}")
-    print(f"计时口径 : wall time（类比 PowerShell Measure-Command），{args.repeat} 次中位数\n")
-    print(f"{'case':6} {'wall base':>10} {'wall cand':>10} {'ratio':>8} "
-          f"{'mem base MB':>12} {'mem cand MB':>12} {'ratio':>8}")
+    print(f"计时口径 : perf_counter 墙钟 + time(1) CPU/RSS，{args.repeat} 次中位数\n")
+    print(f"{'case':6} {'wall b':>8} {'wall c':>8} {'ratio':>7} "
+          f"{'cpu b':>8} {'cpu c':>8} {'ratio':>7} "
+          f"{'rss b MB':>10} {'rss c MB':>10} {'ratio':>7}")
 
     for case in args.cases:
         base_samples, cand_samples = [], []
@@ -106,6 +124,9 @@ def main():
         base = summarize(base_samples)
         cand = summarize(cand_samples)
         wall_ratio = ratio(cand["wall_s"]["median"], base["wall_s"]["median"])
+        cpu_ratio = None
+        if base["cpu_s"] and cand["cpu_s"]:
+            cpu_ratio = ratio(cand["cpu_s"]["median"], base["cpu_s"]["median"])
         mem_ratio = None
         if base["mem_bytes"] and cand["mem_bytes"]:
             mem_ratio = ratio(cand["mem_bytes"]["median"], base["mem_bytes"]["median"])
@@ -114,23 +135,31 @@ def main():
             "baseline": {**base, "samples": base_samples},
             "candidate": {**cand, "samples": cand_samples},
             "wall_ratio": wall_ratio,
+            "cpu_ratio": cpu_ratio,
             "mem_ratio": mem_ratio,
         })
+        base_cpu = base["cpu_s"]["median"] if base["cpu_s"] else None
+        cand_cpu = cand["cpu_s"]["median"] if cand["cpu_s"] else None
         base_mb = base["mem_bytes"]["median"] / 1048576 if base["mem_bytes"] else None
         cand_mb = cand["mem_bytes"]["median"] / 1048576 if cand["mem_bytes"] else None
-        print(f"{case:6} {base['wall_s']['median']:10.3f} {cand['wall_s']['median']:10.3f} "
-              f"{wall_ratio:8.3f} {base_mb:12.2f} {cand_mb:12.2f} {mem_ratio:8.3f}")
+        print(f"{case:6} {base['wall_s']['median']:8.3f} {cand['wall_s']['median']:8.3f} "
+              f"{wall_ratio:7.3f} {base_cpu:8.3f} {cand_cpu:8.3f} {cpu_ratio:7.3f} "
+              f"{base_mb:10.2f} {cand_mb:10.2f} {mem_ratio:7.3f}")
 
     worst_wall = max(rows, key=lambda row: row["wall_ratio"] or 0)
+    worst_cpu = max(rows, key=lambda row: row["cpu_ratio"] or 0)
     worst_mem = max(rows, key=lambda row: row["mem_ratio"] or 0)
     print(f"\n最大墙钟比: {worst_wall['case']} {worst_wall['wall_ratio']:.3f}")
+    print(f"最大 CPU 比 : {worst_cpu['case']} {worst_cpu['cpu_ratio']:.3f}")
     print(f"最大内存比: {worst_mem['case']} {worst_mem['mem_ratio']:.3f}")
     print("效率满分线: 所有用例均 <= 1.05；任一项 > 1.15 则效率项为 0。")
 
     if args.json:
         payload = {
-            "method": "wall time via /usr/bin/time -l; alternating baseline/candidate",
+            "method": "high-resolution wall time via perf_counter; CPU and max RSS via time(1); alternating baseline/candidate",
             "repeat": args.repeat,
+            "baseline": {"path": str(baseline), "sha256": sha256(baseline), "version": version(baseline)},
+            "candidate": {"path": str(candidate), "sha256": sha256(candidate), "version": version(candidate)},
             "rows": rows,
         }
         Path(args.json).write_text(json.dumps(payload, indent=2), encoding="utf-8")

@@ -24,8 +24,8 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+BASELINE = ROOT / "tools/build/official-v069/build/yosys"
+CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 EQY = ROOT / "tools/oss-cad-suite/bin/eqy"
 CELL_RE = re.compile(r"^\s+(\d+)\s+(\S+)\s*$")
 

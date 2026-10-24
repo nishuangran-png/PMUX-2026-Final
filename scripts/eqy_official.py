@@ -21,8 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ["test1", "test2", "test3", "test4"]
 SUITE = ROOT / "tools/oss-cad-suite"
-GOLD_YOSYS = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-GATE_YOSYS = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+GOLD_YOSYS = ROOT / "tools/build/official-v069/build/yosys"
+GATE_YOSYS = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 EQY = SUITE / "bin/eqy"
 ABC_LUT = 4
 DFFEAS_MODEL = ROOT / "formal/intel_dffeas_formal.v"

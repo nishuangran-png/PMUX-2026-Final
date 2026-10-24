@@ -19,8 +19,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from eval_holdout import synth_lut, synth_stats  # noqa: E402
 
 
-DEFAULT_BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+DEFAULT_BASELINE = ROOT / "tools/build/official-v069/build/yosys"
+DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 DEFAULT_MANIFEST = ROOT / "experiments/holdout-20261024/manifest.json"
 
 

@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parent.parent
 SUITE = ROOT / "tools/oss-cad-suite"
 EQY = SUITE / "bin/eqy"
 DFFEAS_MODEL = ROOT / "formal/intel_dffeas_formal.v"
-DEFAULT_GOLD = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-DEFAULT_GATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+DEFAULT_GOLD = ROOT / "tools/build/official-v069/build/yosys"
+DEFAULT_GATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 DEFAULT_RTL = ROOT / "tests/pmux/rtl/dff_clear_cases.v"
 DEFAULT_MODULES = [
     "dff_zero_on_a",

@@ -17,8 +17,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ["test1", "test2", "test3", "test4"]
-OFFICIAL_BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-OFFICIAL_CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+OFFICIAL_BASELINE = ROOT / "tools/build/official-v069/build/yosys"
+OFFICIAL_CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 CELL_RE = re.compile(r"^\s+(\d+)\s+(\S+)\s*$")
 
 # These cells prove that synthesis stopped before the technology mapping was

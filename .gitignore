@@ -54,3 +54,23 @@ _待删除/
 # --- EQY 运行产物 ---
 experiments/eqy-demo/eq_ok/
 experiments/eqy-demo/eq_bad/
+
+# --- 2026-10-25 本地大规模验证产物 ---
+experiments/chain-strategies-20261024/
+experiments/const-pmux-20261025/
+experiments/const-pmux-official069-20261025/
+experiments/const-pmux-official069-final-20261025/
+experiments/eqy-official-20261025/
+experiments/final-mapping-20261025/
+experiments/final-mapping-official069-20261025/
+experiments/final-mapping-official069-final-20261025/
+experiments/holdout-eqy-grouped-20261025/*
+!experiments/holdout-eqy-grouped-20261025/README.md
+!experiments/holdout-eqy-grouped-20261025/*.eqy
+experiments/holdout-eqy-default-failure-20261025/
+experiments/holdout-eqy-official069-20261025/
+experiments/holdout-equivalence-final-guard-20261025/
+experiments/holdout-equivalence-shift-guard-20261025/
+experiments/holdout-official069-final-20261025/
+experiments/semantic-check/
+experiments/test4-sclr/

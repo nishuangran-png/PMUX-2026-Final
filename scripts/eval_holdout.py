@@ -26,8 +26,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_BASELINE = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+DEFAULT_BASELINE = ROOT / "tools/build/official-v069/build/yosys"
+DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 DEFAULT_EQY = ROOT / "tools/oss-cad-suite/bin/eqy"
 HOLDOUT_ROOT = Path(os.environ.get(
     "FPGA_HOLDOUT_ROOT", ROOT / "tools/holdout-20261024/sources"
@@ -173,12 +173,18 @@ def synth_lut(yosys: Path, case: dict, output: Path, workdir: Path,
 
 
 def run_eqy(baseline: Path, candidate: Path, eqy: Path, case: dict,
-            workdir: Path, timeout: int) -> dict:
+            workdir: Path, timeout: int, collect_group: str | None = None) -> dict:
     gold = workdir / f"{case['id']}_gold.il"
     gate = workdir / f"{case['id']}_gate.il"
     gold_luts = synth_lut(baseline, case, gold, workdir, "gold", timeout)
     gate_luts = synth_lut(candidate, case, gate, workdir, "gate", timeout)
     config = workdir / f"{case['id']}.eqy"
+    collect = ""
+    if collect_group:
+        collect = f"""
+[collect {case['top']}]
+group {collect_group}
+"""
     config.write_text(f"""[gold]
 read_rtlil {gold.name}
 prep -top {case['top']}
@@ -186,6 +192,7 @@ prep -top {case['top']}
 [gate]
 read_rtlil {gate.name}
 prep -top {case['top']}
+{collect}
 
 [strategy sat]
 use sat
@@ -222,6 +229,10 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--reps", type=int, default=1)
     parser.add_argument("--keep", action="store_true")
+    parser.add_argument("--workdir", type=Path, default=None,
+                        help="保留运行目录；默认使用临时目录")
+    parser.add_argument("--eqy-collect-group", default=None,
+                        help="传给 EQY [collect] 的 group 模式，例如 output_*")
     args = parser.parse_args()
 
     for binary in (args.baseline, args.candidate):
@@ -229,7 +240,13 @@ def main() -> int:
             parser.error(f"缺少 Yosys：{binary}")
 
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
-    workdir = Path(tempfile.mkdtemp(prefix="pmux_holdout_"))
+    if args.workdir:
+        workdir = args.workdir if args.workdir.is_absolute() else ROOT / args.workdir
+        if workdir.exists() and any(workdir.iterdir()):
+            parser.error(f"workdir 非空：{workdir}")
+        workdir.mkdir(parents=True, exist_ok=True)
+    else:
+        workdir = Path(tempfile.mkdtemp(prefix="pmux_holdout_"))
     print(f"workdir: {workdir}")
     cases = manifest["cases"]
     if args.cases:
@@ -281,8 +298,10 @@ def main() -> int:
             if not args.eqy.exists():
                 raise RuntimeError(f"缺少 EQY：{args.eqy}")
             try:
-                row["eqy"] = run_eqy(args.baseline, args.candidate, args.eqy,
-                                     case, workdir, args.timeout)
+                row["eqy"] = run_eqy(
+                    args.baseline, args.candidate, args.eqy, case, workdir,
+                    args.timeout, args.eqy_collect_group,
+                )
             except Exception as exc:
                 row["eqy"] = {"status": "ERROR", "error": str(exc)}
         rows.append(row)
@@ -300,6 +319,7 @@ def main() -> int:
             "machine": os.uname().machine,
             "python": os.sys.version.split()[0],
             "reps": args.reps,
+            "eqy_collect_group": args.eqy_collect_group,
         },
         "rows": rows,
     }
@@ -309,7 +329,7 @@ def main() -> int:
                              encoding="utf-8")
         print(f"JSON -> {args.json}")
 
-    if not args.keep:
+    if not args.keep and not args.workdir:
         shutil.rmtree(workdir, ignore_errors=True)
     return 0
 
