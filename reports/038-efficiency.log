@@ -1,0 +1,15 @@
+baseline : /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys
+candidate: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys
+计时口径 : perf_counter 墙钟 + time(1) CPU/RSS，31 次中位数
+
+case     wall b   wall c   ratio    cpu b    cpu c   ratio   rss b MB   rss c MB   ratio
+test1     0.302    0.270   0.894    0.280    0.240   0.857      24.36      23.61   0.969
+test2     0.106    0.107   1.011    0.090    0.090   1.000      17.75      17.34   0.977
+test3     0.118    0.115   0.976    0.100    0.100   1.000      22.03      19.38   0.879
+test4     0.138    0.108   0.787    0.120    0.090   0.750      22.66      15.86   0.700
+
+最大墙钟比: test2 1.011
+最大 CPU 比 : test2 1.000
+最大内存比: test2 0.977
+效率满分线: 所有用例均 <= 1.05；任一项 > 1.15 则效率项为 0。
+JSON -> reports/038-efficiency.json

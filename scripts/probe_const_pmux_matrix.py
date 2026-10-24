@@ -75,9 +75,31 @@ def lcg_values(seed: int, count: int) -> list[int]:
     return values
 
 
-def make_case(address_width: int, output_width: int, seed: int) -> tuple[str, str]:
+def full_width_values(seed: int, count: int, output_width: int) -> list[int]:
+    """Generate deterministic values that actually exercise every output bit."""
+    values = []
+    for address in range(count):
+        material = f"pmux-scale:{seed}:{output_width}:{address}".encode()
+        value = 0
+        for offset in range(0, output_width, 256):
+            digest = hashlib.sha256(material + offset.to_bytes(4, "little")).digest()
+            value |= int.from_bytes(digest, "little") << offset
+        values.append(value & ((1 << output_width) - 1))
+    return values
+
+
+def make_case(
+    address_width: int, output_width: int, seed: int, full_width: bool = False
+) -> tuple[str, str]:
     top = f"const_pmux_a{address_width}_w{output_width}"
-    values = lcg_values(seed ^ (address_width << 16) ^ output_width, 1 << address_width)
+    if full_width:
+        values = full_width_values(
+            seed ^ (address_width << 16), 1 << address_width, output_width
+        )
+    else:
+        values = lcg_values(
+            seed ^ (address_width << 16) ^ output_width, 1 << address_width
+        )
     mask = (1 << output_width) - 1
     digits = max(1, (output_width + 3) // 4)
     lines = [
@@ -180,6 +202,11 @@ def main() -> int:
     parser.add_argument("--address-widths", type=int, nargs="+", default=[2, 3, 4, 5, 6])
     parser.add_argument("--output-widths", type=int, nargs="+", default=[1, 4, 8, 16])
     parser.add_argument("--seed", type=int, default=20261025)
+    parser.add_argument(
+        "--full-width-tables",
+        action="store_true",
+        help="fill every output bit from a deterministic digest instead of the legacy 32-bit LCG",
+    )
     parser.add_argument("--json", type=Path, default=None)
     args = parser.parse_args()
 
@@ -207,7 +234,9 @@ def main() -> int:
     print(f"{'case':24} {'base':>6} {'cand':>6} {'delta':>7} {'pct':>8} {'dff':>5}")
     for address_width in args.address_widths:
         for output_width in args.output_widths:
-            top, text = make_case(address_width, output_width, args.seed)
+            top, text = make_case(
+                address_width, output_width, args.seed, args.full_width_tables
+            )
             rtl = rtl_dir / f"{top}.v"
             rtl.write_text(text, encoding="utf-8")
             base = run_yosys(
@@ -266,6 +295,9 @@ def main() -> int:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "git_head": git_head(),
         "seed": args.seed,
+        "data_model": (
+            "full-width-sha256" if args.full_width_tables else "legacy-32bit-lcg"
+        ),
         "baseline": baseline,
         "candidate": candidate,
         "metric": "cycloneiv_lcell_comb + $not",

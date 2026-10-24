@@ -1,0 +1,3 @@
+case                                       base   cand   reduct  gold_lut  gate_lut   delta   proof_s  result
+verilog_axi_priority_encoder_512           1346   1219    9.44%      1346      1219     127     54.16  PASS
+JSON -> reports/038-priority512-lut-equivalence.json

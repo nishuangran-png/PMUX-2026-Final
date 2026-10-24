@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "frozen_at": "2026-10-25",
+  "purpose": "Final 038 verification after bounded split planning and wide-ROM guard.",
+  "metric": "cycloneiv_lcell_comb + $not",
+  "cycles": 2000,
+  "cases": [
+    {
+      "id": "const_pmux_a2_w1",
+      "role": "constructed",
+      "top": "const_pmux_a2_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a2_w1.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a2_w4",
+      "role": "constructed",
+      "top": "const_pmux_a2_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a2_w4.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a2_w8",
+      "role": "constructed",
+      "top": "const_pmux_a2_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a2_w8.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a2_w16",
+      "role": "constructed",
+      "top": "const_pmux_a2_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a2_w16.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a3_w1",
+      "role": "constructed",
+      "top": "const_pmux_a3_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a3_w1.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a3_w4",
+      "role": "constructed",
+      "top": "const_pmux_a3_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a3_w4.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a3_w8",
+      "role": "constructed",
+      "top": "const_pmux_a3_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a3_w8.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a3_w16",
+      "role": "constructed",
+      "top": "const_pmux_a3_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a3_w16.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a4_w1",
+      "role": "constructed",
+      "top": "const_pmux_a4_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a4_w1.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a4_w4",
+      "role": "constructed",
+      "top": "const_pmux_a4_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a4_w4.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a4_w8",
+      "role": "constructed",
+      "top": "const_pmux_a4_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a4_w8.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a4_w16",
+      "role": "constructed",
+      "top": "const_pmux_a4_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a4_w16.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a5_w1",
+      "role": "constructed",
+      "top": "const_pmux_a5_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a5_w1.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a5_w4",
+      "role": "constructed",
+      "top": "const_pmux_a5_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a5_w4.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a5_w8",
+      "role": "constructed",
+      "top": "const_pmux_a5_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a5_w8.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a5_w16",
+      "role": "constructed",
+      "top": "const_pmux_a5_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a5_w16.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a6_w1",
+      "role": "constructed",
+      "top": "const_pmux_a6_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a6_w1.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a6_w4",
+      "role": "constructed",
+      "top": "const_pmux_a6_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a6_w4.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a6_w8",
+      "role": "constructed",
+      "top": "const_pmux_a6_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a6_w8.v"
+        }
+      ]
+    },
+    {
+      "id": "const_pmux_a6_w16",
+      "role": "constructed",
+      "top": "const_pmux_a6_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-matrix-038-final/rtl/const_pmux_a6_w16.v"
+        }
+      ]
+    },
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v"
+        }
+      ],
+      "cycles": 2000
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v"
+        }
+      ],
+      "cycles": 2000
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v"
+        }
+      ],
+      "cycles": 2000
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v"
+        }
+      ],
+      "cycles": 5000
+    }
+  ]
+}

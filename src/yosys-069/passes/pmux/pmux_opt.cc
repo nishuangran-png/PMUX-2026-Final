@@ -365,11 +365,118 @@ static std::map<LutFunction, int> choose_split_plan(
 		return a.key < b.key;
 	});
 
+	bool exact_search = true;
 	long long combinations = 1;
 	for (auto &root : roots) {
-		if (root.options.size() > 1000000 || combinations > 10000000 / GetSize(root.options))
-			return plan;
+		if (GetSize(root.options) > 1000000 ||
+		    combinations > 100000 / GetSize(root.options)) {
+			exact_search = false;
+			break;
+		}
 		combinations *= GetSize(root.options);
+	}
+
+	// The exhaustive search is exact but repeated allocations in the recursive
+	// visitor make a 10-root, five-choice ROM needlessly expensive.  Keep the
+	// exact path for small plans and use a deterministic local search for the
+	// large cases.  The local objective is the same: choose one split per root
+	// while minimizing the number of distinct cofactor nodes.
+	if (!exact_search) {
+		constexpr int max_coordinate_passes = 8;
+		constexpr int max_pair_passes = 3;
+		constexpr long long pair_evaluation_budget = 120000;
+
+		// Reuse one generation-stamped table instead of sorting a fresh vector
+		// for every candidate.  A hidden ROM may expose hundreds of outputs.
+		std::vector<int> seen(GetSize(node_ids), 0);
+		int seen_generation = 0;
+		auto plan_cost = [&](const std::vector<int> &choices) {
+			if (++seen_generation == INT_MAX) {
+				std::fill(seen.begin(), seen.end(), 0);
+				seen_generation = 1;
+			}
+			int cost = 0;
+			for (int root = 0; root < GetSize(roots); root++)
+				for (int id : roots[root].options[choices[root]].second)
+					if (seen[id] != seen_generation) {
+						seen[id] = seen_generation;
+						cost++;
+					}
+			return cost;
+		};
+		auto coordinate_descent = [&](std::vector<int> choices) {
+			for (int pass = 0; pass < max_coordinate_passes; pass++) {
+				bool changed = false;
+				for (int root = 0; root < GetSize(roots); root++) {
+					int original_option = choices[root];
+					int current_cost = plan_cost(choices);
+					int best_option = choices[root];
+					for (int option = 0; option < GetSize(roots[root].options); option++) {
+						choices[root] = option;
+						int option_cost = plan_cost(choices);
+						if (option_cost < current_cost) {
+							current_cost = option_cost;
+							best_option = option;
+						}
+					}
+					choices[root] = best_option;
+					changed |= best_option != original_option;
+				}
+				if (!changed)
+					break;
+			}
+			return choices;
+		};
+		auto pair_descent = [&](std::vector<int> choices) {
+			long long evaluations_left = pair_evaluation_budget;
+			for (int pass = 0; pass < max_pair_passes && evaluations_left > 0; pass++) {
+				bool changed = false;
+				int current_cost = plan_cost(choices);
+				std::vector<int> best_choices = choices;
+				for (int a = 0; a < GetSize(roots) && evaluations_left > 0; a++)
+					for (int b = a + 1; b < GetSize(roots) && evaluations_left > 0; b++)
+						for (int option_a = 0; option_a < GetSize(roots[a].options) && evaluations_left > 0; option_a++)
+							for (int option_b = 0; option_b < GetSize(roots[b].options) && evaluations_left > 0; option_b++) {
+								std::vector<int> trial = choices;
+								trial[a] = option_a;
+								trial[b] = option_b;
+								int trial_cost = plan_cost(trial);
+								evaluations_left--;
+								if (trial_cost < current_cost) {
+									current_cost = trial_cost;
+									best_choices = std::move(trial);
+								}
+							}
+				if (current_cost < plan_cost(choices)) {
+					choices = std::move(best_choices);
+					changed = true;
+				}
+				if (!changed)
+					break;
+			}
+			return choices;
+		};
+
+		std::vector<int> best_choices = coordinate_descent(std::vector<int>(roots.size(), 0));
+		long long pair_evaluations = 0;
+		for (int a = 0; a < GetSize(roots); a++)
+			for (int b = a + 1; b < GetSize(roots); b++)
+				pair_evaluations += (long long)GetSize(roots[a].options) * GetSize(roots[b].options);
+		bool use_pair_descent = pair_evaluations <= pair_evaluation_budget;
+		if (use_pair_descent)
+			best_choices = pair_descent(std::move(best_choices));
+		int best_cost = plan_cost(best_choices);
+
+		log("pmux_opt: split plan local=%d roots=%d pair=%s pair_candidates=%lld\n",
+		    best_cost, GetSize(roots), use_pair_descent ? "on" : "off", pair_evaluations);
+		for (int index = 0; index < GetSize(roots); index++) {
+			plan[roots[index].key] = roots[index].options[best_choices[index]].first;
+			if (verbose)
+				log("  split plan: support=%d -> address bit %d (%d nodes, %d choices)\n",
+				    popcount32(roots[index].key.first), plan[roots[index].key],
+				    best_cost, GetSize(roots[index].options));
+		}
+		return plan;
 	}
 
 	int words = (GetSize(node_ids) + 63) / 64;
@@ -421,7 +528,7 @@ static std::map<LutFunction, int> choose_split_plan(
 
 	if (best_count == INT_MAX)
 		return plan;
-	log("pmux_opt: split plan best=%d roots=%d\n", best_count, GetSize(roots));
+	log("pmux_opt: split plan exact=%d roots=%d\n", best_count, GetSize(roots));
 	for (int index = 0; index < GetSize(roots); index++) {
 		plan[roots[index].key] = roots[index].options[best_choice[index]].first;
 		if (verbose)
@@ -769,102 +876,6 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 				output_functions[bit][addr] = init_data[addr * mem.width + bit] == State::S1;
 		}
 
-		dict<SigBit, std::vector<InputLoad>> gate_loads;
-		for (auto cell : module->cells())
-			for (auto &conn : cell->connections()) {
-				if (ct.cell_output(cell->type, conn.first))
-					continue;
-				if (cell->type.begins_with("$mem"))
-					continue;
-				int offset = 0;
-				for (auto bit : sigmap(conn.second))
-					gate_loads[bit].push_back({cell, conn.first, offset++});
-			}
-
-		bool prefer_plain_ff_flow = false;
-		const IdString port_d = RTLIL::escape_id("d");
-		for (auto &port : mem.rd_ports) {
-			dict<SigBit, int> rom_bit_index;
-			for (int bit = 0; bit < mem.width; bit++)
-				rom_bit_index[sigmap(port.data[bit])] = bit;
-
-			// A registered constant ROM is best left as a memory read until
-			// memory_map.  ABC then sees the complete mux tree and can choose
-			// global 4-input cuts; splitting the table into LUTs here freezes
-			// those cuts and can cost several cells.
-			bool all_direct_ff_loads = true;
-			for (int bit = 0; bit < mem.width; bit++) {
-				auto load_it = gate_loads.find(sigmap(port.data[bit]));
-				if (verbose && (load_it == gate_loads.end() || GetSize(load_it->second) != 1))
-					log("  direct-FF check bit %d: load_count=%d\n", bit,
-					    load_it == gate_loads.end() ? 0 : GetSize(load_it->second));
-				if (verbose && load_it != gate_loads.end() && GetSize(load_it->second) == 1)
-					log("  direct-FF check bit %d: port=%s type=%s\n", bit,
-					    log_id(load_it->second[0].port), log_id(load_it->second[0].cell->type));
-				if (verbose && load_it != gate_loads.end())
-					for (auto &load : load_it->second)
-						log("    bit %d load: %s/%s/%d\n", bit, log_id(load.cell->name),
-						    log_id(load.port), load.offset);
-				if (load_it == gate_loads.end() || GetSize(load_it->second) != 1 ||
-				    (load_it->second[0].port != ID::D && load_it->second[0].port != port_d) ||
-				    !load_it->second[0].cell->type.in(
-				        ID($dff), ID($adff), ID($dffce), ID($adffce),
-				        ID($sdff), ID($sdffe), ID($sdffce), ID(dffeas))) {
-					all_direct_ff_loads = false;
-					break;
-				}
-			}
-			if (all_direct_ff_loads) {
-				prefer_plain_ff_flow = true;
-				break;
-			}
-
-			for (auto cell : module->cells()) {
-				if (cell->type != ID($mux))
-					continue;
-				int width = GetSize(cell->getPort(ID::Y));
-				if (width < 2 || GetSize(cell->getPort(ID::S)) != 1 ||
-				    !sigmap(cell->getPort(ID::A)).is_fully_zero())
-					continue;
-
-				SigSpec b_data = sigmap(cell->getPort(ID::B));
-				pool<int> rom_bits;
-				bool all_rom_bits = true;
-				for (auto bit : b_data) {
-					auto it = rom_bit_index.find(bit);
-					if (it == rom_bit_index.end() || !rom_bits.insert(it->second).second) {
-						all_rom_bits = false;
-						break;
-					}
-				}
-				if (!all_rom_bits)
-					continue;
-
-				bool all_plain_dff_loads = true;
-				for (auto bit : sigmap(cell->getPort(ID::Y))) {
-					auto it = gate_loads.find(bit);
-					if (it == gate_loads.end() || GetSize(it->second) != 1 ||
-					    it->second[0].port != ID::D ||
-					    !it->second[0].cell->type.in(ID($dff), ID($adff))) {
-						all_plain_dff_loads = false;
-						break;
-					}
-				}
-				if (all_plain_dff_loads) {
-					prefer_plain_ff_flow = true;
-					break;
-				}
-			}
-			if (prefer_plain_ff_flow)
-				break;
-		}
-		if (prefer_plain_ff_flow) {
-			if (verbose)
-				log("  constant ROM %s has a shared zero-gated plain-DFF load; leaving it to ABC\n",
-				    log_id(mem.memid));
-			continue;
-		}
-
 		bool needs_decomposition = false, all_cheap = true;
 		for (auto &table : output_functions) {
 			if (popcount32(function_support(table, addr_bits)) > 4) {
@@ -879,9 +890,27 @@ int lower_constant_roms_to_luts(Module *module, SigMap &sigmap, CellTypes &ct, b
 				    log_id(mem.memid));
 			continue;
 		}
+		// Above 128 outputs the fixed Shannon fallback is too coarse: without
+		// the <=5-bit split-plan path it can freeze poor cuts and lose to ABC's
+		// global mapping.  Keep those wide memories in the normal flow.
+		if (mem.width > 128 && addr_bits > 5) {
+			if (verbose)
+				log("  constant ROM %s has %d outputs without a split plan; leaving it to ABC\n",
+				    log_id(mem.memid), mem.width);
+			continue;
+		}
+		int64_t timing_start = PerformanceTimer::query();
 		std::vector<int> lut_order = choose_lut_order(output_functions, addr_bits);
+		int64_t timing_order = PerformanceTimer::query();
 		std::map<LutFunction, int> split_plan = choose_split_plan(output_functions, addr_bits, lut_order, verbose);
+		int64_t timing_split = PerformanceTimer::query();
 		int estimated_luts = estimate_rom_lut_cost(output_functions, addr_bits, lut_order);
+		int64_t timing_estimate = PerformanceTimer::query();
+		if (verbose)
+			log("  constant ROM timing: order=%.3f ms split=%.3f ms estimate=%.3f ms\n",
+			    (timing_order - timing_start) / 1e6,
+			    (timing_split - timing_order) / 1e6,
+			    (timing_estimate - timing_split) / 1e6);
 		if (estimated_luts <= 2 * mem.width) {
 			if (verbose)
 				log("  constant ROM %s estimated at %d LUTs, not enough margin over %d outputs; leaving it unchanged\n",
@@ -3116,6 +3145,7 @@ struct PmuxOptPass : public Pass {
 
 		if (fold_luts) {
 			ct.setup_stdcells();
+			int64_t fold_start = PerformanceTimer::query();
 			int n_folded = 0;
 			int n_mux_folded = 0;
 			int n_dff_enable = 0;
@@ -3123,14 +3153,26 @@ struct PmuxOptPass : public Pass {
 			int n_dff_zero_gate = 0;
 			for (auto module : design->selected_modules())
 				n_folded += fold_not_into_luts(module, ct, verbose);
+			int64_t fold_not_done = PerformanceTimer::query();
 			for (auto module : design->selected_modules())
 				n_dff_enable += fold_inverted_enable_into_dff(module, ct, verbose);
+			int64_t fold_enable_done = PerformanceTimer::query();
 			for (auto module : design->selected_modules())
 				n_dff_zero_gate += fold_zero_gate_into_dff_clear(module, ct, verbose);
+			int64_t fold_zero_done = PerformanceTimer::query();
 			for (auto module : design->selected_modules())
 				n_dff_clear += fold_disabled_lut_into_dff(module, verbose);
+			int64_t fold_clear_done = PerformanceTimer::query();
 			for (auto module : design->selected_modules())
 				n_mux_folded += fold_mux_into_luts(module, ct, verbose);
+			int64_t fold_mux_done = PerformanceTimer::query();
+			if (verbose)
+				log("pmux_opt fold timing: not=%.3f enable=%.3f zero=%.3f clear=%.3f mux=%.3f ms\n",
+				    (fold_not_done - fold_start) / 1e6,
+				    (fold_enable_done - fold_not_done) / 1e6,
+				    (fold_zero_done - fold_enable_done) / 1e6,
+				    (fold_clear_done - fold_zero_done) / 1e6,
+				    (fold_mux_done - fold_clear_done) / 1e6);
 			log("pmux_opt: folded %d NOT cell(s) into LUTs.\n", n_folded);
 			log("pmux_opt: moved %d inverted enable(s) into DFFs.\n", n_dff_enable);
 			log("pmux_opt: moved %d shared zero-gate(s) into DFF synchronous clear.\n",
@@ -3149,10 +3191,15 @@ struct PmuxOptPass : public Pass {
 		for (auto module : design->selected_modules()) {
 			SigMap sigmap(module);
 
+			int64_t module_start = PerformanceTimer::query();
 			n_sync_dff += lower_sync_reset_dffs_to_target(module, verbose);
+			int64_t after_sync = PerformanceTimer::query();
 			n_target_clear += fold_zero_mux_into_target_dff_clear(module, verbose);
+			int64_t after_zero_mux = PerformanceTimer::query();
 			n_rom += lower_constant_roms_to_luts(module, sigmap, ct, verbose);
+			int64_t after_rom = PerformanceTimer::query();
 			n_shift_decode += lower_constant_power_shift_decoders(module, sigmap, verbose);
+			int64_t after_shift = PerformanceTimer::query();
 
 			dict<SigBit, Cell *> bit2cell;
 				for (auto cell : module->cells())
@@ -3296,6 +3343,13 @@ struct PmuxOptPass : public Pass {
 			}
 			SigMap enable_map(module);
 			factor_common_enable_terms(module, enable_map, ct, verbose);
+			if (verbose)
+				log("pmux_opt timing: sync=%.3f zero_mux=%.3f rom=%.3f shift=%.3f rest=%.3f ms\n",
+				    (after_sync - module_start) / 1e6,
+				    (after_zero_mux - after_sync) / 1e6,
+				    (after_rom - after_zero_mux) / 1e6,
+				    (after_shift - after_rom) / 1e6,
+				    (PerformanceTimer::query() - after_shift) / 1e6);
 		}
 
 		if (n_sync_dff)

@@ -1,0 +1,69 @@
+# Yosys version
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+
+# SAT miter command
+tools/build/official-v069/build/yosys -p 'read_rtlil experiments/holdout-038-final/verilog_axi_priority_encoder_512_gold.il; rename priority_encoder gold; read_rtlil experiments/holdout-038-final/verilog_axi_priority_encoder_512_gate.il; rename priority_encoder gate; miter -equiv -flatten gold gate miter; hierarchy -top miter; sat -verify -prove-asserts -show-inputs -show-outputs miter'
+
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+
+-- Running command `read_rtlil experiments/holdout-038-final/verilog_axi_priority_encoder_512_gold.il; rename priority_encoder gold; read_rtlil experiments/holdout-038-final/verilog_axi_priority_encoder_512_gate.il; rename priority_encoder gate; miter -equiv -flatten gold gate miter; hierarchy -top miter; sat -verify -prove-asserts -show-inputs -show-outputs miter' --
+
+1. Executing RTLIL frontend.
+Input filename: experiments/holdout-038-final/verilog_axi_priority_encoder_512_gold.il
+Renaming module \priority_encoder to \gold.
+
+2. Executing RTLIL frontend.
+Input filename: experiments/holdout-038-final/verilog_axi_priority_encoder_512_gate.il
+Renaming module \priority_encoder to \gate.
+
+3. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold" and gate cell "gate".
+
+3.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+3.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \miter
+
+4.2. Analyzing design hierarchy..
+Top module:  \miter
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+5. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 2572 cells to SAT database.
+Import show expression: \in_input_unencoded
+Import show expression: \trigger
+
+Solving problem with 35684 variables and 100891 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 4c41b25359, time: 0.13s, user: 0.11s, system: 0.01s, MEM: 39.12 MB peak
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+Time spent: 80% 1x sat (0 sec), 6% 4x read_rtlil (0 sec), ...
