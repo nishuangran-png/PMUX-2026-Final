@@ -5,6 +5,9 @@
 *.h  text eol=lf
 *.md text eol=lf
 *.v    text eol=lf
+*.py  text eol=lf
+*.sh  text eol=lf
+*.json text eol=lf
 *.html text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf

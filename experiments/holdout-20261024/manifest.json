@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "frozen_at": "2026-10-24",
+  "rules": {
+    "official_scores": "只使用官方四个公开用例；本清单结果不计入正式成绩",
+    "order": "先冻结清单，再跑基线，最后跑候选；不得按收益删用例",
+    "acceptance": "Yosys 0.69 可解析、synth_intel cycloneiv 可综合、纯 RTL、EQY 可验证"
+  },
+  "excluded": [
+    {
+      "id": "openrisc_or1200",
+      "origin": "https://github.com/openrisc/or1200",
+      "commit": "83ac6b42d73f00daa88a996a1f6738d5a639a105",
+      "reason": "根目录许可证不明确；在确认许可证前不得纳入封存集"
+    },
+    {
+      "id": "syntacore_scr1_ipic",
+      "origin": "https://github.com/Syntacore/scr1",
+      "commit": "ebb5e3551a9d93c0ee95f0b767dd878b8927e702",
+      "license": "Solderpad/Apache-2.0",
+      "reason": "当前 Yosys 0.69 原生 SystemVerilog 前端拒绝其函数内 unpacked array；属于工具链前端不兼容，不是操作系统不兼容，也不得通过改 RTL 后冒充原用例"
+    }
+  ],
+  "cases": [
+    {
+      "id": "constructed_priority_chain_05",
+      "role": "constructed",
+      "top": "priority_chain_05",
+      "sources": [{"path": "rtl/priority_chains/priority_chain_05.v"}],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "constructed_priority_chain_06",
+      "role": "constructed",
+      "top": "priority_chain_06",
+      "sources": [{"path": "rtl/priority_chains/priority_chain_06.v"}],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "constructed_priority_chain_08",
+      "role": "constructed",
+      "top": "priority_chain_08",
+      "sources": [{"path": "rtl/priority_chains/priority_chain_08.v"}],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "constructed_priority_chain_16",
+      "role": "constructed",
+      "top": "priority_chain_16",
+      "sources": [{"path": "rtl/priority_chains/priority_chain_16.v"}],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "verilog_axi_priority_encoder_16",
+      "role": "external",
+      "top": "priority_encoder",
+      "sources": [{"path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v"}],
+      "params": {"WIDTH": 16},
+      "eqy": true,
+      "origin": "https://github.com/alexforencich/verilog-axi",
+      "commit": "516bd5dadc3365b7f9e225d2af8fe0b8d804fe53",
+      "license": "MIT"
+    },
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "role": "external",
+      "top": "priority_encoder",
+      "sources": [{"path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v"}],
+      "params": {"WIDTH": 128},
+      "eqy": true,
+      "origin": "https://github.com/alexforencich/verilog-axi",
+      "commit": "516bd5dadc3365b7f9e225d2af8fe0b8d804fe53",
+      "license": "MIT"
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "role": "external",
+      "top": "priority_encoder",
+      "sources": [{"path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v"}],
+      "params": {"WIDTH": 512},
+      "eqy": true,
+      "origin": "https://github.com/alexforencich/verilog-axi",
+      "commit": "516bd5dadc3365b7f9e225d2af8fe0b8d804fe53",
+      "license": "MIT"
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "role": "external",
+      "top": "arbiter",
+      "sources": [
+        {"path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v"},
+        {"path": "@HOLDOUT@/verilog-axi/rtl/arbiter.v"}
+      ],
+      "params": {"PORTS": 64},
+      "eqy": true,
+      "origin": "https://github.com/alexforencich/verilog-axi",
+      "commit": "516bd5dadc3365b7f9e225d2af8fe0b8d804fe53",
+      "license": "MIT"
+    },
+    {
+      "id": "picorv32_default",
+      "role": "external",
+      "top": "picorv32",
+      "sources": [{"path": "@HOLDOUT@/picorv32/picorv32.v"}],
+      "params": {},
+      "eqy": false,
+      "origin": "https://github.com/YosysHQ/picorv32",
+      "commit": "ef203c2b0a3fb793280f5114941416c425c5b461",
+      "license": "ISC"
+    }
+  ]
+}
