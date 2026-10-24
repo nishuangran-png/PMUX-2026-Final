@@ -1,0 +1,159 @@
+{
+  "manifest": "experiments/holdout-20261024/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "296fe87b006f81b9b28e95b0da73034526fe423d5e6fa160320868a35b0af822"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1
+  },
+  "rows": [
+    {
+      "id": "verilog_axi_priority_encoder_16",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 16
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 35,
+        "not": 0,
+        "logic": 35,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 26066944
+      },
+      "candidate": {
+        "lcell": 35,
+        "not": 0,
+        "logic": 35,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 25690112
+      },
+      "reduction_pct": 0.0,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 128
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 323,
+        "not": 0,
+        "logic": 323,
+        "dff": 0,
+        "wall_s": 0.36,
+        "cpu_s": 0.34,
+        "peak_rss_bytes": 34373632
+      },
+      "candidate": {
+        "lcell": 317,
+        "not": 0,
+        "logic": 317,
+        "dff": 0,
+        "wall_s": 0.36,
+        "cpu_s": 0.34,
+        "peak_rss_bytes": 30408704
+      },
+      "reduction_pct": 1.8575851393188854,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 512
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 1315,
+        "not": 0,
+        "logic": 1315,
+        "dff": 0,
+        "wall_s": 2.59,
+        "cpu_s": 2.4899999999999998,
+        "peak_rss_bytes": 49807360
+      },
+      "candidate": {
+        "lcell": 1279,
+        "not": 0,
+        "logic": 1279,
+        "dff": 0,
+        "wall_s": 2.2,
+        "cpu_s": 2.17,
+        "peak_rss_bytes": 37847040
+      },
+      "reduction_pct": 2.737642585551331,
+      "eqy": null
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "role": "external",
+      "top": "arbiter",
+      "params": {
+        "PORTS": 64
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        },
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/arbiter.v",
+          "sha256": "a001507c82843e36e133dea75491fc044f56660fac0aff0127cf3afec7f927e0"
+        }
+      ],
+      "baseline": {
+        "lcell": 173,
+        "not": 0,
+        "logic": 173,
+        "dff": 71,
+        "wall_s": 0.3,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 31719424
+      },
+      "candidate": {
+        "lcell": 166,
+        "not": 0,
+        "logic": 166,
+        "dff": 71,
+        "wall_s": 0.25,
+        "cpu_s": 0.24000000000000002,
+        "peak_rss_bytes": 30834688
+      },
+      "reduction_pct": 4.046242774566474,
+      "eqy": null
+    }
+  ]
+}

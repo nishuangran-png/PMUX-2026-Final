@@ -1,0 +1,160 @@
+{
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga\u6bd4\u8d5b/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga\u6bd4\u8d5b/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "66a62d2b6934c52159192355b185449e03b4dcc7835f4712d9c36922619fad5d"
+  },
+  "rows": [
+    {
+      "case": "test1",
+      "baseline": {
+        "case": "test1",
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "cpu_s": 0.25,
+        "mem_bytes": 25985024,
+        "cells": {
+          "wires": 328,
+          "ports": 23,
+          "cells": 510,
+          "$not": 2,
+          "cycloneiv_lcell_comb": 286,
+          "dffeas": 222
+        }
+      },
+      "candidate": {
+        "case": "test1",
+        "lcell": 200,
+        "not": 2,
+        "logic": 202,
+        "dff": 222,
+        "cpu_s": 0.22,
+        "mem_bytes": 26034176,
+        "cells": {
+          "wires": 243,
+          "ports": 23,
+          "cells": 424,
+          "$not": 2,
+          "cycloneiv_lcell_comb": 200,
+          "dffeas": 222
+        }
+      },
+      "reduction_pct": 29.86111111111111
+    },
+    {
+      "case": "test2",
+      "baseline": {
+        "case": "test2",
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "cpu_s": 0.06999999999999999,
+        "mem_bytes": 20283392,
+        "cells": {
+          "wires": 30,
+          "ports": 10,
+          "cells": 25,
+          "cycloneiv_lcell_comb": 25
+        }
+      },
+      "candidate": {
+        "case": "test2",
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "cpu_s": 0.06999999999999999,
+        "mem_bytes": 22265856,
+        "cells": {
+          "wires": 21,
+          "ports": 10,
+          "cells": 16,
+          "cycloneiv_lcell_comb": 16
+        }
+      },
+      "reduction_pct": 36.0
+    },
+    {
+      "case": "test3",
+      "baseline": {
+        "case": "test3",
+        "lcell": 11,
+        "not": 1,
+        "logic": 12,
+        "dff": 17,
+        "cpu_s": 0.08,
+        "mem_bytes": 23920640,
+        "cells": {
+          "wires": 19,
+          "ports": 5,
+          "cells": 29,
+          "$not": 1,
+          "cycloneiv_lcell_comb": 11,
+          "dffeas": 17
+        }
+      },
+      "candidate": {
+        "case": "test3",
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "cpu_s": 0.08,
+        "mem_bytes": 23920640,
+        "cells": {
+          "wires": 16,
+          "ports": 5,
+          "cells": 26,
+          "cycloneiv_lcell_comb": 9,
+          "dffeas": 17
+        }
+      },
+      "reduction_pct": 25.0
+    },
+    {
+      "case": "test4",
+      "baseline": {
+        "case": "test4",
+        "lcell": 30,
+        "not": 1,
+        "logic": 31,
+        "dff": 10,
+        "cpu_s": 0.09999999999999999,
+        "mem_bytes": 26836992,
+        "cells": {
+          "wires": 40,
+          "ports": 9,
+          "cells": 41,
+          "$not": 1,
+          "cycloneiv_lcell_comb": 30,
+          "dffeas": 10
+        }
+      },
+      "candidate": {
+        "case": "test4",
+        "lcell": 22,
+        "not": 1,
+        "logic": 23,
+        "dff": 10,
+        "cpu_s": 0.09999999999999999,
+        "mem_bytes": 27295744,
+        "cells": {
+          "wires": 32,
+          "ports": 9,
+          "cells": 33,
+          "$not": 1,
+          "cycloneiv_lcell_comb": 22,
+          "dffeas": 10
+        }
+      },
+      "reduction_pct": 25.806451612903224
+    }
+  ],
+  "avg_reduction_pct": 29.166890681003586
+}

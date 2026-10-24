@@ -1,0 +1,16 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_sj520d0h
+phase 1/2: baseline
+verilog_axi_priority_encoder_16 baseline done
+verilog_axi_priority_encoder_128 baseline done
+verilog_axi_priority_encoder_512 baseline done
+verilog_axi_arbiter_64       baseline done
+phase 2/2: candidate
+verilog_axi_priority_encoder_16 candidate done
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_512 candidate done
+verilog_axi_arbiter_64       candidate done
+verilog_axi_priority_encoder_16 external       35 ->    35   +0.00% dff    0 EQY SKIP
+verilog_axi_priority_encoder_128 external      323 ->   317   +1.86% dff    0 EQY SKIP
+verilog_axi_priority_encoder_512 external     1315 ->  1279   +2.74% dff    0 EQY SKIP
+verilog_axi_arbiter_64       external      173 ->   166   +4.05% dff   71 EQY SKIP
+JSON -> /tmp/pmux-shared-holdout.json

@@ -1,0 +1,140 @@
+{
+  "cases": [
+    {
+      "module": "shift_decode_b5_y32",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 48,
+      "gate_luts": 39,
+      "delta_luts": 9,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_b5_y64_oob",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 48,
+      "gate_luts": 39,
+      "delta_luts": 9,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_b8_y256",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 400,
+      "gate_luts": 288,
+      "delta_luts": 112,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_a64_b8_y512_offset",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 400,
+      "gate_luts": 288,
+      "delta_luts": 112,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_signed_a",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 48,
+      "gate_luts": 39,
+      "delta_luts": 9,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_b4_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 16,
+      "gate_luts": 16,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_y16_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 18,
+      "gate_luts": 18,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_a2",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 41,
+      "gate_luts": 35,
+      "delta_luts": 6,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_a3_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 38,
+      "gate_luts": 38,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_a4_signed_safe",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 40,
+      "gate_luts": 34,
+      "delta_luts": 6,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_signed_msb_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 31,
+      "gate_luts": 31,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_signed_b_normalized",
+      "expected_trigger": 1,
+      "trigger": 1,
+      "gold_luts": 48,
+      "gate_luts": 39,
+      "delta_luts": 9,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_signed_width1_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 33,
+      "gate_luts": 33,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_variable_a_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 156,
+      "gate_luts": 156,
+      "delta_luts": 0,
+      "status": "PASS"
+    },
+    {
+      "module": "shift_decode_b17_skip",
+      "expected_trigger": 0,
+      "trigger": 0,
+      "gold_luts": 77,
+      "gate_luts": 77,
+      "delta_luts": 0,
+      "status": "PASS"
+    }
+  ],
+  "all_pass": true
+}

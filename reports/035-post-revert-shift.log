@@ -1,0 +1,17 @@
+module                           hit   gold   gate   delta  result
+shift_decode_b5_y32                1     48     39       9  PASS
+shift_decode_b5_y64_oob            1     48     39       9  PASS
+shift_decode_b8_y256               1    400    288     112  PASS
+shift_decode_a64_b8_y512_offset    1    400    288     112  PASS
+shift_decode_signed_a              1     48     39       9  PASS
+shift_decode_b4_skip               0     16     16       0  PASS
+shift_decode_y16_skip              0     18     18       0  PASS
+shift_decode_a2                    1     41     35       6  PASS
+shift_decode_a3_skip               0     38     38       0  PASS
+shift_decode_a4_signed_safe        1     40     34       6  PASS
+shift_decode_signed_msb_skip       0     31     31       0  PASS
+shift_decode_signed_b_normalized   1     48     39       9  PASS
+shift_decode_signed_width1_skip    0     33     33       0  PASS
+shift_decode_variable_a_skip       0    156    156       0  PASS
+shift_decode_b17_skip              0     77     77       0  PASS
+JSON -> reports/035-post-revert-shift.json
