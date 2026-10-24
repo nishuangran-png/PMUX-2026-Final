@@ -14,27 +14,30 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_GOLD = ROOT / "tools/build/yosys-069-baseline-src/build/yosys"
-DEFAULT_GATE = ROOT / "tools/build/official-v069-formal-src/build-formal/yosys"
+DEFAULT_GOLD = ROOT / "tools/build/official-v069/build/yosys"
+DEFAULT_GATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 DEFAULT_RTL = ROOT / "tests/pmux/rtl/shift_decode_cases.v"
 DFFEAS_MODEL = ROOT / "formal/intel_dffeas_formal.v"
 
 CASES = [
-    {"module": "shift_decode_b5_y32", "trigger": 1, "source": "shift_decode_cases.v"},
-    {"module": "shift_decode_b5_y64_oob", "trigger": 1, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_b5_y32", "trigger": 0, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_b5_y64_oob", "trigger": 0, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_b7_y128", "trigger": 0, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_b5_internal_xor", "trigger": 1,
+     "source": "shift_decode_cases.v"},
     {"module": "shift_decode_b8_y256", "trigger": 1, "source": "shift_decode_cases.v"},
     {"module": "shift_decode_a64_b8_y512_offset", "trigger": 1,
      "source": "shift_decode_cases.v"},
-    {"module": "shift_decode_signed_a", "trigger": 1, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_signed_a", "trigger": 0, "source": "shift_decode_cases.v"},
     {"module": "shift_decode_b4_skip", "trigger": 0, "source": "shift_decode_cases.v"},
     {"module": "shift_decode_y16_skip", "trigger": 0, "source": "shift_decode_cases.v"},
-    {"module": "shift_decode_a2", "trigger": 1, "source": "shift_decode_cases.v"},
+    {"module": "shift_decode_a2", "trigger": 0, "source": "shift_decode_cases.v"},
     {"module": "shift_decode_a3_skip", "trigger": 0, "source": "shift_decode_cases.v"},
-    {"module": "shift_decode_a4_signed_safe", "trigger": 1,
+    {"module": "shift_decode_a4_signed_safe", "trigger": 0,
      "source": "shift_decode_a4_signed_safe.il"},
     {"module": "shift_decode_signed_msb_skip", "trigger": 0,
      "source": "shift_decode_signed_msb_skip.il"},
-    {"module": "shift_decode_signed_b_normalized", "trigger": 1,
+    {"module": "shift_decode_signed_b_normalized", "trigger": 0,
      "source": "shift_decode_cases.v"},
     {"module": "shift_decode_signed_width1_skip", "trigger": 0,
      "source": "shift_decode_signed_width1_skip.il"},

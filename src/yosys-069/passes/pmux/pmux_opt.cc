@@ -463,6 +463,26 @@ class ConstantRomSynthesizer
 	LutNode add_lut(const SigSpec &inputs, Const table)
 	{
 		LutNode node;
+
+		// Yosys 0.69's Intel cells_map.v maps every width-1 $lut to
+		// ~A[0], regardless of the LUT parameter.  A width-1 identity LUT
+		// would therefore be miscompiled after abc9.  Lower the two
+		// possible one-input functions directly here instead of emitting
+		// the problematic cell.
+		if (GetSize(inputs) == 1 && GetSize(table) == 2) {
+			if (table[0] == State::S0 && table[1] == State::S1) {
+				node.sig = inputs[0];
+				node.width = 1;
+				return node;
+			}
+			if (table[0] == State::S1 && table[1] == State::S0) {
+				node.sig = inputs[0];
+				node.width = 1;
+				node.inverted = true;
+				return node;
+			}
+		}
+
 		node.sig = module->addWire(NEW_ID);
 		node.cell = module->addLut(module->uniquify("$pmux_deferred_lut"),
 		                           inputs, node.sig, std::move(table));
@@ -2253,11 +2273,24 @@ int lower_constant_power_shift_decoders(Module *module, SigMap &sigmap, bool ver
 		SigSpec y = sigmap(cell->getPort(ID::Y));
 		int b_width = GetSize(b);
 		int y_width = GetSize(y);
-		// Below a 5-bit index the native shift and a small decoder already map
-		// to the same number of LUTs; avoid neutral rewrites.  At 5 bits and
-		// above the explicit decode consistently improves or ties.
+		// The native shift can be cheaper than an explicit equality decoder for
+		// short indices when the decoded vector is itself a top-level output.
+		// On the official 0.69 ABC flow a 7-bit index and a 128-bit output
+		// regresses by 8 LCELLs, while the same construct feeding internal
+		// logic amortizes through downstream sharing.  The 9-bit/512-bit output
+		// still benefits, so this is a local cost guard rather than a size cap.
 		if (!a.is_fully_const() || b_width < 5 || b_width > 16 ||
 		    y_width < 32 || y_width > 65536)
+			continue;
+
+		bool decoded_drives_output = false;
+		pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+		for (auto bit : y)
+			if (output_bits.count(bit)) {
+				decoded_drives_output = true;
+				break;
+			}
+		if (b_width < 8 && decoded_drives_output)
 			continue;
 
 		// The shift amount must be an unsigned index.

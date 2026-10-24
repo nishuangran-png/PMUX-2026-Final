@@ -1,0 +1,1336 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T18:25:56.972982+00:00",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 24,
+    "passed": 24,
+    "failed": 0
+  },
+  "rows": [
+    {
+      "id": "const_pmux_a2_w1",
+      "top": "const_pmux_a2_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a2_w1.v",
+          "sha256": "ccff84f38fcf3fe4554bc263279dceab1b830a6dd1effdb6cd49baf4c27e2ac7"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w1.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.259,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a2_w4",
+      "top": "const_pmux_a2_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a2_w4.v",
+          "sha256": "b9229302f1b9355ee1e5426f56136f70a70d1d2ddc69aeb5f3d63d16f2930f74"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 2
+        },
+        "lcell": 2,
+        "not": 0,
+        "logic": 2,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 2
+        },
+        "lcell": 2,
+        "not": 0,
+        "logic": 2,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w4.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.263,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a2_w8",
+      "top": "const_pmux_a2_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a2_w8.v",
+          "sha256": "f3f2220f055b272b5fea4e3daf8f68cc47dfcaaabcc626511dca58805a417841"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 5
+        },
+        "lcell": 5,
+        "not": 1,
+        "logic": 6,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 5
+        },
+        "lcell": 5,
+        "not": 1,
+        "logic": 6,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.288,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a2_w16",
+      "top": "const_pmux_a2_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a2_w16.v",
+          "sha256": "99617b5b85538de38521785765bf51c92248e395d385ed797a828df170ce9fd5"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 4,
+          "cycloneiv_lcell_comb": 4
+        },
+        "lcell": 4,
+        "not": 4,
+        "logic": 8,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 4,
+          "cycloneiv_lcell_comb": 4
+        },
+        "lcell": 4,
+        "not": 4,
+        "logic": 8,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a2_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.291,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a3_w1",
+      "top": "const_pmux_a3_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a3_w1.v",
+          "sha256": "9eff7a3ec2b210d591fc295bc3e1f103a713dabb2f5904052c1627ded92af77d"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w1.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.244,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a3_w4",
+      "top": "const_pmux_a3_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a3_w4.v",
+          "sha256": "8706a5337b7f9f7df1ad9893c4300ec1c55689f347c0bce49f19470a202cddff"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w4.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.265,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a3_w8",
+      "top": "const_pmux_a3_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a3_w8.v",
+          "sha256": "0724ec8e62c4b468e4bc17064704d7aaedc0ae4e64f810de7c39254247867b40"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 7
+        },
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 7
+        },
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.292,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a3_w16",
+      "top": "const_pmux_a3_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a3_w16.v",
+          "sha256": "2fcbb1d5ab264f0902b56c0d5014a795c2b63335fc8e7013ab106b40a19bc03e"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 13
+        },
+        "lcell": 13,
+        "not": 1,
+        "logic": 14,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 13
+        },
+        "lcell": 13,
+        "not": 1,
+        "logic": 14,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a3_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.315,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a4_w1",
+      "top": "const_pmux_a4_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a4_w1.v",
+          "sha256": "f916887d2868f0f2f13b2c2b984fe43c8c8b4dbb1ba2726c51cc236e026e9755"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w1.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.238,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a4_w4",
+      "top": "const_pmux_a4_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a4_w4.v",
+          "sha256": "660bd32c7ca9ffecefd86bb59e1a92f7016424590ab800218188258979122f94"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w4.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.273,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a4_w8",
+      "top": "const_pmux_a4_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a4_w8.v",
+          "sha256": "a918601da5448aae414ae48d9fd8737767fdb52b45cd867e3978d8ec6b8b1d1f"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 7
+        },
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 7
+        },
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.309,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a4_w16",
+      "top": "const_pmux_a4_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a4_w16.v",
+          "sha256": "3966eb0a8dc5f7c676bc6c24a10b3a9ce93ff06b155b85fff7324efae45e7769"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 15
+        },
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 15
+        },
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a4_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.342,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a5_w1",
+      "top": "const_pmux_a5_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a5_w1.v",
+          "sha256": "8bd1f1bba7556c26086d6ec80b97745e4bdc237f91e40536ce2421019e1e2a04"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w1.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.246,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a5_w4",
+      "top": "const_pmux_a5_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a5_w4.v",
+          "sha256": "3d7299729a636f85908ad37adcbb5bd7d5a12add42c31b2ca3f7890b0d89b444"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w4.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.283,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a5_w8",
+      "top": "const_pmux_a5_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a5_w8.v",
+          "sha256": "d018814ab3c21ccec910abbdb3998b4be2960841d59adbcb92f1d64c79ab9210"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 15
+        },
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 15
+        },
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.36,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a5_w16",
+      "top": "const_pmux_a5_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a5_w16.v",
+          "sha256": "64fe273c7d5f8d404bb99199c164b11b6e1ed57307eadb54e383c8cb53486eee"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 51
+        },
+        "lcell": 51,
+        "not": 0,
+        "logic": 51,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 38
+        },
+        "lcell": 38,
+        "not": 0,
+        "logic": 38,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a5_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.417,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a6_w1",
+      "top": "const_pmux_a6_w1",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w1.v",
+          "sha256": "25770c4ae12b5a735d2f7137063c3aac3901a2df0b5f9dc577550a4f0fa50585"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1
+        },
+        "lcell": 0,
+        "not": 1,
+        "logic": 1,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w1.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.246,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a6_w4",
+      "top": "const_pmux_a6_w4",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w4.v",
+          "sha256": "97ff265d67d212e47025a2e223e43b3417c1cfccbac45cc67776cfbe5b8f2fd6"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 3
+        },
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w4.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.3,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a6_w8",
+      "top": "const_pmux_a6_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w8.v",
+          "sha256": "509194d863b7e91006041b2bb4098a57ddd87e17a0497251e5e8e4b5864c528e"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 27
+        },
+        "lcell": 27,
+        "not": 0,
+        "logic": 27,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 23
+        },
+        "lcell": 23,
+        "not": 0,
+        "logic": 23,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.379,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a6_w16",
+      "top": "const_pmux_a6_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w16.v",
+          "sha256": "609f9cf4b8890a51c406eb4fa84265d6a7c68a0e8f0738114bd2fa4127795703"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 108
+        },
+        "lcell": 108,
+        "not": 0,
+        "logic": 108,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 79
+        },
+        "lcell": 79,
+        "not": 0,
+        "logic": 79,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/const_pmux_a6_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.583,
+      "errors": []
+    },
+    {
+      "id": "official_test1",
+      "top": "test1",
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 2,
+          "cycloneiv_lcell_comb": 286,
+          "dffeas": 222
+        },
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test1.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test1.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 2,
+          "cycloneiv_lcell_comb": 200,
+          "dffeas": 222
+        },
+        "lcell": 200,
+        "not": 2,
+        "logic": 202,
+        "dff": 222,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test1.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test1.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test1.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 2000,
+        "log": "experiments/final-mapping-official069-final-20261025/official_test1.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 1.577,
+      "errors": []
+    },
+    {
+      "id": "official_test2",
+      "top": "test2",
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v",
+          "sha256": "e43c9b437071488551caf3121e227e86f4fe3190751f245beac3b7ecc3fdb146"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "cycloneiv_lcell_comb": 25
+        },
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test2.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test2.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test2.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 16
+        },
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test2.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test2.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test2.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/official_test2.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-official069-final-20261025/official_test2.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.302,
+      "errors": []
+    },
+    {
+      "id": "official_test3",
+      "top": "test3",
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 12,
+          "dffeas": 17
+        },
+        "lcell": 12,
+        "not": 1,
+        "logic": 13,
+        "dff": 17,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test3.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test3.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test3.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "cycloneiv_lcell_comb": 9,
+          "dffeas": 17
+        },
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test3.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test3.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test3.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 2000,
+        "log": "experiments/final-mapping-official069-final-20261025/official_test3.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 0.38,
+      "errors": []
+    },
+    {
+      "id": "official_test4",
+      "top": "test4",
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 37,
+          "dffeas": 10
+        },
+        "lcell": 37,
+        "not": 1,
+        "logic": 38,
+        "dff": 10,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test4.gold.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test4.gold.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 31,
+          "dffeas": 10
+        },
+        "lcell": 31,
+        "not": 1,
+        "logic": 32,
+        "dff": 10,
+        "il": "experiments/final-mapping-official069-final-20261025/official_test4.gate.il",
+        "verilog": "experiments/final-mapping-official069-final-20261025/official_test4.gate.v",
+        "log": "experiments/final-mapping-official069-final-20261025/official_test4.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 5000,
+        "log": "experiments/final-mapping-official069-final-20261025/official_test4.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 0.534,
+      "errors": []
+    }
+  ]
+}

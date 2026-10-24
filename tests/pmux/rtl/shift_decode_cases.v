@@ -12,6 +12,21 @@ module shift_decode_b5_y64_oob(
 	assign y = 64'h1 << idx;
 endmodule
 
+module shift_decode_b7_y128(
+	input [6:0] idx,
+	output [127:0] y
+);
+	assign y = 128'h1 << idx;
+endmodule
+
+module shift_decode_b5_internal_xor(
+	input [4:0] idx,
+	output [31:0] y
+);
+	wire [31:0] decoded = 32'h1 << idx;
+	assign y = decoded ^ {decoded[30:0], decoded[31]};
+endmodule
+
 module shift_decode_b8_y256(
 	input [7:0] idx,
 	output [255:0] y
