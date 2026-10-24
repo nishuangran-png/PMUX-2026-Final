@@ -1,0 +1,15 @@
+[gold]
+read_rtlil verilog_axi_priority_encoder_512_gold.il
+prep -top priority_encoder
+
+[gate]
+read_rtlil verilog_axi_priority_encoder_512_gate.il
+prep -top priority_encoder
+
+[collect priority_encoder]
+group output_*
+
+
+[strategy sat]
+use sat
+depth 10

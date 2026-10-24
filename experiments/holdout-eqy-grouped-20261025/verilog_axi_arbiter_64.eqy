@@ -1,0 +1,15 @@
+[gold]
+read_rtlil verilog_axi_arbiter_64_gold.il
+prep -top arbiter
+
+[gate]
+read_rtlil verilog_axi_arbiter_64_gate.il
+prep -top arbiter
+
+[collect arbiter]
+group output_*
+
+
+[strategy sat]
+use sat
+depth 10

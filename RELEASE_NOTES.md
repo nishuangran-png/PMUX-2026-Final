@@ -1,107 +1,95 @@
-# PMUX 项目成果快照（2026-10-24 同源复测检查点）
+# PMUX 项目成果快照（2026-10-25 官网 0.69 最终验证）
 
-## 1. 固化范围
+## 1. 结论
 
-本快照对应 pmux_opt v2 在官网 Yosys v0.69 上的同源复测、消融归因和效率采样，
-包含：
+本快照固定 Yosys 官网 `v0.69` commit `9f75ca1f9834a39a863915b5dae0c7b1e33533bc`
+上的 PMUX 优化实现。旧 `ad7ff16f3` 树是 `0.69+117`，其 `27.38%`、`34→27`、
+`13→10` 等结果已全部退出正式口径。
 
-- `pmux_opt` 算法源码；
-- `synth_intel` 主流程集成补丁与安装脚本；
-- 小型常量 ROM 转 LUT、延迟 techmap 与 LUT folding；
-- 官方四题、规模化用例、随机用例与参考用例；
-- 面积、效率、EQY 评测脚本和结果数据；
-- 算法设计文档、环境文档和阶段实验记录。
+官网四题面积（`cycloneiv_lcell_comb + $not`）：
 
-不包含 `tools/`、`build/`、编译产物、临时综合目录和会话中生成的非正式压测文件。
-
-## 2. 固定基线
-
-- 综合器：Yosys 官网 tag `v0.69`，commit `9f75ca1f9834a39a863915b5dae0c7b1e33533bc`
-- 目标流程：`synth_intel -family cycloneiv`
-- 映射：ABC9
-- 面积口径：`cycloneiv_lcell_comb + $not`
-- 缩减率：每个用例先计算，再对四个用例等权平均
-- 等价性：原版和优化版都运行到 ABC9 后的 `$lut` 网表，再用 EQY 验证
-
-## 3. 当前结果
-
-| 用例 | 原版 `LCELL + $not` | 优化版 | 缩减率 | DFF | EQY |
+| 用例 | 基线 | 候选 | 缩减率 | DFF | EQY |
 |---|---:|---:|---:|---:|:---:|
 | test1 | 288 | 202 | 29.86% | 222 不变 | PASS |
 | test2 | 25 | 16 | 36.00% | 0 不变 | PASS |
-| test3 | 13 | 10 | 23.08% | 17 不变 | PASS |
-| test4 | 34 | 27 | 20.59% | 10 不变 | PASS |
-| **平均** |  |  | **27.38%** |  |  |
+| test3 | 13 | 9 | 30.77% | 17 不变 | PASS |
+| test4 | 38 | 32 | 15.79% | 10 不变 | PASS |
+| **平均** |  |  | **28.10%** |  |  |
 
-本次使用同源基线、同源候选和同一个 vendored ABC 重测，四题 EQY 全部 PASS。
-此前 `38 → 26` 和 `38 → 35` 混用了不同 ABC 或流程配置，已退出正式口径。
+`test4` 仍未达到单题 20%，不能表述为四题全部过线。四题 EQY 全部通过；另有
+20 个常量 PMUX 矩阵用例和 4 个官方用例的最终网表验证，合计 **24/24 PASS**。
 
-`test4` 的源结构是 32 路常量 `case`，Yosys 默认 `proc` 先由 `proc_rom` 将其转换为
-只读 `$mem_v2` ROM，再由 `proc_mux` 处理剩余选择，因此原规则在 `pmux_opt` 处看到
-`0 $pmux cell(s)`。当前分支增加了“小型、无写口、全初始化、组合读 ROM”转 LUT 的通用规则，
-并把紧随其后的常量使能 mux 一并吸收。同源实测面积由 34 降到 27。
+## 2. 固定版本
 
-消融确认这条路径依赖“ROM lowering + 延迟 techmap + LUT folding”的顺序组合，
-边际收益不能相加。完整记录见 `reports/026-消融实验.md`。
+| 构件 | SHA-256 | 自报版本 |
+|---|---|---|
+| `official-v069/build/yosys` | `143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d` | `0.69+post (git sha1 9f75ca1f9834…)` |
+| `official-v069-opt/build-current-20261025/yosys` | `2fa898af248f9709b9995ee9c2511ffe410084a7b5a890905f7b53adae050037` | `0.69+post (git sha1 9f75ca1f9834…)` |
+| `tools/oss-cad-suite/bin/yosys-abc` | `91bc02357beb61ace477cf8d8c0a84541ccb44f224c36dab4a8a6f4db689100f` | ABC 1.01 |
 
-## 4. 效率口径
+两臂使用同一个 ABC，面积命令为
+`read_verilog <case>.v; synth_intel -family cycloneiv -top <case>; stat`。
 
-现有四个公开小用例在连续两轮、每轮 31 次同源交替采样中：
+## 3. 本轮修复
 
-- 最大墙钟时间比：`1.000×`
-- 最大峰值 RSS 比：`1.011×`
-- 官方满分条件：每例时间和峰值内存均不超过原版 `1.05×`
+- 修正版本口径：安装脚本硬校验 `.gitcommit` 必须为官网 9f75，不再接受 `0.69+117`。
+- 修正短索引移位回退：索引宽度小于 8 且解码向量直接驱动顶层输出时跳过改写；
+  进入内部布尔逻辑时仍改写。`priority_encoder_128` 由 `307→315` 恢复为 `307→307`。
+- 修正一位 LUT 映射：Yosys 0.69 会把所有宽度 1 `$lut` 映射成反相，最终在 RTLIL
+  层直接消除一位恒等/反相 LUT。
+- 回归覆盖 17 个移位解码边界，17/17 PASS。
 
-这些数字只说明公开四题没有明显回退，不构成大规模效率或隐藏用例通过的证明。四题耗时仅约
-`0.06—0.21 s`，采样分辨率约 `10 ms`，不能把 `1.000×` 解释为精确相等或性能优势。
+## 4. 泛化证据
 
-会话中曾生成 `/tmp/scale_real1k.v` 做临时压力检查，但它是高度重复的 4 级 MUX 链，不是官方
-用例，也没有完成 EQY，未纳入本快照，不能作为泛化证据。
+20 个常量 PMUX 尺寸矩阵用例：改善 3、持平 17、回退 0，合计 `277→231`（16.61%），
+全部通过 SAT miter 或门级仿真。
 
-## 5. 快速复现
+9 个封存用例全部保留：
+
+| 用例 | 基线 | 候选 | 缩减率 | EQY |
+|---|---:|---:|---:|:---:|
+| priority chain 5 | 96 | 66 | 31.25% | PASS |
+| priority chain 6 | 112 | 83 | 25.89% | PASS |
+| priority chain 8 | 160 | 114 | 28.75% | PASS |
+| priority chain 16 | 336 | 255 | 24.11% | PASS |
+| priority encoder 16 | 34 | 34 | 0.00% | PASS |
+| priority encoder 128 | 307 | 307 | 0.00% | PASS |
+| priority encoder 512 | 1346 | 1219 | 9.44% | PASS |
+| arbiter 64 | 172 | 163 | 5.23% | PASS |
+| PicoRV32 | 2108 | 2097 | 0.52% | SKIP |
+
+优先级编码器 128/512 位的 EQY 使用全部输出同分区；默认逐位分区存在部分定义假反例，
+边界说明见 `experiments/holdout-eqy-grouped-20261025/README.md`。PicoRV32 未完成 EQY，
+其面积结果只作探索，不作为大规模等价证明。
+
+## 5. 效率
+
+31 次交替采样，最大墙钟比 `1.008×`、最大 CPU 比 `1.000×`、最大峰值 RSS 比 `0.988×`。
+四个公开用例均低于 `1.05×` 满分线，且没有用例超过 `1.15×` 归零线。该结论仅适用于
+当前四个公开用例，不能外推隐藏效率用例。
+
+## 6. 快速复现
 
 ```bash
-# 1. 准备官网 Yosys 0.69 源码树和 OSS CAD Suite
 bash scripts/install_pmux_069.sh tools/build/official-v069-opt
+cmake -S tools/build/official-v069-opt \
+  -B tools/build/official-v069-opt/build-current-20261025 \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DGIT_EXECUTABLE=/usr/bin/false \
+  -DYOSYS_ORIGIN_INFO=
+cmake --build tools/build/official-v069-opt/build-current-20261025 --target yosys -j8
 
-# 2. 构建优化版 Yosys
-cmake -S tools/build/official-v069-opt -B tools/build/official-v069-opt/build \
-  -DCMAKE_BUILD_TYPE=Release
-cmake --build tools/build/official-v069-opt/build --target yosys -j8
-
-# 3. 面积与形式等价
 python3 scripts/eval_official.py --repeat 3
 python3 scripts/eqy_official.py
-
-# 4. 效率采样
 python3 scripts/eval_efficiency.py --repeat 31
+python3 scripts/verify_shift_decode_cases.py
 ```
 
-完整的安装与依赖说明见 `README.md` 和 `docs/Mac环境搭建.md`。
+## 7. 待办与边界
 
-## 6. 已知限制
+1. `test4` 仍为 `15.79%`，需要继续分析 ROM/LUT 路径。
+2. PicoRV32 尚未完成 EQY，真实千级混合结构证据仍不完整。
+3. 封存集只有 9 例，仍需补充公开 RTL 和更多拓扑。
+4. 隐藏效率用例、Windows/eLinx 流程不在本轮核心算法结论内。
 
-1. 当前只对恰好 4 级的优先级 MUX 链使用平衡树；更长链仍可能生成较大 `$pmux`，需要继续检查时间和内存。
-2. 官方新增效率用例尚未公布，现有四题结果不能外推为最终满分。
-3. Windows 原生 `yosys.exe` 和 PowerShell `Measure-Command` 正式口径仍需复测。
-4. 真实、混合结构的 1000+ cell 留出集尚未固化，当前不能宣称一般电路泛化已经完成。
-5. `test4` 的 ROM 路径仍缺 X 常量、多 ROM、多端口、更大地址空间和 `keep` 属性回归；
-   正式交付前必须补齐，并确认赛题允许修改 `synth_intel` 流程。
-
-## 7. 证据索引
-
-- 算法设计：`docs/算法设计文档-pmux_opt.md`
-- 当前交接说明：`docs/交接日志-20261024-同源复测与消融.md`
-- 同源面积与 EQY：`reports/025-同源复测暂停点.md`
-- 消融实验：`reports/026-消融实验.md`
-- 同源效率采样：`reports/027-同源效率采样.md`
-- 官方复测：`reports/018-最新官方答疑与官网v069复测.md`
-- test2 内存修复：`reports/019-test2平衡mux树.md`
-- test4 定位与阶段修复：`reports/020-test4零收益定位.md`
-- 面积原始数据：`reports/025-clean-samesource-area.json`
-- 面积 EQY：`reports/025-clean-samesource-eqy.log`
-- 效率原始数据：`reports/027-同源效率采样*.json`
-- 核心源码：`src/yosys-069/passes/pmux/pmux_opt.cc`
-- 集成补丁：`patches/yosys-069/pmux_opt-integration.patch`
-- ABC9 输入规范化补丁是独立实验材料，不属于本快照的正式候选：
-  `patches/yosys-069/abc9-input-canonicalization.patch`
+完整证据索引见 `reports/036-官网0.69纠错与最终验证-20261025.md`。
