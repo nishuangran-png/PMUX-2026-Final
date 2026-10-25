@@ -1,0 +1,31 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_qqa89hab
+phase 1/2: baseline
+constructed_priority_chain_05 baseline done
+constructed_priority_chain_06 baseline done
+constructed_priority_chain_08 baseline done
+constructed_priority_chain_16 baseline done
+verilog_axi_priority_encoder_16 baseline done
+verilog_axi_priority_encoder_128 baseline done
+verilog_axi_priority_encoder_512 baseline done
+verilog_axi_arbiter_64       baseline done
+picorv32_default             baseline done
+phase 2/2: candidate
+constructed_priority_chain_05 candidate done
+constructed_priority_chain_06 candidate done
+constructed_priority_chain_08 candidate done
+constructed_priority_chain_16 candidate done
+verilog_axi_priority_encoder_16 candidate done
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_512 candidate done
+verilog_axi_arbiter_64       candidate done
+picorv32_default             candidate done
+constructed_priority_chain_05 constructed    96 ->    66  +31.25% dff    0 EQY PASS
+constructed_priority_chain_06 constructed   112 ->    83  +25.89% dff    0 EQY PASS
+constructed_priority_chain_08 constructed   160 ->   114  +28.75% dff    0 EQY PASS
+constructed_priority_chain_16 constructed   336 ->   255  +24.11% dff    0 EQY PASS
+verilog_axi_priority_encoder_16 external       34 ->    34   +0.00% dff    0 EQY PASS
+verilog_axi_priority_encoder_128 external      307 ->   307   +0.00% dff    0 EQY PASS
+verilog_axi_priority_encoder_512 external     1346 ->  1219   +9.44% dff    0 EQY FAIL
+verilog_axi_arbiter_64       external      172 ->   163   +5.23% dff   71 EQY PASS
+picorv32_default             external     2108 ->  2097   +0.52% dff  597 EQY SKIP
+JSON -> reports/039-holdout-20261024.json

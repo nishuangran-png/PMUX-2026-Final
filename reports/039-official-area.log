@@ -1,0 +1,12 @@
+baseline : tools/build/official-v069/build/yosys
+candidate: tools/build/official-v069-opt/build-current-20261025/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.230     0.200
+test2      25     16   36.00%     0     0.070     0.070
+test3      13      9   30.77%    17     0.080     0.080
+test4      38     26   31.58%    10     0.100     0.070
+
+平均缩减率（每用例先算再平均）: 32.05%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/039-official-area.json

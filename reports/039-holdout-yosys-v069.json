@@ -1,0 +1,1315 @@
+{
+  "manifest": "experiments/holdout-yosys-v069-20261025/manifest.json",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "bef45ff6f6e315ab55cebfdfd42d7c8cfb12878f9df79fcde3c010ce26fedb33"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "attrib09_case__attrib09_bar",
+      "role": "upstream-yosys-v069",
+      "top": "attrib09_bar",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/attrib09_case.v",
+          "sha256": "4a2e7fd5fc06a29729e03d0ec5b334c2b557c9d5418192bc8036a51ca0269d5a"
+        }
+      ],
+      "baseline": {
+        "lcell": 0,
+        "not": 2,
+        "logic": 2,
+        "dff": 0,
+        "wall_s": 0.19,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21282816
+      },
+      "candidate": {
+        "lcell": 0,
+        "not": 2,
+        "logic": 2,
+        "dff": 0,
+        "wall_s": 0.12,
+        "cpu_s": 0.06999999999999999,
+        "peak_rss_bytes": 19169280
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 2,
+        "gate_luts": 2,
+        "log_tail": "EQY 10:45:59 [eqy_attrib09_case__attrib09_bar] read_gold: starting process \"yosys -ql eqy_attrib09_case__attrib09_bar/gold.log eqy_attrib09_case__attrib09_bar/gold.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] read_gold: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] read_gate: starting process \"yosys -ql eqy_attrib09_case__attrib09_bar/gate.log eqy_attrib09_case__attrib09_bar/gate.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] read_gate: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] combine: starting process \"yosys -ql eqy_attrib09_case__attrib09_bar/combine.log eqy_attrib09_case__attrib09_bar/combine.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] combine: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] partition: starting process \"cd eqy_attrib09_case__attrib09_bar; yosys -ql partition.log partition.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] partition: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: starting process \"make -C eqy_attrib09_case__attrib09_bar -f strategies.mk\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: Running strategy 'sat' on 'attrib09_bar.out.0'..\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: Proved equivalence of partition 'attrib09_bar.out.0' using strategy 'sat'\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: Running strategy 'sat' on 'attrib09_bar.out.1'..\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: Proved equivalence of partition 'attrib09_bar.out.1' using strategy 'sat'\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] run: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] Successfully proved equivalence of partition attrib09_bar.out.1\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] Successfully proved equivalence of partition attrib09_bar.out.0\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] Successfully proved designs equivalent\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_bar] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "attrib09_case__attrib09_foo",
+      "role": "upstream-yosys-v069",
+      "top": "attrib09_foo",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/attrib09_case.v",
+          "sha256": "4a2e7fd5fc06a29729e03d0ec5b334c2b557c9d5418192bc8036a51ca0269d5a"
+        }
+      ],
+      "baseline": {
+        "lcell": 0,
+        "not": 2,
+        "logic": 2,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06999999999999999,
+        "peak_rss_bytes": 20447232
+      },
+      "candidate": {
+        "lcell": 0,
+        "not": 2,
+        "logic": 2,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 20414464
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 2,
+        "gate_luts": 2,
+        "log_tail": "EQY 10:45:59 [eqy_attrib09_case__attrib09_foo] read_gold: starting process \"yosys -ql eqy_attrib09_case__attrib09_foo/gold.log eqy_attrib09_case__attrib09_foo/gold.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] read_gold: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] read_gate: starting process \"yosys -ql eqy_attrib09_case__attrib09_foo/gate.log eqy_attrib09_case__attrib09_foo/gate.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] read_gate: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] combine: starting process \"yosys -ql eqy_attrib09_case__attrib09_foo/combine.log eqy_attrib09_case__attrib09_foo/combine.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] combine: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] partition: starting process \"cd eqy_attrib09_case__attrib09_foo; yosys -ql partition.log partition.ys\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] partition: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: starting process \"make -C eqy_attrib09_case__attrib09_foo -f strategies.mk\"\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: Running strategy 'sat' on 'attrib09_foo.out.0'..\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: Proved equivalence of partition 'attrib09_foo.out.0' using strategy 'sat'\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: Running strategy 'sat' on 'attrib09_foo.out.1'..\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: Proved equivalence of partition 'attrib09_foo.out.1' using strategy 'sat'\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] run: finished (returncode=0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] Successfully proved equivalence of partition attrib09_foo.out.1\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] Successfully proved equivalence of partition attrib09_foo.out.0\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] Successfully proved designs equivalent\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:45:59 [eqy_attrib09_case__attrib09_foo] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "case_large__case_lage_top",
+      "role": "upstream-yosys-v069",
+      "top": "case_lage_top",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/case_large.v",
+          "sha256": "4392c1d71c19119f80174bd3d4b718fef1f5e14570a34615cfcdd1e3f5e95d79"
+        }
+      ],
+      "baseline": {
+        "lcell": 638,
+        "not": 0,
+        "logic": 638,
+        "dff": 0,
+        "wall_s": 1.32,
+        "cpu_s": 1.4200000000000002,
+        "peak_rss_bytes": 158777344
+      },
+      "candidate": {
+        "lcell": 638,
+        "not": 0,
+        "logic": 638,
+        "dff": 0,
+        "wall_s": 1.3,
+        "cpu_s": 1.4100000000000001,
+        "peak_rss_bytes": 158416896
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 638,
+        "gate_luts": 638,
+        "log_tail": "ase_lage_top] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:05 [eqy_case_large__case_lage_top] run: finished (returncode=0)\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.31\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.30\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.29\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.28\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.27\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.26\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.25\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.24\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.23\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.22\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.21\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.20\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.19\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.18\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.17\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.16\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.15\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.14\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.13\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.12\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.11\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.10\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.9\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.8\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.7\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.6\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.5\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.4\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.3\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.2\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.1\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved equivalence of partition case_lage_top.y.0\nEQY 10:46:05 [eqy_case_large__case_lage_top] Successfully proved designs equivalent\nEQY 10:46:05 [eqy_case_large__case_lage_top] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)\nEQY 10:46:05 [eqy_case_large__case_lage_top] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 10:46:05 [eqy_case_large__case_lage_top] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "code_hdl_models_encoder_using_case__encoder_using_case",
+      "role": "upstream-yosys-v069",
+      "top": "encoder_using_case",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_hdl_models_encoder_using_case.v",
+          "sha256": "e473e9abd81b2c90f101ed722a12235cd2163f8ef1b69855860f3bcba54d638e"
+        }
+      ],
+      "baseline": {
+        "lcell": 32,
+        "not": 0,
+        "logic": 32,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23969792
+      },
+      "candidate": {
+        "lcell": 32,
+        "not": 0,
+        "logic": 32,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 24788992
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 32,
+        "gate_luts": 32,
+        "log_tail": "ls_encoder_using_case__encoder_using_case/gold.log eqy_code_hdl_models_encoder_using_case__encoder_using_case/gold.ys\"\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] read_gold: finished (returncode=0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] read_gate: starting process \"yosys -ql eqy_code_hdl_models_encoder_using_case__encoder_using_case/gate.log eqy_code_hdl_models_encoder_using_case__encoder_using_case/gate.ys\"\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] read_gate: finished (returncode=0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] combine: starting process \"yosys -ql eqy_code_hdl_models_encoder_using_case__encoder_using_case/combine.log eqy_code_hdl_models_encoder_using_case__encoder_using_case/combine.ys\"\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] combine: finished (returncode=0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] partition: starting process \"cd eqy_code_hdl_models_encoder_using_case__encoder_using_case; yosys -ql partition.log partition.ys\"\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] partition: finished (returncode=0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: starting process \"make -C eqy_code_hdl_models_encoder_using_case__encoder_using_case -f strategies.mk\"\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Running strategy 'sat' on 'encoder_using_case.binary_out.0'..\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Proved equivalence of partition 'encoder_using_case.binary_out.0' using strategy 'sat'\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Running strategy 'sat' on 'encoder_using_case.binary_out.1'..\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Proved equivalence of partition 'encoder_using_case.binary_out.1' using strategy 'sat'\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Running strategy 'sat' on 'encoder_using_case.binary_out.2'..\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Proved equivalence of partition 'encoder_using_case.binary_out.2' using strategy 'sat'\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Running strategy 'sat' on 'encoder_using_case.binary_out.3'..\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: Proved equivalence of partition 'encoder_using_case.binary_out.3' using strategy 'sat'\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] run: finished (returncode=0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] Successfully proved equivalence of partition encoder_using_case.binary_out.3\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] Successfully proved equivalence of partition encoder_using_case.binary_out.2\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] Successfully proved equivalence of partition encoder_using_case.binary_out.1\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] Successfully proved equivalence of partition encoder_using_case.binary_out.0\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] Successfully proved designs equivalent\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:05 [eqy_code_hdl_models_encoder_using_case__encoder_using_case] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "code_verilog_tutorial_decoder__decoder",
+      "role": "upstream-yosys-v069",
+      "top": "decoder",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_verilog_tutorial_decoder.v",
+          "sha256": "c0bb6a78bf57d70bcd1fbc2c6ee96b9ad764f0b4c079a461c9a78c7bfd222927"
+        }
+      ],
+      "baseline": {
+        "lcell": 8,
+        "not": 0,
+        "logic": 8,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 23609344
+      },
+      "candidate": {
+        "lcell": 8,
+        "not": 0,
+        "logic": 8,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22036480
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 8,
+        "gate_luts": 8,
+        "log_tail": "er/combine.ys\"\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] combine: finished (returncode=0)\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] partition: starting process \"cd eqy_code_verilog_tutorial_decoder__decoder; yosys -ql partition.log partition.ys\"\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] partition: finished (returncode=0)\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: starting process \"make -C eqy_code_verilog_tutorial_decoder__decoder -f strategies.mk\"\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.0'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.0' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.1'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.1' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.2'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.2' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.3'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.3' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.4'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.4' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.5'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.5' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.6'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.6' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Running strategy 'sat' on 'decoder.out.7'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: Proved equivalence of partition 'decoder.out.7' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] run: finished (returncode=0)\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.7\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.6\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.5\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.4\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.3\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.2\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.1\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved equivalence of partition decoder.out.0\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] Successfully proved designs equivalent\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder__decoder] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "code_verilog_tutorial_decoder_always__decoder_always",
+      "role": "upstream-yosys-v069",
+      "top": "decoder_always",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_verilog_tutorial_decoder_always.v",
+          "sha256": "09fc1a3602272ff826d49fca651c62ebb6ef7fd5d63a739ee46272cf209f9858"
+        }
+      ],
+      "baseline": {
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21921792
+      },
+      "candidate": {
+        "lcell": 7,
+        "not": 0,
+        "logic": 7,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19775488
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 7,
+        "gate_luts": 7,
+        "log_tail": "ays] run: Running strategy 'sat' on 'decoder_always.out.0'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.0' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.1'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.1' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.2'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.2' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.3'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.3' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.4'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.4' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.5'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.5' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.6'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.6' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Running strategy 'sat' on 'decoder_always.out.7'..\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: Proved equivalence of partition 'decoder_always.out.7' using strategy 'sat'\nEQY 10:46:06 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] run: finished (returncode=0)\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.7\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.6\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.5\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.4\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.3\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.2\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.1\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved equivalence of partition decoder_always.out.0\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] Successfully proved designs equivalent\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_code_verilog_tutorial_decoder_always__decoder_always] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19677184
+      },
+      "candidate": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21643264
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 3,
+        "gate_luts": 3,
+        "log_tail": "EQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1/gold.log eqy_muxpack__mux_if_unbal_4_1/gold.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] read_gold: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1/gate.log eqy_muxpack__mux_if_unbal_4_1/gate.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] read_gate: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1/combine.log eqy_muxpack__mux_if_unbal_4_1/combine.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] combine: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] partition: starting process \"cd eqy_muxpack__mux_if_unbal_4_1; yosys -ql partition.log partition.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] partition: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] run: starting process \"make -C eqy_muxpack__mux_if_unbal_4_1 -f strategies.mk\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] run: Running strategy 'sat' on 'mux_if_unbal_4_1.o'..\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] run: Proved equivalence of partition 'mux_if_unbal_4_1.o' using strategy 'sat'\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] run: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] Successfully proved equivalence of partition mux_if_unbal_4_1.o\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] Successfully proved designs equivalent\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_4_1] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 17,
+        "not": 0,
+        "logic": 17,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 21561344
+      },
+      "candidate": {
+        "lcell": 17,
+        "not": 0,
+        "logic": 17,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 24379392
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 17,
+        "gate_luts": 17,
+        "log_tail": "EQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3/gold.log eqy_muxpack__mux_if_unbal_5_3/gold.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] read_gold: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3/gate.log eqy_muxpack__mux_if_unbal_5_3/gate.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] read_gate: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3/combine.log eqy_muxpack__mux_if_unbal_5_3/combine.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] combine: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] partition: starting process \"cd eqy_muxpack__mux_if_unbal_5_3; yosys -ql partition.log partition.ys\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] partition: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: starting process \"make -C eqy_muxpack__mux_if_unbal_5_3 -f strategies.mk\"\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Running strategy 'sat' on 'mux_if_unbal_5_3.o.0'..\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Proved equivalence of partition 'mux_if_unbal_5_3.o.0' using strategy 'sat'\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Running strategy 'sat' on 'mux_if_unbal_5_3.o.1'..\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Proved equivalence of partition 'mux_if_unbal_5_3.o.1' using strategy 'sat'\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Running strategy 'sat' on 'mux_if_unbal_5_3.o.2'..\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: Proved equivalence of partition 'mux_if_unbal_5_3.o.2' using strategy 'sat'\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] run: finished (returncode=0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] Successfully proved equivalence of partition mux_if_unbal_5_3.o.2\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] Successfully proved equivalence of partition mux_if_unbal_5_3.o.1\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] Successfully proved equivalence of partition mux_if_unbal_5_3.o.0\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] Successfully proved designs equivalent\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:07 [eqy_muxpack__mux_if_unbal_5_3] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_invert",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_invert",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 17,
+        "not": 0,
+        "logic": 17,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 18907136
+      },
+      "candidate": {
+        "lcell": 17,
+        "not": 0,
+        "logic": 17,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 20627456
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 17,
+        "gate_luts": 17,
+        "log_tail": "EQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_invert/gold.log eqy_muxpack__mux_if_unbal_5_3_invert/gold.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] read_gold: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_invert/gate.log eqy_muxpack__mux_if_unbal_5_3_invert/gate.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] read_gate: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_invert/combine.log eqy_muxpack__mux_if_unbal_5_3_invert/combine.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] combine: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] partition: starting process \"cd eqy_muxpack__mux_if_unbal_5_3_invert; yosys -ql partition.log partition.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] partition: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: starting process \"make -C eqy_muxpack__mux_if_unbal_5_3_invert -f strategies.mk\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Running strategy 'sat' on 'mux_if_unbal_5_3_invert.o.0'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Proved equivalence of partition 'mux_if_unbal_5_3_invert.o.0' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Running strategy 'sat' on 'mux_if_unbal_5_3_invert.o.1'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Proved equivalence of partition 'mux_if_unbal_5_3_invert.o.1' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Running strategy 'sat' on 'mux_if_unbal_5_3_invert.o.2'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: Proved equivalence of partition 'mux_if_unbal_5_3_invert.o.2' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] run: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] Successfully proved equivalence of partition mux_if_unbal_5_3_invert.o.2\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] Successfully proved equivalence of partition mux_if_unbal_5_3_invert.o.1\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] Successfully proved equivalence of partition mux_if_unbal_5_3_invert.o.0\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] Successfully proved designs equivalent\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_invert] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_width_mismatch",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_width_mismatch",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 24231936
+      },
+      "candidate": {
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 21889024
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 15,
+        "gate_luts": 15,
+        "log_tail": "EQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_width_mismatch/gold.log eqy_muxpack__mux_if_unbal_5_3_width_mismatch/gold.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] read_gold: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_width_mismatch/gate.log eqy_muxpack__mux_if_unbal_5_3_width_mismatch/gate.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] read_gate: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_width_mismatch/combine.log eqy_muxpack__mux_if_unbal_5_3_width_mismatch/combine.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] combine: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] partition: starting process \"cd eqy_muxpack__mux_if_unbal_5_3_width_mismatch; yosys -ql partition.log partition.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] partition: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: starting process \"make -C eqy_muxpack__mux_if_unbal_5_3_width_mismatch -f strategies.mk\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Running strategy 'sat' on 'mux_if_unbal_5_3_width_mismatch.o.0'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Proved equivalence of partition 'mux_if_unbal_5_3_width_mismatch.o.0' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Running strategy 'sat' on 'mux_if_unbal_5_3_width_mismatch.o.1'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Proved equivalence of partition 'mux_if_unbal_5_3_width_mismatch.o.1' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Running strategy 'sat' on 'mux_if_unbal_5_3_width_mismatch.o.2'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: Proved equivalence of partition 'mux_if_unbal_5_3_width_mismatch.o.2' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] run: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] Successfully proved equivalence of partition mux_if_unbal_5_3_width_mismatch.o.2\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] Successfully proved equivalence of partition mux_if_unbal_5_3_width_mismatch.o.1\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] Successfully proved equivalence of partition mux_if_unbal_5_3_width_mismatch.o.0\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] Successfully proved designs equivalent\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_5_3_width_mismatch] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1_missing",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1_missing",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 4,
+        "not": 0,
+        "logic": 4,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 16777216
+      },
+      "candidate": {
+        "lcell": 4,
+        "not": 0,
+        "logic": 4,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 16760832
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 4,
+        "gate_luts": 4,
+        "log_tail": "EQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_missing/gold.log eqy_muxpack__mux_if_unbal_4_1_missing/gold.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] read_gold: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_missing/gate.log eqy_muxpack__mux_if_unbal_4_1_missing/gate.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] read_gate: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_missing/combine.log eqy_muxpack__mux_if_unbal_4_1_missing/combine.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] combine: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] partition: starting process \"cd eqy_muxpack__mux_if_unbal_4_1_missing; yosys -ql partition.log partition.ys\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] partition: finished (returncode=0)\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] run: starting process \"make -C eqy_muxpack__mux_if_unbal_4_1_missing -f strategies.mk\"\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Running strategy 'sat' on 'mux_if_unbal_4_1_missing.o.0'..\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Proved equivalence of partition 'mux_if_unbal_4_1_missing.o.0' using strategy 'sat'\nEQY 10:46:08 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Running strategy 'sat' on 'mux_if_unbal_4_1_missing.o.1'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Proved equivalence of partition 'mux_if_unbal_4_1_missing.o.1' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Running strategy 'sat' on 'mux_if_unbal_4_1_missing.o.2'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] run: Proved equivalence of partition 'mux_if_unbal_4_1_missing.o.2' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] run: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] Successfully proved equivalence of partition mux_if_unbal_4_1_missing.o.2\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] Successfully proved equivalence of partition mux_if_unbal_4_1_missing.o.1\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] Successfully proved equivalence of partition mux_if_unbal_4_1_missing.o.0\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] Successfully proved designs equivalent\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_missing] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_order",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_order",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 20,
+        "not": 0,
+        "logic": 20,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 20004864
+      },
+      "candidate": {
+        "lcell": 15,
+        "not": 0,
+        "logic": 15,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 18939904
+      },
+      "reduction_pct": 25.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 20,
+        "gate_luts": 15,
+        "log_tail": "EQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_order/gold.log eqy_muxpack__mux_if_unbal_5_3_order/gold.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] read_gold: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_order/gate.log eqy_muxpack__mux_if_unbal_5_3_order/gate.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] read_gate: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_order/combine.log eqy_muxpack__mux_if_unbal_5_3_order/combine.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] combine: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] partition: starting process \"cd eqy_muxpack__mux_if_unbal_5_3_order; yosys -ql partition.log partition.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] partition: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: starting process \"make -C eqy_muxpack__mux_if_unbal_5_3_order -f strategies.mk\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Running strategy 'sat' on 'mux_if_unbal_5_3_order.o.0'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Proved equivalence of partition 'mux_if_unbal_5_3_order.o.0' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Running strategy 'sat' on 'mux_if_unbal_5_3_order.o.1'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Proved equivalence of partition 'mux_if_unbal_5_3_order.o.1' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Running strategy 'sat' on 'mux_if_unbal_5_3_order.o.2'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: Proved equivalence of partition 'mux_if_unbal_5_3_order.o.2' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] run: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] Successfully proved equivalence of partition mux_if_unbal_5_3_order.o.2\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] Successfully proved equivalence of partition mux_if_unbal_5_3_order.o.1\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] Successfully proved equivalence of partition mux_if_unbal_5_3_order.o.0\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] Successfully proved designs equivalent\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_5_3_order] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1_nonexcl",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1_nonexcl",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19890176
+      },
+      "candidate": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19611648
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 3,
+        "gate_luts": 3,
+        "log_tail": "EQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_nonexcl/gold.log eqy_muxpack__mux_if_unbal_4_1_nonexcl/gold.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] read_gold: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_nonexcl/gate.log eqy_muxpack__mux_if_unbal_4_1_nonexcl/gate.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] read_gate: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_4_1_nonexcl/combine.log eqy_muxpack__mux_if_unbal_4_1_nonexcl/combine.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] combine: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] partition: starting process \"cd eqy_muxpack__mux_if_unbal_4_1_nonexcl; yosys -ql partition.log partition.ys\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] partition: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] run: starting process \"make -C eqy_muxpack__mux_if_unbal_4_1_nonexcl -f strategies.mk\"\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] run: Running strategy 'sat' on 'mux_if_unbal_4_1_nonexcl.o'..\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] run: Proved equivalence of partition 'mux_if_unbal_4_1_nonexcl.o' using strategy 'sat'\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] run: finished (returncode=0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] Successfully proved equivalence of partition mux_if_unbal_4_1_nonexcl.o\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] Successfully proved designs equivalent\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:09 [eqy_muxpack__mux_if_unbal_4_1_nonexcl] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_nonexcl",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_nonexcl",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 21184512
+      },
+      "candidate": {
+        "lcell": 12,
+        "not": 0,
+        "logic": 12,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 23855104
+      },
+      "reduction_pct": 25.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 16,
+        "gate_luts": 12,
+        "log_tail": "EQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_nonexcl/gold.log eqy_muxpack__mux_if_unbal_5_3_nonexcl/gold.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] read_gold: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_nonexcl/gate.log eqy_muxpack__mux_if_unbal_5_3_nonexcl/gate.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] read_gate: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] combine: starting process \"yosys -ql eqy_muxpack__mux_if_unbal_5_3_nonexcl/combine.log eqy_muxpack__mux_if_unbal_5_3_nonexcl/combine.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] combine: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] partition: starting process \"cd eqy_muxpack__mux_if_unbal_5_3_nonexcl; yosys -ql partition.log partition.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] partition: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: starting process \"make -C eqy_muxpack__mux_if_unbal_5_3_nonexcl -f strategies.mk\"\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Running strategy 'sat' on 'mux_if_unbal_5_3_nonexcl.o.0'..\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Proved equivalence of partition 'mux_if_unbal_5_3_nonexcl.o.0' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Running strategy 'sat' on 'mux_if_unbal_5_3_nonexcl.o.1'..\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Proved equivalence of partition 'mux_if_unbal_5_3_nonexcl.o.1' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Running strategy 'sat' on 'mux_if_unbal_5_3_nonexcl.o.2'..\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: Proved equivalence of partition 'mux_if_unbal_5_3_nonexcl.o.2' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] run: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] Successfully proved equivalence of partition mux_if_unbal_5_3_nonexcl.o.2\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] Successfully proved equivalence of partition mux_if_unbal_5_3_nonexcl.o.1\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] Successfully proved equivalence of partition mux_if_unbal_5_3_nonexcl.o.0\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] Successfully proved designs equivalent\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:10 [eqy_muxpack__mux_if_unbal_5_3_nonexcl] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_case_unbal_8_7",
+      "role": "upstream-yosys-v069",
+      "top": "mux_case_unbal_8_7",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 57,
+        "not": 0,
+        "logic": 57,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 22315008
+      },
+      "candidate": {
+        "lcell": 57,
+        "not": 0,
+        "logic": 57,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 24002560
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 57,
+        "gate_luts": 57,
+        "log_tail": "eqy_muxpack__mux_case_unbal_8_7/gold.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] read_gold: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] read_gate: starting process \"yosys -ql eqy_muxpack__mux_case_unbal_8_7/gate.log eqy_muxpack__mux_case_unbal_8_7/gate.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] read_gate: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] combine: starting process \"yosys -ql eqy_muxpack__mux_case_unbal_8_7/combine.log eqy_muxpack__mux_case_unbal_8_7/combine.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] combine: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] partition: starting process \"cd eqy_muxpack__mux_case_unbal_8_7; yosys -ql partition.log partition.ys\"\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] partition: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: starting process \"make -C eqy_muxpack__mux_case_unbal_8_7 -f strategies.mk\"\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.0'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.0' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.1'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.1' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.2'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.2' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.3'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.3' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.4'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.4' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.5'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.5' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Running strategy 'sat' on 'mux_case_unbal_8_7.o.6'..\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: Proved equivalence of partition 'mux_case_unbal_8_7.o.6' using strategy 'sat'\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] run: finished (returncode=0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.6\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.5\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.4\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.3\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.2\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.1\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved equivalence of partition mux_case_unbal_8_7.o.0\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] Successfully proved designs equivalent\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:10 [eqy_muxpack__mux_case_unbal_8_7] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_bal_8_2",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_bal_8_2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 12,
+        "not": 0,
+        "logic": 12,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 16695296
+      },
+      "candidate": {
+        "lcell": 12,
+        "not": 0,
+        "logic": 12,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 16809984
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 12,
+        "gate_luts": 12,
+        "log_tail": "EQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_bal_8_2/gold.log eqy_muxpack__mux_if_bal_8_2/gold.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] read_gold: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_bal_8_2/gate.log eqy_muxpack__mux_if_bal_8_2/gate.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] read_gate: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] combine: starting process \"yosys -ql eqy_muxpack__mux_if_bal_8_2/combine.log eqy_muxpack__mux_if_bal_8_2/combine.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] combine: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] partition: starting process \"cd eqy_muxpack__mux_if_bal_8_2; yosys -ql partition.log partition.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] partition: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: starting process \"make -C eqy_muxpack__mux_if_bal_8_2 -f strategies.mk\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: Running strategy 'sat' on 'mux_if_bal_8_2.o.0'..\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: Proved equivalence of partition 'mux_if_bal_8_2.o.0' using strategy 'sat'\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: Running strategy 'sat' on 'mux_if_bal_8_2.o.1'..\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: Proved equivalence of partition 'mux_if_bal_8_2.o.1' using strategy 'sat'\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] run: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] Successfully proved equivalence of partition mux_if_bal_8_2.o.1\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] Successfully proved equivalence of partition mux_if_bal_8_2.o.0\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] Successfully proved designs equivalent\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_8_2] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__mux_if_bal_5_1",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_bal_5_1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 17203200
+      },
+      "candidate": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 17055744
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 3,
+        "gate_luts": 3,
+        "log_tail": "EQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] read_gold: starting process \"yosys -ql eqy_muxpack__mux_if_bal_5_1/gold.log eqy_muxpack__mux_if_bal_5_1/gold.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] read_gold: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] read_gate: starting process \"yosys -ql eqy_muxpack__mux_if_bal_5_1/gate.log eqy_muxpack__mux_if_bal_5_1/gate.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] read_gate: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] combine: starting process \"yosys -ql eqy_muxpack__mux_if_bal_5_1/combine.log eqy_muxpack__mux_if_bal_5_1/combine.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] combine: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] partition: starting process \"cd eqy_muxpack__mux_if_bal_5_1; yosys -ql partition.log partition.ys\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] partition: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] run: starting process \"make -C eqy_muxpack__mux_if_bal_5_1 -f strategies.mk\"\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] run: Running strategy 'sat' on 'mux_if_bal_5_1.o'..\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] run: Proved equivalence of partition 'mux_if_bal_5_1.o' using strategy 'sat'\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] run: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] Successfully proved equivalence of partition mux_if_bal_5_1.o\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] Successfully proved designs equivalent\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__mux_if_bal_5_1] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__clairexen_nonexclusive_select",
+      "role": "upstream-yosys-v069",
+      "top": "clairexen_nonexclusive_select",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21266432
+      },
+      "candidate": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19202048
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 3,
+        "gate_luts": 3,
+        "log_tail": "EQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] read_gold: starting process \"yosys -ql eqy_muxpack__clairexen_nonexclusive_select/gold.log eqy_muxpack__clairexen_nonexclusive_select/gold.ys\"\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] read_gold: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] read_gate: starting process \"yosys -ql eqy_muxpack__clairexen_nonexclusive_select/gate.log eqy_muxpack__clairexen_nonexclusive_select/gate.ys\"\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] read_gate: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] combine: starting process \"yosys -ql eqy_muxpack__clairexen_nonexclusive_select/combine.log eqy_muxpack__clairexen_nonexclusive_select/combine.ys\"\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] combine: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] partition: starting process \"cd eqy_muxpack__clairexen_nonexclusive_select; yosys -ql partition.log partition.ys\"\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] partition: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] run: starting process \"make -C eqy_muxpack__clairexen_nonexclusive_select -f strategies.mk\"\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] run: Running strategy 'sat' on 'clairexen_nonexclusive_select.o'..\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] run: Proved equivalence of partition 'clairexen_nonexclusive_select.o' using strategy 'sat'\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] run: finished (returncode=0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] Successfully proved equivalence of partition clairexen_nonexclusive_select.o\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] Successfully proved designs equivalent\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:11 [eqy_muxpack__clairexen_nonexclusive_select] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__clairexen_freduce",
+      "role": "upstream-yosys-v069",
+      "top": "clairexen_freduce",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 6,
+        "not": 0,
+        "logic": 6,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19611648
+      },
+      "candidate": {
+        "lcell": 6,
+        "not": 0,
+        "logic": 6,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19415040
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 6,
+        "gate_luts": 6,
+        "log_tail": "EQY 10:46:12 [eqy_muxpack__clairexen_freduce] read_gold: starting process \"yosys -ql eqy_muxpack__clairexen_freduce/gold.log eqy_muxpack__clairexen_freduce/gold.ys\"\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] read_gold: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] read_gate: starting process \"yosys -ql eqy_muxpack__clairexen_freduce/gate.log eqy_muxpack__clairexen_freduce/gate.ys\"\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] read_gate: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] combine: starting process \"yosys -ql eqy_muxpack__clairexen_freduce/combine.log eqy_muxpack__clairexen_freduce/combine.ys\"\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] combine: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] partition: starting process \"cd eqy_muxpack__clairexen_freduce; yosys -ql partition.log partition.ys\"\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] partition: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: starting process \"make -C eqy_muxpack__clairexen_freduce -f strategies.mk\"\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Running strategy 'sat' on 'clairexen_freduce.o.0'..\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Proved equivalence of partition 'clairexen_freduce.o.0' using strategy 'sat'\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Running strategy 'sat' on 'clairexen_freduce.o.1'..\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Proved equivalence of partition 'clairexen_freduce.o.1' using strategy 'sat'\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Running strategy 'sat' on 'clairexen_freduce.o.2'..\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Proved equivalence of partition 'clairexen_freduce.o.2' using strategy 'sat'\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Running strategy 'sat' on 'clairexen_freduce.o.3'..\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: Proved equivalence of partition 'clairexen_freduce.o.3' using strategy 'sat'\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] run: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] Successfully proved equivalence of partition clairexen_freduce.o.3\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] Successfully proved equivalence of partition clairexen_freduce.o.2\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] Successfully proved equivalence of partition clairexen_freduce.o.1\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] Successfully proved equivalence of partition clairexen_freduce.o.0\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] Successfully proved designs equivalent\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:12 [eqy_muxpack__clairexen_freduce] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__case_nonexclusive_select",
+      "role": "upstream-yosys-v069",
+      "top": "case_nonexclusive_select",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 4,
+        "not": 0,
+        "logic": 4,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22806528
+      },
+      "candidate": {
+        "lcell": 4,
+        "not": 0,
+        "logic": 4,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22872064
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 4,
+        "gate_luts": 4,
+        "log_tail": "EQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] read_gold: starting process \"yosys -ql eqy_muxpack__case_nonexclusive_select/gold.log eqy_muxpack__case_nonexclusive_select/gold.ys\"\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] read_gold: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] read_gate: starting process \"yosys -ql eqy_muxpack__case_nonexclusive_select/gate.log eqy_muxpack__case_nonexclusive_select/gate.ys\"\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] read_gate: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] combine: starting process \"yosys -ql eqy_muxpack__case_nonexclusive_select/combine.log eqy_muxpack__case_nonexclusive_select/combine.ys\"\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] combine: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] partition: starting process \"cd eqy_muxpack__case_nonexclusive_select; yosys -ql partition.log partition.ys\"\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] partition: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] run: starting process \"make -C eqy_muxpack__case_nonexclusive_select -f strategies.mk\"\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] run: Running strategy 'sat' on 'case_nonexclusive_select.o'..\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] run: Proved equivalence of partition 'case_nonexclusive_select.o' using strategy 'sat'\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] run: finished (returncode=0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] Successfully proved equivalence of partition case_nonexclusive_select.o\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] Successfully proved designs equivalent\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:12 [eqy_muxpack__case_nonexclusive_select] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__case_nonoverlap",
+      "role": "upstream-yosys-v069",
+      "top": "case_nonoverlap",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22511616
+      },
+      "candidate": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 23461888
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 5,
+        "gate_luts": 5,
+        "log_tail": "EQY 10:46:13 [eqy_muxpack__case_nonoverlap] read_gold: starting process \"yosys -ql eqy_muxpack__case_nonoverlap/gold.log eqy_muxpack__case_nonoverlap/gold.ys\"\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] read_gold: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] read_gate: starting process \"yosys -ql eqy_muxpack__case_nonoverlap/gate.log eqy_muxpack__case_nonoverlap/gate.ys\"\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] read_gate: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] combine: starting process \"yosys -ql eqy_muxpack__case_nonoverlap/combine.log eqy_muxpack__case_nonoverlap/combine.ys\"\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] combine: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] partition: starting process \"cd eqy_muxpack__case_nonoverlap; yosys -ql partition.log partition.ys\"\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] partition: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] run: starting process \"make -C eqy_muxpack__case_nonoverlap -f strategies.mk\"\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] run: Running strategy 'sat' on 'case_nonoverlap.o'..\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] run: Proved equivalence of partition 'case_nonoverlap.o' using strategy 'sat'\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] run: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] Successfully proved equivalence of partition case_nonoverlap.o\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] Successfully proved designs equivalent\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:13 [eqy_muxpack__case_nonoverlap] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__case_overlap",
+      "role": "upstream-yosys-v069",
+      "top": "case_overlap",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21200896
+      },
+      "candidate": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 22413312
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 5,
+        "gate_luts": 5,
+        "log_tail": "EQY 10:46:13 [eqy_muxpack__case_overlap] read_gold: starting process \"yosys -ql eqy_muxpack__case_overlap/gold.log eqy_muxpack__case_overlap/gold.ys\"\nEQY 10:46:13 [eqy_muxpack__case_overlap] read_gold: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] read_gate: starting process \"yosys -ql eqy_muxpack__case_overlap/gate.log eqy_muxpack__case_overlap/gate.ys\"\nEQY 10:46:13 [eqy_muxpack__case_overlap] read_gate: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] combine: starting process \"yosys -ql eqy_muxpack__case_overlap/combine.log eqy_muxpack__case_overlap/combine.ys\"\nEQY 10:46:13 [eqy_muxpack__case_overlap] combine: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] partition: starting process \"cd eqy_muxpack__case_overlap; yosys -ql partition.log partition.ys\"\nEQY 10:46:13 [eqy_muxpack__case_overlap] partition: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] run: starting process \"make -C eqy_muxpack__case_overlap -f strategies.mk\"\nEQY 10:46:13 [eqy_muxpack__case_overlap] run: Running strategy 'sat' on 'case_overlap.o'..\nEQY 10:46:13 [eqy_muxpack__case_overlap] run: Proved equivalence of partition 'case_overlap.o' using strategy 'sat'\nEQY 10:46:13 [eqy_muxpack__case_overlap] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:13 [eqy_muxpack__case_overlap] run: finished (returncode=0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] Successfully proved equivalence of partition case_overlap.o\nEQY 10:46:13 [eqy_muxpack__case_overlap] Successfully proved designs equivalent\nEQY 10:46:13 [eqy_muxpack__case_overlap] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:13 [eqy_muxpack__case_overlap] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__chain_slice_self_input",
+      "role": "upstream-yosys-v069",
+      "top": "chain_slice_self_input",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 32,
+        "not": 0,
+        "logic": 32,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 19939328
+      },
+      "candidate": {
+        "lcell": 32,
+        "not": 0,
+        "logic": 32,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 20332544
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 32,
+        "gate_luts": 32,
+        "log_tail": "tition chain_slice_self_input.Y.29\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.28\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.27\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.26\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.25\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.24\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.23\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.22\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.21\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.20\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.19\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.18\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.17\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.16\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.15\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.14\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.13\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.12\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.11\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.10\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.9\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.8\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.7\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.6\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.5\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.4\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.3\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.2\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.1\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved equivalence of partition chain_slice_self_input.Y.0\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] Successfully proved designs equivalent\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:15 [eqy_muxpack__chain_slice_self_input] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "muxpack__case_overlap2",
+      "role": "upstream-yosys-v069",
+      "top": "case_overlap2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513"
+        }
+      ],
+      "baseline": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 20283392
+      },
+      "candidate": {
+        "lcell": 5,
+        "not": 0,
+        "logic": 5,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21233664
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 5,
+        "gate_luts": 5,
+        "log_tail": "EQY 10:46:15 [eqy_muxpack__case_overlap2] read_gold: starting process \"yosys -ql eqy_muxpack__case_overlap2/gold.log eqy_muxpack__case_overlap2/gold.ys\"\nEQY 10:46:15 [eqy_muxpack__case_overlap2] read_gold: finished (returncode=0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] read_gate: starting process \"yosys -ql eqy_muxpack__case_overlap2/gate.log eqy_muxpack__case_overlap2/gate.ys\"\nEQY 10:46:15 [eqy_muxpack__case_overlap2] read_gate: finished (returncode=0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] combine: starting process \"yosys -ql eqy_muxpack__case_overlap2/combine.log eqy_muxpack__case_overlap2/combine.ys\"\nEQY 10:46:15 [eqy_muxpack__case_overlap2] combine: finished (returncode=0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] partition: starting process \"cd eqy_muxpack__case_overlap2; yosys -ql partition.log partition.ys\"\nEQY 10:46:15 [eqy_muxpack__case_overlap2] partition: finished (returncode=0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] run: starting process \"make -C eqy_muxpack__case_overlap2 -f strategies.mk\"\nEQY 10:46:15 [eqy_muxpack__case_overlap2] run: Running strategy 'sat' on 'case_overlap2.o'..\nEQY 10:46:15 [eqy_muxpack__case_overlap2] run: Proved equivalence of partition 'case_overlap2.o' using strategy 'sat'\nEQY 10:46:15 [eqy_muxpack__case_overlap2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:15 [eqy_muxpack__case_overlap2] run: finished (returncode=0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] Successfully proved equivalence of partition case_overlap2.o\nEQY 10:46:15 [eqy_muxpack__case_overlap2] Successfully proved designs equivalent\nEQY 10:46:15 [eqy_muxpack__case_overlap2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:15 [eqy_muxpack__case_overlap2] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "opt_share_large_pmux_cat__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_cat.v",
+          "sha256": "1380bad198a91fb9e737f999ab3c1ced37e6c281242fc88e39dcfd6529f15217"
+        }
+      ],
+      "baseline": {
+        "lcell": 271,
+        "not": 0,
+        "logic": 271,
+        "dff": 0,
+        "wall_s": 0.22,
+        "cpu_s": 0.2,
+        "peak_rss_bytes": 27148288
+      },
+      "candidate": {
+        "lcell": 271,
+        "not": 0,
+        "logic": 271,
+        "dff": 0,
+        "wall_s": 0.22,
+        "cpu_s": 0.21000000000000002,
+        "peak_rss_bytes": 30277632
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 271,
+        "gate_luts": 271,
+        "log_tail": "nce of partition opt_share_test.res.28\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.27\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.26\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.25\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.24\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.23\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.22\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.21\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.20\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.19\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.18\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.17\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.16\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.15\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.14\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.13\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.12\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.11\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.10\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.9\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.8\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.7\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.6\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.5\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.4\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.3\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.2\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.1\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.0\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] Successfully proved designs equivalent\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:17 [eqy_opt_share_large_pmux_cat__opt_share_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "opt_share_large_pmux_cat_multipart__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_cat_multipart.v",
+          "sha256": "ca7565c4cffa1427d2678cfccd6dd2d6926372ae4a6c9596ba8e06a3897d1841"
+        }
+      ],
+      "baseline": {
+        "lcell": 426,
+        "not": 0,
+        "logic": 426,
+        "dff": 0,
+        "wall_s": 0.27,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 28180480
+      },
+      "candidate": {
+        "lcell": 426,
+        "not": 0,
+        "logic": 426,
+        "dff": 0,
+        "wall_s": 0.28,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 28721152
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 426,
+        "gate_luts": 426,
+        "log_tail": "46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.25\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.24\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.23\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.22\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.21\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.20\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.19\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.18\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.17\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.16\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.15\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.14\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.13\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.12\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.11\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.10\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.9\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.8\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.7\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.6\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.5\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.4\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.3\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.2\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.1\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.0\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] Successfully proved designs equivalent\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 10:46:20 [eqy_opt_share_large_pmux_cat_multipart__opt_share_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "opt_share_large_pmux_multipart__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_multipart.v",
+          "sha256": "bcc034d09f3211ece49945c5f5de541af6deb062009f7ff0022a07af3c1fe03f"
+        }
+      ],
+      "baseline": {
+        "lcell": 311,
+        "not": 0,
+        "logic": 311,
+        "dff": 0,
+        "wall_s": 0.23,
+        "cpu_s": 0.21000000000000002,
+        "peak_rss_bytes": 29704192
+      },
+      "candidate": {
+        "lcell": 311,
+        "not": 0,
+        "logic": 311,
+        "dff": 0,
+        "wall_s": 0.23,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 31539200
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 311,
+        "gate_luts": 311,
+        "log_tail": "t_share_large_pmux_multipart__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.5' using strategy 'sat'\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.6'..\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.6' using strategy 'sat'\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.7'..\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.7' using strategy 'sat'\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.8'..\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.8' using strategy 'sat'\nEQY 10:46:22 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.9'..\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.9' using strategy 'sat'\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] run: finished (returncode=0)\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.15\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.14\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.13\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.12\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.11\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.10\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.9\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.8\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.7\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.6\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.5\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.4\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.3\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.2\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.1\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.0\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] Successfully proved designs equivalent\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:23 [eqy_opt_share_large_pmux_multipart__opt_share_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "opt_share_large_pmux_part__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_part.v",
+          "sha256": "a4463488383d83259f99359640586e54969946190dc7746c06d5829f1fa558dc"
+        }
+      ],
+      "baseline": {
+        "lcell": 245,
+        "not": 0,
+        "logic": 245,
+        "dff": 0,
+        "wall_s": 0.21,
+        "cpu_s": 0.19,
+        "peak_rss_bytes": 31145984
+      },
+      "candidate": {
+        "lcell": 245,
+        "not": 0,
+        "logic": 245,
+        "dff": 0,
+        "wall_s": 0.21,
+        "cpu_s": 0.19,
+        "peak_rss_bytes": 29884416
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 245,
+        "gate_luts": 245,
+        "log_tail": "ng strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.5'..\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.5' using strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.6'..\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.6' using strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.7'..\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.7' using strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.8'..\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.8' using strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Running strategy 'sat' on 'opt_share_test.res.9'..\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: Proved equivalence of partition 'opt_share_test.res.9' using strategy 'sat'\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] run: finished (returncode=0)\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.15\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.14\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.13\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.12\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.11\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.10\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.9\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.8\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.7\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.6\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.5\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.4\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.3\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.2\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.1\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved equivalence of partition opt_share_test.res.0\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] Successfully proved designs equivalent\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)\nEQY 10:46:24 [eqy_opt_share_large_pmux_part__opt_share_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f1_test",
+      "role": "upstream-yosys-v069",
+      "top": "f1_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 13,
+        "not": 0,
+        "logic": 13,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 21348352
+      },
+      "candidate": {
+        "lcell": 13,
+        "not": 0,
+        "logic": 13,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 25051136
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 13,
+        "gate_luts": 13,
+        "log_tail": "EQY 10:46:25 [eqy_test_simulation_mux__f1_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f1_test/gold.log eqy_test_simulation_mux__f1_test/gold.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] read_gold: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f1_test/gate.log eqy_test_simulation_mux__f1_test/gate.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] read_gate: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f1_test/combine.log eqy_test_simulation_mux__f1_test/combine.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] combine: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] partition: starting process \"cd eqy_test_simulation_mux__f1_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] partition: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] run: starting process \"make -C eqy_test_simulation_mux__f1_test -f strategies.mk\"\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] run: Running strategy 'sat' on 'f1_test.out'..\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] run: Proved equivalence of partition 'f1_test.out' using strategy 'sat'\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] run: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] Successfully proved equivalence of partition f1_test.out\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] Successfully proved designs equivalent\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:25 [eqy_test_simulation_mux__f1_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f2_test",
+      "role": "upstream-yosys-v069",
+      "top": "f2_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 1,
+        "not": 0,
+        "logic": 1,
+        "dff": 0,
+        "wall_s": 0.07,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 16777216
+      },
+      "candidate": {
+        "lcell": 1,
+        "not": 0,
+        "logic": 1,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 16859136
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 1,
+        "gate_luts": 1,
+        "log_tail": "EQY 10:46:25 [eqy_test_simulation_mux__f2_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f2_test/gold.log eqy_test_simulation_mux__f2_test/gold.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] read_gold: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f2_test/gate.log eqy_test_simulation_mux__f2_test/gate.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] read_gate: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f2_test/combine.log eqy_test_simulation_mux__f2_test/combine.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] combine: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] partition: starting process \"cd eqy_test_simulation_mux__f2_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] partition: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] run: starting process \"make -C eqy_test_simulation_mux__f2_test -f strategies.mk\"\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] run: Running strategy 'sat' on 'f2_test.out'..\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] run: Proved equivalence of partition 'f2_test.out' using strategy 'sat'\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] run: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] Successfully proved equivalence of partition f2_test.out\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] Successfully proved designs equivalent\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:25 [eqy_test_simulation_mux__f2_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f3_test",
+      "role": "upstream-yosys-v069",
+      "top": "f3_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 44,
+        "not": 0,
+        "logic": 44,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 19169280
+      },
+      "candidate": {
+        "lcell": 44,
+        "not": 0,
+        "logic": 44,
+        "dff": 0,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 20119552
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 44,
+        "gate_luts": 44,
+        "log_tail": "EQY 10:46:25 [eqy_test_simulation_mux__f3_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f3_test/gold.log eqy_test_simulation_mux__f3_test/gold.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] read_gold: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f3_test/gate.log eqy_test_simulation_mux__f3_test/gate.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] read_gate: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f3_test/combine.log eqy_test_simulation_mux__f3_test/combine.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] combine: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] partition: starting process \"cd eqy_test_simulation_mux__f3_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] partition: finished (returncode=0)\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] run: starting process \"make -C eqy_test_simulation_mux__f3_test -f strategies.mk\"\nEQY 10:46:25 [eqy_test_simulation_mux__f3_test] run: Running strategy 'sat' on 'f3_test.out'..\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] run: Proved equivalence of partition 'f3_test.out' using strategy 'sat'\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] run: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] Successfully proved equivalence of partition f3_test.out\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] Successfully proved designs equivalent\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f3_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f4_test",
+      "role": "upstream-yosys-v069",
+      "top": "f4_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06999999999999999,
+        "peak_rss_bytes": 21266432
+      },
+      "candidate": {
+        "lcell": 3,
+        "not": 0,
+        "logic": 3,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 20627456
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 3,
+        "gate_luts": 3,
+        "log_tail": "EQY 10:46:26 [eqy_test_simulation_mux__f4_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f4_test/gold.log eqy_test_simulation_mux__f4_test/gold.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] read_gold: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f4_test/gate.log eqy_test_simulation_mux__f4_test/gate.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] read_gate: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f4_test/combine.log eqy_test_simulation_mux__f4_test/combine.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] combine: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] partition: starting process \"cd eqy_test_simulation_mux__f4_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] partition: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] run: starting process \"make -C eqy_test_simulation_mux__f4_test -f strategies.mk\"\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] run: Running strategy 'sat' on 'f4_test.out'..\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] run: Proved equivalence of partition 'f4_test.out' using strategy 'sat'\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] run: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] Successfully proved equivalence of partition f4_test.out\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] Successfully proved designs equivalent\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f4_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f5_test",
+      "role": "upstream-yosys-v069",
+      "top": "f5_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 80,
+        "not": 0,
+        "logic": 80,
+        "dff": 0,
+        "wall_s": 0.14,
+        "cpu_s": 0.12,
+        "peak_rss_bytes": 21725184
+      },
+      "candidate": {
+        "lcell": 80,
+        "not": 0,
+        "logic": 80,
+        "dff": 0,
+        "wall_s": 0.13,
+        "cpu_s": 0.12,
+        "peak_rss_bytes": 22003712
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 80,
+        "gate_luts": 80,
+        "log_tail": "EQY 10:46:26 [eqy_test_simulation_mux__f5_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f5_test/gold.log eqy_test_simulation_mux__f5_test/gold.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] read_gold: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f5_test/gate.log eqy_test_simulation_mux__f5_test/gate.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] read_gate: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f5_test/combine.log eqy_test_simulation_mux__f5_test/combine.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] combine: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] partition: starting process \"cd eqy_test_simulation_mux__f5_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] partition: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] run: starting process \"make -C eqy_test_simulation_mux__f5_test -f strategies.mk\"\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] run: Running strategy 'sat' on 'f5_test.out'..\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] run: Proved equivalence of partition 'f5_test.out' using strategy 'sat'\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] run: finished (returncode=0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] Successfully proved equivalence of partition f5_test.out\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] Successfully proved designs equivalent\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:26 [eqy_test_simulation_mux__f5_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "test_simulation_mux__f6_test",
+      "role": "upstream-yosys-v069",
+      "top": "f6_test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a"
+        }
+      ],
+      "baseline": {
+        "lcell": 6,
+        "not": 0,
+        "logic": 6,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19857408
+      },
+      "candidate": {
+        "lcell": 6,
+        "not": 0,
+        "logic": 6,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 20905984
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 6,
+        "gate_luts": 6,
+        "log_tail": "EQY 10:46:27 [eqy_test_simulation_mux__f6_test] read_gold: starting process \"yosys -ql eqy_test_simulation_mux__f6_test/gold.log eqy_test_simulation_mux__f6_test/gold.ys\"\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] read_gold: finished (returncode=0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] read_gate: starting process \"yosys -ql eqy_test_simulation_mux__f6_test/gate.log eqy_test_simulation_mux__f6_test/gate.ys\"\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] read_gate: finished (returncode=0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] combine: starting process \"yosys -ql eqy_test_simulation_mux__f6_test/combine.log eqy_test_simulation_mux__f6_test/combine.ys\"\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] combine: finished (returncode=0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] partition: starting process \"cd eqy_test_simulation_mux__f6_test; yosys -ql partition.log partition.ys\"\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] partition: finished (returncode=0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] run: starting process \"make -C eqy_test_simulation_mux__f6_test -f strategies.mk\"\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] run: Running strategy 'sat' on 'f6_test.out'..\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] run: Proved equivalence of partition 'f6_test.out' using strategy 'sat'\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] run: finished (returncode=0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] Successfully proved equivalence of partition f6_test.out\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] Successfully proved designs equivalent\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 10:46:27 [eqy_test_simulation_mux__f6_test] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "wide_thru_priority__test",
+      "role": "upstream-yosys-v069",
+      "top": "test",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/wide_thru_priority.v",
+          "sha256": "ba35fa2015ba23ffc54e2c77337f7144840f8bde769caf567b218bfec289e419"
+        }
+      ],
+      "baseline": {
+        "lcell": 1123,
+        "not": 0,
+        "logic": 1123,
+        "dff": 512,
+        "wall_s": 0.5,
+        "cpu_s": 0.48000000000000004,
+        "peak_rss_bytes": 35569664
+      },
+      "candidate": {
+        "lcell": 1123,
+        "not": 0,
+        "logic": 1123,
+        "dff": 512,
+        "wall_s": 0.5,
+        "cpu_s": 0.48000000000000004,
+        "peak_rss_bytes": 35487744
+      },
+      "reduction_pct": 0.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 1123,
+        "gate_luts": 1123,
+        "log_tail": "lly proved equivalence of partition test.mem.13.3\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.13.2\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.13.1\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.13.0\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.7\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.6\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.5\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.4\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.3\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.2\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.1\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.12.0\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.7\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.6\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.5\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.4\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.3\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.2\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.1\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.11.0\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.7\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.6\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.5\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.4\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.3\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.2\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.1\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.10.0\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.7\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.6\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.5\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.4\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.3\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.2\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.1\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved equivalence of partition test.mem.0.0\nEQY 10:46:48 [eqy_wide_thru_priority__test] Successfully proved designs equivalent\nEQY 10:46:48 [eqy_wide_thru_priority__test] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:19 (19)\nEQY 10:46:48 [eqy_wide_thru_priority__test] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:16 (16)\nEQY 10:46:48 [eqy_wide_thru_priority__test] DONE (PASS, rc=0)\n"
+      }
+    }
+  ]
+}

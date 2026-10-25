@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "top": "priority_encoder",
+      "baseline_logic": 1346,
+      "candidate_logic": 1219,
+      "reduction_pct": 9.435364041604755,
+      "gold_luts": 1346,
+      "gate_luts": 1219,
+      "delta_luts": 127,
+      "proof_s": 46.178898541,
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "all_pass": true
+}

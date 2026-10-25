@@ -1,0 +1,528 @@
+{
+  "schema": 1,
+  "frozen_at": "2026-10-25",
+  "title": "Yosys 0.69 上游 RTL 泛化封存集",
+  "origin": {
+    "project": "YosysHQ/yosys",
+    "tag": "v0.69",
+    "commit": "9f75ca1f9834a39a863915b5dae0c7b1e33533bc",
+    "url": "https://github.com/YosysHQ/yosys/tree/v0.69/tests",
+    "archive": "rtl.zip delivered on desktop",
+    "archive_sha256": "b15a8540b09822c96d5b50dbab685f762cf43e65694b6295f71b09b86dc3c772",
+    "license": "Yosys upstream license, see upstream COPYING at tagged commit"
+  },
+  "rules": {
+    "official_scores": "只使用官方四个公开用例；本清单结果不计入正式成绩",
+    "freezing": "先冻结完整 35 个顶层模块，再运行基线和候选；改善、持平、回归全部保留",
+    "source_integrity": "源文件逐字节复制自 rtl.zip，并已与 Yosys v0.69 干净源码树逐文件哈希核对",
+    "semantics": "不修改 RTL；case_large.v 的 y=256 在 32 位输出上按原文件行为截断，仅如实记录",
+    "acceptance": "Yosys 0.69 可解析、synth_intel cycloneiv 可综合、纯 RTL、EQY 结果逐项保留"
+  },
+  "source_catalog": {
+    "attrib09_case.v": {
+      "sha256": "4a2e7fd5fc06a29729e03d0ec5b334c2b557c9d5418192bc8036a51ca0269d5a",
+      "upstream_path": "tests/simple/attrib09_case.v"
+    },
+    "case_large.v": {
+      "sha256": "4392c1d71c19119f80174bd3d4b718fef1f5e14570a34615cfcdd1e3f5e95d79",
+      "upstream_path": "tests/simple/case_large.v"
+    },
+    "code_hdl_models_encoder_using_case.v": {
+      "sha256": "e473e9abd81b2c90f101ed722a12235cd2163f8ef1b69855860f3bcba54d638e",
+      "upstream_path": "tests/asicworld/code_hdl_models_encoder_using_case.v"
+    },
+    "code_verilog_tutorial_decoder.v": {
+      "sha256": "c0bb6a78bf57d70bcd1fbc2c6ee96b9ad764f0b4c079a461c9a78c7bfd222927",
+      "upstream_path": "tests/asicworld/code_verilog_tutorial_decoder.v"
+    },
+    "code_verilog_tutorial_decoder_always.v": {
+      "sha256": "09fc1a3602272ff826d49fca651c62ebb6ef7fd5d63a739ee46272cf209f9858",
+      "upstream_path": "tests/asicworld/code_verilog_tutorial_decoder_always.v"
+    },
+    "muxpack.v": {
+      "sha256": "76f7cdfadd307ab752f2f8e8d22d19e2446387c1420fbff54b2e79b4350dc513",
+      "upstream_path": "tests/various/muxpack.v"
+    },
+    "opt_share_large_pmux_cat.v": {
+      "sha256": "1380bad198a91fb9e737f999ab3c1ced37e6c281242fc88e39dcfd6529f15217",
+      "upstream_path": "tests/opt/opt_share_large_pmux_cat.v"
+    },
+    "opt_share_large_pmux_cat_multipart.v": {
+      "sha256": "ca7565c4cffa1427d2678cfccd6dd2d6926372ae4a6c9596ba8e06a3897d1841",
+      "upstream_path": "tests/opt/opt_share_large_pmux_cat_multipart.v"
+    },
+    "opt_share_large_pmux_multipart.v": {
+      "sha256": "bcc034d09f3211ece49945c5f5de541af6deb062009f7ff0022a07af3c1fe03f",
+      "upstream_path": "tests/opt/opt_share_large_pmux_multipart.v"
+    },
+    "opt_share_large_pmux_part.v": {
+      "sha256": "a4463488383d83259f99359640586e54969946190dc7746c06d5829f1fa558dc",
+      "upstream_path": "tests/opt/opt_share_large_pmux_part.v"
+    },
+    "test_simulation_mux.v": {
+      "sha256": "721a2100631b9029fac535edb220032fa66de65255ee45a0603c8da1bb89d73a",
+      "upstream_path": "tests/hana/test_simulation_mux.v"
+    },
+    "wide_thru_priority.v": {
+      "sha256": "ba35fa2015ba23ffc54e2c77337f7144840f8bde769caf567b218bfec289e419",
+      "upstream_path": "tests/memories/wide_thru_priority.v"
+    }
+  },
+  "cases": [
+    {
+      "id": "attrib09_case__attrib09_bar",
+      "role": "upstream-yosys-v069",
+      "top": "attrib09_bar",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/attrib09_case.v",
+          "upstream_path": "tests/simple/attrib09_case.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "attrib09_case__attrib09_foo",
+      "role": "upstream-yosys-v069",
+      "top": "attrib09_foo",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/attrib09_case.v",
+          "upstream_path": "tests/simple/attrib09_case.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "case_large__case_lage_top",
+      "role": "upstream-yosys-v069",
+      "top": "case_lage_top",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/case_large.v",
+          "upstream_path": "tests/simple/case_large.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "code_hdl_models_encoder_using_case__encoder_using_case",
+      "role": "upstream-yosys-v069",
+      "top": "encoder_using_case",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_hdl_models_encoder_using_case.v",
+          "upstream_path": "tests/asicworld/code_hdl_models_encoder_using_case.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "code_verilog_tutorial_decoder__decoder",
+      "role": "upstream-yosys-v069",
+      "top": "decoder",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_verilog_tutorial_decoder.v",
+          "upstream_path": "tests/asicworld/code_verilog_tutorial_decoder.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "code_verilog_tutorial_decoder_always__decoder_always",
+      "role": "upstream-yosys-v069",
+      "top": "decoder_always",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/code_verilog_tutorial_decoder_always.v",
+          "upstream_path": "tests/asicworld/code_verilog_tutorial_decoder_always.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_invert",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_invert",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_width_mismatch",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_width_mismatch",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1_missing",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1_missing",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_order",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_order",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_4_1_nonexcl",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_4_1_nonexcl",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_unbal_5_3_nonexcl",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_unbal_5_3_nonexcl",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_case_unbal_8_7",
+      "role": "upstream-yosys-v069",
+      "top": "mux_case_unbal_8_7",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_bal_8_2",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_bal_8_2",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__mux_if_bal_5_1",
+      "role": "upstream-yosys-v069",
+      "top": "mux_if_bal_5_1",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__clairexen_nonexclusive_select",
+      "role": "upstream-yosys-v069",
+      "top": "clairexen_nonexclusive_select",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__clairexen_freduce",
+      "role": "upstream-yosys-v069",
+      "top": "clairexen_freduce",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__case_nonexclusive_select",
+      "role": "upstream-yosys-v069",
+      "top": "case_nonexclusive_select",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__case_nonoverlap",
+      "role": "upstream-yosys-v069",
+      "top": "case_nonoverlap",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__case_overlap",
+      "role": "upstream-yosys-v069",
+      "top": "case_overlap",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__chain_slice_self_input",
+      "role": "upstream-yosys-v069",
+      "top": "chain_slice_self_input",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "muxpack__case_overlap2",
+      "role": "upstream-yosys-v069",
+      "top": "case_overlap2",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/muxpack.v",
+          "upstream_path": "tests/various/muxpack.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "opt_share_large_pmux_cat__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_cat.v",
+          "upstream_path": "tests/opt/opt_share_large_pmux_cat.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "opt_share_large_pmux_cat_multipart__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_cat_multipart.v",
+          "upstream_path": "tests/opt/opt_share_large_pmux_cat_multipart.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "opt_share_large_pmux_multipart__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_multipart.v",
+          "upstream_path": "tests/opt/opt_share_large_pmux_multipart.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "opt_share_large_pmux_part__opt_share_test",
+      "role": "upstream-yosys-v069",
+      "top": "opt_share_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/opt_share_large_pmux_part.v",
+          "upstream_path": "tests/opt/opt_share_large_pmux_part.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f1_test",
+      "role": "upstream-yosys-v069",
+      "top": "f1_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f2_test",
+      "role": "upstream-yosys-v069",
+      "top": "f2_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f3_test",
+      "role": "upstream-yosys-v069",
+      "top": "f3_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f4_test",
+      "role": "upstream-yosys-v069",
+      "top": "f4_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f5_test",
+      "role": "upstream-yosys-v069",
+      "top": "f5_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "test_simulation_mux__f6_test",
+      "role": "upstream-yosys-v069",
+      "top": "f6_test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/test_simulation_mux.v",
+          "upstream_path": "tests/hana/test_simulation_mux.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    },
+    {
+      "id": "wide_thru_priority__test",
+      "role": "upstream-yosys-v069",
+      "top": "test",
+      "sources": [
+        {
+          "path": "rtl/upstream/yosys-v069/wide_thru_priority.v",
+          "upstream_path": "tests/memories/wide_thru_priority.v"
+        }
+      ],
+      "params": {},
+      "eqy": true
+    }
+  ]
+}

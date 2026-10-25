@@ -1,0 +1,79 @@
+# Yosys version
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+
+# LUT netlist hashes
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	LC_CTYPE = "C.UTF-8",
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+20c05b90d6095dea9d5cae1a895a6a117fd10067d4c268904e683fea2701eca4  /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gold.il
+fd8cf1e34ec4787e1743449de125e54189a94c03dd6f07e389c419a59b1909f2  /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gate.il
+
+# SAT miter command
+tools/build/official-v069/build/yosys -p read_rtlil\ /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gold.il\;\ rename\ priority_encoder\ gold\;\ read_rtlil\ /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gate.il\;\ rename\ priority_encoder\ gate\;\ miter\ -equiv\ -flatten\ gold\ gate\ miter\;\ hierarchy\ -top\ miter\;\ sat\ -verify\ -prove-asserts\ -show-inputs\ -show-outputs\ miter 
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+
+-- Running command `read_rtlil /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gold.il; rename priority_encoder gold; read_rtlil /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gate.il; rename priority_encoder gate; miter -equiv -flatten gold gate miter; hierarchy -top miter; sat -verify -prove-asserts -show-inputs -show-outputs miter' --
+
+1. Executing RTLIL frontend.
+Input filename: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gold.il
+Renaming module \priority_encoder to \gold.
+
+2. Executing RTLIL frontend.
+Input filename: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_lut_equiv_dd8j76xl/verilog_axi_priority_encoder_512_gate.il
+Renaming module \priority_encoder to \gate.
+
+3. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold" and gate cell "gate".
+
+3.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+3.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \miter
+
+4.2. Analyzing design hierarchy..
+Top module:  \miter
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+5. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 2572 cells to SAT database.
+Import show expression: \in_input_unencoded
+Import show expression: \trigger
+
+Solving problem with 35684 variables and 100891 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 83522858a3, time: 0.13s, user: 0.11s, system: 0.01s, MEM: 37.47 MB peak
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+Time spent: 82% 1x sat (0 sec), 5% 4x read_rtlil (0 sec), ...

@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-25T02:50:54.380761+00:00",
+  "git_head": "037954cdea1c88f10d0e71b84f68ddc8b2237b02",
+  "seed": 20261025,
+  "data_model": "full-width-sha256",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "bef45ff6f6e315ab55cebfdfd42d7c8cfb12878f9df79fcde3c010ce26fedb33",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 4,
+    "improved": 2,
+    "equal": 2,
+    "regressed": 0,
+    "total_baseline": 4399,
+    "total_candidate": 4303,
+    "total_delta": 96,
+    "total_reduction_pct": 2.182314162309616,
+    "best_delta": 63,
+    "worst_delta": 0
+  },
+  "cases": [
+    {
+      "id": "const_pmux_a6_w64",
+      "address_width": 6,
+      "output_width": 64,
+      "states": 64,
+      "rtl": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w64.v",
+      "rtl_sha256": "a1235748cf51772e82d147f228db01def0eddb1376a8bf0c5caeb9ff0ad76a5a",
+      "baseline": {
+        "lcell": 508,
+        "not": 0,
+        "logic": 508,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 508
+        },
+        "wall_s": 0.364585,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w64.baseline.log"
+      },
+      "candidate": {
+        "lcell": 445,
+        "not": 0,
+        "logic": 445,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 445
+        },
+        "wall_s": 0.193636,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w64.candidate.log"
+      },
+      "delta": 63,
+      "reduction_pct": 12.401574803149607
+    },
+    {
+      "id": "const_pmux_a6_w128",
+      "address_width": 6,
+      "output_width": 128,
+      "states": 64,
+      "rtl": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w128.v",
+      "rtl_sha256": "64d93158399787d20463437bd93139d0bb0365322f9a48c4cecdc793b454473c",
+      "baseline": {
+        "lcell": 924,
+        "not": 0,
+        "logic": 924,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 924
+        },
+        "wall_s": 0.535537,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w128.baseline.log"
+      },
+      "candidate": {
+        "lcell": 891,
+        "not": 0,
+        "logic": 891,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 891
+        },
+        "wall_s": 0.332579,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w128.candidate.log"
+      },
+      "delta": 33,
+      "reduction_pct": 3.571428571428571
+    },
+    {
+      "id": "const_pmux_a6_w192",
+      "address_width": 6,
+      "output_width": 192,
+      "states": 64,
+      "rtl": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w192.v",
+      "rtl_sha256": "400b50b9fb4770860e15ce84fa702c1f2f66036b29ec25bee423cd773e760007",
+      "baseline": {
+        "lcell": 1297,
+        "not": 0,
+        "logic": 1297,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 1297
+        },
+        "wall_s": 0.704135,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w192.baseline.log"
+      },
+      "candidate": {
+        "lcell": 1297,
+        "not": 0,
+        "logic": 1297,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 1297
+        },
+        "wall_s": 0.703143,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w192.candidate.log"
+      },
+      "delta": 0,
+      "reduction_pct": 0.0
+    },
+    {
+      "id": "const_pmux_a6_w256",
+      "address_width": 6,
+      "output_width": 256,
+      "states": 64,
+      "rtl": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w256.v",
+      "rtl_sha256": "016179d39cfd81c4f55391fcf633f60e1a694e0ced059dcf38d57e059d386ee6",
+      "baseline": {
+        "lcell": 1670,
+        "not": 0,
+        "logic": 1670,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 1670
+        },
+        "wall_s": 0.936772,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w256.baseline.log"
+      },
+      "candidate": {
+        "lcell": 1670,
+        "not": 0,
+        "logic": 1670,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 1670
+        },
+        "wall_s": 1.105773,
+        "log": "experiments/const-pmux-20261025/logs/const_pmux_a6_w256.candidate.log"
+      },
+      "delta": 0,
+      "reduction_pct": 0.0
+    }
+  ]
+}

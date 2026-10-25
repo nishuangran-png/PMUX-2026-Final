@@ -2381,16 +2381,68 @@ int lower_constant_power_shift_decoders(Module *module, SigMap &sigmap, bool ver
 // chains; three-wide groups amortize the shared activity signal better once a
 // chain is long enough.  Keeping the select logic local avoids one long mask
 // network whose techmap/ABC cost grows with the chain length.
+struct ChainCompare {
+	SigSpec bus;
+	int code = -1;
+};
+
+bool decode_chain_compare(Module *module, SigMap &sigmap,
+                          const dict<SigBit, Cell *> &bit2cell, SigBit select,
+                          ChainCompare &out)
+{
+	auto it = bit2cell.find(sigmap(select));
+	if (it == bit2cell.end() || it->second == nullptr ||
+	    !module->cells_.count(it->second->name))
+		return false;
+	Cell *driver = it->second;
+
+	if (driver->type == ID($eq)) {
+		SigSpec a = sigmap(driver->getPort(ID::A));
+		SigSpec b = sigmap(driver->getPort(ID::B));
+		if (GetSize(a) != GetSize(b))
+			return false;
+		if (a.is_fully_const() && !b.is_fully_const()) {
+			out.bus = b;
+			out.code = a.as_int();
+			return true;
+		}
+		if (b.is_fully_const() && !a.is_fully_const()) {
+			out.bus = a;
+			out.code = b.as_int();
+			return true;
+		}
+		return false;
+	}
+
+	// `proc` represents an all-zero comparison as $logic_not over the full bus.
+	if (driver->type == ID($logic_not)) {
+		SigSpec a = sigmap(driver->getPort(ID::A));
+		if (GetSize(a) > 1) {
+			out.bus = a;
+			out.code = 0;
+			return true;
+		}
+	}
+
+	return false;
+}
+
 int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, bool verbose)
 {
 	std::vector<Cell *> muxes;
 	dict<SigBit, Cell *> mux_driver;
+	dict<SigBit, Cell *> bit2cell;
 	for (auto cell : module->cells())
 		if (cell->type == ID($mux)) {
 			muxes.push_back(cell);
 			for (auto bit : sigmap(cell->getPort(ID::Y)))
 				mux_driver[bit] = cell;
 		}
+	for (auto cell : module->cells())
+		for (auto &conn : cell->connections())
+			if (ct.cell_output(cell->type, conn.first))
+				for (auto bit : sigmap(conn.second))
+					bit2cell[bit] = cell;
 
 	pool<IdString> used_as_inner;
 	for (auto mux : muxes) {
@@ -2502,6 +2554,31 @@ int convert_priority_mux_chains(Module *module, SigMap &sigmap, CellTypes &ct, b
 			}
 		if (!ok)
 			continue;
+
+		// A dense, descending comparator chain is already the canonical order
+		// ABC handles best.  Rewriting it adds shared OR terms for predicates
+		// that are mutually exclusive, which can freeze a worse cut and make
+		// area regress.  Keep non-dense, overlapping and permuted chains on the
+		// existing restructuring path; this is a structural cost guard, not a
+		// module-name special case.
+		bool canonical_decoder_chain = true;
+		SigSpec decoder_bus;
+		for (size_t i = 0; i < chain.size(); i++) {
+			ChainCompare compare;
+			if (!decode_chain_compare(module, sigmap, bit2cell, selects[i][0], compare) ||
+			    compare.code != int(chain.size() - 1 - i) ||
+			    (i > 0 && !same_multiset(decoder_bus, compare.bus))) {
+				canonical_decoder_chain = false;
+				break;
+			}
+			decoder_bus = compare.bus;
+		}
+		if (canonical_decoder_chain) {
+			if (verbose)
+				log("  kept %d-level canonical decoder $mux chain at %s for abc9\n",
+				    GetSize(chain), log_signal(outer->getPort(ID::Y)));
+			continue;
+		}
 
 		// The chain's selects are independent scalar predicates, so a group of
 		// three can share one OR term without changing priority semantics.

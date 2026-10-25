@@ -14,6 +14,9 @@
 *.sha256 text eol=lf
 # 官方四题 RTL 保留下发时的 CRLF 字节，manifest 直接记录其原始哈希
 rtl/official/**/*.v text eol=crlf
+# 上游封存集按原字节冻结；SHA256SUMS 也必须是 LF，避免 Windows 检出后哈希变化
+rtl/upstream/yosys-v069/SHA256SUMS text eol=lf
+rtl/upstream/yosys-v069/**/*.v text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
 .gitignore text eol=lf
 .gitattributes text eol=lf
 
