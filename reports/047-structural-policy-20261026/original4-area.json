@@ -1,0 +1,148 @@
+{
+  "manifest": "experiments/final-mapping-038-final/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "caec57129f4e51bd926a8484f0b9efb95a164140810c879ec7a48f562528f9e4"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "wall_s": 0.24,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 26525696
+      },
+      "candidate": {
+        "lcell": 200,
+        "not": 2,
+        "logic": 202,
+        "dff": 222,
+        "wall_s": 0.21,
+        "cpu_s": 0.2,
+        "peak_rss_bytes": 25001984
+      },
+      "reduction_pct": 29.86111111111111,
+      "eqy": null
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v",
+          "sha256": "e43c9b437071488551caf3121e227e86f4fe3190751f245beac3b7ecc3fdb146"
+        }
+      ],
+      "baseline": {
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 18808832
+      },
+      "candidate": {
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 17481728
+      },
+      "reduction_pct": 36.0,
+      "eqy": null
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "lcell": 12,
+        "not": 1,
+        "logic": 13,
+        "dff": 17,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 23117824
+      },
+      "candidate": {
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19890176
+      },
+      "reduction_pct": 30.76923076923077,
+      "eqy": null
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "lcell": 37,
+        "not": 1,
+        "logic": 38,
+        "dff": 10,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 24166400
+      },
+      "candidate": {
+        "lcell": 25,
+        "not": 1,
+        "logic": 26,
+        "dff": 10,
+        "wall_s": 0.08,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 17022976
+      },
+      "reduction_pct": 31.57894736842105,
+      "eqy": null
+    }
+  ]
+}

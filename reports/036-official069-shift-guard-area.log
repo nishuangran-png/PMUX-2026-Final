@@ -1,0 +1,12 @@
+baseline : tools/build/official-v069/build/yosys
+candidate: tools/build/official-v069-opt/build-current-20261025/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.270     0.230
+test2      25     16   36.00%     0     0.090     0.090
+test3      13      9   30.77%    17     0.100     0.110
+test4      38     32   15.79%    10     0.130     0.130
+
+平均缩减率（每用例先算再平均）: 28.10%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/036-official069-shift-guard-area.json

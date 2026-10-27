@@ -1,0 +1,16 @@
+workdir: /Users/selina/Documents/ChatGPT/fpga比赛/experiments/holdout-equivalence-shift-guard-20261025
+phase 1/2: baseline
+verilog_axi_priority_encoder_16 baseline done
+verilog_axi_priority_encoder_128 baseline done
+verilog_axi_priority_encoder_512 baseline done
+verilog_axi_arbiter_64       baseline done
+phase 2/2: candidate
+verilog_axi_priority_encoder_16 candidate done
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_512 candidate done
+verilog_axi_arbiter_64       candidate done
+verilog_axi_priority_encoder_16 external       34 ->    34   +0.00% dff    0 EQY PASS
+verilog_axi_priority_encoder_128 external      307 ->   307   +0.00% dff    0 EQY PASS
+verilog_axi_priority_encoder_512 external     1346 ->  1219   +9.44% dff    0 EQY PASS
+verilog_axi_arbiter_64       external      172 ->   172   +0.00% dff   71 EQY PASS
+JSON -> reports/036-official069-shift-guard-holdout-subset.json

@@ -1,0 +1,180 @@
+{
+  "manifest": "experiments/official-new-5-20261026/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "15591414460969e5ecdbead9ff9e05e9e8519e0e1bae439cb73a7d308b01e253"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official-new-20261026__pmux_case01_balanced",
+      "role": "official-new-20261026",
+      "top": "pmux_case01_balanced",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case01_balanced.v",
+          "sha256": "463263f4b265cbad3b634d69d316cd29e7ea0a62f91ee396dbeeecf7df5c7343"
+        }
+      ],
+      "baseline": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.26,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 30720000
+      },
+      "candidate": {
+        "lcell": 387,
+        "not": 0,
+        "logic": 387,
+        "dff": 12,
+        "wall_s": 0.27,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 27295744
+      },
+      "reduction_pct": 4.679802955665025,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case02_pipeline",
+      "role": "official-new-20261026",
+      "top": "pmux_case02_pipeline",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case02_pipeline.v",
+          "sha256": "8639081b2fb7c446edef52a514d63b49333e444ce21638f03bdee97dc954e0ea"
+        }
+      ],
+      "baseline": {
+        "lcell": 444,
+        "not": 0,
+        "logic": 444,
+        "dff": 24,
+        "wall_s": 0.31,
+        "cpu_s": 0.3,
+        "peak_rss_bytes": 34963456
+      },
+      "candidate": {
+        "lcell": 432,
+        "not": 0,
+        "logic": 432,
+        "dff": 24,
+        "wall_s": 0.3,
+        "cpu_s": 0.29000000000000004,
+        "peak_rss_bytes": 33488896
+      },
+      "reduction_pct": 2.7027027027027026,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case03_crossbar",
+      "role": "official-new-20261026",
+      "top": "pmux_case03_crossbar",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case03_crossbar.v",
+          "sha256": "bf1fc3bf6383beb007a69587d77a29ea74fb1fbdf7429fb401c0855a31c05932"
+        }
+      ],
+      "baseline": {
+        "lcell": 409,
+        "not": 0,
+        "logic": 409,
+        "dff": 10,
+        "wall_s": 0.29,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 28803072
+      },
+      "candidate": {
+        "lcell": 371,
+        "not": 0,
+        "logic": 371,
+        "dff": 10,
+        "wall_s": 0.29,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 29261824
+      },
+      "reduction_pct": 9.290953545232274,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case04_feedback",
+      "role": "official-new-20261026",
+      "top": "pmux_case04_feedback",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case04_feedback.v",
+          "sha256": "d668d258d804674dd1412538e7bce04d4630d02928ffe113413b536e6b9ed70f"
+        }
+      ],
+      "baseline": {
+        "lcell": 364,
+        "not": 1,
+        "logic": 365,
+        "dff": 16,
+        "wall_s": 0.24,
+        "cpu_s": 0.23,
+        "peak_rss_bytes": 29196288
+      },
+      "candidate": {
+        "lcell": 356,
+        "not": 1,
+        "logic": 357,
+        "dff": 16,
+        "wall_s": 0.25,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 27377664
+      },
+      "reduction_pct": 2.191780821917808,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case05_nested.v",
+          "sha256": "57d64edd3704d9d74407145080a63d06390e4a598c419a948fdea22fb1147f1d"
+        }
+      ],
+      "baseline": {
+        "lcell": 415,
+        "not": 0,
+        "logic": 415,
+        "dff": 12,
+        "wall_s": 0.26,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 25608192
+      },
+      "candidate": {
+        "lcell": 398,
+        "not": 0,
+        "logic": 398,
+        "dff": 12,
+        "wall_s": 0.27,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 25886720
+      },
+      "reduction_pct": 4.096385542168675,
+      "eqy": null
+    }
+  ]
+}

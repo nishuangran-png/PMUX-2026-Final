@@ -1,0 +1,10 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_rmoibnct
+phase 1/2: baseline
+muxpack__mux_if_unbal_5_3_order baseline done
+muxpack__mux_if_unbal_5_3_nonexcl baseline done
+phase 2/2: candidate
+muxpack__mux_if_unbal_5_3_order candidate done
+muxpack__mux_if_unbal_5_3_nonexcl candidate done
+muxpack__mux_if_unbal_5_3_order upstream-yosys-v069    20 ->    15  +25.00% dff    0 EQY PASS
+muxpack__mux_if_unbal_5_3_nonexcl upstream-yosys-v069    16 ->    12  +25.00% dff    0 EQY PASS
+JSON -> reports/048-default-policy-20261026/holdout-eqy/improved.json

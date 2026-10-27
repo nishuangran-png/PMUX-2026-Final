@@ -1,0 +1,28 @@
+case                                     base   cand   dff     method  result
+const_pmux_a2_w1                            1      1     0  sat-miter  PASS (0.88s)
+const_pmux_a2_w4                            2      2     0  sat-miter  PASS (0.41s)
+const_pmux_a2_w8                            6      6     0  sat-miter  PASS (0.42s)
+const_pmux_a2_w16                           8      8     0  sat-miter  PASS (0.44s)
+const_pmux_a3_w1                            1      1     0  sat-miter  PASS (0.38s)
+const_pmux_a3_w4                            3      3     0  sat-miter  PASS (0.41s)
+const_pmux_a3_w8                            7      7     0  sat-miter  PASS (0.45s)
+const_pmux_a3_w16                          14     14     0  sat-miter  PASS (0.46s)
+const_pmux_a4_w1                            1      1     0  sat-miter  PASS (0.39s)
+const_pmux_a4_w4                            3      3     0  sat-miter  PASS (0.43s)
+const_pmux_a4_w8                            7      7     0  sat-miter  PASS (0.46s)
+const_pmux_a4_w16                          15     15     0  sat-miter  PASS (0.53s)
+const_pmux_a5_w1                            1      1     0  sat-miter  PASS (0.37s)
+const_pmux_a5_w4                            3      3     0  sat-miter  PASS (0.42s)
+const_pmux_a5_w8                           15     15     0  sat-miter  PASS (0.48s)
+const_pmux_a5_w16                          51     38     0  sat-miter  PASS (0.59s)
+const_pmux_a6_w1                            1      1     0  sat-miter  PASS (0.35s)
+const_pmux_a6_w4                            3      3     0  sat-miter  PASS (0.52s)
+const_pmux_a6_w8                           27     23     0  sat-miter  PASS (0.49s)
+const_pmux_a6_w16                         108     79     0  sat-miter  PASS (0.62s)
+official_test1                            288    202   222   gate-sim  PASS (1.70s)
+official_test2                             25     16     0  sat-miter  PASS (0.33s)
+official_test3                             13      9    17   gate-sim  PASS (0.40s)
+official_test4                             38     26    10   gate-sim  PASS (0.51s)
+JSON -> reports/037-final-mapping.json
+
+最终网表验证：24/24 通过

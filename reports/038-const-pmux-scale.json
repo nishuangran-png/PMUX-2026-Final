@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T18:47:38.368092+00:00",
+  "git_head": "aba1a34d0708cad7ba3a8e40c09356b2f116722d",
+  "seed": 20261025,
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "ee7ccc5c6679c5ad998e4a36aaddbc0b954cbebeec7b2998b561ef7b8a60aeaa",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 3,
+    "improved": 1,
+    "equal": 2,
+    "regressed": 0,
+    "total_baseline": 717,
+    "total_candidate": 665,
+    "total_delta": 52,
+    "total_reduction_pct": 7.252440725244072,
+    "best_delta": 52,
+    "worst_delta": 0
+  },
+  "cases": [
+    {
+      "id": "const_pmux_a6_w64",
+      "address_width": 6,
+      "output_width": 64,
+      "states": 64,
+      "rtl": "experiments/const-pmux-scale-038-20261025/rtl/const_pmux_a6_w64.v",
+      "rtl_sha256": "84097174a1f9d4a9901ac475855656a716e9c288a22e3aef939de0368f1eb13f",
+      "baseline": {
+        "lcell": 243,
+        "not": 0,
+        "logic": 243,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 243
+        },
+        "wall_s": 0.248094,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w64.baseline.log"
+      },
+      "candidate": {
+        "lcell": 191,
+        "not": 0,
+        "logic": 191,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 191
+        },
+        "wall_s": 0.177938,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w64.candidate.log"
+      },
+      "delta": 52,
+      "reduction_pct": 21.39917695473251
+    },
+    {
+      "id": "const_pmux_a6_w128",
+      "address_width": 6,
+      "output_width": 128,
+      "states": 64,
+      "rtl": "experiments/const-pmux-scale-038-20261025/rtl/const_pmux_a6_w128.v",
+      "rtl_sha256": "145ebd0107a7afcd263fc0e99b8aaf32b1d16c97f2933f485c3b7dd99295b48e",
+      "baseline": {
+        "lcell": 237,
+        "not": 0,
+        "logic": 237,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 237
+        },
+        "wall_s": 0.307591,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w128.baseline.log"
+      },
+      "candidate": {
+        "lcell": 237,
+        "not": 0,
+        "logic": 237,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 237
+        },
+        "wall_s": 0.297713,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w128.candidate.log"
+      },
+      "delta": 0,
+      "reduction_pct": 0.0
+    },
+    {
+      "id": "const_pmux_a6_w256",
+      "address_width": 6,
+      "output_width": 256,
+      "states": 64,
+      "rtl": "experiments/const-pmux-scale-038-20261025/rtl/const_pmux_a6_w256.v",
+      "rtl_sha256": "08d0cdeafc096a994fd11a148a2c14a9003ca5b56ef554684d56609d4ba59dbf",
+      "baseline": {
+        "lcell": 237,
+        "not": 0,
+        "logic": 237,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 237
+        },
+        "wall_s": 0.313978,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w256.baseline.log"
+      },
+      "candidate": {
+        "lcell": 237,
+        "not": 0,
+        "logic": 237,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 237
+        },
+        "wall_s": 0.308696,
+        "log": "experiments/const-pmux-scale-038-20261025/logs/const_pmux_a6_w256.candidate.log"
+      },
+      "delta": 0,
+      "reduction_pct": 0.0
+    }
+  ]
+}

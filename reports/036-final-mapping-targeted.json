@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T17:38:24.193621+00:00",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 3,
+    "passed": 3,
+    "failed": 0
+  },
+  "rows": [
+    {
+      "id": "const_pmux_a6_w8",
+      "top": "const_pmux_a6_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w8.v",
+          "sha256": "509194d863b7e91006041b2bb4098a57ddd87e17a0497251e5e8e4b5864c528e"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "cycloneiv_lcell_comb": 23
+        },
+        "lcell": 23,
+        "not": 0,
+        "logic": 23,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gold.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gold.v",
+        "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2",
+        "cells": {
+          "cycloneiv_lcell_comb": 23
+        },
+        "lcell": 23,
+        "not": 0,
+        "logic": 23,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gate.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gate.v",
+        "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w8.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.502,
+      "errors": []
+    },
+    {
+      "id": "const_pmux_a6_w16",
+      "top": "const_pmux_a6_w16",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w16.v",
+          "sha256": "609f9cf4b8890a51c406eb4fa84265d6a7c68a0e8f0738114bd2fa4127795703"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "cycloneiv_lcell_comb": 106
+        },
+        "lcell": 106,
+        "not": 0,
+        "logic": 106,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gold.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gold.v",
+        "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2",
+        "cells": {
+          "cycloneiv_lcell_comb": 79
+        },
+        "lcell": 79,
+        "not": 0,
+        "logic": 79,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gate.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gate.v",
+        "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "PASS",
+        "rtl_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.rtl-vs-final.log",
+          "log_tail": ""
+        },
+        "baseline_vs_final": {
+          "status": "PASS",
+          "returncode": 0,
+          "log": "experiments/final-mapping-20261025/targeted/const_pmux_a6_w16.baseline-vs-final.log",
+          "log_tail": ""
+        }
+      },
+      "status": "PASS",
+      "elapsed_s": 0.493,
+      "errors": []
+    },
+    {
+      "id": "official_test4",
+      "top": "test4",
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 30,
+          "dffeas": 10
+        },
+        "lcell": 30,
+        "not": 1,
+        "logic": 31,
+        "dff": 10,
+        "il": "experiments/final-mapping-20261025/targeted/official_test4.gold.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/official_test4.gold.v",
+        "log": "experiments/final-mapping-20261025/targeted/official_test4.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 22,
+          "dffeas": 10
+        },
+        "lcell": 22,
+        "not": 1,
+        "logic": 23,
+        "dff": 10,
+        "il": "experiments/final-mapping-20261025/targeted/official_test4.gate.il",
+        "verilog": "experiments/final-mapping-20261025/targeted/official_test4.gate.v",
+        "log": "experiments/final-mapping-20261025/targeted/official_test4.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 5000,
+        "log": "experiments/final-mapping-20261025/targeted/official_test4.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 0.42,
+      "errors": []
+    }
+  ]
+}

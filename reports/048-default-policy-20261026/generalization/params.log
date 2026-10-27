@@ -1,0 +1,19 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_tpdtw92l
+phase 1/2: baseline
+generalize__balanced_l2_w7   baseline done
+generalize__pipeline_l2_w5   baseline done
+generalize__crossbar_l3_w4   baseline done
+generalize__feedback_l1_w5   baseline done
+generalize__nested_l2_w6     baseline done
+phase 2/2: candidate
+generalize__balanced_l2_w7   candidate done
+generalize__pipeline_l2_w5   candidate done
+generalize__crossbar_l3_w4   candidate done
+generalize__feedback_l1_w5   candidate done
+generalize__nested_l2_w6     candidate done
+generalize__balanced_l2_w7   parameter-extrapolation   455 ->   399  +12.31% dff   14 EQY PASS
+generalize__pipeline_l2_w5   parameter-extrapolation   408 ->   320  +21.57% dff   20 EQY PASS
+generalize__crossbar_l3_w4   parameter-extrapolation   468 ->   374  +20.09% dff   12 EQY PASS
+generalize__feedback_l1_w5   parameter-extrapolation   114 ->   105   +7.89% dff    5 EQY PASS
+generalize__nested_l2_w6     parameter-extrapolation   381 ->   368   +3.41% dff   12 EQY PASS
+JSON -> reports/048-default-policy-20261026/generalization/params.json

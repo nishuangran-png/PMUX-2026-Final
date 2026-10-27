@@ -1,0 +1,7 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_4m3io9bh
+phase 1/2: baseline
+official-new-20261026__pmux_case05_nested baseline done
+phase 2/2: candidate
+official-new-20261026__pmux_case05_nested candidate done
+official-new-20261026__pmux_case05_nested official-new-20261026   415 ->   398   +4.10% dff   12 EQY PASS
+JSON -> reports/044-new5-ablation-20261026/after-bfix/case05-tree-low-mask23-f1-s1.json

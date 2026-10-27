@@ -1,0 +1,18 @@
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LC_ALL = "C.UTF-8",
+	LC_CTYPE = "C.UTF-8",
+	LANG = "C.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+case                              wall b    wall c  ratio   cpu b   cpu c  ratio   rss b MB rss c MB ratio
+pmux_case01_balanced                0.284    0.285  1.004   0.260  0.260  1.000     28.40    29.32  1.032
+pmux_case02_pipeline                0.337    0.306  0.907   0.320  0.280  0.875     35.81    35.57  0.993
+pmux_case03_crossbar                0.312    0.241  0.771   0.290  0.220  0.759     30.16    26.67  0.884
+pmux_case04_feedback                0.272    0.271  0.997   0.250  0.250  1.000     27.15    28.11  1.035
+pmux_case05_nested                  0.288    0.284  0.988   0.260  0.260  1.000     27.08    29.05  1.073
+
+sum wall median baseline 1.4938517300000023 candidate 1.3879656664999975
+sum cpu median baseline 1.3800000000000001 candidate 1.27
+max wall ratio 1.0044851625809559 max cpu ratio 1.0 max rss ratio 1.0727062896710906
+JSON -> reports/048-default-policy-20261026/efficiency/repeat10.json

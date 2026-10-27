@@ -29,6 +29,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_BASELINE = ROOT / "tools/build/official-v069/build/yosys"
 DEFAULT_CANDIDATE = ROOT / "tools/build/official-v069-opt/build-current-20261025/yosys"
 DEFAULT_EQY = ROOT / "tools/oss-cad-suite/bin/eqy"
+FORMAL_MODEL = ROOT / "scripts/cycloneiv_formal.v"
+MAPPED_SIM_MODEL = ROOT / "formal/intel_cycloneiv_sim.v"
 HOLDOUT_ROOT = Path(os.environ.get(
     "FPGA_HOLDOUT_ROOT", ROOT / "tools/holdout-20261024/sources"
 ))
@@ -154,14 +156,27 @@ def count_luts(path: Path) -> int:
 
 
 def synth_lut(yosys: Path, case: dict, output: Path, workdir: Path,
-              arm: str, timeout: int) -> int:
+              arm: str, timeout: int, stage: str) -> int:
     raw = workdir / f"{case['id']}_{arm}_raw.il"
-    script = "; ".join(source_commands(case) + [
-        f"synth_intel -family cycloneiv -top {case['top']} -run begin:map_ffs",
-        "abc9 -lut 4 -W 300",
-        "clean; opt -fast; clean",
-        f"write_rtlil {raw}",
-    ])
+    if stage == "core":
+        script = "; ".join(source_commands(case) + [
+            f"hierarchy -top {case['top']}",
+            "synth_intel -family cycloneiv -run begin:map_ffram",
+            "memory_map",
+            "opt -full",
+            "techmap -map +/techmap.v",
+            "opt -full",
+            "abc9 -lut 4 -W 300",
+            "clean; opt -fast; clean",
+            f"write_rtlil {raw}",
+        ])
+    else:
+        script = "; ".join(source_commands(case) + [
+            f"synth_intel -family cycloneiv -top {case['top']} -run begin:map_ffs",
+            "abc9 -lut 4 -W 300",
+            "clean; opt -fast; clean",
+            f"write_rtlil {raw}",
+        ])
     proc = subprocess.run([str(yosys), "-q", "-p", script],
                           capture_output=True, text=True, timeout=timeout)
     if proc.returncode != 0:
@@ -173,12 +188,20 @@ def synth_lut(yosys: Path, case: dict, output: Path, workdir: Path,
 
 
 def run_eqy(baseline: Path, candidate: Path, eqy: Path, case: dict,
-            workdir: Path, timeout: int, collect_group: str | None = None) -> dict:
+            workdir: Path, timeout: int, stage: str,
+            collect_group: str | None = None) -> dict:
     gold = workdir / f"{case['id']}_gold.il"
     gate = workdir / f"{case['id']}_gate.il"
-    gold_luts = synth_lut(baseline, case, gold, workdir, "gold", timeout)
-    gate_luts = synth_lut(candidate, case, gate, workdir, "gate", timeout)
+    gold_luts = synth_lut(baseline, case, gold, workdir, "gold", timeout, stage)
+    gate_luts = synth_lut(candidate, case, gate, workdir, "gate", timeout, stage)
     config = workdir / f"{case['id']}.eqy"
+    gate_library = ""
+    gold_library = ""
+    if stage == "core":
+        gate_library = f"read_verilog {FORMAL_MODEL}\n"
+    else:
+        gold_library = f"read_verilog {MAPPED_SIM_MODEL}\n"
+        gate_library = f"read_verilog {MAPPED_SIM_MODEL}\n"
     collect = ""
     if collect_group:
         collect = f"""
@@ -186,11 +209,11 @@ def run_eqy(baseline: Path, candidate: Path, eqy: Path, case: dict,
 group {collect_group}
 """
     config.write_text(f"""[gold]
-read_rtlil {gold.name}
+{gold_library}read_rtlil {gold.name}
 prep -top {case['top']}
 
 [gate]
-read_rtlil {gate.name}
+{gate_library}read_rtlil {gate.name}
 prep -top {case['top']}
 {collect}
 
@@ -222,6 +245,8 @@ def main() -> int:
     parser.add_argument("--baseline", type=Path, default=DEFAULT_BASELINE)
     parser.add_argument("--candidate", type=Path, default=DEFAULT_CANDIDATE)
     parser.add_argument("--eqy", type=Path, default=DEFAULT_EQY)
+    parser.add_argument("--eqy-stage", choices=["core", "mapped"], default="core",
+                        help="core 验证 pmux_opt 的 RTLIL 边界；mapped 验证旧版完整映射")
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--case", action="append", dest="cases")
     parser.add_argument("--skip-eqy", action="store_true")
@@ -300,7 +325,7 @@ def main() -> int:
             try:
                 row["eqy"] = run_eqy(
                     args.baseline, args.candidate, args.eqy, case, workdir,
-                    args.timeout, args.eqy_collect_group,
+                    args.timeout, args.eqy_stage, args.eqy_collect_group,
                 )
             except Exception as exc:
                 row["eqy"] = {"status": "ERROR", "error": str(exc)}
@@ -319,6 +344,7 @@ def main() -> int:
             "machine": os.uname().machine,
             "python": os.sys.version.split()[0],
             "reps": args.reps,
+            "eqy_stage": args.eqy_stage,
             "eqy_collect_group": args.eqy_collect_group,
         },
         "rows": rows,

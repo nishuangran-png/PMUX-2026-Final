@@ -1,0 +1,55 @@
+{
+  "case": "test",
+  "source": "/Users/selina/Documents/ChatGPT/fpga\u6bd4\u8d5b/rtl/upstream/yosys-v069/wide_thru_priority.v",
+  "repeat": 21,
+  "method": "alternating order; perf_counter wall; /usr/bin/time -l CPU/RSS",
+  "baseline": {
+    "wall_s": {
+      "median": 0.49389320799999936,
+      "min": 0.4883040419999993,
+      "max": 0.7241065419999995
+    },
+    "cpu_s": {
+      "median": 0.47,
+      "min": 0.46,
+      "max": 0.52
+    },
+    "rss_bytes": {
+      "median": 35454976,
+      "min": 34488320,
+      "max": 36651008
+    }
+  },
+  "candidate": {
+    "wall_s": {
+      "median": 0.5032222910000002,
+      "min": 0.49613625000000106,
+      "max": 0.562025209
+    },
+    "cpu_s": {
+      "median": 0.48,
+      "min": 0.46,
+      "max": 0.5
+    },
+    "rss_bytes": {
+      "median": 35667968,
+      "min": 34226176,
+      "max": 36667392
+    }
+  },
+  "ratios": {
+    "wall": 1.01888886676085,
+    "cpu": 1.0212765957446808,
+    "rss": 1.006007393715342
+  },
+  "logic": {
+    "baseline": 1123,
+    "candidate": 1123,
+    "stable": true
+  },
+  "dff": {
+    "baseline": 512,
+    "candidate": 512,
+    "stable": true
+  }
+}

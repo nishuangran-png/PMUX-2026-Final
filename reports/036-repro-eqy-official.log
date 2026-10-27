@@ -1,0 +1,9 @@
+== 2026-10-25T02:02:40+08:00 EQY repro ==
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_eqy_8v14_igs
+case   lut_gold lut_gate   delta  eqy
+test1       287      201      86  PASS
+test2        25       16       9  PASS
+test3        12        9       3  PASS
+test4        30       32      -2  PASS
+
+EQY 全部通过

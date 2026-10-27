@@ -1,0 +1,16 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_9ss3g0uu
+phase 1/2: baseline
+official_test1               baseline done
+official_test2               baseline done
+official_test3               baseline done
+official_test4               baseline done
+phase 2/2: candidate
+official_test1               candidate done
+official_test2               candidate done
+official_test3               candidate done
+official_test4               candidate done
+official_test1               official      288 ->   202  +29.86% dff  222 EQY PASS
+official_test2               official       25 ->    16  +36.00% dff    0 EQY PASS
+official_test3               official       13 ->     9  +30.77% dff   17 EQY PASS
+official_test4               official       38 ->    26  +31.58% dff   10 EQY ERROR
+JSON -> reports/044-new5-ablation-20261026/guarded/original4-final-policy.json

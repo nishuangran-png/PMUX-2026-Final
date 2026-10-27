@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T18:49:26.131921+00:00",
+  "git_head": "aba1a34d0708cad7ba3a8e40c09356b2f116722d",
+  "seed": 7,
+  "data_model": "full-width-sha256",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "ee7ccc5c6679c5ad998e4a36aaddbc0b954cbebeec7b2998b561ef7b8a60aeaa",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 3,
+    "improved": 3,
+    "equal": 0,
+    "regressed": 0,
+    "total_baseline": 1473,
+    "total_candidate": 1338,
+    "total_delta": 135,
+    "total_reduction_pct": 9.164969450101832,
+    "best_delta": 62,
+    "worst_delta": 30
+  },
+  "cases": [
+    {
+      "id": "const_pmux_a5_w64",
+      "address_width": 5,
+      "output_width": 64,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-seed7-038-20261025/rtl/const_pmux_a5_w64.v",
+      "rtl_sha256": "3ca1aed222ba1dfafbe89e9b1ac4a04ef692252f068bb9bd3a5e44f5b2a44964",
+      "baseline": {
+        "lcell": 235,
+        "not": 0,
+        "logic": 235,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 235
+        },
+        "wall_s": 0.298632,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w64.baseline.log"
+      },
+      "candidate": {
+        "lcell": 192,
+        "not": 0,
+        "logic": 192,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 192
+        },
+        "wall_s": 0.209055,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w64.candidate.log"
+      },
+      "delta": 43,
+      "reduction_pct": 18.29787234042553
+    },
+    {
+      "id": "const_pmux_a5_w128",
+      "address_width": 5,
+      "output_width": 128,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-seed7-038-20261025/rtl/const_pmux_a5_w128.v",
+      "rtl_sha256": "a41d4f908aa7edde8de4c306b20462c0b56a33af030f5c59fce04b164c3e67ce",
+      "baseline": {
+        "lcell": 444,
+        "not": 0,
+        "logic": 444,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 444
+        },
+        "wall_s": 0.397537,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w128.baseline.log"
+      },
+      "candidate": {
+        "lcell": 382,
+        "not": 0,
+        "logic": 382,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 382
+        },
+        "wall_s": 0.256203,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w128.candidate.log"
+      },
+      "delta": 62,
+      "reduction_pct": 13.963963963963963
+    },
+    {
+      "id": "const_pmux_a5_w256",
+      "address_width": 5,
+      "output_width": 256,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-seed7-038-20261025/rtl/const_pmux_a5_w256.v",
+      "rtl_sha256": "e9e9ae21b23c8bbf020822ea9a18946586e3ed8e9e18773e831fdc80a9f8839e",
+      "baseline": {
+        "lcell": 794,
+        "not": 0,
+        "logic": 794,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 794
+        },
+        "wall_s": 0.609094,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w256.baseline.log"
+      },
+      "candidate": {
+        "lcell": 764,
+        "not": 0,
+        "logic": 764,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 764
+        },
+        "wall_s": 0.434998,
+        "log": "experiments/const-pmux-localplan-seed7-038-20261025/logs/const_pmux_a5_w256.candidate.log"
+      },
+      "delta": 30,
+      "reduction_pct": 3.7783375314861463
+    }
+  ]
+}

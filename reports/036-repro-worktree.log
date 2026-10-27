@@ -1,0 +1,17 @@
+Preparing worktree (detached HEAD ad7ff16)
+Updating files:  90% (3646/4040)Updating files:  91% (3677/4040)Updating files:  92% (3717/4040)Updating files:  93% (3758/4040)Updating files:  94% (3798/4040)Updating files:  95% (3838/4040)Updating files:  96% (3879/4040)Updating files:  97% (3919/4040)Updating files:  98% (3960/4040)Updating files:  99% (4000/4040)Updating files: 100% (4040/4040)Updating files: 100% (4040/4040), done.
+HEAD is now at ad7ff16 yosys snapshot e8db64c6 (0.69+117) with deps
+== 2026-10-25T01:55:29+08:00 install ==
+安装完成：/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025
+下一步：cmake -S "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025" -B "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025/build" -DCMAKE_BUILD_TYPE=Release
+        cmake --build "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025/build" --target yosys -j8
+== integrated diff ==
+ M passes/CMakeLists.txt
+ M techlibs/intel/CMakeLists.txt
+ M techlibs/intel/synth_intel.cc
+?? passes/pmux/
+?? techlibs/intel/common/ff_map_pn1.v
+ passes/CMakeLists.txt         |  1 +
+ techlibs/intel/CMakeLists.txt |  1 +
+ techlibs/intel/synth_intel.cc | 24 +++++++++++++++++++++---
+ 3 files changed, 23 insertions(+), 3 deletions(-)

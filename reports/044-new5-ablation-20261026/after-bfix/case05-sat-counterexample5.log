@@ -1,0 +1,125 @@
+
+-- Running command `
+read_rtlil reports/044-new5-ablation-20261026/case05-rtlil-20261026b/mask0.il;
+rename pmux_case05_nested gold;
+design -stash gold;
+read_rtlil reports/044-new5-ablation-20261026/case05-rtlil-20261026c/mask8.il;
+rename pmux_case05_nested gate;
+design -stash gate;
+design -copy-from gold gold;
+design -copy-from gate gate;
+equiv_make gold gate equiv;
+hierarchy -top equiv;
+flatten;
+opt_clean;
+sat -seq 1 -prove lane[0].next_q_gold lane[0].next_q_gate -show-inputs -show-outputs -show lane[0].next_q_gold -show lane[0].next_q_gate;
+' --
+
+1. Executing RTLIL frontend.
+Input filename: reports/044-new5-ablation-20261026/case05-rtlil-20261026b/mask0.il
+Renaming module \pmux_case05_nested to \gold.
+
+2. Executing RTLIL frontend.
+Input filename: reports/044-new5-ablation-20261026/case05-rtlil-20261026c/mask8.il
+Renaming module \pmux_case05_nested to \gate.
+
+3. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: lane[0].next_q_gold (\lane[0].next_q_gold), lane[0].next_q_gate (\lane[0].next_q_gate) -> lane[0].next_q
+Presumably equivalent wires: lane[0].q_gold (\lane[0].q_gold), lane[0].q_gate (\lane[0].q_gate) -> lane[0].q
+Presumably equivalent wires: lane[0].s_gold (\ctrl_in_gold), lane[0].s_gate (\ctrl_in_gate) -> lane[0].s
+Presumably equivalent wires: lane[0].d_gold (\data_in_gold [47:36]), lane[0].d_gate (\data_in_gate [47:36]) -> lane[0].d
+Presumably equivalent wires: lane[0].c_gold (\data_in_gold [35:24]), lane[0].c_gate (\data_in_gate [35:24]) -> lane[0].c
+Presumably equivalent wires: lane[0].b_gold (\data_in_gold [23:12]), lane[0].b_gate (\data_in_gate [23:12]) -> lane[0].b
+Presumably equivalent wires: lane[0].a_gold (\data_in_gold [11:0]), lane[0].a_gate (\data_in_gate [11:0]) -> lane[0].a
+Presumably equivalent wires: data_out_gold (\lane[0].q_gold), data_out_gate (\lane[0].q_gate) -> data_out
+Presumably equivalent wires: ctrl_in_gold (\ctrl_in_gold), ctrl_in_gate (\ctrl_in_gate) -> ctrl_in
+Presumably equivalent wires: data_in_gold (\data_in_gold), data_in_gate (\data_in_gate) -> data_in
+Presumably equivalent wires: en_gold (\en_gold), en_gate (\en_gate) -> en
+Presumably equivalent wires: rst_gold (\rst_gold), rst_gate (\rst_gate) -> rst
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Changing input D of cell $auto$ff.cc:337:slice$71_gate ($sdffe): \lane[0].next_q_gate -> \lane[0].next_q
+Changing input A of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:58$15_gate ($add): \lane[0].q_gate -> \data_out
+Changing input A of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:55$14_gate ($xor): \lane[0].q_gate -> \data_out
+Changing input B of cell $or$rtl/official-new-20261026/pmux_case05_nested.v:53$12_gate ($or): \lane[0].q_gate -> \data_out
+Changing input B of cell $sub$rtl/official-new-20261026/pmux_case05_nested.v:52$11_gate ($sub): \lane[0].q_gate -> \data_out
+Changing input B of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:47$10_gate ($add): \lane[0].q_gate -> \data_out
+Changing input B of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:46$9_gate ($xor): \lane[0].q_gate -> \data_out
+Changing input B of cell $sub$rtl/official-new-20261026/pmux_case05_nested.v:33$4_gate ($sub): \lane[0].q_gate -> \data_out
+Changing input B of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:32$3_gate ($add): \lane[0].q_gate -> \data_out
+Changing input B of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:31$2_gate ($xor): \lane[0].q_gate -> \data_out
+Changing input D of cell $auto$ff.cc:337:slice$71_gold ($sdffe): \lane[0].next_q_gold -> \lane[0].next_q
+Changing input A of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:58$15_gold ($add): \lane[0].q_gold -> \data_out
+Changing input A of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:55$14_gold ($xor): \lane[0].q_gold -> \data_out
+Changing input B of cell $or$rtl/official-new-20261026/pmux_case05_nested.v:53$12_gold ($or): \lane[0].q_gold -> \data_out
+Changing input B of cell $sub$rtl/official-new-20261026/pmux_case05_nested.v:52$11_gold ($sub): \lane[0].q_gold -> \data_out
+Changing input B of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:47$10_gold ($add): \lane[0].q_gold -> \data_out
+Changing input B of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:46$9_gold ($xor): \lane[0].q_gold -> \data_out
+Changing input B of cell $sub$rtl/official-new-20261026/pmux_case05_nested.v:33$4_gold ($sub): \lane[0].q_gold -> \data_out
+Changing input B of cell $add$rtl/official-new-20261026/pmux_case05_nested.v:32$3_gold ($add): \lane[0].q_gold -> \data_out
+Changing input B of cell $xor$rtl/official-new-20261026/pmux_case05_nested.v:31$2_gold ($xor): \lane[0].q_gold -> \data_out
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+4.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+5. Executing FLATTEN pass (flatten design).
+
+6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \equiv..
+Removed 76 unused cells and 7 unused wires.
+<suppressed ~83 debug messages>
+
+7. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 100 cells to SAT database.
+No constraints for initial state found.
+
+Import proof-constraint: \lane[0].next_q_gold = \lane[0].next_q_gate
+Final proof equation: \lane[0].next_q_gold = \lane[0].next_q_gate
+Import show expression: \lane[0].next_q_gold
+Import show expression: \lane[0].next_q_gate
+Import show expression: \ctrl_in
+Import show expression: \data_in
+Import show expression: \en
+Import show expression: \rst
+Import show expression: \clk
+Import show expression: \data_out
+
+Solving problem with 4212 variables and 11299 clauses..
+SAT proof finished - model found: FAIL!
+
+   ______                   ___       ___       _ _            _ _ 
+  (_____ \                 / __)     / __)     (_) |          | | |
+   _____) )___ ___   ___ _| |__    _| |__ _____ _| | _____  __| | |
+  |  ____/ ___) _ \ / _ (_   __)  (_   __|____ | | || ___ |/ _  |_|
+  | |   | |  | |_| | |_| || |       | |  / ___ | | || ____( (_| |_ 
+  |_|   |_|   \___/ \___/ |_|       |_|  \_____|_|\_)_____)\____|_|
+
+
+  Time Signal Name                       Dec       Hex                                                 Bin
+  ---- ------------------------- ----------- --------- ---------------------------------------------------
+  init \lane[0].q_gate                     0         0                                        000000000000
+  init \lane[0].q_gold                     0         0                                        000000000000
+  ---- ------------------------- ----------- --------- ---------------------------------------------------
+     1 \clk                                0         0                                                   0
+     1 \ctrl_in                          888       378                                    0000001101111000
+     1 \data_in                           --        --    000110100001000001011111000000000000000000000000
+     1 \data_out                           0         0                                        000000000000
+     1 \en                                 0         0                                                   0
+     1 \lane[0].next_q_gate              417       1a1                                        000110100001
+     1 \lane[0].next_q_gold               95        5f                                        000001011111
+     1 \rst                                0         0                                                   0
+
+End of script. Logfile hash: 45c9c511f1, time: 0.02s, user: 0.02s, system: 0.00s, MEM: 13.95 MB peak
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+Time spent: 85% 1x sat (0 sec), 5% 1x opt_clean (0 sec), ...

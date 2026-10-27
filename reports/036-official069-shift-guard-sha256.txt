@@ -1,0 +1,1 @@
+217a5719c84b9c01b1914ae9ea1203a517fd615f851df2108ec4f27597afee73  tools/build/official-v069-opt/build-current-20261025/yosys

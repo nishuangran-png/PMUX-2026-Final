@@ -1,0 +1,2492 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>PMUX 优化实验台</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="PMUX 优化实验台" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;PMUX 优化实验台&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;pmux-lab-root&quot;&gt;
+  &lt;style&gt;
+    #pmux-lab-root {
+      --lab-gap: 1rem;
+      min-width: 0;
+    }
+
+    #pmux-lab-root .lab-hero {
+      display: grid;
+      gap: 0.35rem;
+      max-width: 78ch;
+      margin-block-end: 1rem;
+    }
+
+    #pmux-lab-root .lab-hero h1,
+    #pmux-lab-root h2,
+    #pmux-lab-root h3,
+    #pmux-lab-root p {
+      margin-block: 0;
+    }
+
+    #pmux-lab-root .lab-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #pmux-lab-root .lab-lede {
+      max-width: 72ch;
+      margin-block-end: 0.9rem;
+    }
+
+    #pmux-lab-root .lab-metrics {
+      margin-block: 0.9rem 1rem;
+    }
+
+    #pmux-lab-root .lab-main-tabs {
+      margin-block-end: 1rem;
+    }
+
+    #pmux-lab-root .lab-panel {
+      padding-block-start: 0.25rem;
+    }
+
+    #pmux-lab-root .lab-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+      margin-block-end: 0.5rem;
+    }
+
+    #pmux-lab-root .lab-pipeline {
+      margin-block: 0.9rem 1.1rem;
+    }
+
+    #pmux-lab-root .lab-controls {
+      margin-block: 0.75rem 1rem;
+    }
+
+    #pmux-lab-root .lab-control-title {
+      display: block;
+      margin-block-end: 0.4rem;
+    }
+
+    #pmux-lab-root .lab-rule-panel[hidden] {
+      display: none;
+    }
+
+    #pmux-lab-root .rule-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+      gap: 1.5rem;
+      align-items: start;
+      padding-block: 1rem 0.5rem;
+    }
+
+    #pmux-lab-root .rule-kicker {
+      color: var(--muted-foreground);
+      margin-block-end: 0.25rem;
+    }
+
+    #pmux-lab-root .rule-copy {
+      margin-block: 0.35rem 0.75rem;
+    }
+
+    #pmux-lab-root .rule-facts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem 0.75rem;
+    }
+
+    #pmux-lab-root .before-after {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: center;
+      min-width: 0;
+    }
+
+    #pmux-lab-root .lab-diagram {
+      display: grid;
+      align-content: start;
+      gap: 0.45rem;
+      min-width: 0;
+    }
+
+    #pmux-lab-root .lab-diagram-title {
+      font-weight: 500;
+    }
+
+    #pmux-lab-root .lab-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    #pmux-lab-root .lab-flow.is-column {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #pmux-lab-root .lab-node {
+      display: inline-flex;
+      align-items: center;
+      min-width: 0;
+      min-height: 1.9rem;
+      padding: 0.22rem 0.48rem;
+      border: 1px solid var(--border);
+      border-radius: 0.35rem;
+      color: var(--card-foreground);
+      background: var(--card);
+      overflow-wrap: anywhere;
+    }
+
+    #pmux-lab-root .lab-node.is-source {
+      background: color-mix(in srgb, var(--viz-series-2) 12%, var(--card));
+    }
+
+    #pmux-lab-root .lab-node.is-hot {
+      background: color-mix(in srgb, var(--viz-series-1) 16%, var(--card));
+      border-color: color-mix(in srgb, var(--viz-series-1) 44%, var(--border));
+    }
+
+    #pmux-lab-root .lab-node.is-muted {
+      color: var(--muted-foreground);
+      opacity: 0.58;
+    }
+
+    #pmux-lab-root .lab-arrow {
+      color: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .lab-before-after-arrow {
+      color: var(--muted-foreground);
+      align-self: center;
+    }
+
+    #pmux-lab-root .lab-stack,
+    #pmux-lab-root .lab-lane {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    #pmux-lab-root .lab-split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    #pmux-lab-root .lab-group {
+      padding: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: 0.4rem;
+      background: color-mix(in srgb, var(--viz-series-2) 8%, transparent);
+    }
+
+    #pmux-lab-root .lab-group-title {
+      color: var(--muted-foreground);
+      margin-block-end: 0.25rem;
+    }
+
+    #pmux-lab-root .lab-group-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    #pmux-lab-root .lab-mini-chip {
+      padding: 0.08rem 0.32rem;
+      border: 1px solid var(--border);
+      border-radius: 0.25rem;
+      background: var(--background);
+    }
+
+    #pmux-lab-root .lab-rule-pager {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    #pmux-lab-root .lab-select-wrap {
+      min-width: min(100%, 18rem);
+    }
+
+    #pmux-lab-root .lab-chain-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+      padding-block: 0.8rem 0.25rem;
+    }
+
+    #pmux-lab-root .chain-column {
+      min-width: 0;
+    }
+
+    #pmux-lab-root .chain-heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.35rem 0.8rem;
+      margin-block-end: 0.55rem;
+    }
+
+    #pmux-lab-root .chain-rail {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.3rem;
+      min-height: 4.5rem;
+    }
+
+    #pmux-lab-root .chain-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    #pmux-lab-root .chain-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.65rem;
+      padding: 0.1rem 0.32rem;
+      border: 1px solid var(--border);
+      border-radius: 0.3rem;
+      background: var(--card);
+      color: var(--card-foreground);
+    }
+
+    #pmux-lab-root .chain-chip.is-select {
+      background: color-mix(in srgb, var(--viz-series-2) 12%, var(--card));
+    }
+
+    #pmux-lab-root .chain-chip.is-mux {
+      background: color-mix(in srgb, var(--viz-series-1) 14%, var(--card));
+    }
+
+    #pmux-lab-root .chain-arrow {
+      color: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .chain-more {
+      color: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .chain-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+      gap: 0.45rem;
+    }
+
+    #pmux-lab-root .chain-group {
+      padding: 0.42rem;
+      border: 1px solid var(--border);
+      border-radius: 0.38rem;
+      background: color-mix(in srgb, var(--viz-series-1) 7%, transparent);
+    }
+
+    #pmux-lab-root .chain-group-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-block-end: 0.3rem;
+    }
+
+    #pmux-lab-root .chain-group-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      margin-block-end: 0.35rem;
+    }
+
+    #pmux-lab-root .chain-or {
+      color: var(--muted-foreground);
+      padding-block-start: 0.28rem;
+      border-block-start: 1px solid var(--border);
+    }
+
+    #pmux-lab-root .chain-center-arrow {
+      color: var(--muted-foreground);
+      align-self: center;
+    }
+
+    #pmux-lab-root .chain-summary {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.55rem 0.9rem;
+      margin-block: 0.85rem 0.3rem;
+    }
+
+    #pmux-lab-root .chain-note {
+      margin-block: 0.2rem 0.7rem;
+    }
+
+    #pmux-lab-root .lab-chart {
+      min-height: 12rem;
+      margin-block: 0.35rem 0.45rem;
+    }
+
+    #pmux-lab-root .lab-chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #pmux-lab-root .lab-chart text {
+      font-size: 12px;
+      fill: var(--foreground);
+    }
+
+    #pmux-lab-root .lab-chart .chart-muted {
+      fill: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .lab-chart .chart-grid {
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+
+    #pmux-lab-root .lab-chart .chart-track {
+      fill: var(--viz-series-2);
+      opacity: 0.22;
+    }
+
+    #pmux-lab-root .lab-chart .chart-fill {
+      fill: var(--viz-series-1);
+    }
+
+    #pmux-lab-root .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1rem;
+    }
+
+    #pmux-lab-root .chart-swatch {
+      display: inline-block;
+      inline-size: 0.62rem;
+      block-size: 0.62rem;
+      border-radius: 0.15rem;
+      margin-inline-end: 0.35rem;
+      vertical-align: 0.02rem;
+    }
+
+    #pmux-lab-root .chart-swatch.is-track {
+      background: color-mix(in srgb, var(--viz-series-2) 34%, transparent);
+    }
+
+    #pmux-lab-root .chart-swatch.is-fill {
+      background: var(--viz-series-1);
+    }
+
+    #pmux-lab-root .evidence-list {
+      display: grid;
+      gap: 0.55rem;
+      margin-block: 0.6rem 0.8rem;
+    }
+
+    #pmux-lab-root .evidence-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.22rem 0.75rem;
+      align-items: baseline;
+    }
+
+    #pmux-lab-root .evidence-track {
+      grid-column: 1 / -1;
+      block-size: 0.42rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--viz-series-2) 18%, transparent);
+    }
+
+    #pmux-lab-root .evidence-fill {
+      block-size: 100%;
+      inline-size: var(--bar, 0%);
+      border-radius: inherit;
+      background: var(--viz-series-1);
+    }
+
+    #pmux-lab-root .evidence-row.is-zero .evidence-fill {
+      inline-size: 0;
+    }
+
+    #pmux-lab-root .evidence-value {
+      color: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .evidence-group-title {
+      margin-block: 0.9rem 0.15rem;
+    }
+
+    #pmux-lab-root .lab-rule-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem 1.2rem;
+      margin-block: 0.55rem 0.6rem;
+    }
+
+    #pmux-lab-root .lab-rule-list {
+      display: grid;
+      gap: 0.35rem;
+      padding-inline-start: 1.1rem;
+      margin: 0;
+    }
+
+    #pmux-lab-root .lab-rule-list li::marker {
+      color: var(--muted-foreground);
+    }
+
+    #pmux-lab-root .lab-boundary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-block: 0.8rem 0.25rem;
+    }
+
+    #pmux-lab-root .lab-boundary h3 {
+      margin-block-end: 0.4rem;
+    }
+
+    #pmux-lab-root .lab-source-note {
+      margin-block-start: 1rem;
+    }
+
+    #pmux-lab-root .lab-inline-code {
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 720px) {
+      #pmux-lab-root .rule-stage,
+      #pmux-lab-root .lab-chain-layout,
+      #pmux-lab-root .lab-rule-grid,
+      #pmux-lab-root .lab-boundary {
+        grid-template-columns: 1fr;
+      }
+
+      #pmux-lab-root .before-after {
+        grid-template-columns: 1fr;
+      }
+
+      #pmux-lab-root .lab-before-after-arrow,
+      #pmux-lab-root .chain-center-arrow {
+        transform: rotate(90deg);
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      #pmux-lab-root .lab-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      #pmux-lab-root .chain-fill,
+      #pmux-lab-root .chart-fill {
+        transition: inline-size 180ms ease, width 180ms ease;
+      }
+    }
+  &lt;/style&gt;
+
+  &lt;header class=&quot;lab-hero&quot;&gt;
+    &lt;div class=&quot;lab-eyebrow text-small text-muted&quot;&gt;PMUX · Yosys 0.69 · 同源实验&lt;/div&gt;
+    &lt;h1&gt;把一长串条件选择，改写成更省 LUT 的结构&lt;/h1&gt;
+    &lt;p class=&quot;lab-lede text-muted&quot;&gt;先识别完整结构，再证明功能等价，最后才改写；证据不足时保留原电路。&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;viz-grid lab-metrics&quot; aria-label=&quot;当前结果摘要&quot;&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;官方四题平均缩减&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value tabular-nums&quot;&gt;23.86%&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;严格同源口径&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;等价性验证&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value tabular-nums&quot;&gt;4 / 4&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;EQY 全部通过&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;结构矩阵退化&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value tabular-nums&quot;&gt;0 / 152&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;141 有收益 · 11 持平&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;nav nav-pills lab-main-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;实验视图&quot;&gt;
+    &lt;button class=&quot;nav-link active&quot; id=&quot;tab-rules&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot; aria-controls=&quot;panel-rules&quot;&gt;规则演示&lt;/button&gt;
+    &lt;button class=&quot;nav-link&quot; id=&quot;tab-chain&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; aria-controls=&quot;panel-chain&quot;&gt;链长实验&lt;/button&gt;
+    &lt;button class=&quot;nav-link&quot; id=&quot;tab-evidence&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; aria-controls=&quot;panel-evidence&quot;&gt;结果边界&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;section class=&quot;lab-panel&quot; id=&quot;panel-rules&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;tab-rules&quot;&gt;
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;八道工序&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;结构命中 → 等价证明 → 收益判断 → 改写&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-flow lab-pipeline&quot; aria-label=&quot;优化在综合流程中的位置&quot;&gt;
+      &lt;span class=&quot;lab-node is-source&quot;&gt;RTL 读入&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;通用处理&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node is-hot&quot;&gt;pmux_opt 主流程&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;LUT 映射&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node is-hot&quot;&gt;LUT 收尾&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;EQY&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;viz-controls lab-controls&quot;&gt;
+      &lt;label class=&quot;form-label lab-select-wrap&quot; for=&quot;rule-select&quot;&gt;选择工序
+        &lt;select class=&quot;form-select&quot; id=&quot;rule-select&quot;&gt;
+          &lt;option value=&quot;0&quot;&gt;01 · 常量表直接变 LUT&lt;/option&gt;
+          &lt;option value=&quot;1&quot;&gt;02 · 优先级 MUX 链分组&lt;/option&gt;
+          &lt;option value=&quot;2&quot;&gt;03 · 两个 PMUX 共用选择网络&lt;/option&gt;
+          &lt;option value=&quot;3&quot;&gt;04 · 稀疏更新 PMUX 折叠&lt;/option&gt;
+          &lt;option value=&quot;4&quot;&gt;05 · 门控比较器缩窄&lt;/option&gt;
+          &lt;option value=&quot;5&quot;&gt;06 · 相邻常量码共因子&lt;/option&gt;
+          &lt;option value=&quot;6&quot;&gt;07 · 公共使能提取&lt;/option&gt;
+          &lt;option value=&quot;7&quot;&gt;08 · LUT 收尾吸收&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+      &lt;div class=&quot;lab-rule-pager&quot;&gt;
+        &lt;button class=&quot;btn&quot; id=&quot;rule-prev&quot; type=&quot;button&quot;&gt;上一道&lt;/button&gt;
+        &lt;button class=&quot;btn&quot; id=&quot;rule-next&quot; type=&quot;button&quot;&gt;下一道&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;0&quot;&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;01 / 08 · 常量表&lt;/div&gt;
+          &lt;h3&gt;常量表直接变 LUT&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;小 ROM 没有写口、内容固定，本质上就是一张真值表。把地址位直接变成 LUT 输入，并把常用使能选择一起写进表里。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test4 命中&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;关闭 ROM lowering 后，test4 回到基线&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;地址&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;常量 ROM&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;使能 MUX&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;地址 + 使能&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;LUT 真值表&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;1&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;02 / 08 · 选择链&lt;/div&gt;
+          &lt;h3&gt;优先级 MUX 链分组&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;把一长串“前面的条件优先”的开关，切成若干小组。组内保留顺序，组外用一个总开关选组，避免逐级叠加的反相与门。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test2 命中&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;25 → 16；16 级封存链 336 → 248&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-stack&quot;&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;S0&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;MUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;下一层&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;S1&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;MUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;下一层&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;S2&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;MUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-split&quot;&gt;
+              &lt;div class=&quot;lab-group&quot;&gt;&lt;div class=&quot;lab-group-title text-small&quot;&gt;G0 · 组内优先&lt;/div&gt;&lt;div class=&quot;lab-group-chips&quot;&gt;&lt;span class=&quot;lab-mini-chip&quot;&gt;S0&lt;/span&gt;&lt;span class=&quot;lab-mini-chip&quot;&gt;S1&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+              &lt;div class=&quot;lab-group&quot;&gt;&lt;div class=&quot;lab-group-title text-small&quot;&gt;G1 · 组内优先&lt;/div&gt;&lt;div class=&quot;lab-group-chips&quot;&gt;&lt;span class=&quot;lab-mini-chip&quot;&gt;S2&lt;/span&gt;&lt;span class=&quot;lab-mini-chip&quot;&gt;S3&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;先选组&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;局部 MUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;2&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;03 / 08 · 共享选择&lt;/div&gt;
+          &lt;h3&gt;两个 PMUX 共用选择网络&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;两排多路开关如果使用同一组选择线，只是输入顺序按最低位成对交换，那么控制线只需要做一份，结果再用最低位拨回来。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test1 命中&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;与其它结构规则共同作用，单条收益不可相加&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-stack&quot;&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;数据 A&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;PMUX A&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;数据 B&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;PMUX B&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;同一选择&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-muted&quot;&gt;重复两份&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;共享选择&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;一份选择网络&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;两路结果&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;最低位&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;交换&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;3&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;04 / 08 · 稀疏更新&lt;/div&gt;
+          &lt;h3&gt;局部更新 PMUX 折叠&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;寄存器大部分时候保持原值，只在少数条件下更新。如果更新值能证明就是总线上的某些位，就把整块选择器折叠成连线；有另一路有效值时再保留一个小 MUX。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test3 命中 3 处&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;只处理能逐位证明为总线位的情况&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;保持值&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;大 PMUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;寄存器&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;局部更新&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;↗&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;总线位&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;直连&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;寄存器&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-muted&quot;&gt;非空 A 端&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;单个小 MUX&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;4&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;05 / 08 · 门控比较&lt;/div&gt;
+          &lt;h3&gt;门控比较器缩窄&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;如果寄存器使能已经保证总线某一位固定不变，那么比较器不必再重复检查这一位。只有整条扇出都能证明时才缩窄，遇到未知负载就放弃。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test3 命中 3 个比较器&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;遍历完整扇出后才允许删除比较位&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;完整总线&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;8 位比较&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;使能寄存器&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;可观察位&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;6 位比较&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;使能寄存器&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-muted&quot;&gt;2 位已由使能确定&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;5&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;06 / 08 · 相邻常量&lt;/div&gt;
+          &lt;h3&gt;相邻常量码共因子&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;两个条件只差最低位时，完整比较两遍很浪费。先算共同高位，再用差分位选择结果，控制逻辑更短。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test3 命中 1 对&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;只处理普通 eq，不碰带 X 语义的 eqx&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;总线&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;= 7E&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;总线&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;= 7F&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;总线&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;共同前缀&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;最低位选择&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;6&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;07 / 08 · 公共使能&lt;/div&gt;
+          &lt;h3&gt;公共使能提取&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;同一时钟下的一批寄存器，如果开关条件都包含同一个公共项，就把这项算一次，再分给各分支使用。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test1 / test3 命中&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;日志：test1 16 组，test3 3 组 active-high DFF enable&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;DFF 1&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;DFF 2&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;共享门&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;c1 / c2&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;DFF&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-panel&quot; data-rule=&quot;7&quot; hidden&gt;
+      &lt;div class=&quot;rule-stage&quot;&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;rule-kicker text-small text-muted&quot;&gt;08 / 08 · 映射后收尾&lt;/div&gt;
+          &lt;h3&gt;LUT 收尾吸收&lt;/h3&gt;
+          &lt;p class=&quot;rule-copy text-muted&quot;&gt;映射完成后，单负载反相器可以翻转 LUT 真值表消掉；某些常量数据 MUX 也能把选择位并入 LUT。这是最后一道清洁工。&lt;/p&gt;
+          &lt;div class=&quot;rule-facts&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;test4 命中&lt;/span&gt;&lt;span class=&quot;text-small text-muted&quot;&gt;消融口径：fold 再省 2 个单元（29 → 27）&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;before-after&quot;&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;原结构&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;LUT&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;NOT&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-source&quot;&gt;常量&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;MUX&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;lab-before-after-arrow&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;lab-diagram&quot;&gt;
+            &lt;div class=&quot;lab-diagram-title text-small&quot;&gt;改写后&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;翻转后的 LUT&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;lab-flow&quot;&gt;&lt;span class=&quot;lab-node is-hot&quot;&gt;写入选择位的 LUT&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;lab-node&quot;&gt;输出&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-panel&quot; id=&quot;panel-chain&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;tab-chain&quot; hidden&gt;
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;链长 × 位宽实验&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;实际 pass 回归数据，不是拟合曲线&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;lab-lede text-muted&quot;&gt;链越长，分组收益通常越明显；但窄数据路径的控制开销可能吃掉收益，所以算法会保留原链。&lt;/p&gt;
+
+    &lt;div class=&quot;viz-controls lab-controls&quot;&gt;
+      &lt;label class=&quot;form-label&quot; for=&quot;chain-length&quot;&gt;
+        &lt;span class=&quot;lab-control-title&quot;&gt;链长 &lt;span class=&quot;tabular-nums&quot; id=&quot;chain-length-value&quot;&gt;8&lt;/span&gt; 级&lt;/span&gt;
+        &lt;input class=&quot;form-range&quot; id=&quot;chain-length&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;7&quot; step=&quot;1&quot; value=&quot;4&quot;&gt;
+      &lt;/label&gt;
+      &lt;label class=&quot;form-label&quot; for=&quot;chain-width&quot;&gt;数据位宽
+        &lt;select class=&quot;form-select&quot; id=&quot;chain-width&quot;&gt;
+          &lt;option value=&quot;1&quot;&gt;1 位&lt;/option&gt;
+          &lt;option value=&quot;2&quot;&gt;2 位&lt;/option&gt;
+          &lt;option value=&quot;3&quot;&gt;3 位&lt;/option&gt;
+          &lt;option value=&quot;4&quot;&gt;4 位&lt;/option&gt;
+          &lt;option value=&quot;8&quot;&gt;8 位&lt;/option&gt;
+          &lt;option value=&quot;16&quot; selected&gt;16 位&lt;/option&gt;
+          &lt;option value=&quot;32&quot;&gt;32 位&lt;/option&gt;
+          &lt;option value=&quot;64&quot;&gt;64 位&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-chain-layout&quot;&gt;
+      &lt;div class=&quot;chain-column&quot;&gt;
+        &lt;div class=&quot;chain-heading&quot;&gt;&lt;div class=&quot;lab-diagram-title&quot;&gt;原结构&lt;/div&gt;&lt;div class=&quot;text-small text-muted&quot; id=&quot;chain-before-caption&quot;&gt;8 级逐级嵌套&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;chain-rail&quot; id=&quot;chain-before&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;chain-center-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/div&gt;
+      &lt;div class=&quot;chain-column&quot;&gt;
+        &lt;div class=&quot;chain-heading&quot;&gt;&lt;div class=&quot;lab-diagram-title&quot;&gt;分组结构&lt;/div&gt;&lt;div class=&quot;text-small text-muted&quot; id=&quot;chain-after-caption&quot;&gt;2 路分组&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;chain-groups&quot; id=&quot;chain-after&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;chain-summary&quot; aria-live=&quot;polite&quot;&gt;
+      &lt;span class=&quot;text-muted&quot;&gt;实测基线&lt;/span&gt;
+      &lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;chain-baseline&quot;&gt;160&lt;/span&gt;
+      &lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;chain-candidate&quot;&gt;114&lt;/span&gt;
+      &lt;span class=&quot;viz-stat-value tabular-nums&quot; id=&quot;chain-reduction&quot;&gt;−28.7%&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;chain-note text-small text-muted&quot; id=&quot;chain-note&quot;&gt;8 级 × 16 位：160 → 114，结构改写后减少 46 个单元。&lt;/div&gt;
+
+    &lt;hr&gt;
+
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;矩阵结论&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;链长 4–64 · 位宽 1–64&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;lab-flow&quot;&gt;
+      &lt;span class=&quot;lab-node is-hot&quot;&gt;141 组有收益&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;11 组持平&lt;/span&gt;
+      &lt;span class=&quot;lab-node is-muted&quot;&gt;0 组退化&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;平均 17.63%&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;最大 32.99%&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-panel&quot; id=&quot;panel-evidence&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;tab-evidence&quot; hidden&gt;
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;官方四题&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;LCELL + $not · 严格同源基线&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;lab-chart&quot; id=&quot;official-chart&quot; role=&quot;img&quot; aria-label=&quot;官方四题基线、候选和缩减率&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;chart-legend text-small text-muted&quot;&gt;
+      &lt;span&gt;&lt;span class=&quot;chart-swatch is-track&quot;&gt;&lt;/span&gt;基线&lt;/span&gt;
+      &lt;span&gt;&lt;span class=&quot;chart-swatch is-fill&quot;&gt;&lt;/span&gt;候选&lt;/span&gt;
+      &lt;span&gt;标签显示“基线 → 候选”和缩减率&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;hr&gt;
+
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;封存集&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;自行构造链 + 外部纯 RTL&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;evidence-list&quot; aria-label=&quot;封存集缩减率&quot;&gt;
+      &lt;div class=&quot;evidence-row&quot;&gt;&lt;span&gt;构造链 · 5 级&lt;/span&gt;&lt;span class=&quot;evidence-value tabular-nums&quot;&gt;31.25%&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot; style=&quot;--bar:31.25%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row&quot;&gt;&lt;span&gt;构造链 · 6 级&lt;/span&gt;&lt;span class=&quot;evidence-value tabular-nums&quot;&gt;25.89%&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot; style=&quot;--bar:25.89%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row&quot;&gt;&lt;span&gt;构造链 · 8 级&lt;/span&gt;&lt;span class=&quot;evidence-value tabular-nums&quot;&gt;28.75%&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot; style=&quot;--bar:28.75%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row&quot;&gt;&lt;span&gt;构造链 · 16 级&lt;/span&gt;&lt;span class=&quot;evidence-value tabular-nums&quot;&gt;26.19%&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot; style=&quot;--bar:26.19%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row is-zero&quot;&gt;&lt;span&gt;priority_encoder · 16&lt;/span&gt;&lt;span class=&quot;evidence-value&quot;&gt;持平&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row is-zero&quot;&gt;&lt;span&gt;priority_encoder · 128&lt;/span&gt;&lt;span class=&quot;evidence-value&quot;&gt;持平&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row is-zero&quot;&gt;&lt;span&gt;priority_encoder · 512&lt;/span&gt;&lt;span class=&quot;evidence-value&quot;&gt;持平&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row is-zero&quot;&gt;&lt;span&gt;arbiter · 64&lt;/span&gt;&lt;span class=&quot;evidence-value&quot;&gt;持平&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;evidence-row is-zero&quot;&gt;&lt;span&gt;picorv32&lt;/span&gt;&lt;span class=&quot;evidence-value&quot;&gt;持平&lt;/span&gt;&lt;div class=&quot;evidence-track&quot;&gt;&lt;div class=&quot;evidence-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;text-small text-muted&quot;&gt;外部用例用于暴露泛化边界，不计入官方四题成绩。零收益不是“优化失败”，而是当前识别器尚未覆盖那些写法。&lt;/p&gt;
+
+    &lt;hr&gt;
+
+    &lt;div class=&quot;lab-section-head&quot;&gt;
+      &lt;h2&gt;验证链路&lt;/h2&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;每一步都有明确门禁&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;lab-flow lab-pipeline&quot;&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;结构完整&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;同一总线&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;扇出可证明&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node is-hot&quot;&gt;等价改写&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;EQY&lt;/span&gt;&lt;span class=&quot;lab-arrow&quot;&gt;→&lt;/span&gt;
+      &lt;span class=&quot;lab-node&quot;&gt;封存集回归&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;lab-rule-grid&quot;&gt;
+      &lt;div&gt;
+        &lt;h3&gt;已获证据&lt;/h3&gt;
+        &lt;ul class=&quot;lab-rule-list text-muted&quot;&gt;
+          &lt;li&gt;四个官方用例严格同源复测，平均缩减 23.86%。&lt;/li&gt;
+          &lt;li&gt;四个官方用例 EQY 全部通过。&lt;/li&gt;
+          &lt;li&gt;10 个边界链 EQY 全部通过。&lt;/li&gt;
+          &lt;li&gt;152 组结构矩阵 0 退化。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h3&gt;尚不能写&lt;/h3&gt;
+        &lt;ul class=&quot;lab-rule-list text-muted&quot;&gt;
+          &lt;li&gt;不能宣称所有 priority encoder 或所有 PMUX 都已优化。&lt;/li&gt;
+          &lt;li&gt;不能把自行构造链或外部用例的成绩计入官方四题。&lt;/li&gt;
+          &lt;li&gt;不能把四个公开用例的结果直接外推到全部隐藏用例。&lt;/li&gt;
+          &lt;li&gt;不能用 EQY 通过替代最终门级时序与端到端验收。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p class=&quot;lab-source-note text-small text-muted&quot;&gt;
+      原始证据：&lt;code class=&quot;lab-inline-code&quot;&gt;reports/030-自适应链分组-20261024.md&lt;/code&gt; · &lt;code class=&quot;lab-inline-code&quot;&gt;reports/026-消融实验.md&lt;/code&gt;
+    &lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;script&gt;
+  (function () {
+    var root = document.getElementById(&#x27;pmux-lab-root&#x27;);
+    if (!root) return;
+
+    var officialRows = [
+      { name: &#x27;test1&#x27;, baseline: 288, candidate: 202, reduction: 29.86 },
+      { name: &#x27;test2&#x27;, baseline: 25, candidate: 16, reduction: 36.00 },
+      { name: &#x27;test3&#x27;, baseline: 12, candidate: 10, reduction: 16.67 },
+      { name: &#x27;test4&#x27;, baseline: 31, candidate: 27, reduction: 12.90 }
+    ];
+
+    var chainLengths = [4, 5, 6, 7, 8, 16, 32, 64];
+    var chainWidths = [1, 2, 3, 4, 8, 16, 32, 64];
+    var chainData = {
+      4:  { baseline: [5, 10, 15, 20, 40, 80, 160, 320], candidate: [4, 9, 13, 17, 33, 65, 129, 257] },
+      5:  { baseline: [6, 12, 18, 24, 48, 96, 192, 384], candidate: [6, 10, 14, 18, 34, 66, 130, 258] },
+      6:  { baseline: [7, 14, 21, 28, 56, 112, 224, 448], candidate: [6, 13, 18, 23, 43, 83, 163, 323] },
+      7:  { baseline: [9, 18, 27, 36, 72, 144, 288, 576], candidate: [8, 14, 20, 26, 50, 98, 194, 386] },
+      8:  { baseline: [10, 20, 30, 40, 80, 160, 320, 640], candidate: [9, 16, 23, 30, 58, 114, 226, 450] },
+      16: { baseline: [21, 42, 63, 84, 168, 336, 672, 1344], candidate: [18, 35, 51, 69, 131, 248, 517, 1029] },
+      32: { baseline: [36, 72, 108, 144, 288, 576, 1152, 2304], candidate: [36, 69, 98, 127, 246, 475, 939, 1867] },
+      64: { baseline: [69, 138, 207, 276, 552, 1104, 2208, 4416], candidate: [69, 138, 198, 257, 490, 957, 1877, 3733] }
+    };
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat(&#x27;zh-CN&#x27;).format(value);
+    }
+
+    function drawOfficialChart() {
+      var host = root.querySelector(&#x27;#official-chart&#x27;);
+      if (!host) return;
+      var measured = host.clientWidth || 700;
+      var width = Math.max(300, Math.round(measured));
+      var narrow = width &lt; 490;
+      var left = narrow ? 46 : 58;
+      var right = narrow ? 2 : 10;
+      var top = 8;
+      var rowHeight = narrow ? 42 : 44;
+      var plotWidth = Math.max(180, width - left - right);
+      var height = top + officialRows.length * rowHeight + 30;
+      var maxValue = 300;
+      var ticks = narrow ? [0, 150, 300] : [0, 100, 200, 300];
+      var parts = [];
+
+      parts.push(&#x27;&lt;svg width=&quot;&#x27; + width + &#x27;&quot; height=&quot;&#x27; + height + &#x27;&quot; viewBox=&quot;0 0 &#x27; + width + &#x27; &#x27; + height + &#x27;&quot; role=&quot;img&quot; aria-labelledby=&quot;official-chart-title official-chart-desc&quot;&gt;&#x27;);
+      parts.push(&#x27;&lt;title id=&quot;official-chart-title&quot;&gt;官方四题基线、候选和缩减率&lt;/title&gt;&#x27;);
+      parts.push(&#x27;&lt;desc id=&quot;official-chart-desc&quot;&gt;test1 从 288 降到 202，缩小 29.86%；test2 从 25 降到 16，缩小 36%；test3 从 12 降到 10，缩小 16.67%；test4 从 31 降到 27，缩小 12.9%。&lt;/desc&gt;&#x27;);
+
+      ticks.forEach(function (tick) {
+        var x = left + (tick / maxValue) * plotWidth;
+        parts.push(&#x27;&lt;line class=&quot;chart-grid&quot; x1=&quot;&#x27; + x.toFixed(1) + &#x27;&quot; y1=&quot;&#x27; + (top + 12) + &#x27;&quot; x2=&quot;&#x27; + x.toFixed(1) + &#x27;&quot; y2=&quot;&#x27; + (top + officialRows.length * rowHeight - 6) + &#x27;&quot;&gt;&lt;/line&gt;&#x27;);
+        parts.push(&#x27;&lt;text class=&quot;chart-muted&quot; x=&quot;&#x27; + x.toFixed(1) + &#x27;&quot; y=&quot;&#x27; + (height - 8) + &#x27;&quot; text-anchor=&quot;middle&quot;&gt;&#x27; + tick + &#x27;&lt;/text&gt;&#x27;);
+      });
+
+      officialRows.forEach(function (row, index) {
+        var y = top + index * rowHeight;
+        var baselineWidth = (row.baseline / maxValue) * plotWidth;
+        var candidateWidth = (row.candidate / maxValue) * plotWidth;
+        var textY = y + 12;
+        var barY = y + 20;
+        var countText = row.baseline + &#x27; → &#x27; + row.candidate;
+        var reductionText = &#x27;−&#x27; + row.reduction.toFixed(2) + &#x27;%&#x27;;
+
+        parts.push(&#x27;&lt;text class=&quot;chart-muted&quot; x=&quot;0&quot; y=&quot;&#x27; + textY + &#x27;&quot;&gt;&#x27; + row.name + &#x27;&lt;/text&gt;&#x27;);
+        parts.push(&#x27;&lt;text x=&quot;&#x27; + left + &#x27;&quot; y=&quot;&#x27; + textY + &#x27;&quot;&gt;&#x27; + countText + &#x27;&lt;/text&gt;&#x27;);
+        parts.push(&#x27;&lt;text x=&quot;&#x27; + width + &#x27;&quot; y=&quot;&#x27; + textY + &#x27;&quot; text-anchor=&quot;end&quot;&gt;&#x27; + reductionText + &#x27;&lt;/text&gt;&#x27;);
+        parts.push(&#x27;&lt;rect class=&quot;chart-track&quot; x=&quot;&#x27; + left + &#x27;&quot; y=&quot;&#x27; + barY + &#x27;&quot; width=&quot;&#x27; + baselineWidth.toFixed(1) + &#x27;&quot; height=&quot;8&quot; rx=&quot;4&quot;&gt;&lt;/rect&gt;&#x27;);
+        parts.push(&#x27;&lt;rect class=&quot;chart-fill&quot; x=&quot;&#x27; + left + &#x27;&quot; y=&quot;&#x27; + barY + &#x27;&quot; width=&quot;&#x27; + candidateWidth.toFixed(1) + &#x27;&quot; height=&quot;8&quot; rx=&quot;4&quot;&gt;&lt;/rect&gt;&#x27;);
+      });
+
+      parts.push(&#x27;&lt;/svg&gt;&#x27;);
+      host.innerHTML = parts.join(&#x27;&#x27;);
+    }
+
+    var chainState = { lengthIndex: 0, widthIndex: 0 };
+    var chainLengthInput = root.querySelector(&#x27;#chain-length&#x27;);
+    var chainWidthSelect = root.querySelector(&#x27;#chain-width&#x27;);
+    if (chainLengthInput) chainState.lengthIndex = Number(chainLengthInput.value);
+    if (chainWidthSelect) chainState.widthIndex = Math.max(0, chainWidths.indexOf(Number(chainWidthSelect.value)));
+
+    function buildChainRail(length) {
+      var shown = Math.min(length, 10);
+      var pieces = [];
+      for (var i = 0; i &lt; shown; i += 1) {
+        pieces.push(&#x27;&lt;span class=&quot;chain-step&quot;&gt;&lt;span class=&quot;chain-chip is-select&quot;&gt;S&#x27; + (i + 1) + &#x27;&lt;/span&gt;&lt;span class=&quot;chain-arrow&quot;&gt;→&lt;/span&gt;&lt;span class=&quot;chain-chip is-mux&quot;&gt;M&lt;/span&gt;&lt;/span&gt;&#x27;);
+        if (i &lt; shown - 1) pieces.push(&#x27;&lt;span class=&quot;chain-arrow&quot;&gt;↓&lt;/span&gt;&#x27;);
+      }
+      if (length &gt; shown) pieces.push(&#x27;&lt;span class=&quot;chain-more text-small&quot;&gt;+&#x27; + (length - shown) + &#x27; 级&lt;/span&gt;&#x27;);
+      return pieces.join(&#x27;&#x27;);
+    }
+
+    function buildChainGroups(length, groupSize) {
+      var groups = [];
+      var groupCount = Math.ceil(length / groupSize);
+      for (var i = 0; i &lt; groupCount; i += 1) {
+        var members = [];
+        for (var j = 0; j &lt; groupSize; j += 1) {
+          var index = i * groupSize + j;
+          if (index &lt; length) members.push(&#x27;S&#x27; + (index + 1));
+        }
+        groups.push({ name: &#x27;G&#x27; + i, members: members });
+      }
+      var shownGroups = groups.slice(0, 6);
+      var html = shownGroups.map(function (group) {
+        return &#x27;&lt;div class=&quot;chain-group&quot;&gt;&lt;div class=&quot;chain-group-title text-small&quot;&gt;&lt;span&gt;组内优先&lt;/span&gt;&lt;span&gt;&#x27; + group.name + &#x27;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;chain-group-members&quot;&gt;&#x27; + group.members.map(function (member) { return &#x27;&lt;span class=&quot;lab-mini-chip&quot;&gt;&#x27; + member + &#x27;&lt;/span&gt;&#x27;; }).join(&#x27;&#x27;) + &#x27;&lt;/div&gt;&lt;div class=&quot;chain-or text-small&quot;&gt;组命中 = OR&lt;/div&gt;&lt;/div&gt;&#x27;;
+      }).join(&#x27;&#x27;);
+      if (groups.length &gt; shownGroups.length) {
+        html += &#x27;&lt;div class=&quot;chain-group&quot;&gt;&lt;div class=&quot;chain-group-title text-small&quot;&gt;&lt;span&gt;其余&lt;/span&gt;&lt;span&gt;+&#x27; + (groups.length - shownGroups.length) + &#x27;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;chain-or text-small&quot;&gt;同样分组&lt;/div&gt;&lt;/div&gt;&#x27;;
+      }
+      return html;
+    }
+
+    function renderChain() {
+      var length = chainLengths[chainState.lengthIndex];
+      var width = chainWidths[chainState.widthIndex];
+      var widthPosition = chainWidths.indexOf(width);
+      var row = chainData[length];
+      var baseline = row.baseline[widthPosition];
+      var candidate = row.candidate[widthPosition];
+      var reduction = baseline === 0 ? 0 : (1 - candidate / baseline) * 100;
+      var groupSize = (width === 1 || length &lt; 7) ? 2 : 3;
+      var protectedChain = (width === 1 &amp;&amp; length &gt; 16) || (width === 2 &amp;&amp; length &gt; 32);
+      var flat = baseline === candidate;
+
+      root.querySelector(&#x27;#chain-length-value&#x27;).textContent = String(length);
+      root.querySelector(&#x27;#chain-baseline&#x27;).textContent = formatNumber(baseline);
+      root.querySelector(&#x27;#chain-candidate&#x27;).textContent = formatNumber(candidate);
+      root.querySelector(&#x27;#chain-reduction&#x27;).textContent = reduction === 0 ? &#x27;持平&#x27; : &#x27;−&#x27; + reduction.toFixed(1) + &#x27;%&#x27;;
+      root.querySelector(&#x27;#chain-before-caption&#x27;).textContent = length + &#x27; 级逐级嵌套&#x27;;
+      root.querySelector(&#x27;#chain-after-caption&#x27;).textContent = groupSize + &#x27; 路分组&#x27;;
+      root.querySelector(&#x27;#chain-before&#x27;).innerHTML = buildChainRail(length);
+      root.querySelector(&#x27;#chain-after&#x27;).innerHTML = buildChainGroups(length, groupSize);
+
+      var note = length + &#x27; 级 × &#x27; + width + &#x27; 位：&#x27; + formatNumber(baseline) + &#x27; → &#x27; + formatNumber(candidate);
+      if (flat) {
+        note += &#x27;；这组结构持平，算法保留原结构。&#x27;;
+      } else {
+        note += &#x27;，结构改写后减少 &#x27; + formatNumber(baseline - candidate) + &#x27; 个单元。&#x27;;
+      }
+      if (protectedChain) {
+        note += &#x27; 当前触发窄链保护，不做改写。&#x27;;
+      }
+      root.querySelector(&#x27;#chain-note&#x27;).textContent = note;
+    }
+
+    if (chainLengthInput) {
+      chainLengthInput.addEventListener(&#x27;input&#x27;, function () {
+        chainState.lengthIndex = Number(chainLengthInput.value);
+        renderChain();
+      });
+    }
+    if (chainWidthSelect) {
+      chainWidthSelect.addEventListener(&#x27;change&#x27;, function () {
+        chainState.widthIndex = chainWidths.indexOf(Number(chainWidthSelect.value));
+        renderChain();
+      });
+    }
+    renderChain();
+
+    var ruleSelect = root.querySelector(&#x27;#rule-select&#x27;);
+    var rulePanels = Array.prototype.slice.call(root.querySelectorAll(&#x27;.lab-rule-panel&#x27;));
+    var rulePrev = root.querySelector(&#x27;#rule-prev&#x27;);
+    var ruleNext = root.querySelector(&#x27;#rule-next&#x27;);
+
+    function showRule(index) {
+      var nextIndex = Math.max(0, Math.min(rulePanels.length - 1, index));
+      rulePanels.forEach(function (panel, panelIndex) {
+        panel.hidden = panelIndex !== nextIndex;
+      });
+      if (ruleSelect) ruleSelect.value = String(nextIndex);
+      if (rulePrev) rulePrev.disabled = nextIndex === 0;
+      if (ruleNext) ruleNext.disabled = nextIndex === rulePanels.length - 1;
+    }
+
+    if (ruleSelect) {
+      ruleSelect.addEventListener(&#x27;change&#x27;, function () {
+        showRule(Number(ruleSelect.value));
+      });
+    }
+    if (rulePrev) {
+      rulePrev.addEventListener(&#x27;click&#x27;, function () {
+        showRule(Number(ruleSelect.value) - 1);
+      });
+    }
+    if (ruleNext) {
+      ruleNext.addEventListener(&#x27;click&#x27;, function () {
+        showRule(Number(ruleSelect.value) + 1);
+      });
+    }
+    showRule(0);
+
+    var outerTabs = Array.prototype.slice.call(root.querySelectorAll(&#x27;.lab-main-tabs [role=&quot;tab&quot;]&#x27;));
+    outerTabs.forEach(function (tab) {
+      tab.addEventListener(&#x27;click&#x27;, function () {
+        window.setTimeout(drawOfficialChart, 60);
+      });
+    });
+
+    drawOfficialChart();
+    if (typeof ResizeObserver === &#x27;function&#x27;) {
+      var chartHost = root.querySelector(&#x27;#official-chart&#x27;);
+      if (chartHost) {
+        new ResizeObserver(function () {
+          drawOfficialChart();
+        }).observe(chartHost);
+      }
+    }
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerdown&quot;, handlePointer);
+    document.removeEventListener(&quot;pointercancel&quot;, handlePointer);
+    document.removeEventListener(&quot;click&quot;, handleTouchClick);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerdown&quot;, handlePointer);
+  document.addEventListener(&quot;pointercancel&quot;, handlePointer);
+  document.addEventListener(&quot;click&quot;, handleTouchClick);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

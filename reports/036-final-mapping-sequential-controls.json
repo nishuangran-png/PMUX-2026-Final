@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T17:39:40.891833+00:00",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "rows": [
+    {
+      "id": "official_test1",
+      "top": "test1",
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "$not": 2,
+          "cycloneiv_lcell_comb": 286,
+          "dffeas": 222
+        },
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "il": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gold.il",
+        "verilog": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gold.v",
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2",
+        "cells": {
+          "$not": 2,
+          "cycloneiv_lcell_comb": 200,
+          "dffeas": 222
+        },
+        "lcell": 200,
+        "not": 2,
+        "logic": 202,
+        "dff": 222,
+        "il": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gate.il",
+        "verilog": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gate.v",
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 2000,
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test1.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 1.434,
+      "errors": []
+    },
+    {
+      "id": "official_test3",
+      "top": "test3",
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 11,
+          "dffeas": 17
+        },
+        "lcell": 11,
+        "not": 1,
+        "logic": 12,
+        "dff": 17,
+        "il": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gold.il",
+        "verilog": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gold.v",
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2",
+        "cells": {
+          "cycloneiv_lcell_comb": 9,
+          "dffeas": 17
+        },
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "il": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gate.il",
+        "verilog": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gate.v",
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.gate.synth.log"
+      },
+      "method": "gate-sim",
+      "check": {
+        "status": "PASS",
+        "stage": "simulation",
+        "errors": 0,
+        "cycles": 2000,
+        "log": "experiments/final-mapping-20261025/sequential-controls-check/official_test3.sim.log",
+        "log_tail": ""
+      },
+      "status": "PASS",
+      "elapsed_s": 0.307,
+      "errors": []
+    }
+  ]
+}

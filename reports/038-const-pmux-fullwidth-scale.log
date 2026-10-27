@@ -1,0 +1,6 @@
+case                       base   cand   delta      pct   dff
+const_pmux_a6_w64           508    445      63   12.40%     0
+const_pmux_a6_w128          924    891      33    3.57%     0
+const_pmux_a6_w256         1670   1776    -106   -6.35%     0
+
+合计 3 例：改善 2，持平 0，回归 1； 3102 -> 3112，-0.32%

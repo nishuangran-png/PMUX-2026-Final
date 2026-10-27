@@ -36,6 +36,7 @@
 #include "kernel/register.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <cstdint>
 #include <map>
 #include <utility>
@@ -1184,6 +1185,145 @@ int fold_not_into_luts(Module *module, CellTypes &ct, bool verbose)
 	return folded;
 }
 
+// ABC can leave a one-input LUT that computes an inversion immediately in
+// front of another LUT.  On Cyclone IV that LUT becomes a free-standing
+// $not, while the downstream LUT still costs a full LCELL.  Rewriting the
+// downstream truth table and reconnecting it to the un-inverted signal
+// removes the inverter without changing the represented function.
+//
+// This deliberately handles only LUT/LCELL truth tables and only accepts
+// consumers that can absorb the inversion.  Primary outputs, DFF data pins,
+// and unknown cell types make the candidate ineligible.
+int absorb_inverted_luts(Module *module, bool verbose)
+{
+	const IdString lut_mask = RTLIL::escape_id("lut_mask");
+	struct Load {
+		Cell *cell;
+		int offset;
+	};
+
+	int folded = 0;
+
+	while (true) {
+		SigMap sigmap(module);
+		pool<SigBit> output_bits = collect_output_bits(module, sigmap);
+		Cell *candidate = nullptr;
+		SigBit candidate_out, candidate_input;
+		std::vector<Load> lut_loads;
+		std::vector<Load> lcell_loads;
+
+		for (auto cell : module->cells()) {
+			if (cell->type != ID($lut) || GetSize(cell->getPort(ID::A)) != 1 ||
+			    GetSize(cell->getPort(ID::Y)) != 1)
+				continue;
+			if (cell->getParam(ID::WIDTH).as_int() != 1)
+				continue;
+
+			Const table = cell->getParam(ID::LUT);
+			if (GetSize(table) != 2)
+				continue;
+			std::vector<State> table_bits = table.to_bits();
+			if (table_bits[0] != State::S1 || table_bits[1] != State::S0)
+				continue;
+
+			SigBit out = sigmap(cell->getPort(ID::Y)[0]);
+			if (output_bits.count(out))
+				continue;
+
+			std::vector<Load> candidate_lut_loads;
+			std::vector<Load> candidate_lcell_loads;
+			bool supported = true;
+			for (auto load_cell : module->cells()) {
+				if (load_cell == cell)
+					continue;
+				for (auto &conn : load_cell->connections()) {
+					SigSpec port = sigmap(conn.second);
+					for (int offset = 0; offset < GetSize(port); offset++) {
+						if (port[offset] != out)
+							continue;
+						if (load_cell->type == ID($lut) && conn.first == ID::A &&
+						    GetSize(load_cell->getPort(ID::A)) ==
+						            load_cell->getParam(ID::WIDTH).as_int()) {
+							candidate_lut_loads.push_back({load_cell, offset});
+							continue;
+						}
+						if (load_cell->type == ID(cycloneiv_lcell_comb) &&
+						    conn.first == ID(datab) && GetSize(port) == 1 &&
+						    GetSize(load_cell->getParam(lut_mask)) == 16) {
+							candidate_lcell_loads.push_back({load_cell, offset});
+							continue;
+						}
+						supported = false;
+						break;
+					}
+					if (!supported)
+						break;
+				}
+				if (!supported)
+					break;
+			}
+
+			if (!supported ||
+			    (candidate_lut_loads.empty() && candidate_lcell_loads.empty()))
+				continue;
+
+			candidate = cell;
+			candidate_out = out;
+			candidate_input = cell->getPort(ID::A)[0];
+			lut_loads = std::move(candidate_lut_loads);
+			lcell_loads = std::move(candidate_lcell_loads);
+			break;
+		}
+
+		if (candidate == nullptr)
+			break;
+
+		for (auto &load : lut_loads) {
+			int width = load.cell->getParam(ID::WIDTH).as_int();
+			Const table = load.cell->getParam(ID::LUT);
+			if (width < 1 || width > 4 || GetSize(table) != (1 << width))
+				continue;
+			std::vector<State> old_table = table.to_bits();
+			std::vector<State> new_table = old_table;
+			for (int index = 0; index < GetSize(new_table); index++)
+				new_table[index] = old_table[index ^ (1 << load.offset)];
+			load.cell->setParam(ID::LUT, Const(std::move(new_table)));
+
+			SigSpec input = load.cell->getPort(ID::A);
+			input[load.offset] = candidate_input;
+			load.cell->setPort(ID::A, input);
+		}
+
+		for (auto &load : lcell_loads) {
+			// cycloneiv_lcell_comb stores combout in the high byte and the
+			// carry function in the low byte.  datab is address bit 1 for
+			// combout and address bit 2 for cout.
+			Const mask = load.cell->getParam(lut_mask);
+			std::vector<State> old_mask = mask.to_bits();
+			std::vector<State> new_mask = old_mask;
+			for (int index = 0; index < 8; index++) {
+				new_mask[index] = old_mask[index ^ 4];
+				new_mask[index + 8] = old_mask[(index + 8) ^ 2];
+			}
+			load.cell->setParam(lut_mask, Const(std::move(new_mask)));
+
+			SigSpec input = load.cell->getPort(ID(datab));
+			input[load.offset] = candidate_input;
+			load.cell->setPort(ID(datab), input);
+		}
+
+		if (verbose)
+			log("  absorbed inverted LUT %s into %d downstream LUT(s) and %d LCELL(s)\n",
+			    log_id(candidate->name), GetSize(lut_loads), GetSize(lcell_loads));
+
+		module->connect(candidate_out, candidate_input);
+		module->remove(candidate);
+		folded++;
+	}
+
+	return folded;
+}
+
 // A technology flip-flop can absorb an inverted clock enable without spending
 // a LUT: hold the register by synchronously loading its own Q, and enable that
 // load with the un-inverted signal.  This is only profitable when the inverter
@@ -2134,17 +2274,35 @@ bool analyze_select_bit(const SigSpec &bit, SigMap &sigmap,
 }
 
 // Balanced mux tree over `bus`; leaves[i] is selected by bus value i.
+struct TreeLeaf {
+	int code;
+	SigSpec sig;
+};
+
+SigSpec build_tree(Module *module, const SigSpec &bus, const std::vector<TreeLeaf> &leaves,
+		const std::vector<int> &bit_order, int depth)
+{
+	if (GetSize(leaves) == 1)
+		return leaves[0].sig;
+
+	int bit = bit_order[depth];
+	std::vector<TreeLeaf> lo, hi;
+	for (const auto &leaf : leaves)
+		(leaf.code & (1 << bit) ? hi : lo).push_back(leaf);
+	SigSpec l = build_tree(module, bus, lo, bit_order, depth + 1);
+	SigSpec h = build_tree(module, bus, hi, bit_order, depth + 1);
+	return module->Mux(NEW_ID, l, h, bus[bit]);
+}
+
 SigSpec build_tree(Module *module, const SigSpec &bus, const std::vector<SigSpec> &leaves)
 {
-	if (GetSize(bus) == 0)
-		return leaves[0];
-	int n = GetSize(bus);
-	int half = GetSize(leaves) / 2;
-	std::vector<SigSpec> lo(leaves.begin(), leaves.begin() + half);
-	std::vector<SigSpec> hi(leaves.begin() + half, leaves.end());
-	SigSpec l = build_tree(module, bus.extract(0, n - 1), lo);
-	SigSpec h = build_tree(module, bus.extract(0, n - 1), hi);
-	return module->Mux(NEW_ID, l, h, bus[n - 1]);
+	std::vector<TreeLeaf> tree_leaves;
+	for (int code = 0; code < GetSize(leaves); code++)
+		tree_leaves.push_back({code, leaves[code]});
+	std::vector<int> bit_order;
+	for (int bit = GetSize(bus) - 1; bit >= 0; bit--)
+		bit_order.push_back(bit);
+	return build_tree(module, bus, tree_leaves, bit_order, 0);
 }
 
 bool slice_equal(const SigSpec &a, int aoff, const SigSpec &b, int boff, int width, SigMap &sigmap)
@@ -2153,6 +2311,426 @@ bool slice_equal(const SigSpec &a, int aoff, const SigSpec &b, int boff, int wid
 		if (sigmap(a[aoff + i]) != sigmap(b[boff + i]))
 			return false;
 	return true;
+}
+
+static bool is_factorable_operator(const Cell *cell)
+{
+	return cell->type.in(ID($add), ID($sub), ID($xor), ID($and), ID($or));
+}
+
+// A dense selector whose branches all evaluate the same bit-vector operator
+// can be factored into one operator after selecting each operand.  This is
+// the structural equivalent of (s ? a0+b0 : a1+b1) -> (s ? a0:a1) +
+// (s ? b0:b1), and applies equally to XOR, AND, OR and subtraction.
+bool factor_same_operator(Module *module, SigMap &sigmap,
+                          const dict<SigBit, Cell *> &bit2cell, const SigSpec &bus,
+                          const std::vector<SigSpec> &leaves, SigSpec &result, bool verbose)
+{
+	if (GetSize(leaves) < 2 || GetSize(leaves[0]) == 0)
+		return false;
+
+	int width = GetSize(leaves[0]);
+	std::vector<Cell *> operators;
+	pool<Cell *> distinct_operators;
+	for (const auto &leaf : leaves) {
+		if (GetSize(leaf) != width)
+			return false;
+
+		Cell *operator_cell = nullptr;
+		for (auto bit : leaf) {
+			auto it = bit2cell.find(sigmap(bit));
+			if (it == bit2cell.end() || it->second == nullptr ||
+			    !module->cells_.count(it->second->name))
+				return false;
+			if (operator_cell == nullptr)
+				operator_cell = it->second;
+			else if (operator_cell != it->second)
+				return false;
+		}
+		if (operator_cell == nullptr || !is_factorable_operator(operator_cell) ||
+		    sigmap(operator_cell->getPort(ID::Y)) != sigmap(leaf) ||
+		    GetSize(operator_cell->getPort(ID::A)) != width ||
+		    GetSize(operator_cell->getPort(ID::B)) != width ||
+		    !operator_cell->hasPort(ID::Y))
+			return false;
+
+		operators.push_back(operator_cell);
+		distinct_operators.insert(operator_cell);
+	}
+
+	// Sharing only one physical operator cannot save anything and would just
+	// add two selector trees.
+	if (distinct_operators.size() < 2)
+		return false;
+
+	Cell *reference = operators.front();
+	for (Cell *operator_cell : operators)
+		if (operator_cell->type != reference->type ||
+		    operator_cell->parameters != reference->parameters)
+			return false;
+
+	std::vector<SigSpec> a_values, b_values;
+	for (Cell *operator_cell : operators) {
+		a_values.push_back(sigmap(operator_cell->getPort(ID::A)));
+		b_values.push_back(sigmap(operator_cell->getPort(ID::B)));
+	}
+
+	auto select_operand = [&](const std::vector<SigSpec> &values) {
+		bool identical = true;
+		for (size_t i = 1; i < values.size(); i++)
+			if (values[i] != values[0]) {
+				identical = false;
+				break;
+			}
+		return identical ? values[0] : build_tree(module, bus, values);
+	};
+
+	SigSpec selected_a = select_operand(a_values);
+	SigSpec selected_b = select_operand(b_values);
+	SigSpec selected_y = module->addWire(NEW_ID, width);
+	Cell *factor = module->addCell(NEW_ID, reference->type);
+	factor->parameters = reference->parameters;
+	factor->setPort(ID::A, selected_a);
+	factor->setPort(ID::B, selected_b);
+	factor->setPort(ID::Y, selected_y);
+	result = selected_y;
+
+	if (verbose)
+		log("  factored %d copies of %s into one post-select operator over %s\n",
+		    GetSize(operators), log_id(reference->type), log_signal(bus));
+	return true;
+}
+
+// Return the maximum number of PMUX boundaries reached through data inputs
+// below a cell.  Registers terminate the cone: feedback through a DFF is not a
+// combinational chain.  Select inputs are deliberately ignored because decoder
+// logic is not part of the data path being rewritten.
+int pmux_data_depth(Cell *cell, SigMap &sigmap, const dict<SigBit, Cell *> &bit2cell,
+                    CellTypes &ct, dict<IdString, int> &memo, pool<IdString> &active,
+                    int threshold)
+{
+	if (cell->is_builtin_ff())
+		return 0;
+	auto memo_it = memo.find(cell->name);
+	if (memo_it != memo.end())
+		return memo_it->second;
+	if (!active.insert(cell->name).second)
+		return 0;
+
+	int best = 0;
+	for (auto &conn : cell->connections()) {
+		if (!ct.cell_input(cell->type, conn.first))
+			continue;
+		if (cell->type.in(ID($mux), ID($pmux), ID($bmux)) && conn.first == ID::S)
+			continue;
+
+		for (auto bit : sigmap(conn.second)) {
+			auto it = bit2cell.find(bit);
+			if (it == bit2cell.end() || it->second == nullptr ||
+			    !cell->module->cells_.count(it->second->name))
+				continue;
+			Cell *driver = it->second;
+			if (driver->is_builtin_ff())
+				continue;
+			int depth = pmux_data_depth(driver, sigmap, bit2cell, ct, memo, active,
+			                            threshold);
+			if (driver->type == ID($pmux))
+				depth++;
+			best = std::max(best, depth);
+			if (best >= threshold)
+				break;
+		}
+		if (best >= threshold)
+			break;
+	}
+
+	active.erase(cell->name);
+	memo[cell->name] = best;
+	return best;
+}
+
+void collect_direct_pmux_drivers(Cell *cell, Module *module, SigMap &sigmap,
+                                 const dict<SigBit, Cell *> &bit2cell,
+                                 pool<IdString> &drivers)
+{
+	for (IdString port : {ID::A, ID::B}) {
+		if (!cell->hasPort(port))
+			continue;
+		for (auto bit : cell->getPort(port)) {
+			auto it = bit2cell.find(sigmap(bit));
+			if (it == bit2cell.end() || it->second == nullptr ||
+			    !module->cells_.count(it->second->name))
+				continue;
+			if (it->second->type == ID($pmux))
+				drivers.insert(it->second->name);
+		}
+	}
+}
+
+bool cone_reaches_driver(Cell *cell, Module *module, SigMap &sigmap,
+                         const dict<SigBit, Cell *> &bit2cell, CellTypes &ct,
+                         const pool<IdString> &targets, pool<IdString> &active)
+{
+	if (cell->is_builtin_ff())
+		return false;
+	if (!active.insert(cell->name).second)
+		return false;
+	for (auto &conn : cell->connections()) {
+		if (!ct.cell_input(cell->type, conn.first))
+			continue;
+		if (cell->type.in(ID($mux), ID($pmux), ID($bmux)) && conn.first == ID::S)
+			continue;
+		for (auto bit : sigmap(conn.second)) {
+			auto it = bit2cell.find(bit);
+			if (it == bit2cell.end() || it->second == nullptr ||
+			    !module->cells_.count(it->second->name))
+				continue;
+			Cell *driver = it->second;
+			if (targets.count(driver->name) ||
+			    cone_reaches_driver(driver, module, sigmap, bit2cell, ct, targets, active)) {
+				active.erase(cell->name);
+				return true;
+			}
+		}
+	}
+	active.erase(cell->name);
+	return false;
+}
+
+bool direct_pmux_drivers_independent(Module *module, SigMap &sigmap,
+                                     const dict<SigBit, Cell *> &bit2cell, CellTypes &ct,
+                                     const pool<IdString> &drivers)
+{
+	for (auto name : drivers) {
+		auto it = module->cells_.find(name);
+		if (it == module->cells_.end())
+			return false;
+		pool<IdString> active;
+		if (cone_reaches_driver(it->second, module, sigmap, bit2cell, ct, drivers, active))
+			return false;
+	}
+	return true;
+}
+
+// A complete `case (bus)` on a b-bit signal is represented by a $pmux with
+// 2^b-1 one-hot `$eq` selectors; the unselected A input is the remaining
+// default code.  The comparators are redundant when all codes are covered:
+// the same function is an ordinary 2^b-way mux tree indexed directly by bus.
+// Rewrite this exact shape so techmap does not have to reconstruct the bus
+// from 2^b-1 equality decoders.
+int rewrite_dense_decoder_pmuxes(Module *module, SigMap &sigmap, CellTypes &ct,
+                                  const dict<SigBit, Cell *> &bit2cell, int &factored_count,
+                                  bool verbose)
+{
+	std::vector<Cell *> pmuxes;
+	for (auto cell : module->cells())
+		if (cell->type == ID($pmux))
+			pmuxes.push_back(cell);
+
+	int rewritten = 0;
+	int factored = 0;
+	int candidate_index = 0;
+	const char *dense_mask_text = getenv("PMUX_DENSE_MASK");
+	unsigned dense_mask = dense_mask_text ? strtoul(dense_mask_text, nullptr, 0) : ~0u;
+	const char *dense_style_text = getenv("PMUX_DENSE_STYLE");
+	std::string dense_style = dense_style_text ? dense_style_text : "auto";
+	const char *factor_ops_text = getenv("PMUX_FACTOR_OPS");
+	bool factor_ops = factor_ops_text == nullptr || std::string(factor_ops_text) != "0";
+	const char *skip_deep_text = getenv("PMUX_SKIP_DEEP");
+	bool skip_deep = skip_deep_text == nullptr || std::string(skip_deep_text) != "0";
+	const char *deep_threshold_text = getenv("PMUX_DEEP_THRESHOLD");
+	int deep_threshold = deep_threshold_text ? atoi(deep_threshold_text) : 2;
+	if (deep_threshold < 1)
+		deep_threshold = 1;
+	const char *deep_policy_text = getenv("PMUX_DEEP_POLICY");
+	std::string deep_policy = deep_policy_text ? deep_policy_text : "independent";
+	bool relaxed_depth = deep_policy == "independent" || deep_policy == "leaf-relaxed";
+
+	// Compute the complete pre-rewrite data depth.  Rewriting one PMUX mutates
+	// the connectivity seen by later candidates, so doing this lazily would make
+	// the guard depend on candidate order.
+	dict<IdString, int> pmux_depths;
+	dict<IdString, int> direct_pmux_counts;
+	pool<IdString> independent_deep_pmuxes;
+	if (skip_deep) {
+		dict<IdString, int> memo;
+		int analysis_limit = relaxed_depth ? deep_threshold + 1 : deep_threshold;
+		for (Cell *cell : pmuxes) {
+			pool<IdString> active;
+			pmux_depths[cell->name] = pmux_data_depth(cell, sigmap, bit2cell, ct, memo,
+			                                               active, analysis_limit);
+			pool<IdString> drivers;
+			collect_direct_pmux_drivers(cell, module, sigmap, bit2cell, drivers);
+			direct_pmux_counts[cell->name] = GetSize(drivers);
+			if (relaxed_depth && !drivers.empty() &&
+			    direct_pmux_drivers_independent(module, sigmap, bit2cell, ct, drivers))
+				independent_deep_pmuxes.insert(cell->name);
+		}
+	}
+	for (Cell *cell : pmuxes) {
+		if (!module->cells_.count(cell->name))
+			continue;
+
+		int width = GetSize(cell->getPort(ID::Y));
+		int nsel = GetSize(cell->getPort(ID::S));
+		if (width < 1 || nsel < 1 || GetSize(cell->getPort(ID::A)) != width ||
+		    GetSize(cell->getPort(ID::B)) != width * nsel)
+			continue;
+
+		std::vector<DecodeBit> decoded(nsel);
+		bool ok = true;
+		for (int i = 0; i < nsel; i++)
+			if (!analyze_select_bit(cell->getPort(ID::S)[i], sigmap, bit2cell,
+			                        module, decoded[i])) {
+				ok = false;
+				break;
+			}
+		if (!ok)
+			continue;
+
+		SigSpec bus = decoded[0].bus;
+		int bus_width = GetSize(bus);
+		if (bus_width < 1 || bus_width > 8 || (1 << bus_width) != nsel + 1)
+			continue;
+
+		std::vector<int> selected_at(1 << bus_width, -1);
+		bool bad = false;
+		for (int i = 0; i < nsel; i++) {
+			int code = decoded[i].code;
+			if (code < 0 || code >= GetSize(selected_at) ||
+			    decoded[i].bus != bus || selected_at[code] != -1) {
+				bad = true;
+				break;
+			}
+			selected_at[code] = i;
+		}
+		if (bad)
+			continue;
+
+		int default_code = -1;
+		for (int code = 0; code < GetSize(selected_at); code++)
+			if (selected_at[code] < 0) {
+				default_code = code;
+				break;
+			}
+		if (default_code < 0)
+			continue;
+
+		SigSpec default_data = sigmap(cell->getPort(ID::A));
+		bool undef_default = false;
+		for (auto bit : default_data)
+			if (bit.wire == nullptr && (bit.data == State::Sx || bit.data == State::Sz)) {
+				undef_default = true;
+				break;
+			}
+
+		int data_depth = 0;
+		int direct_pmux_leaves = 0;
+		if (skip_deep) {
+			auto depth_it = pmux_depths.find(cell->name);
+			if (depth_it != pmux_depths.end())
+				data_depth = depth_it->second;
+			auto count_it = direct_pmux_counts.find(cell->name);
+			if (count_it != direct_pmux_counts.end())
+				direct_pmux_leaves = count_it->second;
+		}
+
+		if (verbose)
+			log("  dense candidate %d: %s Y=%s A=%s nsel=%d bus=%s width=%d default=%d depth=%d pmux_leaves=%d%s\n",
+			    candidate_index, log_id(cell->name), log_signal(cell->getPort(ID::Y)),
+			    log_signal(cell->getPort(ID::A)), nsel, log_signal(bus), bus_width,
+			    default_code, data_depth, direct_pmux_leaves,
+			    undef_default ? " undef-default" : "");
+
+		bool selected_by_mask = candidate_index < 32 && (dense_mask & (1u << candidate_index));
+		bool relaxed_candidate = relaxed_depth && data_depth == deep_threshold &&
+		                         independent_deep_pmuxes.count(cell->name);
+		bool skip_for_depth = skip_deep && data_depth >= deep_threshold &&
+		                      !relaxed_candidate;
+		candidate_index++;
+		if (!selected_by_mask || skip_for_depth || undef_default) {
+			if (verbose && skip_for_depth)
+				log("    skipping dense candidate %d because depth=%d pmux_leaves=%d\n",
+				    candidate_index - 1, data_depth, direct_pmux_leaves);
+			if (verbose && undef_default)
+				log("    skipping dense candidate %d because its default branch contains undef\n",
+				    candidate_index - 1);
+			continue;
+		}
+
+		SigSpec data = sigmap(cell->getPort(ID::B));
+		std::vector<SigSpec> leaves(1 << bus_width);
+		for (int code = 0; code < GetSize(leaves); code++) {
+			if (code == default_code)
+				leaves[code] = sigmap(cell->getPort(ID::A));
+			else
+				leaves[code] = data.extract(selected_at[code] * width, width);
+		}
+
+		SigSpec factored_result;
+		if (factor_ops &&
+		    factor_same_operator(module, sigmap, bit2cell, bus, leaves, factored_result, verbose)) {
+			module->connect(cell->getPort(ID::Y), factored_result);
+			module->remove(cell);
+			factored++;
+			continue;
+		}
+
+		std::vector<TreeLeaf> tree_leaves;
+		for (int code = 0; code < GetSize(leaves); code++)
+			tree_leaves.push_back({code, leaves[code]});
+
+		bool reverse_leaves = dense_style == "tree-revleaf" ||
+			dense_style == "tree-low-revleaf";
+		bool reverse_bits = dense_style == "tree-low" ||
+			dense_style == "tree-low-revleaf";
+		if (dense_style == "auto")
+			reverse_bits = bus_width <= 2;
+		if (reverse_leaves)
+			std::reverse(tree_leaves.begin(), tree_leaves.end());
+
+		std::vector<int> bit_order;
+		if (reverse_bits)
+			for (int bit = 0; bit < bus_width; bit++)
+				bit_order.push_back(bit);
+		else
+			for (int bit = bus_width - 1; bit >= 0; bit--)
+				bit_order.push_back(bit);
+
+		SigSpec replacement;
+		if (dense_style == "bmux" || dense_style == "bmux-bitrev") {
+			SigSpec packed;
+			for (int code = 0; code < GetSize(tree_leaves); code++) {
+				int packed_code = code;
+				if (dense_style == "bmux-bitrev") {
+					packed_code = 0;
+					for (int bit = 0; bit < bus_width; bit++)
+						if (code & (1 << bit))
+							packed_code |= 1 << (bus_width - 1 - bit);
+				}
+				packed.append(tree_leaves[packed_code].sig);
+			}
+			SigSpec bmux_bus = bus;
+			if (dense_style == "bmux-bitrev")
+				for (int lo = 0, hi = bus_width - 1; lo < hi; lo++, hi--)
+					std::swap(bmux_bus[lo], bmux_bus[hi]);
+			SigSpec y = module->addWire(NEW_ID, width);
+			module->addBmux(NEW_ID, packed, bmux_bus, y);
+			replacement = y;
+		} else {
+			replacement = build_tree(module, bus, tree_leaves, bit_order, 0);
+		}
+		module->connect(cell->getPort(ID::Y), replacement);
+		module->remove(cell);
+		rewritten++;
+		if (verbose)
+			log("  rewrote dense %d-way PMUX %s as %s over %d-bit bus\n",
+			    nsel, log_id(cell->name), dense_style.c_str(), bus_width);
+	}
+	if (factored)
+		log("pmux_opt: factored %d dense selector operator group(s).\n", factored);
+	factored_count = factored;
+	return rewritten;
 }
 
 SigBit make_not(Module *module, SigBit bit)
@@ -2903,8 +3481,8 @@ int factor_common_enable_terms(Module *module, SigMap &sigmap, CellTypes &ct, bo
 // between the two predicates instead of synthesizing two independent wide
 // equality comparators.  This is deliberately conservative: only straight
 // $eq cells with a fully constant operand are considered; $eqx is skipped.
-void factor_adjacent_eq(Module *module, SigMap &sigmap, const pool<SigBit> &allowed_outputs,
-                        bool verbose)
+int factor_adjacent_eq(Module *module, SigMap &sigmap, const pool<SigBit> &allowed_outputs,
+                       bool verbose)
 {
 	struct EqInfo {
 		Cell *cell;
@@ -3000,6 +3578,7 @@ void factor_adjacent_eq(Module *module, SigMap &sigmap, const pool<SigBit> &allo
 
 	if (merged)
 		log("pmux_opt: factored %d adjacent equality pair(s).\n", merged);
+	return merged;
 }
 
 // Sparse PMUX cells in register-update logic often carry data that is just a
@@ -3194,12 +3773,20 @@ struct PmuxOptPass : public Pass {
 		log("        move shared inverted DFF enables into synchronous self-load mode,\n");
 		log("        and move shared disabled-state LUT inputs into DFF synchronous clear\n");
 		log("\n");
+		log("    -absorb_inverters\n");
+		log("        fold post-ABC one-input inversion LUTs into downstream LUT/LCELL truth tables\n");
+		log("\n");
+		log("    -max_iterations <n>\n");
+		log("        run bounded fixed-point restructuring for at most n rounds (default: 4)\n");
+		log("\n");
 	}
 
 	void execute(std::vector<std::string> args, RTLIL::Design *design) override
 	{
 		bool verbose = false;
 		bool fold_luts = false;
+		bool absorb_inverters = false;
+		int max_iterations = 4;
 		size_t argidx;
 		for (argidx = 1; argidx < args.size(); argidx++) {
 			if (args[argidx] == "-v") {
@@ -3208,6 +3795,16 @@ struct PmuxOptPass : public Pass {
 			}
 			if (args[argidx] == "-fold_luts") {
 				fold_luts = true;
+				continue;
+			}
+			if (args[argidx] == "-absorb_inverters") {
+				absorb_inverters = true;
+				continue;
+			}
+			if (args[argidx] == "-max_iterations" && argidx + 1 < args.size()) {
+				max_iterations = atoi(args[++argidx].c_str());
+				if (max_iterations < 1)
+					log_cmd_error("pmux_opt: -max_iterations must be at least 1.\n");
 				continue;
 			}
 			break;
@@ -3220,36 +3817,68 @@ struct PmuxOptPass : public Pass {
 		ct.setup_internals();
 		ct.setup_design(design);
 
+		if (absorb_inverters) {
+			int n_absorbed = 0;
+			for (auto module : design->selected_modules())
+				n_absorbed += absorb_inverted_luts(module, verbose);
+			log("pmux_opt: absorbed %d post-ABC inversion LUT(s).\n", n_absorbed);
+			return;
+		}
+
 		if (fold_luts) {
 			ct.setup_stdcells();
-			int64_t fold_start = PerformanceTimer::query();
 			int n_folded = 0;
 			int n_mux_folded = 0;
 			int n_dff_enable = 0;
 			int n_dff_clear = 0;
 			int n_dff_zero_gate = 0;
-			for (auto module : design->selected_modules())
-				n_folded += fold_not_into_luts(module, ct, verbose);
-			int64_t fold_not_done = PerformanceTimer::query();
-			for (auto module : design->selected_modules())
-				n_dff_enable += fold_inverted_enable_into_dff(module, ct, verbose);
-			int64_t fold_enable_done = PerformanceTimer::query();
-			for (auto module : design->selected_modules())
-				n_dff_zero_gate += fold_zero_gate_into_dff_clear(module, ct, verbose);
-			int64_t fold_zero_done = PerformanceTimer::query();
-			for (auto module : design->selected_modules())
-				n_dff_clear += fold_disabled_lut_into_dff(module, verbose);
-			int64_t fold_clear_done = PerformanceTimer::query();
-			for (auto module : design->selected_modules())
-				n_mux_folded += fold_mux_into_luts(module, ct, verbose);
-			int64_t fold_mux_done = PerformanceTimer::query();
-			if (verbose)
-				log("pmux_opt fold timing: not=%.3f enable=%.3f zero=%.3f clear=%.3f mux=%.3f ms\n",
-				    (fold_not_done - fold_start) / 1e6,
-				    (fold_enable_done - fold_not_done) / 1e6,
-				    (fold_zero_done - fold_enable_done) / 1e6,
-				    (fold_clear_done - fold_zero_done) / 1e6,
-				    (fold_mux_done - fold_clear_done) / 1e6);
+			int fold_rounds = 0;
+
+			for (int round = 1; round <= max_iterations; round++) {
+				int round_changes = 0;
+				int64_t fold_start = PerformanceTimer::query();
+				for (auto module : design->selected_modules()) {
+					int count = fold_not_into_luts(module, ct, verbose);
+					n_folded += count;
+					round_changes += count;
+				}
+				int64_t fold_not_done = PerformanceTimer::query();
+				for (auto module : design->selected_modules()) {
+					int count = fold_inverted_enable_into_dff(module, ct, verbose);
+					n_dff_enable += count;
+					round_changes += count;
+				}
+				int64_t fold_enable_done = PerformanceTimer::query();
+				for (auto module : design->selected_modules()) {
+					int count = fold_zero_gate_into_dff_clear(module, ct, verbose);
+					n_dff_zero_gate += count;
+					round_changes += count;
+				}
+				int64_t fold_zero_done = PerformanceTimer::query();
+				for (auto module : design->selected_modules()) {
+					int count = fold_disabled_lut_into_dff(module, verbose);
+					n_dff_clear += count;
+					round_changes += count;
+				}
+				int64_t fold_clear_done = PerformanceTimer::query();
+				for (auto module : design->selected_modules()) {
+					int count = fold_mux_into_luts(module, ct, verbose);
+					n_mux_folded += count;
+					round_changes += count;
+				}
+				int64_t fold_mux_done = PerformanceTimer::query();
+				fold_rounds = round;
+				if (verbose)
+					log("pmux_opt fold round %d: changes=%d timing: not=%.3f enable=%.3f "
+					    "zero=%.3f clear=%.3f mux=%.3f ms\n",
+					    round, round_changes, (fold_not_done - fold_start) / 1e6,
+					    (fold_enable_done - fold_not_done) / 1e6,
+					    (fold_zero_done - fold_enable_done) / 1e6,
+					    (fold_clear_done - fold_zero_done) / 1e6,
+					    (fold_mux_done - fold_clear_done) / 1e6);
+				if (round_changes == 0)
+					break;
+			}
 			log("pmux_opt: folded %d NOT cell(s) into LUTs.\n", n_folded);
 			log("pmux_opt: moved %d inverted enable(s) into DFFs.\n", n_dff_enable);
 			log("pmux_opt: moved %d shared zero-gate(s) into DFF synchronous clear.\n",
@@ -3257,25 +3886,49 @@ struct PmuxOptPass : public Pass {
 			log("pmux_opt: moved %d disabled-state LUT input(s) into DFF synchronous clear.\n",
 			    n_dff_clear);
 			log("pmux_opt: folded %d constant-data MUX cell(s) into LUTs.\n", n_mux_folded);
+			log("pmux_opt: fold fixed point after %d round(s).\n", fold_rounds);
 			return;
 		}
 
 		int n_pmux = 0, n_pairs = 0, n_skip = 0, n_rom = 0;
+		int n_dense_pmux = 0;
 		int n_target_clear = 0;
 		int n_sync_dff = 0;
 		int n_shift_decode = 0;
+		int pmux_rounds = 0;
 
-		for (auto module : design->selected_modules()) {
-			SigMap sigmap(module);
+		for (int round = 1; round <= max_iterations; round++) {
+			int round_changes = 0;
+			bool selected_module = false;
+			int round_front = 0, round_priority = 0, round_dense = 0, round_pairs = 0;
+			int round_partial = 0, round_narrow = 0, round_adjacent = 0, round_enable = 0;
+			for (auto module : design->selected_modules()) {
+				selected_module = true;
+				if (round == 1)
+					module->attributes.erase(ID(pmux_opt_restructured));
+				int module_changes_start = round_changes;
+				SigMap sigmap(module);
 
-			int64_t module_start = PerformanceTimer::query();
-			n_sync_dff += lower_sync_reset_dffs_to_target(module, verbose);
+				int64_t module_start = PerformanceTimer::query();
+				int count = lower_sync_reset_dffs_to_target(module, verbose);
+				n_sync_dff += count;
+				round_changes += count;
+				round_front += count;
 			int64_t after_sync = PerformanceTimer::query();
-			n_target_clear += fold_zero_mux_into_target_dff_clear(module, verbose);
+			count = fold_zero_mux_into_target_dff_clear(module, verbose);
+				n_target_clear += count;
+				round_changes += count;
+				round_front += count;
 			int64_t after_zero_mux = PerformanceTimer::query();
-			n_rom += lower_constant_roms_to_luts(module, sigmap, ct, verbose);
+			count = lower_constant_roms_to_luts(module, sigmap, ct, verbose);
+				n_rom += count;
+				round_changes += count;
+				round_front += count;
 			int64_t after_rom = PerformanceTimer::query();
-			n_shift_decode += lower_constant_power_shift_decoders(module, sigmap, verbose);
+			count = lower_constant_power_shift_decoders(module, sigmap, verbose);
+				n_shift_decode += count;
+				round_changes += count;
+				round_front += count;
 			int64_t after_shift = PerformanceTimer::query();
 
 			dict<SigBit, Cell *> bit2cell;
@@ -3285,13 +3938,29 @@ struct PmuxOptPass : public Pass {
 							for (auto bit : sigmap(conn.second))
 								bit2cell[bit] = cell;
 
-			convert_priority_mux_chains(module, sigmap, ct, verbose);
+				// Dense PMUX lowering and priority-chain conversion synthesize new mux
+				// cells.  Re-feeding those cells to the same topology rewrite in a later
+				// round is not a fixed point: it can freeze a worse ABC cut.  Treat these
+				// two global normalizations as a one-shot canonicalization, while the
+				// local consuming rewrites below continue to a bounded fixed point.
+				if (round == 1) {
+					count = convert_priority_mux_chains(module, sigmap, ct, verbose);
+					round_changes += count;
+					round_priority += count;
+					int dense_factored = 0;
+					count = rewrite_dense_decoder_pmuxes(module, sigmap, ct, bit2cell,
+					                                    dense_factored, verbose);
+					n_dense_pmux += count;
+					round_changes += count + dense_factored;
+					round_dense += count + dense_factored;
+				}
 
 			std::vector<Cell *> pmuxes;
 			for (auto cell : module->cells())
 				if (cell->type == ID($pmux))
 					pmuxes.push_back(cell);
-			n_pmux += pmuxes.size();
+			if (round == 1)
+				n_pmux += pmuxes.size();
 
 			pool<IdString> done;
 
@@ -3405,28 +4074,54 @@ struct PmuxOptPass : public Pass {
 				done.insert(c1->name);
 				done.insert(partner->name);
 				n_pairs++;
+				round_changes++;
+				round_pairs++;
 			}
 
 			SigMap post_map(module);
 			pool<SigBit> partial_decoders;
-			simplify_partial_pmux(module, post_map, ct, verbose, partial_decoders);
-			if (!partial_decoders.empty()) {
-				narrow_gated_eq_decoders(module, post_map, ct, partial_decoders, verbose);
+				count = simplify_partial_pmux(module, post_map, ct, verbose, partial_decoders);
+				round_changes += count;
+				round_partial += count;
+				if (!partial_decoders.empty()) {
+					count = narrow_gated_eq_decoders(module, post_map, ct,
+					                                 partial_decoders, verbose);
+					round_changes += count;
+					round_narrow += count;
 				SigMap factor_map(module);
 				pool<SigBit> factor_outputs;
 				for (auto bit : partial_decoders)
 					factor_outputs.insert(factor_map(bit));
-				factor_adjacent_eq(module, factor_map, factor_outputs, verbose);
-			}
-			SigMap enable_map(module);
-			factor_common_enable_terms(module, enable_map, ct, verbose);
+					count = factor_adjacent_eq(module, factor_map, factor_outputs, verbose);
+					round_changes += count;
+					round_adjacent += count;
+				}
+				SigMap enable_map(module);
+				count = factor_common_enable_terms(module, enable_map, ct, verbose);
+				round_changes += count;
+				round_enable += count;
+			if (round_changes != module_changes_start)
+				module->set_bool_attribute(ID(pmux_opt_restructured));
 			if (verbose)
-				log("pmux_opt timing: sync=%.3f zero_mux=%.3f rom=%.3f shift=%.3f rest=%.3f ms\n",
+				log("pmux_opt round %d module %s: changes=%d timing: "
+				    "sync=%.3f zero_mux=%.3f rom=%.3f shift=%.3f rest=%.3f ms\n",
+				    round, log_id(module->name), round_changes,
 				    (after_sync - module_start) / 1e6,
 				    (after_zero_mux - after_sync) / 1e6,
 				    (after_rom - after_zero_mux) / 1e6,
 				    (after_shift - after_rom) / 1e6,
 				    (PerformanceTimer::query() - after_shift) / 1e6);
+			}
+
+				pmux_rounds = round;
+				log("pmux_opt: fixed-point round %d changes=%d "
+				    "[front=%d priority=%d dense=%d pairs=%d partial=%d narrow=%d "
+				    "adjacent=%d enable=%d]\n",
+				    round, round_changes, round_front, round_priority, round_dense,
+				    round_pairs, round_partial, round_narrow, round_adjacent,
+				    round_enable);
+			if (!selected_module || round_changes == 0)
+				break;
 		}
 
 		if (n_sync_dff)
@@ -3437,8 +4132,12 @@ struct PmuxOptPass : public Pass {
 			    n_target_clear);
 		log("pmux_opt: %d $pmux cell(s), merged %d pair(s), skipped %d, lowered %d constant ROM(s).\n",
 		    n_pmux, n_pairs, n_skip, n_rom);
+		if (n_dense_pmux)
+			log("pmux_opt: rewrote %d dense decoder PMUX cell(s) as bus-controlled mux trees.\n",
+			    n_dense_pmux);
 		if (n_shift_decode)
 			log("pmux_opt: lowered %d constant power-of-two shift decoder(s).\n", n_shift_decode);
+		log("pmux_opt: restructuring fixed point after %d round(s).\n", pmux_rounds);
 	}
 } PmuxOptPass;
 

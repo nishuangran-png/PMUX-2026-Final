@@ -1,0 +1,205 @@
+{
+  "manifest": "experiments/official-new-5-20261026/manifest.json",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "f95ac85d6a3c242a8151d7cea0095be13c5fa501853fc672768c66b6f34bf1a1"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official-new-20261026__pmux_case01_balanced",
+      "role": "official-new-20261026",
+      "top": "pmux_case01_balanced",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case01_balanced.v",
+          "sha256": "463263f4b265cbad3b634d69d316cd29e7ea0a62f91ee396dbeeecf7df5c7343"
+        }
+      ],
+      "baseline": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.28,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 29327360
+      },
+      "candidate": {
+        "lcell": 276,
+        "not": 0,
+        "logic": 276,
+        "dff": 12,
+        "wall_s": 0.24,
+        "cpu_s": 0.22999999999999998,
+        "peak_rss_bytes": 54493184
+      },
+      "reduction_pct": 32.01970443349754,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 406,
+        "gate_luts": 250,
+        "log_tail": "EQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case01_balanced/gold.log eqy_official-new-20261026__pmux_case01_balanced/gold.ys\"\nEQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gold: finished (returncode=0)\nEQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case01_balanced/gate.log eqy_official-new-20261026__pmux_case01_balanced/gate.ys\"\nEQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case01_balanced' in cell `$auto$alumacc.cc:548:replace_alu$92.slice[7].full_adder' is not part of the design.\nEQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: finished (returncode=1)\nEQY  0:56:04 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case02_pipeline",
+      "role": "official-new-20261026",
+      "top": "pmux_case02_pipeline",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case02_pipeline.v",
+          "sha256": "8639081b2fb7c446edef52a514d63b49333e444ce21638f03bdee97dc954e0ea"
+        }
+      ],
+      "baseline": {
+        "lcell": 444,
+        "not": 0,
+        "logic": 444,
+        "dff": 24,
+        "wall_s": 0.32,
+        "cpu_s": 0.31,
+        "peak_rss_bytes": 37568512
+      },
+      "candidate": {
+        "lcell": 312,
+        "not": 0,
+        "logic": 312,
+        "dff": 24,
+        "wall_s": 0.26,
+        "cpu_s": 0.24,
+        "peak_rss_bytes": 52969472
+      },
+      "reduction_pct": 29.72972972972973,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 402,
+        "gate_luts": 312,
+        "log_tail": "EQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case02_pipeline/gold.log eqy_official-new-20261026__pmux_case02_pipeline/gold.ys\"\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gold: finished (returncode=0)\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case02_pipeline/gate.log eqy_official-new-20261026__pmux_case02_pipeline/gate.ys\"\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case02_pipeline' in cell `$auto$alumacc.cc:548:replace_alu$445.slice[2].full_adder' is not part of the design.\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: finished (returncode=1)\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case03_crossbar",
+      "role": "official-new-20261026",
+      "top": "pmux_case03_crossbar",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case03_crossbar.v",
+          "sha256": "bf1fc3bf6383beb007a69587d77a29ea74fb1fbdf7429fb401c0855a31c05932"
+        }
+      ],
+      "baseline": {
+        "lcell": 409,
+        "not": 0,
+        "logic": 409,
+        "dff": 10,
+        "wall_s": 0.29,
+        "cpu_s": 0.27,
+        "peak_rss_bytes": 31211520
+      },
+      "candidate": {
+        "lcell": 250,
+        "not": 0,
+        "logic": 250,
+        "dff": 10,
+        "wall_s": 0.21,
+        "cpu_s": 0.18000000000000002,
+        "peak_rss_bytes": 53723136
+      },
+      "reduction_pct": 38.87530562347188,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 380,
+        "gate_luts": 252,
+        "log_tail": "EQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case03_crossbar/gold.log eqy_official-new-20261026__pmux_case03_crossbar/gold.ys\"\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gold: finished (returncode=0)\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case03_crossbar/gate.log eqy_official-new-20261026__pmux_case03_crossbar/gate.ys\"\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case03_crossbar' in cell `$auto$alumacc.cc:548:replace_alu$244.slice[1].full_adder' is not part of the design.\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: finished (returncode=1)\nEQY  0:56:05 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case04_feedback",
+      "role": "official-new-20261026",
+      "top": "pmux_case04_feedback",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case04_feedback.v",
+          "sha256": "d668d258d804674dd1412538e7bce04d4630d02928ffe113413b536e6b9ed70f"
+        }
+      ],
+      "baseline": {
+        "lcell": 364,
+        "not": 1,
+        "logic": 365,
+        "dff": 16,
+        "wall_s": 0.24,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 28082176
+      },
+      "candidate": {
+        "lcell": 265,
+        "not": 1,
+        "logic": 266,
+        "dff": 16,
+        "wall_s": 0.24,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 51757056
+      },
+      "reduction_pct": 27.123287671232877,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 364,
+        "gate_luts": 234,
+        "log_tail": "EQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case04_feedback/gold.log eqy_official-new-20261026__pmux_case04_feedback/gold.ys\"\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gold: finished (returncode=0)\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case04_feedback/gate.log eqy_official-new-20261026__pmux_case04_feedback/gate.ys\"\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case04_feedback' in cell `$auto$alumacc.cc:548:replace_alu$124.slice[6].full_adder' is not part of the design.\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: finished (returncode=1)\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case05_nested.v",
+          "sha256": "57d64edd3704d9d74407145080a63d06390e4a598c419a948fdea22fb1147f1d"
+        }
+      ],
+      "baseline": {
+        "lcell": 415,
+        "not": 0,
+        "logic": 415,
+        "dff": 12,
+        "wall_s": 0.26,
+        "cpu_s": 0.24000000000000002,
+        "peak_rss_bytes": 28934144
+      },
+      "candidate": {
+        "lcell": 304,
+        "not": 0,
+        "logic": 304,
+        "dff": 12,
+        "wall_s": 0.27,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 52953088
+      },
+      "reduction_pct": 26.746987951807228,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 394,
+        "gate_luts": 195,
+        "log_tail": "EQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case05_nested/gold.log eqy_official-new-20261026__pmux_case05_nested/gold.ys\"\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gold: finished (returncode=0)\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case05_nested/gate.log eqy_official-new-20261026__pmux_case05_nested/gate.ys\"\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case05_nested' in cell `$auto$alumacc.cc:548:replace_alu$104.slice[3].full_adder' is not part of the design.\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gate: finished (returncode=1)\nEQY  0:56:06 [eqy_official-new-20261026__pmux_case05_nested] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    }
+  ]
+}

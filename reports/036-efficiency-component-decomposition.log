@@ -1,0 +1,15 @@
+
+== version ==
+baseline wall_med=4.715 ms  wall_p10=4.144  wall_p90=5.157  rss_med=6.969 MiB
+new      wall_med=4.446 ms  wall_p10=3.854  wall_p90=5.150  rss_med=6.781 MiB
+ratio new/base wall=0.943 rss=0.973
+
+== frontend ==
+baseline wall_med=8.253 ms  wall_p10=7.743  wall_p90=9.295  rss_med=10.078 MiB
+new      wall_med=8.081 ms  wall_p10=7.437  wall_p90=8.945  rss_med=10.000 MiB
+ratio new/base wall=0.979 rss=0.992
+
+== full ==
+baseline wall_med=103.572 ms  wall_p10=102.102  wall_p90=106.626  rss_med=18.594 MiB
+new      wall_med=106.277 ms  wall_p10=104.293  wall_p90=108.487  rss_med=20.172 MiB
+ratio new/base wall=1.026 rss=1.085

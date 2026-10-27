@@ -1,0 +1,149 @@
+{
+  "manifest": "experiments/final-mapping-038-final/manifest.json",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/tmp/pmux-clean-repro-069-20261027.eZDfal/build-repro/yosys",
+    "sha256": "455aca22e3eb9fc9c599e465b1ee0fdb6fe45141603653a4dff5496102d056d7"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_stage": "core",
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "wall_s": 0.32,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 25804800
+      },
+      "candidate": {
+        "lcell": 200,
+        "not": 4,
+        "logic": 204,
+        "dff": 222,
+        "wall_s": 1.01,
+        "cpu_s": 0.30000000000000004,
+        "peak_rss_bytes": 54378496
+      },
+      "reduction_pct": 29.166666666666668,
+      "eqy": null
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v",
+          "sha256": "e43c9b437071488551caf3121e227e86f4fe3190751f245beac3b7ecc3fdb146"
+        }
+      ],
+      "baseline": {
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 19562496
+      },
+      "candidate": {
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "wall_s": 0.13,
+        "cpu_s": 0.11,
+        "peak_rss_bytes": 50184192
+      },
+      "reduction_pct": 36.0,
+      "eqy": null
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "lcell": 12,
+        "not": 1,
+        "logic": 13,
+        "dff": 17,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 24559616
+      },
+      "candidate": {
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "wall_s": 0.14,
+        "cpu_s": 0.12,
+        "peak_rss_bytes": 46055424
+      },
+      "reduction_pct": 30.76923076923077,
+      "eqy": null
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "lcell": 37,
+        "not": 1,
+        "logic": 38,
+        "dff": 10,
+        "wall_s": 0.15,
+        "cpu_s": 0.13,
+        "peak_rss_bytes": 23232512
+      },
+      "candidate": {
+        "lcell": 25,
+        "not": 1,
+        "logic": 26,
+        "dff": 10,
+        "wall_s": 0.11,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 48775168
+      },
+      "reduction_pct": 31.57894736842105,
+      "eqy": null
+    }
+  ]
+}

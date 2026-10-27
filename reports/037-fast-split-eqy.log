@@ -1,0 +1,8 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_eqy_y5nyox7g
+case   lut_gold lut_gate   delta  eqy
+test1       287      201      86  PASS
+test2        25       16       9  PASS
+test3        12        9       3  PASS
+test4        34       35      -1  PASS
+
+EQY 全部通过

@@ -1,0 +1,13 @@
+workdir: /Users/selina/Documents/ChatGPT/fpga比赛/experiments/holdout-eqy-grouped-20261025
+phase 1/2: baseline
+verilog_axi_priority_encoder_128 baseline done
+verilog_axi_priority_encoder_512 baseline done
+verilog_axi_arbiter_64       baseline done
+phase 2/2: candidate
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_512 candidate done
+verilog_axi_arbiter_64       candidate done
+verilog_axi_priority_encoder_128 external      323 ->   316   +2.17% dff    0 EQY PASS
+verilog_axi_priority_encoder_512 external     1315 ->  1208   +8.14% dff    0 EQY PASS
+verilog_axi_arbiter_64       external      173 ->   163   +5.78% dff   71 EQY PASS
+JSON -> reports/036-holdout-eqy-grouped.json

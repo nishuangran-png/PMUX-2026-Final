@@ -1,0 +1,15 @@
+== 2026-10-25T02:03:13+08:00 efficiency repro ==
+baseline : /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys
+candidate: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025/build/yosys
+计时口径 : wall time（类比 PowerShell Measure-Command），31 次中位数
+
+case    wall base  wall cand    ratio  mem base MB  mem cand MB    ratio
+test1       0.320      0.280    0.875        26.66        26.41    0.991
+test2       0.090      0.100    1.111        19.03        20.50    1.077
+test3       0.110      0.100    0.909        23.67        21.75    0.919
+test4       0.130      0.120    0.923        25.17        24.69    0.981
+
+最大墙钟比: test2 1.111
+最大内存比: test2 1.077
+效率满分线: 所有用例均 <= 1.05；任一项 > 1.15 则效率项为 0。
+JSON -> reports/036-repro-efficiency.json

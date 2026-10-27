@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T18:49:11.812373+00:00",
+  "git_head": "aba1a34d0708cad7ba3a8e40c09356b2f116722d",
+  "seed": 20261025,
+  "data_model": "full-width-sha256",
+  "baseline": {
+    "path": "tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "ee7ccc5c6679c5ad998e4a36aaddbc0b954cbebeec7b2998b561ef7b8a60aeaa",
+    "version": "Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 3,
+    "improved": 3,
+    "equal": 0,
+    "regressed": 0,
+    "total_baseline": 1470,
+    "total_candidate": 1336,
+    "total_delta": 134,
+    "total_reduction_pct": 9.115646258503402,
+    "best_delta": 55,
+    "worst_delta": 31
+  },
+  "cases": [
+    {
+      "id": "const_pmux_a5_w64",
+      "address_width": 5,
+      "output_width": 64,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-038-20261025/rtl/const_pmux_a5_w64.v",
+      "rtl_sha256": "434ef9ec6e0ca096f6410f60a9ec119633155a591905f6198c7532c2fb1a0e5d",
+      "baseline": {
+        "lcell": 239,
+        "not": 0,
+        "logic": 239,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 239
+        },
+        "wall_s": 0.276936,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w64.baseline.log"
+      },
+      "candidate": {
+        "lcell": 191,
+        "not": 0,
+        "logic": 191,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 191
+        },
+        "wall_s": 0.209714,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w64.candidate.log"
+      },
+      "delta": 48,
+      "reduction_pct": 20.0836820083682
+    },
+    {
+      "id": "const_pmux_a5_w128",
+      "address_width": 5,
+      "output_width": 128,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-038-20261025/rtl/const_pmux_a5_w128.v",
+      "rtl_sha256": "6950f760d6cc1ed8e2de54ef1be1cbe1caa1b21bb9eac4cc9ba40b7d8f6090a9",
+      "baseline": {
+        "lcell": 438,
+        "not": 0,
+        "logic": 438,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 438
+        },
+        "wall_s": 0.404033,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w128.baseline.log"
+      },
+      "candidate": {
+        "lcell": 383,
+        "not": 0,
+        "logic": 383,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 383
+        },
+        "wall_s": 0.261173,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w128.candidate.log"
+      },
+      "delta": 55,
+      "reduction_pct": 12.557077625570775
+    },
+    {
+      "id": "const_pmux_a5_w256",
+      "address_width": 5,
+      "output_width": 256,
+      "states": 32,
+      "rtl": "experiments/const-pmux-localplan-038-20261025/rtl/const_pmux_a5_w256.v",
+      "rtl_sha256": "c7ee7aa6b4cf8851616291bd32621e4ae9a8bd36e2695926b38053f5c8fcb99e",
+      "baseline": {
+        "lcell": 793,
+        "not": 0,
+        "logic": 793,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 793
+        },
+        "wall_s": 0.602535,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w256.baseline.log"
+      },
+      "candidate": {
+        "lcell": 762,
+        "not": 0,
+        "logic": 762,
+        "dff": 0,
+        "cells": {
+          "cycloneiv_lcell_comb": 762
+        },
+        "wall_s": 0.431064,
+        "log": "experiments/const-pmux-localplan-038-20261025/logs/const_pmux_a5_w256.candidate.log"
+      },
+      "delta": 31,
+      "reduction_pct": 3.909205548549811
+    }
+  ]
+}

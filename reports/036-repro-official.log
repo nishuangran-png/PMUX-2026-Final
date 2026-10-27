@@ -1,0 +1,13 @@
+== 2026-10-25T02:02:07+08:00 official repro ==
+baseline : /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys
+candidate: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-src/tools/build/pmux-repro-20261025/build/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test1     288    202   29.86%   222     0.330     0.320
+test2      25     16   36.00%     0     0.100     0.110
+test3      12      9   25.00%    17     0.120     0.110
+test4      31     23   25.81%    10     0.140     0.130
+
+平均缩减率（每用例先算再平均）: 29.17%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/036-repro-official.json

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-24T17:38:27.695469+00:00",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-formal-src/build-formal/yosys-033-old",
+    "sha256": "66a62d2b6934c52159192355b185449e03b4dcc7835f4712d9c36922619fad5d"
+  },
+  "metric": "cycloneiv_lcell_comb + $not",
+  "summary": {
+    "cases": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  "rows": [
+    {
+      "id": "const_pmux_a6_w8",
+      "top": "const_pmux_a6_w8",
+      "sources": [
+        {
+          "path": "experiments/const-pmux-20261025/rtl/const_pmux_a6_w8.v",
+          "sha256": "509194d863b7e91006041b2bb4098a57ddd87e17a0497251e5e8e4b5864c528e"
+        }
+      ],
+      "baseline": {
+        "binary_sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258",
+        "cells": {
+          "cycloneiv_lcell_comb": 23
+        },
+        "lcell": 23,
+        "not": 0,
+        "logic": 23,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gold.il",
+        "verilog": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gold.v",
+        "log": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gold.synth.log"
+      },
+      "candidate": {
+        "binary_sha256": "66a62d2b6934c52159192355b185449e03b4dcc7835f4712d9c36922619fad5d",
+        "cells": {
+          "$not": 1,
+          "cycloneiv_lcell_comb": 23
+        },
+        "lcell": 23,
+        "not": 1,
+        "logic": 24,
+        "dff": 0,
+        "il": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gate.il",
+        "verilog": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gate.v",
+        "log": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.gate.synth.log"
+      },
+      "method": "sat-miter",
+      "check": {
+        "status": "FAIL",
+        "rtl_vs_final": {
+          "status": "FAIL",
+          "returncode": 1,
+          "log": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.rtl-vs-final.log",
+          "log_tail": "Removed 2 unused modules.\n\n11. Executing SAT pass (solving SAT problems in the circuit).\nUsing SAT solver `minisat`.\n\nSetting up SAT problem:\nFinal constraint equation: { } = { }\nImported 59 cells to SAT database.\nImport proof-constraint: \\trigger = 1'0\nFinal proof equation: \\trigger = 1'0\nImport show expression: \\in_sel\nImport show expression: \\trigger\n\nSolving problem with 3491 variables and 9353 clauses..\nSAT proof finished - model found: FAIL!\n\n   ______                   ___       ___       _ _            _ _ \n  (_____ \\                 / __)     / __)     (_) |          | | |\n   _____) )___ ___   ___ _| |__    _| |__ _____ _| | _____  __| | |\n  |  ____/ ___) _ \\ / _ (_   __)  (_   __|____ | | || ___ |/ _  |_|\n  | |   | |  | |_| | |_| || |       | |  / ___ | | || ____( (_| |_ \n  |_|   |_|   \\___/ \\___/ |_|       |_|  \\_____|_|\\_)_____)\\____|_|\n\n\n  Signal Name             Dec       Hex           Bin\n  --------------- ----------- --------- -------------\n  \\in_sel                  20        14        010100\n  \\trigger                  1         1             1\n\nERROR: Called with -verify and proof did fail!"
+        },
+        "baseline_vs_final": {
+          "status": "FAIL",
+          "returncode": 1,
+          "log": "experiments/final-mapping-20261025/negative-control/const_pmux_a6_w8.baseline-vs-final.log",
+          "log_tail": "Removed 2 unused modules.\n\n6. Executing SAT pass (solving SAT problems in the circuit).\nUsing SAT solver `minisat`.\n\nSetting up SAT problem:\nFinal constraint equation: { } = { }\nImported 51 cells to SAT database.\nImport proof-constraint: \\trigger = 1'0\nFinal proof equation: \\trigger = 1'0\nImport show expression: \\in_sel\nImport show expression: \\trigger\n\nSolving problem with 4810 variables and 12938 clauses..\nSAT proof finished - model found: FAIL!\n\n   ______                   ___       ___       _ _            _ _ \n  (_____ \\                 / __)     / __)     (_) |          | | |\n   _____) )___ ___   ___ _| |__    _| |__ _____ _| | _____  __| | |\n  |  ____/ ___) _ \\ / _ (_   __)  (_   __|____ | | || ___ |/ _  |_|\n  | |   | |  | |_| | |_| || |       | |  / ___ | | || ____( (_| |_ \n  |_|   |_|   \\___/ \\___/ |_|       |_|  \\_____|_|\\_)_____)\\____|_|\n\n\n  Signal Name             Dec       Hex           Bin\n  --------------- ----------- --------- -------------\n  \\in_sel                  31        1f        011111\n  \\trigger                  1         1             1\n\nERROR: Called with -verify and proof did fail!"
+        }
+      },
+      "status": "FAIL",
+      "elapsed_s": 0.396,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "manifest": "experiments/official-new-5-20261026/manifest.json",
+  "baseline": {
+    "path": "experiments/official-new-5-20261026/old-bin/yosys",
+    "sha256": "bef45ff6f6e315ab55cebfdfd42d7c8cfb12878f9df79fcde3c010ce26fedb33"
+  },
+  "candidate": {
+    "path": "tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "d9e613bcf6b4e3446d3d072d742f2bdbd7ddf4e8e50c3a2c3132b877cb630bc9"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official-new-20261026__pmux_case01_balanced",
+      "role": "official-new-20261026",
+      "top": "pmux_case01_balanced",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case01_balanced.v",
+          "sha256": "463263f4b265cbad3b634d69d316cd29e7ea0a62f91ee396dbeeecf7df5c7343"
+        }
+      ],
+      "baseline": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.32,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 29769728
+      },
+      "candidate": {
+        "lcell": 413,
+        "not": 0,
+        "logic": 413,
+        "dff": 12,
+        "wall_s": 0.63,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 35602432
+      },
+      "reduction_pct": -1.7241379310344827,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case02_pipeline",
+      "role": "official-new-20261026",
+      "top": "pmux_case02_pipeline",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case02_pipeline.v",
+          "sha256": "8639081b2fb7c446edef52a514d63b49333e444ce21638f03bdee97dc954e0ea"
+        }
+      ],
+      "baseline": {
+        "lcell": 444,
+        "not": 0,
+        "logic": 444,
+        "dff": 24,
+        "wall_s": 0.34,
+        "cpu_s": 0.33,
+        "peak_rss_bytes": 40140800
+      },
+      "candidate": {
+        "lcell": 442,
+        "not": 0,
+        "logic": 442,
+        "dff": 24,
+        "wall_s": 0.33,
+        "cpu_s": 0.32,
+        "peak_rss_bytes": 36651008
+      },
+      "reduction_pct": 0.45045045045045046,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case03_crossbar",
+      "role": "official-new-20261026",
+      "top": "pmux_case03_crossbar",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case03_crossbar.v",
+          "sha256": "bf1fc3bf6383beb007a69587d77a29ea74fb1fbdf7429fb401c0855a31c05932"
+        }
+      ],
+      "baseline": {
+        "lcell": 409,
+        "not": 0,
+        "logic": 409,
+        "dff": 10,
+        "wall_s": 0.31,
+        "cpu_s": 0.29000000000000004,
+        "peak_rss_bytes": 31178752
+      },
+      "candidate": {
+        "lcell": 378,
+        "not": 0,
+        "logic": 378,
+        "dff": 10,
+        "wall_s": 0.31,
+        "cpu_s": 0.29000000000000004,
+        "peak_rss_bytes": 31014912
+      },
+      "reduction_pct": 7.579462102689487,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case04_feedback",
+      "role": "official-new-20261026",
+      "top": "pmux_case04_feedback",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case04_feedback.v",
+          "sha256": "d668d258d804674dd1412538e7bce04d4630d02928ffe113413b536e6b9ed70f"
+        }
+      ],
+      "baseline": {
+        "lcell": 364,
+        "not": 1,
+        "logic": 365,
+        "dff": 16,
+        "wall_s": 0.27,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 27475968
+      },
+      "candidate": {
+        "lcell": 399,
+        "not": 1,
+        "logic": 400,
+        "dff": 16,
+        "wall_s": 0.27,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 27148288
+      },
+      "reduction_pct": -9.58904109589041,
+      "eqy": null
+    },
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case05_nested.v",
+          "sha256": "57d64edd3704d9d74407145080a63d06390e4a598c419a948fdea22fb1147f1d"
+        }
+      ],
+      "baseline": {
+        "lcell": 415,
+        "not": 0,
+        "logic": 415,
+        "dff": 12,
+        "wall_s": 0.28,
+        "cpu_s": 0.27,
+        "peak_rss_bytes": 29523968
+      },
+      "candidate": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.28,
+        "cpu_s": 0.27,
+        "peak_rss_bytes": 31604736
+      },
+      "reduction_pct": 2.1686746987951806,
+      "eqy": null
+    }
+  ]
+}

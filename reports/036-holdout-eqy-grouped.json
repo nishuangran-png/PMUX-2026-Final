@@ -1,0 +1,141 @@
+{
+  "manifest": "experiments/holdout-20261024/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/yosys-069-baseline-src/build/yosys",
+    "sha256": "9cfee0f63e242599a3e6966edaeeb44a81c04c55a86fb57908b2feaa68eca258"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-formal-src/build-formal/yosys",
+    "sha256": "823e998dce7ba068c58e1d6e9719cee6d5fe076d1565340e5377920a7f9373f2"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": "output_*"
+  },
+  "rows": [
+    {
+      "id": "verilog_axi_priority_encoder_128",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 128
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 323,
+        "not": 0,
+        "logic": 323,
+        "dff": 0,
+        "wall_s": 0.52,
+        "cpu_s": 0.41,
+        "peak_rss_bytes": 33259520
+      },
+      "candidate": {
+        "lcell": 316,
+        "not": 0,
+        "logic": 316,
+        "dff": 0,
+        "wall_s": 0.5,
+        "cpu_s": 0.44999999999999996,
+        "peak_rss_bytes": 30916608
+      },
+      "reduction_pct": 2.1671826625387,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 323,
+        "gate_luts": 316,
+        "log_tail": "EQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] read_gold: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_128/gold.log eqy_verilog_axi_priority_encoder_128/gold.ys\"\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] read_gold: finished (returncode=0)\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] read_gate: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_128/gate.log eqy_verilog_axi_priority_encoder_128/gate.ys\"\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] read_gate: finished (returncode=0)\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] combine: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_128/combine.log eqy_verilog_axi_priority_encoder_128/combine.ys\"\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] combine: finished (returncode=0)\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] partition: starting process \"cd eqy_verilog_axi_priority_encoder_128; yosys -ql partition.log partition.ys\"\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] partition: finished (returncode=0)\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] run: starting process \"make -C eqy_verilog_axi_priority_encoder_128 -f strategies.mk\"\nEQY  1:48:58 [eqy_verilog_axi_priority_encoder_128] run: Running strategy 'sat' on 'priority_encoder.output_encoded'..\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] run: Proved equivalence of partition 'priority_encoder.output_encoded' using strategy 'sat'\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] run: finished (returncode=0)\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] Successfully proved equivalence of partition priority_encoder.output_encoded\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] Successfully proved designs equivalent\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:48:59 [eqy_verilog_axi_priority_encoder_128] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_priority_encoder_512",
+      "role": "external",
+      "top": "priority_encoder",
+      "params": {
+        "WIDTH": 512
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        }
+      ],
+      "baseline": {
+        "lcell": 1315,
+        "not": 0,
+        "logic": 1315,
+        "dff": 0,
+        "wall_s": 3.04,
+        "cpu_s": 3.01,
+        "peak_rss_bytes": 50528256
+      },
+      "candidate": {
+        "lcell": 1208,
+        "not": 0,
+        "logic": 1208,
+        "dff": 0,
+        "wall_s": 2.99,
+        "cpu_s": 2.98,
+        "peak_rss_bytes": 41353216
+      },
+      "reduction_pct": 8.136882129277566,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 1315,
+        "gate_luts": 1208,
+        "log_tail": "EQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] read_gold: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_512/gold.log eqy_verilog_axi_priority_encoder_512/gold.ys\"\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] read_gold: finished (returncode=0)\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] read_gate: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_512/gate.log eqy_verilog_axi_priority_encoder_512/gate.ys\"\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] read_gate: finished (returncode=0)\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] combine: starting process \"yosys -ql eqy_verilog_axi_priority_encoder_512/combine.log eqy_verilog_axi_priority_encoder_512/combine.ys\"\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] combine: finished (returncode=0)\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] partition: starting process \"cd eqy_verilog_axi_priority_encoder_512; yosys -ql partition.log partition.ys\"\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] partition: finished (returncode=0)\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] run: starting process \"make -C eqy_verilog_axi_priority_encoder_512 -f strategies.mk\"\nEQY  1:49:05 [eqy_verilog_axi_priority_encoder_512] run: Running strategy 'sat' on 'priority_encoder.output_encoded'..\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] run: Proved equivalence of partition 'priority_encoder.output_encoded' using strategy 'sat'\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] run: finished (returncode=0)\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] Successfully proved equivalence of partition priority_encoder.output_encoded\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] Successfully proved designs equivalent\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY  1:49:07 [eqy_verilog_axi_priority_encoder_512] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "verilog_axi_arbiter_64",
+      "role": "external",
+      "top": "arbiter",
+      "params": {
+        "PORTS": 64
+      },
+      "sources": [
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5"
+        },
+        {
+          "path": "@HOLDOUT@/verilog-axi/rtl/arbiter.v",
+          "sha256": "a001507c82843e36e133dea75491fc044f56660fac0aff0127cf3afec7f927e0"
+        }
+      ],
+      "baseline": {
+        "lcell": 173,
+        "not": 0,
+        "logic": 173,
+        "dff": 71,
+        "wall_s": 0.37,
+        "cpu_s": 0.34,
+        "peak_rss_bytes": 30916608
+      },
+      "candidate": {
+        "lcell": 163,
+        "not": 0,
+        "logic": 163,
+        "dff": 71,
+        "wall_s": 0.35,
+        "cpu_s": 0.33,
+        "peak_rss_bytes": 30752768
+      },
+      "reduction_pct": 5.780346820809249,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 164,
+        "gate_luts": 155,
+        "log_tail": "partition arbiter.grant.35\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.34\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.33\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.32\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.31\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.30\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.29\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.28\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.27\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.26\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.25\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.24\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.23\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.22\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.21\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.20\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.19\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.18\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.17\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.16\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.15\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.14\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.13\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.12\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.11\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.10\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.9\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.8\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.7\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.6\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.5\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.4\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.3\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.2\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.1\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved equivalence of partition arbiter.grant.0\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] Successfully proved designs equivalent\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:08 (8)\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:08 (8)\nEQY  1:49:17 [eqy_verilog_axi_arbiter_64] DONE (PASS, rc=0)\n"
+      }
+    }
+  ]
+}

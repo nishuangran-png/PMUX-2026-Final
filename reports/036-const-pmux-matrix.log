@@ -1,0 +1,23 @@
+case                       base   cand   delta      pct   dff
+const_pmux_a2_w1              1      1       0    0.00%     0
+const_pmux_a2_w4              2      2       0    0.00%     0
+const_pmux_a2_w8              6      6       0    0.00%     0
+const_pmux_a2_w16             8      8       0    0.00%     0
+const_pmux_a3_w1              1      1       0    0.00%     0
+const_pmux_a3_w4              3      3       0    0.00%     0
+const_pmux_a3_w8              7      7       0    0.00%     0
+const_pmux_a3_w16            14     14       0    0.00%     0
+const_pmux_a4_w1              1      1       0    0.00%     0
+const_pmux_a4_w4              3      3       0    0.00%     0
+const_pmux_a4_w8              7      7       0    0.00%     0
+const_pmux_a4_w16            15     15       0    0.00%     0
+const_pmux_a5_w1              1      1       0    0.00%     0
+const_pmux_a5_w4              3      3       0    0.00%     0
+const_pmux_a5_w8             14     14       0    0.00%     0
+const_pmux_a5_w16            48     39       9   18.75%     0
+const_pmux_a6_w1              1      1       0    0.00%     0
+const_pmux_a6_w4              3      3       0    0.00%     0
+const_pmux_a6_w8             23     24      -1   -4.35%     0
+const_pmux_a6_w16           106     80      26   24.53%     0
+
+合计 20 例：改善 2，持平 17，回归 1； 267 -> 233，12.73%

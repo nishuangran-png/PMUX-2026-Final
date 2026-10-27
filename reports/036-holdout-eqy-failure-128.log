@@ -1,0 +1,6 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_o1j6ulv5
+phase 1/2: baseline
+verilog_axi_priority_encoder_128 baseline done
+phase 2/2: candidate
+verilog_axi_priority_encoder_128 candidate done
+verilog_axi_priority_encoder_128 external      323 ->   316   +2.17% dff    0 EQY FAIL

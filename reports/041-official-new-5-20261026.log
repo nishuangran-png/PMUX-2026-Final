@@ -1,0 +1,19 @@
+workdir: /Users/selina/Documents/ChatGPT/fpga比赛/experiments/official-new-5-20261026/run
+phase 1/2: baseline
+official-new-20261026__pmux_case01_balanced baseline done
+official-new-20261026__pmux_case02_pipeline baseline done
+official-new-20261026__pmux_case03_crossbar baseline done
+official-new-20261026__pmux_case04_feedback baseline done
+official-new-20261026__pmux_case05_nested baseline done
+phase 2/2: candidate
+official-new-20261026__pmux_case01_balanced candidate done
+official-new-20261026__pmux_case02_pipeline candidate done
+official-new-20261026__pmux_case03_crossbar candidate done
+official-new-20261026__pmux_case04_feedback candidate done
+official-new-20261026__pmux_case05_nested candidate done
+official-new-20261026__pmux_case01_balanced official-new-20261026   406 ->   406   +0.00% dff   12 EQY PASS
+official-new-20261026__pmux_case02_pipeline official-new-20261026   444 ->   444   +0.00% dff   24 EQY PASS
+official-new-20261026__pmux_case03_crossbar official-new-20261026   409 ->   409   +0.00% dff   10 EQY PASS
+official-new-20261026__pmux_case04_feedback official-new-20261026   365 ->   365   +0.00% dff   16 EQY PASS
+official-new-20261026__pmux_case05_nested official-new-20261026   415 ->   415   +0.00% dff   12 EQY PASS
+JSON -> reports/041-official-new-5-20261026.json

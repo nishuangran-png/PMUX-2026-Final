@@ -12,8 +12,12 @@
 *.patch text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
 *.log text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
 *.sha256 text eol=lf
+*.txt text eol=lf
+*.stdout text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+*.abc text eol=lf
 # 官方四题 RTL 保留下发时的 CRLF 字节，manifest 直接记录其原始哈希
-rtl/official/**/*.v text eol=crlf
+rtl/official/**/*.v text eol=crlf whitespace=-blank-at-eof
+rtl/official-new-20261026/**/*.v text eol=crlf whitespace=-blank-at-eof
 # 上游封存集按原字节冻结；SHA256SUMS 也必须是 LF，避免 Windows 检出后哈希变化
 rtl/upstream/yosys-v069/SHA256SUMS text eol=lf
 rtl/upstream/yosys-v069/**/*.v text eol=lf whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
@@ -23,3 +27,6 @@ rtl/upstream/yosys-v069/**/*.v text eol=lf whitespace=-blank-at-eol,-blank-at-eo
 # 二进制资料不做换行转换
 *.pdf binary
 *.png binary
+*.xlsx binary
+*.rar binary
+*.il binary

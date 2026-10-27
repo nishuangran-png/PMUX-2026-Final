@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "name": "官方四题 + 新增五题（统一核心算法验证）",
+  "purpose": "Nine-case regression: one candidate binary and one synth_intel command.",
+  "metric": "cycloneiv_lcell_comb + $not",
+  "cases": [
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "sources": [{"path": "rtl/official/test1/test1.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "sources": [{"path": "rtl/official/test2/test2.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "sources": [{"path": "rtl/official/test3/test3.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "sources": [{"path": "rtl/official/test4/test4.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official-new-20261026__pmux_case01_balanced",
+      "role": "official-new-20261026",
+      "top": "pmux_case01_balanced",
+      "sources": [{"path": "rtl/official-new-20261026/pmux_case01_balanced.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official-new-20261026__pmux_case02_pipeline",
+      "role": "official-new-20261026",
+      "top": "pmux_case02_pipeline",
+      "sources": [{"path": "rtl/official-new-20261026/pmux_case02_pipeline.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official-new-20261026__pmux_case03_crossbar",
+      "role": "official-new-20261026",
+      "top": "pmux_case03_crossbar",
+      "sources": [{"path": "rtl/official-new-20261026/pmux_case03_crossbar.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official-new-20261026__pmux_case04_feedback",
+      "role": "official-new-20261026",
+      "top": "pmux_case04_feedback",
+      "sources": [{"path": "rtl/official-new-20261026/pmux_case04_feedback.v"}],
+      "eqy": true
+    },
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "sources": [{"path": "rtl/official-new-20261026/pmux_case05_nested.v"}],
+      "eqy": true
+    }
+  ]
+}

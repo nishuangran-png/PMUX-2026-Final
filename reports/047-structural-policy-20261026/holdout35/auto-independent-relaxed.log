@@ -1,0 +1,109 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_wax09pod
+phase 1/2: baseline
+attrib09_case__attrib09_bar  baseline done
+attrib09_case__attrib09_foo  baseline done
+case_large__case_lage_top    baseline done
+code_hdl_models_encoder_using_case__encoder_using_case baseline done
+code_verilog_tutorial_decoder__decoder baseline done
+code_verilog_tutorial_decoder_always__decoder_always baseline done
+muxpack__mux_if_unbal_4_1    baseline done
+muxpack__mux_if_unbal_5_3    baseline done
+muxpack__mux_if_unbal_5_3_invert baseline done
+muxpack__mux_if_unbal_5_3_width_mismatch baseline done
+muxpack__mux_if_unbal_4_1_missing baseline done
+muxpack__mux_if_unbal_5_3_order baseline done
+muxpack__mux_if_unbal_4_1_nonexcl baseline done
+muxpack__mux_if_unbal_5_3_nonexcl baseline done
+muxpack__mux_case_unbal_8_7  baseline done
+muxpack__mux_if_bal_8_2      baseline done
+muxpack__mux_if_bal_5_1      baseline done
+muxpack__clairexen_nonexclusive_select baseline done
+muxpack__clairexen_freduce   baseline done
+muxpack__case_nonexclusive_select baseline done
+muxpack__case_nonoverlap     baseline done
+muxpack__case_overlap        baseline done
+muxpack__chain_slice_self_input baseline done
+muxpack__case_overlap2       baseline done
+opt_share_large_pmux_cat__opt_share_test baseline done
+opt_share_large_pmux_cat_multipart__opt_share_test baseline done
+opt_share_large_pmux_multipart__opt_share_test baseline done
+opt_share_large_pmux_part__opt_share_test baseline done
+test_simulation_mux__f1_test baseline done
+test_simulation_mux__f2_test baseline done
+test_simulation_mux__f3_test baseline done
+test_simulation_mux__f4_test baseline done
+test_simulation_mux__f5_test baseline done
+test_simulation_mux__f6_test baseline done
+wide_thru_priority__test     baseline done
+phase 2/2: candidate
+attrib09_case__attrib09_bar  candidate done
+attrib09_case__attrib09_foo  candidate done
+case_large__case_lage_top    candidate done
+code_hdl_models_encoder_using_case__encoder_using_case candidate done
+code_verilog_tutorial_decoder__decoder candidate done
+code_verilog_tutorial_decoder_always__decoder_always candidate done
+muxpack__mux_if_unbal_4_1    candidate done
+muxpack__mux_if_unbal_5_3    candidate done
+muxpack__mux_if_unbal_5_3_invert candidate done
+muxpack__mux_if_unbal_5_3_width_mismatch candidate done
+muxpack__mux_if_unbal_4_1_missing candidate done
+muxpack__mux_if_unbal_5_3_order candidate done
+muxpack__mux_if_unbal_4_1_nonexcl candidate done
+muxpack__mux_if_unbal_5_3_nonexcl candidate done
+muxpack__mux_case_unbal_8_7  candidate done
+muxpack__mux_if_bal_8_2      candidate done
+muxpack__mux_if_bal_5_1      candidate done
+muxpack__clairexen_nonexclusive_select candidate done
+muxpack__clairexen_freduce   candidate done
+muxpack__case_nonexclusive_select candidate done
+muxpack__case_nonoverlap     candidate done
+muxpack__case_overlap        candidate done
+muxpack__chain_slice_self_input candidate done
+muxpack__case_overlap2       candidate done
+opt_share_large_pmux_cat__opt_share_test candidate done
+opt_share_large_pmux_cat_multipart__opt_share_test candidate done
+opt_share_large_pmux_multipart__opt_share_test candidate done
+opt_share_large_pmux_part__opt_share_test candidate done
+test_simulation_mux__f1_test candidate done
+test_simulation_mux__f2_test candidate done
+test_simulation_mux__f3_test candidate done
+test_simulation_mux__f4_test candidate done
+test_simulation_mux__f5_test candidate done
+test_simulation_mux__f6_test candidate done
+wide_thru_priority__test     candidate done
+attrib09_case__attrib09_bar  upstream-yosys-v069     2 ->     2   +0.00% dff    0 EQY SKIP
+attrib09_case__attrib09_foo  upstream-yosys-v069     2 ->     2   +0.00% dff    0 EQY SKIP
+case_large__case_lage_top    upstream-yosys-v069   638 ->   638   +0.00% dff    0 EQY SKIP
+code_hdl_models_encoder_using_case__encoder_using_case upstream-yosys-v069    32 ->    32   +0.00% dff    0 EQY SKIP
+code_verilog_tutorial_decoder__decoder upstream-yosys-v069     8 ->     8   +0.00% dff    0 EQY SKIP
+code_verilog_tutorial_decoder_always__decoder_always upstream-yosys-v069     7 ->     7   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_4_1    upstream-yosys-v069     3 ->     3   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_5_3    upstream-yosys-v069    17 ->    17   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_5_3_invert upstream-yosys-v069    17 ->    17   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_5_3_width_mismatch upstream-yosys-v069    15 ->    15   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_4_1_missing upstream-yosys-v069     4 ->     4   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_5_3_order upstream-yosys-v069    20 ->    15  +25.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_4_1_nonexcl upstream-yosys-v069     3 ->     3   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_unbal_5_3_nonexcl upstream-yosys-v069    16 ->    12  +25.00% dff    0 EQY SKIP
+muxpack__mux_case_unbal_8_7  upstream-yosys-v069    57 ->    57   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_bal_8_2      upstream-yosys-v069    12 ->    12   +0.00% dff    0 EQY SKIP
+muxpack__mux_if_bal_5_1      upstream-yosys-v069     3 ->     3   +0.00% dff    0 EQY SKIP
+muxpack__clairexen_nonexclusive_select upstream-yosys-v069     3 ->     3   +0.00% dff    0 EQY SKIP
+muxpack__clairexen_freduce   upstream-yosys-v069     6 ->     6   +0.00% dff    0 EQY SKIP
+muxpack__case_nonexclusive_select upstream-yosys-v069     4 ->     4   +0.00% dff    0 EQY SKIP
+muxpack__case_nonoverlap     upstream-yosys-v069     5 ->     5   +0.00% dff    0 EQY SKIP
+muxpack__case_overlap        upstream-yosys-v069     5 ->     5   +0.00% dff    0 EQY SKIP
+muxpack__chain_slice_self_input upstream-yosys-v069    32 ->    32   +0.00% dff    0 EQY SKIP
+muxpack__case_overlap2       upstream-yosys-v069     5 ->     5   +0.00% dff    0 EQY SKIP
+opt_share_large_pmux_cat__opt_share_test upstream-yosys-v069   271 ->   271   +0.00% dff    0 EQY SKIP
+opt_share_large_pmux_cat_multipart__opt_share_test upstream-yosys-v069   426 ->   426   +0.00% dff    0 EQY SKIP
+opt_share_large_pmux_multipart__opt_share_test upstream-yosys-v069   311 ->   311   +0.00% dff    0 EQY SKIP
+opt_share_large_pmux_part__opt_share_test upstream-yosys-v069   245 ->   245   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f1_test upstream-yosys-v069    13 ->    13   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f2_test upstream-yosys-v069     1 ->     1   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f3_test upstream-yosys-v069    44 ->    44   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f4_test upstream-yosys-v069     3 ->     3   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f5_test upstream-yosys-v069    80 ->    80   +0.00% dff    0 EQY SKIP
+test_simulation_mux__f6_test upstream-yosys-v069     6 ->     6   +0.00% dff    0 EQY SKIP
+wide_thru_priority__test     upstream-yosys-v069  1123 ->  1123   +0.00% dff  512 EQY SKIP
+JSON -> reports/047-structural-policy-20261026/holdout35/auto-independent-relaxed.json

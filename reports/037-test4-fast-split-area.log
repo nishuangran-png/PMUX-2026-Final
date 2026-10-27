@@ -1,0 +1,9 @@
+baseline : /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys
+candidate: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys
+
+case     base   cand   reduct   dff  cpu_base  cpu_cand
+test4      38     26   31.58%    10     0.130     0.130
+
+平均缩减率（每用例先算再平均）: 31.58%
+官方满分线: ≥20% ；基础分线: 有缩减
+JSON -> reports/037-test4-fast-split-area.json

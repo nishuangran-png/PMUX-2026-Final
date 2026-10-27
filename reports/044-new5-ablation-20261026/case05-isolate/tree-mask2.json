@@ -1,0 +1,57 @@
+{
+  "manifest": "experiments/official-new-5-20261026/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "24b8fb6fc0809ca1144dcc94f6b9c5a3607806f67b62f0eb5e0f74f35773f4b6"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case05_nested.v",
+          "sha256": "57d64edd3704d9d74407145080a63d06390e4a598c419a948fdea22fb1147f1d"
+        }
+      ],
+      "baseline": {
+        "lcell": 415,
+        "not": 0,
+        "logic": 415,
+        "dff": 12,
+        "wall_s": 0.38,
+        "cpu_s": 0.37,
+        "peak_rss_bytes": 28835840
+      },
+      "candidate": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.39,
+        "cpu_s": 0.38,
+        "peak_rss_bytes": 30670848
+      },
+      "reduction_pct": 2.1686746987951806,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 394,
+        "gate_luts": 398,
+        "log_tail": "' using strategy 'sat'\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] run: finished (returncode=0)\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.11\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.10\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.9\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.8\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.7\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.6\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.5\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.4\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.3\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.2\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.1\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.lane.0.next_q.0\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.11\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.10\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.9\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.8\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.7\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.6\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.5\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.4\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.3\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.2\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.1\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved equivalence of partition pmux_case05_nested.data_out.0\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] Successfully proved designs equivalent\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)\nEQY 20:22:56 [eqy_official-new-20261026__pmux_case05_nested] DONE (PASS, rc=0)\n"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+
+ wall_ms
+baseline median=107.3244 p05=102.9783 p95=126.3946 min=93.1509 max=197.4110
+new      median=109.3940 p05=105.7483 p95=116.2706 min=104.9279 max=213.9714
+ratio new/base = 1.0193
+
+ rss_mib
+baseline median=18.8906 p05=16.8609 p95=20.0156 min=16.4531 max=20.4219
+new      median=20.4531 p05=18.3188 p95=21.6391 min=16.8281 max=22.1562
+ratio new/base = 1.0827
+
+ yosys_mem_mib
+baseline median=15.0500 p05=14.5230 p95=15.6080 min=14.4200 max=15.9100
+new      median=15.3000 p05=14.8900 p95=15.9170 min=14.7800 max=16.1900
+ratio new/base = 1.0166

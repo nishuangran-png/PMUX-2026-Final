@@ -1,0 +1,58 @@
+-- Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE) 
+-- Could NOT find GTest (missing: GTEST_LIBRARY GTEST_INCLUDE_DIR GTEST_MAIN_LIBRARY) 
+-- 
+-- The following packages have been found:
+
+ * FLEX (required version >= 2.6), The Fast Lexical Analyzer, <https://github.com/westes/flex>
+   Compiling the Verilog lexer
+ * BISON (required version >= 3.6), The Yacc-compatible Parser Generator, <https://www.gnu.org/software/bison/>
+   Compiling the Verilog parser
+ * Python3 (required version >= 3.7), Dynamic programming language (Interpreter), <https://www.python.org/>
+   Generating data files
+   Running external SMT2 solvers
+
+-- The following packages have not been found:
+
+ * PkgConfig, Library metadata manager, <https://www.freedesktop.org/wiki/Software/pkg-config/>
+   Discovering dependencies
+ * zlib, A massively spiffy yet delicately unobtrusive compression library, <https://github.com/madler/zlib>
+   Handling Gzip and FST file formats
+ * libffi, A Portable Foreign Function Interface Library, <https://sourceware.org/libffi/>
+   Implementing Verilog DPI-C
+ * editline, Line editing and history library (BSD), <https://www.thrysoee.dk/editline/>
+   Enhancing the command prompt
+ * readline, Line editing and history library (GPL), <https://tiswww.case.edu/php/chet/readline/rltop.html>
+   Enhancing the command prompt
+ * tcl, Dynamic programming language, <https://www.tcl-lang.org/>
+   Parsing SDC constraint files
+   Binding Yosys API
+ * GTest, C++ testing and mocking framework by Google, <https://google.github.io/googletest/>
+   Running unit tests
+
+-- The following features have been enabled:
+
+ * have_glob, Glob expansion in filenames
+ * have_spawn, Passes that invoke external tools
+ * have_threads, Multithreaded netlist operations
+ * have_plugins, Dynamically loadable binary plugins
+ * with_abc, Production-quality logic synthesis flow
+
+-- The following features have been disabled:
+
+ * with_zlib, Transparent Gzip decompression and FST file format support
+ * with_libffi, Verilog DPI-C foreign function interface
+ * with_readline, Using readline for prompt editing and history
+ * with_editline, Using editline for prompt editing and history
+ * with_tcl, Tcl scripting and SDC parsing
+ * with_python, Python scripting and embedding
+ * with_verific, Verific frontend integration
+
+-- Configuring Yosys 0.69+post
+-- Git commit 9f75ca1f9834a39a863915b5dae0c7b1e33533bc
+-- External ABC: /Users/selina/Documents/ChatGPT/fpga比赛/tools/oss-cad-suite/bin/yosys-abc
+-- {fmt} version: 12.2.1
+-- Build type: Release
+-- C++ modules support is disabled. Enable with -DTOMLPLUSPLUS_BUILD_MODULES=ON
+-- Configuring done (1.1s)
+-- Generating done (0.6s)
+-- Build files have been written to: /Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025

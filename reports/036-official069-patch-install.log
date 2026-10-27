@@ -1,0 +1,3 @@
+安装完成：/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt
+下一步：cmake -S "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt" -B "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build" -DCMAKE_BUILD_TYPE=Release
+        cmake --build "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build" --target yosys -j8

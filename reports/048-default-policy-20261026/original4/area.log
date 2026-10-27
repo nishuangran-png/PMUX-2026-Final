@@ -1,0 +1,76 @@
+workdir: /var/folders/g2/ydt5xmqj4h38r8ly6x69p0vw0000gn/T/pmux_holdout_50euuufs
+phase 1/2: baseline
+const_pmux_a2_w1             baseline done
+const_pmux_a2_w4             baseline done
+const_pmux_a2_w8             baseline done
+const_pmux_a2_w16            baseline done
+const_pmux_a3_w1             baseline done
+const_pmux_a3_w4             baseline done
+const_pmux_a3_w8             baseline done
+const_pmux_a3_w16            baseline done
+const_pmux_a4_w1             baseline done
+const_pmux_a4_w4             baseline done
+const_pmux_a4_w8             baseline done
+const_pmux_a4_w16            baseline done
+const_pmux_a5_w1             baseline done
+const_pmux_a5_w4             baseline done
+const_pmux_a5_w8             baseline done
+const_pmux_a5_w16            baseline done
+const_pmux_a6_w1             baseline done
+const_pmux_a6_w4             baseline done
+const_pmux_a6_w8             baseline done
+const_pmux_a6_w16            baseline done
+official_test1               baseline done
+official_test2               baseline done
+official_test3               baseline done
+official_test4               baseline done
+phase 2/2: candidate
+const_pmux_a2_w1             candidate done
+const_pmux_a2_w4             candidate done
+const_pmux_a2_w8             candidate done
+const_pmux_a2_w16            candidate done
+const_pmux_a3_w1             candidate done
+const_pmux_a3_w4             candidate done
+const_pmux_a3_w8             candidate done
+const_pmux_a3_w16            candidate done
+const_pmux_a4_w1             candidate done
+const_pmux_a4_w4             candidate done
+const_pmux_a4_w8             candidate done
+const_pmux_a4_w16            candidate done
+const_pmux_a5_w1             candidate done
+const_pmux_a5_w4             candidate done
+const_pmux_a5_w8             candidate done
+const_pmux_a5_w16            candidate done
+const_pmux_a6_w1             candidate done
+const_pmux_a6_w4             candidate done
+const_pmux_a6_w8             candidate done
+const_pmux_a6_w16            candidate done
+official_test1               candidate done
+official_test2               candidate done
+official_test3               candidate done
+official_test4               candidate done
+const_pmux_a2_w1             constructed     1 ->     1   +0.00% dff    0 EQY SKIP
+const_pmux_a2_w4             constructed     2 ->     2   +0.00% dff    0 EQY SKIP
+const_pmux_a2_w8             constructed     6 ->     6   +0.00% dff    0 EQY SKIP
+const_pmux_a2_w16            constructed     8 ->     8   +0.00% dff    0 EQY SKIP
+const_pmux_a3_w1             constructed     1 ->     1   +0.00% dff    0 EQY SKIP
+const_pmux_a3_w4             constructed     3 ->     3   +0.00% dff    0 EQY SKIP
+const_pmux_a3_w8             constructed     7 ->     7   +0.00% dff    0 EQY SKIP
+const_pmux_a3_w16            constructed    14 ->    14   +0.00% dff    0 EQY SKIP
+const_pmux_a4_w1             constructed     1 ->     1   +0.00% dff    0 EQY SKIP
+const_pmux_a4_w4             constructed     3 ->     3   +0.00% dff    0 EQY SKIP
+const_pmux_a4_w8             constructed     7 ->     7   +0.00% dff    0 EQY SKIP
+const_pmux_a4_w16            constructed    15 ->    15   +0.00% dff    0 EQY SKIP
+const_pmux_a5_w1             constructed     1 ->     1   +0.00% dff    0 EQY SKIP
+const_pmux_a5_w4             constructed     3 ->     3   +0.00% dff    0 EQY SKIP
+const_pmux_a5_w8             constructed    15 ->    15   +0.00% dff    0 EQY SKIP
+const_pmux_a5_w16            constructed    51 ->    38  +25.49% dff    0 EQY SKIP
+const_pmux_a6_w1             constructed     1 ->     1   +0.00% dff    0 EQY SKIP
+const_pmux_a6_w4             constructed     3 ->     3   +0.00% dff    0 EQY SKIP
+const_pmux_a6_w8             constructed    27 ->    23  +14.81% dff    0 EQY SKIP
+const_pmux_a6_w16            constructed   108 ->    79  +26.85% dff    0 EQY SKIP
+official_test1               official      288 ->   202  +29.86% dff  222 EQY SKIP
+official_test2               official       25 ->    16  +36.00% dff    0 EQY SKIP
+official_test3               official       13 ->     9  +30.77% dff   17 EQY SKIP
+official_test4               official       38 ->    26  +31.58% dff   10 EQY SKIP
+JSON -> reports/048-default-policy-20261026/original4/area.json

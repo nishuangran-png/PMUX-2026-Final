@@ -1,0 +1,168 @@
+{
+  "manifest": "experiments/final-mapping-038-final/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "499a745404739b7730a57c92528d407bb12210a2243d87f85c4c050598751956"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "wall_s": 0.33,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 22904832
+      },
+      "candidate": {
+        "lcell": 200,
+        "not": 2,
+        "logic": 202,
+        "dff": 222,
+        "wall_s": 0.24,
+        "cpu_s": 0.19,
+        "peak_rss_bytes": 24051712
+      },
+      "reduction_pct": 29.86111111111111,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 287,
+        "gate_luts": 201,
+        "log_tail": "29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.4\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.3\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.2\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.1\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.0\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.11\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.10\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.9\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.8\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.7\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.6\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.5\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.4\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.3\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.2\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.1\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.0\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.11\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.10\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.9\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.8\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.7\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.6\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.5\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.4\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.3\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.2\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.1\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.0\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.11\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.10\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.9\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.8\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.7\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.6\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.5\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.4\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.3\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.2\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.1\nEQY 20:29:56 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.0\nEQY 20:29:56 [eqy_official_test1] Successfully proved designs equivalent\nEQY 20:29:56 [eqy_official_test1] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:06 (6)\nEQY 20:29:56 [eqy_official_test1] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:05 (5)\nEQY 20:29:56 [eqy_official_test1] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v",
+          "sha256": "e43c9b437071488551caf3121e227e86f4fe3190751f245beac3b7ecc3fdb146"
+        }
+      ],
+      "baseline": {
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 18972672
+      },
+      "candidate": {
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 17383424
+      },
+      "reduction_pct": 36.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 25,
+        "gate_luts": 16,
+        "log_tail": "EQY 20:29:57 [eqy_official_test2] read_gold: starting process \"yosys -ql eqy_official_test2/gold.log eqy_official_test2/gold.ys\"\nEQY 20:29:57 [eqy_official_test2] read_gold: finished (returncode=0)\nEQY 20:29:57 [eqy_official_test2] read_gate: starting process \"yosys -ql eqy_official_test2/gate.log eqy_official_test2/gate.ys\"\nEQY 20:29:57 [eqy_official_test2] read_gate: finished (returncode=0)\nEQY 20:29:57 [eqy_official_test2] combine: starting process \"yosys -ql eqy_official_test2/combine.log eqy_official_test2/combine.ys\"\nEQY 20:29:57 [eqy_official_test2] combine: finished (returncode=0)\nEQY 20:29:57 [eqy_official_test2] partition: starting process \"cd eqy_official_test2; yosys -ql partition.log partition.ys\"\nEQY 20:29:57 [eqy_official_test2] partition: finished (returncode=0)\nEQY 20:29:57 [eqy_official_test2] run: starting process \"make -C eqy_official_test2 -f strategies.mk\"\nEQY 20:29:57 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.0'..\nEQY 20:29:57 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.0' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.1'..\nEQY 20:29:57 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.1' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.2'..\nEQY 20:29:57 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.2' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.3'..\nEQY 20:29:57 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.3' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.4'..\nEQY 20:29:57 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.4' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 20:29:57 [eqy_official_test2] run: finished (returncode=0)\nEQY 20:29:57 [eqy_official_test2] Successfully proved equivalence of partition test2.out.4\nEQY 20:29:57 [eqy_official_test2] Successfully proved equivalence of partition test2.out.3\nEQY 20:29:57 [eqy_official_test2] Successfully proved equivalence of partition test2.out.2\nEQY 20:29:57 [eqy_official_test2] Successfully proved equivalence of partition test2.out.1\nEQY 20:29:57 [eqy_official_test2] Successfully proved equivalence of partition test2.out.0\nEQY 20:29:57 [eqy_official_test2] Successfully proved designs equivalent\nEQY 20:29:57 [eqy_official_test2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 20:29:57 [eqy_official_test2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 20:29:57 [eqy_official_test2] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "lcell": 12,
+        "not": 1,
+        "logic": 13,
+        "dff": 17,
+        "wall_s": 0.09,
+        "cpu_s": 0.07,
+        "peak_rss_bytes": 20643840
+      },
+      "candidate": {
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "wall_s": 0.09,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 20430848
+      },
+      "reduction_pct": 30.76923076923077,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 12,
+        "gate_luts": 9,
+        "log_tail": "t'\nEQY 20:29:57 [eqy_official_test3] run: Running strategy 'sat' on 'test3.rw'..\nEQY 20:29:57 [eqy_official_test3] run: Proved equivalence of partition 'test3.rw' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.0'..\nEQY 20:29:57 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.0' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.1'..\nEQY 20:29:57 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.1' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.2'..\nEQY 20:29:57 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.2' using strategy 'sat'\nEQY 20:29:57 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.3'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.3' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.4'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.4' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.5'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.5' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.6'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.6' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.7'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.7' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr_out'..\nEQY 20:29:58 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr_out' using strategy 'sat'\nEQY 20:29:58 [eqy_official_test3] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY 20:29:58 [eqy_official_test3] run: finished (returncode=0)\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr_out\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.7\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.6\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.5\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.4\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.3\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.2\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.1\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.0\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.rw\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.7\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.6\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.5\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.4\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.3\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.2\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.1\nEQY 20:29:58 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.0\nEQY 20:29:58 [eqy_official_test3] Successfully proved designs equivalent\nEQY 20:29:58 [eqy_official_test3] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 20:29:58 [eqy_official_test3] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY 20:29:58 [eqy_official_test3] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "lcell": 37,
+        "not": 1,
+        "logic": 38,
+        "dff": 10,
+        "wall_s": 0.1,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23396352
+      },
+      "candidate": {
+        "lcell": 25,
+        "not": 1,
+        "logic": 26,
+        "dff": 10,
+        "wall_s": 0.08,
+        "cpu_s": 0.06,
+        "peak_rss_bytes": 16252928
+      },
+      "reduction_pct": 31.57894736842105,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 34,
+        "gate_luts": 30,
+        "log_tail": "EQY 20:29:58 [eqy_official_test4] read_gold: starting process \"yosys -ql eqy_official_test4/gold.log eqy_official_test4/gold.ys\"\nEQY 20:29:58 [eqy_official_test4] read_gold: finished (returncode=0)\nEQY 20:29:58 [eqy_official_test4] read_gate: starting process \"yosys -ql eqy_official_test4/gate.log eqy_official_test4/gate.ys\"\nEQY 20:29:58 [eqy_official_test4] read_gate: ERROR: Module `\\dffeas' referenced in module `\\test4' in cell `$auto$pmux_opt.cc:1765:fold_zero_mux_into_target_dff_clear$60' is not part of the design.\nEQY 20:29:58 [eqy_official_test4] read_gate: finished (returncode=1)\nEQY 20:29:58 [eqy_official_test4] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    }
+  ]
+}

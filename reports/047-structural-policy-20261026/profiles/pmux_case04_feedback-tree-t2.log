@@ -1,0 +1,349 @@
+
+-- Running command `read_verilog rtl/official-new-20261026/pmux_case04_feedback.v; hierarchy -check -top pmux_case04_feedback; proc; flatten; tribuf -logic; deminout; opt_expr; opt_clean; check; opt -nodffe -nosdff; fsm; opt; pmux_opt -v; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/official-new-20261026/pmux_case04_feedback.v
+Parsing Verilog input from `rtl/official-new-20261026/pmux_case04_feedback.v' to AST representation.
+Generating RTLIL representation for module `\pmux_case04_feedback'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \pmux_case04_feedback
+
+2.2. Analyzing design hierarchy..
+Top module:  \pmux_case04_feedback
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$25 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$22 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$19 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$15 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$11 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$8 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$5 in module pmux_case04_feedback.
+Marked 1 switch rules as full_case in process $proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$1 in module pmux_case04_feedback.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 8 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27'.
+Found async reset \rst in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~10 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27'.
+     1/1: $0\lane[1].q[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$25'.
+     1/1: $1\lane[1].next_q[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$22'.
+     1/1: $1\lane[1].x2[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$19'.
+     1/1: $1\lane[1].x1[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$15'.
+     1/1: $1\lane[1].x0[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13'.
+     1/1: $0\lane[0].q[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$11'.
+     1/1: $1\lane[0].next_q[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$8'.
+     1/1: $1\lane[0].x2[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$5'.
+     1/1: $1\lane[0].x1[7:0]
+Creating decoders for process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$1'.
+     1/1: $1\lane[0].x0[7:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\pmux_case04_feedback.\lane[1].next_q' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$25'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[1].x2' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$22'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[1].x1' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$19'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[1].x0' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$15'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[0].next_q' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$11'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[0].x2' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$8'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[0].x1' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$5'.
+No latch inferred for signal `\pmux_case04_feedback.\lane[0].x0' from process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$1'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\pmux_case04_feedback.\lane[1].q' using process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27'.
+  created $adff cell `$procdff$75' with positive edge clock and positive level reset.
+Creating register for signal `\pmux_case04_feedback.\lane[0].q' using process `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13'.
+  created $adff cell `$procdff$78' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$27'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$25'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$25'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$22'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$22'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$19'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$19'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$15'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$15'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:56$13'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$11'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:48$11'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$8'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:40$8'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$5'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:32$5'.
+Found and cleaned up 1 empty switch in `\pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$1'.
+Removing empty process `pmux_case04_feedback.$proc$rtl/official-new-20261026/pmux_case04_feedback.v:24$1'.
+Cleaned up 10 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+<suppressed ~10 debug messages>
+
+4. Executing FLATTEN pass (flatten design).
+
+5. Executing TRIBUF pass.
+
+6. Executing DEMINOUT pass (demote inout ports to input or output).
+
+7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+Removed 0 unused cells and 30 unused wires.
+<suppressed ~1 debug messages>
+
+9. Executing CHECK pass (checking for obvious problems).
+Checking module pmux_case04_feedback...
+Found and reported 0 problems.
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 54 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Computing hashes of 52 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pmux_case04_feedback..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~30 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pmux_case04_feedback.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 52 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pmux_case04_feedback..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~30 debug messages>
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pmux_case04_feedback.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 52 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+10.16. Finished fast OPT passes. (There is nothing left to do.)
+
+11. Executing FSM pass (extract and optimize FSM).
+
+11.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+11.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+11.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+
+11.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+11.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+11.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+11.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 52 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pmux_case04_feedback..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~30 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pmux_case04_feedback.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 52 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$78 ($adff) from module pmux_case04_feedback (D = \lane[0].next_q, Q = \lane[0].q).
+Adding EN signal on $procdff$75 ($adff) from module pmux_case04_feedback (D = \lane[1].next_q, Q = \lane[1].q).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+Removed 2 unused cells and 2 unused wires.
+<suppressed ~3 debug messages>
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pmux_case04_feedback..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~28 debug messages>
+
+12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pmux_case04_feedback.
+Performed a total of 0 changes.
+
+12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pmux_case04_feedback'.
+Computing hashes of 50 cells of `\pmux_case04_feedback'.
+Finding duplicate cells in `\pmux_case04_feedback'.
+Removed a total of 0 cells.
+
+12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pmux_case04_feedback..
+
+12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pmux_case04_feedback.
+
+12.16. Finished fast OPT passes. (There is nothing left to do.)
+
+13. Executing PMUX_OPT pass.
+  synchronous-reset scan: target=0
+  target-clear scan: target=0
+  dense candidate 0: $procmux$69 Y=\lane[0].x0 A=\data_in [31:24] nsel=3 bus=\ctrl_in [1:0] width=2 default=3
+  rewrote dense 3-way PMUX  as tree over 2-bit bus
+  dense candidate 1: $procmux$64 Y=\lane[0].x1 A=\lane[0].q nsel=3 bus=\ctrl_in [3:2] width=2 default=3
+  rewrote dense 3-way PMUX  as tree over 2-bit bus
+  dense candidate 2: $procmux$59 Y=\lane[0].x2 A=$xor$rtl/official-new-20261026/pmux_case04_feedback.v:26$2_Y nsel=3 bus=\ctrl_in [5:4] width=2 default=3
+    skipping dense candidate 2 because its data cone reaches depth-2 PMUXs
+  dense candidate 3: $procmux$54 Y=\lane[0].next_q A=$sub$rtl/official-new-20261026/pmux_case04_feedback.v:53$12_Y nsel=3 bus=\ctrl_in [7:6] width=2 default=3
+    skipping dense candidate 3 because its data cone reaches depth-2 PMUXs
+  dense candidate 4: $procmux$47 Y=\lane[1].x0 A=\data_in [63:56] nsel=3 bus=\ctrl_in [17:16] width=2 default=3
+  rewrote dense 3-way PMUX  as tree over 2-bit bus
+  dense candidate 5: $procmux$42 Y=\lane[1].x1 A=\lane[1].q nsel=3 bus=\ctrl_in [19:18] width=2 default=3
+  rewrote dense 3-way PMUX  as tree over 2-bit bus
+  dense candidate 6: $procmux$37 Y=\lane[1].x2 A=$xor$rtl/official-new-20261026/pmux_case04_feedback.v:26$16_Y nsel=3 bus=\ctrl_in [21:20] width=2 default=3
+    skipping dense candidate 6 because its data cone reaches depth-2 PMUXs
+  dense candidate 7: $procmux$32 Y=\lane[1].next_q A=$sub$rtl/official-new-20261026/pmux_case04_feedback.v:53$26_Y nsel=3 bus=\ctrl_in [23:22] width=2 default=3
+    skipping dense candidate 7 because its data cone reaches depth-2 PMUXs
+  partial candidate $procmux$59: A=$xor$rtl/official-new-20261026/pmux_case04_feedback.v:26$2_Y undef=0
+  partial candidate $procmux$54: A=$sub$rtl/official-new-20261026/pmux_case04_feedback.v:53$12_Y undef=0
+  partial candidate $procmux$37: A=$xor$rtl/official-new-20261026/pmux_case04_feedback.v:26$16_Y undef=0
+  partial candidate $procmux$32: A=$sub$rtl/official-new-20261026/pmux_case04_feedback.v:53$26_Y undef=0
+pmux_opt timing: sync=0.004 zero_mux=0.003 rom=0.004 shift=0.002 rest=0.141 ms
+pmux_opt: 4 $pmux cell(s), merged 0 pair(s), skipped 0, lowered 0 constant ROM(s).
+pmux_opt: rewrote 4 dense decoder PMUX cell(s) as bus-controlled mux trees.
+
+14. Printing statistics.
+
+=== pmux_case04_feedback ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       78 wires
+      525 wire bits
+       26 public wires
+      291 public wire bits
+        6 ports
+      115 port bits
+       58 cells
+        6   $add
+        2   $adffe
+       16   $eq
+        2   $logic_and
+        8   $logic_not
+       12   $mux
+        4   $pmux
+        4   $sub
+        4   $xor
+
+End of script. Logfile hash: 731b109d9c, time: 0.01s, user: 0.01s, system: 0.00s, MEM: 11.72 MB peak
+Yosys 0.69+post (git sha1 9f75ca1f9834a39a863915b5dae0c7b1e33533bc, Release, AppleClang /usr/bin/c++ 16.0.0.16000026)
+Time spent: 21% 2x read_verilog (0 sec), 18% 6x opt_clean (0 sec), ...

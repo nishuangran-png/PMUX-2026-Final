@@ -1,0 +1,30 @@
+========== addr=5 seed=20261025 ==========
+case                       base   cand   delta      pct   dff
+const_pmux_a5_w64           239    191      48   20.08%     0
+const_pmux_a5_w128          438    383      55   12.56%     0
+const_pmux_a5_w256          793    762      31    3.91%     0
+
+合计 3 例：改善 3，持平 0，回归 0； 1470 -> 1336，9.12%
+========== addr=6 seed=20261025 ==========
+case                       base   cand   delta      pct   dff
+const_pmux_a6_w64           508    445      63   12.40%     0
+const_pmux_a6_w128          924    891      33    3.57%     0
+const_pmux_a6_w192         1297   1297       0    0.00%     0
+const_pmux_a6_w256         1670   1670       0    0.00%     0
+
+合计 4 例：改善 2，持平 2，回归 0； 4399 -> 4303，2.18%
+========== addr=5 seed=7 ==========
+case                       base   cand   delta      pct   dff
+const_pmux_a5_w64           235    192      43   18.30%     0
+const_pmux_a5_w128          444    382      62   13.96%     0
+const_pmux_a5_w256          794    764      30    3.78%     0
+
+合计 3 例：改善 3，持平 0，回归 0； 1473 -> 1338，9.16%
+========== addr=6 seed=7 ==========
+case                       base   cand   delta      pct   dff
+const_pmux_a6_w64           523    445      78   14.91%     0
+const_pmux_a6_w128          927    890      37    3.99%     0
+const_pmux_a6_w192         1312   1312       0    0.00%     0
+const_pmux_a6_w256         1646   1646       0    0.00%     0
+
+合计 4 例：改善 2，持平 2，回归 0； 4408 -> 4293，2.61%

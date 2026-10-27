@@ -1,8 +1,6 @@
-diff --git a/passes/CMakeLists.txt b/passes/CMakeLists.txt
-index 8e0c4a1..aca0cd7 100644
 --- a/passes/CMakeLists.txt
 +++ b/passes/CMakeLists.txt
-@@ -4,6 +4,7 @@ add_subdirectory(fsm)
+@@ -4,6 +4,7 @@
  add_subdirectory(hierarchy)
  add_subdirectory(memory)
  add_subdirectory(opt)
@@ -10,11 +8,17 @@ index 8e0c4a1..aca0cd7 100644
  add_subdirectory(pmgen)
  add_subdirectory(proc)
  add_subdirectory(sat)
-diff --git a/techlibs/intel/CMakeLists.txt b/techlibs/intel/CMakeLists.txt
-index 8b62196..934d2f2 100644
 --- a/techlibs/intel/CMakeLists.txt
 +++ b/techlibs/intel/CMakeLists.txt
-@@ -38,6 +38,7 @@ yosys_pass(synth_intel
+@@ -20,6 +20,7 @@
+ 		opt_clean
+ 		opt_expr
+ 		peepopt
++		pmux_opt
+ 		proc
+ 		read_verilog
+ 		setundef
+@@ -38,6 +39,7 @@
  		common/brams_m9k.txt
  		common/brams_map_m9k.v
  		common/ff_map.v
@@ -22,11 +26,18 @@ index 8b62196..934d2f2 100644
  
  		max10/cells_sim.v
  		max10/cells_map.v
-diff --git a/techlibs/intel/synth_intel.cc b/techlibs/intel/synth_intel.cc
-index 3a229fb..8c85621 100644
+@@ -48,6 +50,8 @@
+ 
+ 		cycloneiv/cells_sim.v
+ 		cycloneiv/cells_map.v
++		cycloneiv/alu_map.v
++		cycloneiv/pmux_abc.abc
+ 
+ 		cycloneive/cells_sim.v
+ 		cycloneive/cells_map.v
 --- a/techlibs/intel/synth_intel.cc
 +++ b/techlibs/intel/synth_intel.cc
-@@ -209,6 +209,7 @@ struct SynthIntelPass : public ScriptPass {
+@@ -209,6 +209,7 @@
  			run("opt -nodffe -nosdff");
  			run("fsm");
  			run("opt");
@@ -34,7 +45,12 @@ index 3a229fb..8c85621 100644
  			run("wreduce");
  			run("peepopt");
  			run("opt_clean");
-@@ -251,15 +252,32 @@ struct SynthIntelPass : public ScriptPass {
+@@ -248,23 +249,58 @@
+ 		}
+ 
+ 		if (check_label("map_ffram")) {
++			if (!help_mode && family_opt == "cycloneiv")
++				run("techmap -map +/intel/cycloneiv/alu_map.v");
  			run("opt -fast -mux_undef -undriven -fine -full");
  			run("memory_map");
  			run("opt -undriven -fine");
@@ -70,3 +86,25 @@ index 3a229fb..8c85621 100644
  		}
  
  		if (check_label("map_luts")) {
+-			run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
++			bool pmux_restructured = false;
++			if (!help_mode) {
++				for (auto module : active_design->selected_modules())
++					if (module->get_bool_attribute(ID(pmux_opt_restructured))) {
++						pmux_restructured = true;
++						break;
++					}
++			}
++			if (!help_mode)
++				log("pmux_opt: structural rewrites=%d; selecting %s ABC flow.\n",
++				    int(pmux_restructured), pmux_restructured ? "custom" : "abc9");
++			if (help_mode || (family_opt == "cycloneiv" && pmux_restructured))
++				run("abc -lut 4 -script +/intel/cycloneiv/pmux_abc.abc");
++			else
++				run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
+ 			run("clean");
++			run("pmux_opt -absorb_inverters");
++			run("clean -purge");
+ 			run("opt -fast");
+ 			run("autoname");
+ 			run("clean");

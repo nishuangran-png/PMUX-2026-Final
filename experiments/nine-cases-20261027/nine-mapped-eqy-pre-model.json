@@ -1,0 +1,354 @@
+{
+  "manifest": "experiments/nine-cases-20261027/manifest.json",
+  "baseline": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069/build/yosys",
+    "sha256": "143bd6015239d40c4bfa156928a48efe2ea1efd5712d5d232eab8929f31eb91d"
+  },
+  "candidate": {
+    "path": "/Users/selina/Documents/ChatGPT/fpga比赛/tools/build/official-v069-opt/build-current-20261025/yosys",
+    "sha256": "379b27bfdddeb0f37c0b21f629169c2bbc8cd4b7026c92e6cddf9e1bcb3a385e"
+  },
+  "environment": {
+    "platform": "Darwin",
+    "machine": "arm64",
+    "python": "3.9.6",
+    "reps": 1,
+    "eqy_stage": "mapped",
+    "eqy_collect_group": null
+  },
+  "rows": [
+    {
+      "id": "official_test1",
+      "role": "official",
+      "top": "test1",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test1/test1.v",
+          "sha256": "2d2dba011b0e8799d0de3790b69b7f01c6eb6ac665c4321b57b0378a4972fd13"
+        }
+      ],
+      "baseline": {
+        "lcell": 286,
+        "not": 2,
+        "logic": 288,
+        "dff": 222,
+        "wall_s": 0.23,
+        "cpu_s": 0.21000000000000002,
+        "peak_rss_bytes": 26001408
+      },
+      "candidate": {
+        "lcell": 200,
+        "not": 4,
+        "logic": 204,
+        "dff": 222,
+        "wall_s": 0.29,
+        "cpu_s": 0.22,
+        "peak_rss_bytes": 50446336
+      },
+      "reduction_pct": 29.166666666666668,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 287,
+        "gate_luts": 201,
+        "log_tail": "16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.4\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.3\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.2\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.1\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i3.0\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.11\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.10\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.9\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.8\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.7\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.6\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.5\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.4\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.3\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.2\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.1\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i2.0\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.11\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.10\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.9\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.8\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.7\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.6\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.5\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.4\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.3\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.2\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.1\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i1.0\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.11\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.10\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.9\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.8\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.7\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.6\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.5\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.4\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.3\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.2\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.1\nEQY  1:16:08 [eqy_official_test1] Successfully proved equivalence of partition test1.i0.0\nEQY  1:16:08 [eqy_official_test1] Successfully proved designs equivalent\nEQY  1:16:08 [eqy_official_test1] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:06 (6)\nEQY  1:16:08 [eqy_official_test1] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:05 (5)\nEQY  1:16:08 [eqy_official_test1] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test2",
+      "role": "official",
+      "top": "test2",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test2/test2.v",
+          "sha256": "e43c9b437071488551caf3121e227e86f4fe3190751f245beac3b7ecc3fdb146"
+        }
+      ],
+      "baseline": {
+        "lcell": 25,
+        "not": 0,
+        "logic": 25,
+        "dff": 0,
+        "wall_s": 0.08,
+        "cpu_s": 0.06999999999999999,
+        "peak_rss_bytes": 20332544
+      },
+      "candidate": {
+        "lcell": 16,
+        "not": 0,
+        "logic": 16,
+        "dff": 0,
+        "wall_s": 0.1,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 48758784
+      },
+      "reduction_pct": 36.0,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 25,
+        "gate_luts": 16,
+        "log_tail": "EQY  1:16:08 [eqy_official_test2] read_gold: starting process \"yosys -ql eqy_official_test2/gold.log eqy_official_test2/gold.ys\"\nEQY  1:16:08 [eqy_official_test2] read_gold: finished (returncode=0)\nEQY  1:16:08 [eqy_official_test2] read_gate: starting process \"yosys -ql eqy_official_test2/gate.log eqy_official_test2/gate.ys\"\nEQY  1:16:08 [eqy_official_test2] read_gate: finished (returncode=0)\nEQY  1:16:08 [eqy_official_test2] combine: starting process \"yosys -ql eqy_official_test2/combine.log eqy_official_test2/combine.ys\"\nEQY  1:16:08 [eqy_official_test2] combine: finished (returncode=0)\nEQY  1:16:08 [eqy_official_test2] partition: starting process \"cd eqy_official_test2; yosys -ql partition.log partition.ys\"\nEQY  1:16:08 [eqy_official_test2] partition: finished (returncode=0)\nEQY  1:16:08 [eqy_official_test2] run: starting process \"make -C eqy_official_test2 -f strategies.mk\"\nEQY  1:16:08 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.0'..\nEQY  1:16:08 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.0' using strategy 'sat'\nEQY  1:16:08 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.1'..\nEQY  1:16:08 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.1' using strategy 'sat'\nEQY  1:16:08 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.2'..\nEQY  1:16:08 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.2' using strategy 'sat'\nEQY  1:16:08 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.3'..\nEQY  1:16:08 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.3' using strategy 'sat'\nEQY  1:16:08 [eqy_official_test2] run: Running strategy 'sat' on 'test2.out.4'..\nEQY  1:16:08 [eqy_official_test2] run: Proved equivalence of partition 'test2.out.4' using strategy 'sat'\nEQY  1:16:08 [eqy_official_test2] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY  1:16:08 [eqy_official_test2] run: finished (returncode=0)\nEQY  1:16:08 [eqy_official_test2] Successfully proved equivalence of partition test2.out.4\nEQY  1:16:08 [eqy_official_test2] Successfully proved equivalence of partition test2.out.3\nEQY  1:16:08 [eqy_official_test2] Successfully proved equivalence of partition test2.out.2\nEQY  1:16:08 [eqy_official_test2] Successfully proved equivalence of partition test2.out.1\nEQY  1:16:08 [eqy_official_test2] Successfully proved equivalence of partition test2.out.0\nEQY  1:16:08 [eqy_official_test2] Successfully proved designs equivalent\nEQY  1:16:08 [eqy_official_test2] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:16:08 [eqy_official_test2] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:16:08 [eqy_official_test2] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test3",
+      "role": "official",
+      "top": "test3",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test3/test3.v",
+          "sha256": "1551b9212622ccef6019d6e77de2c43dc8c80d267957b55a42121f34a08780e9"
+        }
+      ],
+      "baseline": {
+        "lcell": 12,
+        "not": 1,
+        "logic": 13,
+        "dff": 17,
+        "wall_s": 0.1,
+        "cpu_s": 0.08,
+        "peak_rss_bytes": 23035904
+      },
+      "candidate": {
+        "lcell": 9,
+        "not": 0,
+        "logic": 9,
+        "dff": 17,
+        "wall_s": 0.1,
+        "cpu_s": 0.09,
+        "peak_rss_bytes": 51658752
+      },
+      "reduction_pct": 30.76923076923077,
+      "eqy": {
+        "status": "PASS",
+        "gold_luts": 12,
+        "gate_luts": 9,
+        "log_tail": "t'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.rw'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.rw' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.0'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.0' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.1'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.1' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.2'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.2' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.3'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.3' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.4'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.4' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.5'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.5' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.6'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.6' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr.7'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr.7' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: Running strategy 'sat' on 'test3.sr_out'..\nEQY  1:16:09 [eqy_official_test3] run: Proved equivalence of partition 'test3.sr_out' using strategy 'sat'\nEQY  1:16:09 [eqy_official_test3] run: /Library/Developer/CommandLineTools/usr/bin/make -f strategies.mk summary\nEQY  1:16:09 [eqy_official_test3] run: finished (returncode=0)\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr_out\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.7\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.6\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.5\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.4\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.3\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.2\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.1\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.sr.0\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.rw\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.7\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.6\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.5\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.4\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.3\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.2\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.1\nEQY  1:16:09 [eqy_official_test3] Successfully proved equivalence of partition test3.gpioout.0\nEQY  1:16:09 [eqy_official_test3] Successfully proved designs equivalent\nEQY  1:16:09 [eqy_official_test3] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:16:09 [eqy_official_test3] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)\nEQY  1:16:09 [eqy_official_test3] DONE (PASS, rc=0)\n"
+      }
+    },
+    {
+      "id": "official_test4",
+      "role": "official",
+      "top": "test4",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official/test4/test4.v",
+          "sha256": "c0c5042928bd6bf568e2b7fb2193f2b6db9c4193ba3a5378fc50a331d43422d7"
+        }
+      ],
+      "baseline": {
+        "lcell": 37,
+        "not": 1,
+        "logic": 38,
+        "dff": 10,
+        "wall_s": 0.11,
+        "cpu_s": 0.09999999999999999,
+        "peak_rss_bytes": 23085056
+      },
+      "candidate": {
+        "lcell": 25,
+        "not": 1,
+        "logic": 26,
+        "dff": 10,
+        "wall_s": 0.08,
+        "cpu_s": 0.06999999999999999,
+        "peak_rss_bytes": 48840704
+      },
+      "reduction_pct": 31.57894736842105,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 34,
+        "gate_luts": 30,
+        "log_tail": "EQY  1:16:09 [eqy_official_test4] read_gold: starting process \"yosys -ql eqy_official_test4/gold.log eqy_official_test4/gold.ys\"\nEQY  1:16:09 [eqy_official_test4] read_gold: finished (returncode=0)\nEQY  1:16:09 [eqy_official_test4] read_gate: starting process \"yosys -ql eqy_official_test4/gate.log eqy_official_test4/gate.ys\"\nEQY  1:16:09 [eqy_official_test4] read_gate: ERROR: Module `\\dffeas' referenced in module `\\test4' in cell `$auto$pmux_opt.cc:1904:fold_zero_mux_into_target_dff_clear$60' is not part of the design.\nEQY  1:16:09 [eqy_official_test4] read_gate: finished (returncode=1)\nEQY  1:16:09 [eqy_official_test4] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case01_balanced",
+      "role": "official-new-20261026",
+      "top": "pmux_case01_balanced",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case01_balanced.v",
+          "sha256": "463263f4b265cbad3b634d69d316cd29e7ea0a62f91ee396dbeeecf7df5c7343"
+        }
+      ],
+      "baseline": {
+        "lcell": 406,
+        "not": 0,
+        "logic": 406,
+        "dff": 12,
+        "wall_s": 0.28,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 28409856
+      },
+      "candidate": {
+        "lcell": 276,
+        "not": 0,
+        "logic": 276,
+        "dff": 12,
+        "wall_s": 0.26,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 53379072
+      },
+      "reduction_pct": 32.01970443349754,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 406,
+        "gate_luts": 250,
+        "log_tail": "EQY  1:16:09 [eqy_official-new-20261026__pmux_case01_balanced] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case01_balanced/gold.log eqy_official-new-20261026__pmux_case01_balanced/gold.ys\"\nEQY  1:16:09 [eqy_official-new-20261026__pmux_case01_balanced] read_gold: finished (returncode=0)\nEQY  1:16:09 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case01_balanced/gate.log eqy_official-new-20261026__pmux_case01_balanced/gate.ys\"\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case01_balanced' in cell `$auto$alumacc.cc:548:replace_alu$92.slice[7].full_adder' is not part of the design.\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: finished (returncode=1)\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case01_balanced] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case02_pipeline",
+      "role": "official-new-20261026",
+      "top": "pmux_case02_pipeline",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case02_pipeline.v",
+          "sha256": "8639081b2fb7c446edef52a514d63b49333e444ce21638f03bdee97dc954e0ea"
+        }
+      ],
+      "baseline": {
+        "lcell": 444,
+        "not": 0,
+        "logic": 444,
+        "dff": 24,
+        "wall_s": 0.33,
+        "cpu_s": 0.32,
+        "peak_rss_bytes": 36159488
+      },
+      "candidate": {
+        "lcell": 312,
+        "not": 0,
+        "logic": 312,
+        "dff": 24,
+        "wall_s": 0.27,
+        "cpu_s": 0.26,
+        "peak_rss_bytes": 53919744
+      },
+      "reduction_pct": 29.72972972972973,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 402,
+        "gate_luts": 312,
+        "log_tail": "EQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case02_pipeline/gold.log eqy_official-new-20261026__pmux_case02_pipeline/gold.ys\"\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gold: finished (returncode=0)\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case02_pipeline/gate.log eqy_official-new-20261026__pmux_case02_pipeline/gate.ys\"\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case02_pipeline' in cell `$auto$alumacc.cc:548:replace_alu$445.slice[2].full_adder' is not part of the design.\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: finished (returncode=1)\nEQY  1:16:10 [eqy_official-new-20261026__pmux_case02_pipeline] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case03_crossbar",
+      "role": "official-new-20261026",
+      "top": "pmux_case03_crossbar",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case03_crossbar.v",
+          "sha256": "bf1fc3bf6383beb007a69587d77a29ea74fb1fbdf7429fb401c0855a31c05932"
+        }
+      ],
+      "baseline": {
+        "lcell": 409,
+        "not": 0,
+        "logic": 409,
+        "dff": 10,
+        "wall_s": 0.3,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 31309824
+      },
+      "candidate": {
+        "lcell": 250,
+        "not": 0,
+        "logic": 250,
+        "dff": 10,
+        "wall_s": 0.22,
+        "cpu_s": 0.2,
+        "peak_rss_bytes": 53690368
+      },
+      "reduction_pct": 38.87530562347188,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 380,
+        "gate_luts": 252,
+        "log_tail": "EQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case03_crossbar/gold.log eqy_official-new-20261026__pmux_case03_crossbar/gold.ys\"\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gold: finished (returncode=0)\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case03_crossbar/gate.log eqy_official-new-20261026__pmux_case03_crossbar/gate.ys\"\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case03_crossbar' in cell `$auto$alumacc.cc:548:replace_alu$244.slice[1].full_adder' is not part of the design.\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: finished (returncode=1)\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case03_crossbar] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case04_feedback",
+      "role": "official-new-20261026",
+      "top": "pmux_case04_feedback",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case04_feedback.v",
+          "sha256": "d668d258d804674dd1412538e7bce04d4630d02928ffe113413b536e6b9ed70f"
+        }
+      ],
+      "baseline": {
+        "lcell": 364,
+        "not": 1,
+        "logic": 365,
+        "dff": 16,
+        "wall_s": 0.27,
+        "cpu_s": 0.25,
+        "peak_rss_bytes": 30851072
+      },
+      "candidate": {
+        "lcell": 265,
+        "not": 1,
+        "logic": 266,
+        "dff": 16,
+        "wall_s": 0.25,
+        "cpu_s": 0.24000000000000002,
+        "peak_rss_bytes": 53002240
+      },
+      "reduction_pct": 27.123287671232877,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 364,
+        "gate_luts": 234,
+        "log_tail": "EQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case04_feedback/gold.log eqy_official-new-20261026__pmux_case04_feedback/gold.ys\"\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gold: finished (returncode=0)\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case04_feedback/gate.log eqy_official-new-20261026__pmux_case04_feedback/gate.ys\"\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case04_feedback' in cell `$auto$alumacc.cc:548:replace_alu$124.slice[6].full_adder' is not part of the design.\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: finished (returncode=1)\nEQY  1:16:11 [eqy_official-new-20261026__pmux_case04_feedback] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    },
+    {
+      "id": "official-new-20261026__pmux_case05_nested",
+      "role": "official-new-20261026",
+      "top": "pmux_case05_nested",
+      "params": {},
+      "sources": [
+        {
+          "path": "rtl/official-new-20261026/pmux_case05_nested.v",
+          "sha256": "57d64edd3704d9d74407145080a63d06390e4a598c419a948fdea22fb1147f1d"
+        }
+      ],
+      "baseline": {
+        "lcell": 415,
+        "not": 0,
+        "logic": 415,
+        "dff": 12,
+        "wall_s": 0.29,
+        "cpu_s": 0.27,
+        "peak_rss_bytes": 28016640
+      },
+      "candidate": {
+        "lcell": 304,
+        "not": 0,
+        "logic": 304,
+        "dff": 12,
+        "wall_s": 0.29,
+        "cpu_s": 0.28,
+        "peak_rss_bytes": 52740096
+      },
+      "reduction_pct": 26.746987951807228,
+      "eqy": {
+        "status": "ERROR",
+        "gold_luts": 394,
+        "gate_luts": 195,
+        "log_tail": "EQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gold: starting process \"yosys -ql eqy_official-new-20261026__pmux_case05_nested/gold.log eqy_official-new-20261026__pmux_case05_nested/gold.ys\"\nEQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gold: finished (returncode=0)\nEQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gate: starting process \"yosys -ql eqy_official-new-20261026__pmux_case05_nested/gate.log eqy_official-new-20261026__pmux_case05_nested/gate.ys\"\nEQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gate: ERROR: Module `\\cycloneiv_lcell_comb' referenced in module `\\pmux_case05_nested' in cell `$auto$alumacc.cc:548:replace_alu$104.slice[3].full_adder' is not part of the design.\nEQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gate: finished (returncode=1)\nEQY  1:16:12 [eqy_official-new-20261026__pmux_case05_nested] read_gate: job failed. ERROR.\nERROR: Reading sources failed.\n"
+      }
+    }
+  ]
+}
