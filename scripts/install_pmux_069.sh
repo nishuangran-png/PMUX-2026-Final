@@ -32,10 +32,10 @@ SYNTH_FILE="$SRC_ROOT/techlibs/intel/synth_intel.cc"
 INTEL_CMAKE_FILE="$SRC_ROOT/techlibs/intel/CMakeLists.txt"
 FFMAP_SRC="$ROOT/src/yosys-069/techlibs/intel/common/ff_map_pn1.v"
 FFMAP_DST="$SRC_ROOT/techlibs/intel/common/ff_map_pn1.v"
-ALU_SRC="$ROOT/src/yosys-069/techlibs/intel/cycloneiv/alu_map.v"
-ALU_DST="$SRC_ROOT/techlibs/intel/cycloneiv/alu_map.v"
 ABC_SRC="$ROOT/src/yosys-069/techlibs/intel/cycloneiv/pmux_abc.abc"
 ABC_DST="$SRC_ROOT/techlibs/intel/cycloneiv/pmux_abc.abc"
+ABC9_SRC="$ROOT/src/yosys-069/techlibs/intel/cycloneiv/pmux_abc9.abc"
+ABC9_DST="$SRC_ROOT/techlibs/intel/cycloneiv/pmux_abc9.abc"
 
 die() {
   echo "错误：$*" >&2
@@ -45,8 +45,8 @@ die() {
 [ -f "$PASS_SRC/pmux_opt.cc" ] || die "缺少 $PASS_SRC/pmux_opt.cc"
 [ -f "$PASS_SRC/CMakeLists.txt" ] || die "缺少 $PASS_SRC/CMakeLists.txt"
 [ -f "$FFMAP_SRC" ] || die "缺少 $FFMAP_SRC"
-[ -f "$ALU_SRC" ] || die "缺少 $ALU_SRC"
 [ -f "$ABC_SRC" ] || die "缺少 $ABC_SRC"
+[ -f "$ABC9_SRC" ] || die "缺少 $ABC9_SRC"
 [ -f "$PATCH" ] || die "缺少 $PATCH"
 [ -f "$CMAKE_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
 [ -f "$SYNTH_FILE" ] || die "不是 Yosys 源码树：$SRC_ROOT"
@@ -73,6 +73,7 @@ fi
 
 cmake_hits="$(grep -cF 'add_subdirectory(pmux)' "$CMAKE_FILE" || true)"
 synth_hits="$(grep -cF 'run("pmux_opt");' "$SYNTH_FILE" || true)"
+dense_only_hits="$(grep -cF 'run("pmux_opt -dense_only");' "$SYNTH_FILE" || true)"
 deferred_marker_hits="$(grep -cF 'cell->name.begins_with("$pmux_deferred_lut")' "$SYNTH_FILE" || true)"
 deferred_select_hits="$(grep -cF 'select -set pmux_deferred_luts */c:*pmux_deferred_lut*' "$SYNTH_FILE" || true)"
 deferred_techmap_hits="$(grep -cF 'techmap -map +/techmap.v * @pmux_deferred_luts %d' "$SYNTH_FILE" || true)"
@@ -80,66 +81,62 @@ fold_luts_hits="$(grep -cF 'run("pmux_opt -fold_luts");' "$SYNTH_FILE" || true)"
 intel_cmake_hits="$(grep -cF 'common/ff_map_pn1.v' "$INTEL_CMAKE_FILE" || true)"
 pn1_legalize_hits="$(grep -cF 'dfflegalize -cell $_DFFE_PN0P_ 01 -cell $_DFFE_PN1P_ 01' "$SYNTH_FILE" || true)"
 pn1_techmap_hits="$(grep -cF 'techmap -map +/intel/common/ff_map.v -map +/intel/common/ff_map_pn1.v' "$SYNTH_FILE" || true)"
-alu_map_hits="$(grep -cF 'techmap -map +/intel/cycloneiv/alu_map.v' "$SYNTH_FILE" || true)"
-pmux_abc_hits="$(grep -cF 'abc -lut 4 -script +/intel/cycloneiv/pmux_abc.abc' "$SYNTH_FILE" || true)"
+pmux_abc9_hits="$(grep -cF 'abc9 -lut 4 -W 300 -script +/intel/cycloneiv/pmux_abc9.abc' "$SYNTH_FILE" || true)"
 abc_gate_hits="$(grep -cF 'module->get_bool_attribute(ID(pmux_opt_restructured))' "$SYNTH_FILE" || true)"
 absorb_hits="$(grep -cF 'run("pmux_opt -absorb_inverters");' "$SYNTH_FILE" || true)"
-intel_alu_hits="$(grep -cF 'cycloneiv/alu_map.v' "$INTEL_CMAKE_FILE" || true)"
 intel_abc_hits="$(grep -cF 'cycloneiv/pmux_abc.abc' "$INTEL_CMAKE_FILE" || true)"
+intel_abc9_hits="$(grep -cF 'cycloneiv/pmux_abc9.abc' "$INTEL_CMAKE_FILE" || true)"
 
-if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ] && \
+if [ "$cmake_hits" = "1" ] && [ "$synth_hits" = "1" ] && [ "$dense_only_hits" = "1" ] && \
    [ "$deferred_marker_hits" = "1" ] && [ "$deferred_select_hits" = "1" ] && \
    [ "$deferred_techmap_hits" = "1" ] && \
    [ "$fold_luts_hits" = "1" ] && [ "$intel_cmake_hits" = "1" ] && \
    [ "$pn1_legalize_hits" = "1" ] && [ "$pn1_techmap_hits" = "1" ] && \
-   [ "$alu_map_hits" = "1" ] && [ "$pmux_abc_hits" = "1" ] && \
+   [ "$pmux_abc9_hits" = "1" ] && \
    [ "$abc_gate_hits" = "1" ] && \
-   [ "$absorb_hits" = "1" ] && [ "$intel_alu_hits" = "1" ] && \
-   [ "$intel_abc_hits" = "1" ]; then
+   [ "$absorb_hits" = "1" ] && \
+   [ "$intel_abc_hits" = "1" ] && [ "$intel_abc9_hits" = "1" ]; then
   mkdir -p "$PASS_DST"
   mkdir -p "$(dirname "$FFMAP_DST")"
-  mkdir -p "$(dirname "$ALU_DST")"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
   cp -p "$FFMAP_SRC" "$FFMAP_DST"
-  cp -p "$ALU_SRC" "$ALU_DST"
   cp -p "$ABC_SRC" "$ABC_DST"
+  cp -p "$ABC9_SRC" "$ABC9_DST"
   echo "pmux_opt 已集成：$SRC_ROOT"
   exit 0
 fi
-if [ "$cmake_hits" != "0" ] || [ "$synth_hits" != "0" ] || \
+if [ "$cmake_hits" != "0" ] || [ "$synth_hits" != "0" ] || [ "$dense_only_hits" != "0" ] || \
    [ "$deferred_marker_hits" != "0" ] || [ "$deferred_select_hits" != "0" ] || \
    [ "$deferred_techmap_hits" != "0" ] || \
    [ "$fold_luts_hits" != "0" ] || [ "$intel_cmake_hits" != "0" ] || \
    [ "$pn1_legalize_hits" != "0" ] || [ "$pn1_techmap_hits" != "0" ] || \
-   [ "$alu_map_hits" != "0" ] || [ "$pmux_abc_hits" != "0" ] || \
+   [ "$pmux_abc9_hits" != "0" ] || \
    [ "$abc_gate_hits" != "0" ] || \
-   [ "$absorb_hits" != "0" ] || [ "$intel_alu_hits" != "0" ] || \
-   [ "$intel_abc_hits" != "0" ]; then
-  die "集成状态不完整（CMake=$cmake_hits，pass=$synth_hits，marker=$deferred_marker_hits，select=$deferred_select_hits，techmap=$deferred_techmap_hits，fold_luts=$fold_luts_hits，intel_cmake=$intel_cmake_hits，pn1_legalize=$pn1_legalize_hits，pn1_techmap=$pn1_techmap_hits，alu_map=$alu_map_hits，pmux_abc=$pmux_abc_hits，abc_gate=$abc_gate_hits，absorb=$absorb_hits，intel_alu=$intel_alu_hits，intel_abc=$intel_abc_hits），请使用干净的 Yosys 0.69 源码树"
+   [ "$absorb_hits" != "0" ] || \
+   [ "$intel_abc_hits" != "0" ] || [ "$intel_abc9_hits" != "0" ]; then
+  die "集成状态不完整（CMake=$cmake_hits，pass=$synth_hits，dense_only=$dense_only_hits，marker=$deferred_marker_hits，select=$deferred_select_hits，techmap=$deferred_techmap_hits，fold_luts=$fold_luts_hits，intel_cmake=$intel_cmake_hits，pn1_legalize=$pn1_legalize_hits，pn1_techmap=$pn1_techmap_hits，pmux_abc9=$pmux_abc9_hits，abc_gate=$abc_gate_hits，absorb=$absorb_hits，intel_abc=$intel_abc_hits，intel_abc9=$intel_abc9_hits），请使用干净的 Yosys 0.69 源码树"
 fi
 
 if [ "$git_root" = "$SRC_ROOT" ]; then
   git -C "$SRC_ROOT" apply --check "$PATCH" || die "补丁无法干净应用到 $SRC_ROOT"
   mkdir -p "$PASS_DST"
   mkdir -p "$(dirname "$FFMAP_DST")"
-  mkdir -p "$(dirname "$ALU_DST")"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
   cp -p "$FFMAP_SRC" "$FFMAP_DST"
-  cp -p "$ALU_SRC" "$ALU_DST"
   cp -p "$ABC_SRC" "$ABC_DST"
+  cp -p "$ABC9_SRC" "$ABC9_DST"
   git -C "$SRC_ROOT" apply "$PATCH"
 else
   patch -p1 -d "$SRC_ROOT" --dry-run < "$PATCH" >/dev/null || die "补丁无法干净应用到 $SRC_ROOT"
   mkdir -p "$PASS_DST"
   mkdir -p "$(dirname "$FFMAP_DST")"
-  mkdir -p "$(dirname "$ALU_DST")"
   cp -p "$PASS_SRC/CMakeLists.txt" "$PASS_DST/CMakeLists.txt"
   cp -p "$PASS_SRC/pmux_opt.cc" "$PASS_DST/pmux_opt.cc"
   cp -p "$FFMAP_SRC" "$FFMAP_DST"
-  cp -p "$ALU_SRC" "$ALU_DST"
   cp -p "$ABC_SRC" "$ABC_DST"
+  cp -p "$ABC9_SRC" "$ABC9_DST"
   patch -p1 -d "$SRC_ROOT" < "$PATCH" >/dev/null
 fi
 

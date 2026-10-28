@@ -1,0 +1,7 @@
+&scorr
+&sweep
+&syn2 -m -R 10
+&syn2 -m -R 10
+&dch -f -r
+&if -W 300 -a -v
+&mfs

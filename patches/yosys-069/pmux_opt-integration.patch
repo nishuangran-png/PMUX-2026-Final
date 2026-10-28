@@ -28,30 +28,29 @@
  		max10/cells_map.v
 @@ -48,6 +50,8 @@
  
- 		cycloneiv/cells_sim.v
- 		cycloneiv/cells_map.v
-+		cycloneiv/alu_map.v
+		cycloneiv/cells_sim.v
+		cycloneiv/cells_map.v
 +		cycloneiv/pmux_abc.abc
++		cycloneiv/pmux_abc9.abc
  
  		cycloneive/cells_sim.v
  		cycloneive/cells_map.v
 --- a/techlibs/intel/synth_intel.cc
 +++ b/techlibs/intel/synth_intel.cc
-@@ -209,6 +209,7 @@
+@@ -209,6 +209,8 @@
  			run("opt -nodffe -nosdff");
  			run("fsm");
++			run("pmux_opt -dense_only");
  			run("opt");
 +			run("pmux_opt");
  			run("wreduce");
  			run("peepopt");
  			run("opt_clean");
-@@ -248,23 +249,58 @@
- 		}
- 
- 		if (check_label("map_ffram")) {
-+			if (!help_mode && family_opt == "cycloneiv")
-+				run("techmap -map +/intel/cycloneiv/alu_map.v");
- 			run("opt -fast -mux_undef -undriven -fine -full");
+@@ -248,23 +249,64 @@
+		}
+
+		if (check_label("map_ffram")) {
+			run("opt -fast -mux_undef -undriven -fine -full");
  			run("memory_map");
  			run("opt -undriven -fine");
 -			run("techmap -map +/techmap.v");
@@ -88,18 +87,26 @@
  		if (check_label("map_luts")) {
 -			run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
 +			bool pmux_restructured = false;
++			int design_cells = 0, design_dffs = 0;
 +			if (!help_mode) {
-+				for (auto module : active_design->selected_modules())
++				for (auto module : active_design->selected_modules()) {
++					design_cells += GetSize(module->cells());
++					for (auto cell : module->cells())
++						if (cell->type == ID(dffeas))
++							design_dffs++;
 +					if (module->get_bool_attribute(ID(pmux_opt_restructured))) {
 +						pmux_restructured = true;
-+						break;
 +					}
++				}
 +			}
++			bool use_area_flow = family_opt == "cycloneiv" && pmux_restructured &&
++					design_cells >= 64 && design_dffs < 64;
 +			if (!help_mode)
-+				log("pmux_opt: structural rewrites=%d; selecting %s ABC flow.\n",
-+				    int(pmux_restructured), pmux_restructured ? "custom" : "abc9");
-+			if (help_mode || (family_opt == "cycloneiv" && pmux_restructured))
-+				run("abc -lut 4 -script +/intel/cycloneiv/pmux_abc.abc");
++				log("pmux_opt: structural rewrites=%d cells=%d dffs=%d; selecting %s ABC flow.\n",
++				    int(pmux_restructured), design_cells, design_dffs,
++				    use_area_flow ? "low-memory abc9" : "native abc9");
++			if (!help_mode && use_area_flow)
++				run("abc9 -lut 4 -W 300 -script +/intel/cycloneiv/pmux_abc9.abc");
 +			else
 +				run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
  			run("clean");
