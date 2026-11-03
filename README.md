@@ -13,7 +13,10 @@
 形式验证与 Windows 冻结交付的六个阶段，以及关键纠错和 A/B/C 消融，
 见 [`docs/DEVELOPMENT_TIMELINE.md`](docs/DEVELOPMENT_TIMELINE.md)。
 
-时间线依据真实工作日志和冻结证据整理；Git 发布树没有补造历史提交。
+项目原始开发仓从 **2026-09-22** 启动，冻结前形成 **31 次真实非合并
+提交**（9 月 12 次、10 月 19 次）。逐条日期、SHA 和提交说明见
+[`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md)。公开 GitHub 图接入的是
+原始提交对象，没有回填日期；最终 `HEAD` 仍对应冻结交付树。
 
 ## 结果
 
