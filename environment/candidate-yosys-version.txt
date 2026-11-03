@@ -1,0 +1,1 @@
+Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, GNU %WORK_ROOT%/gccshim/gxx-wrap.exe 16.2.0)

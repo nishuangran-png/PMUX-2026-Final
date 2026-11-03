@@ -1,0 +1,6 @@
+file,top,corresponds_to,what,source
+pmux_case01_balanced.v,pmux_case01_balanced,user_case01,"One lane, four 4-to-1 PMUX banks feeding a fifth 4-to-1 selector, 12-bit datapath","user supplied 2026-10-26"
+pmux_case02_pipeline.v,pmux_case02_pipeline,user_case02,"Four lanes with two-stage feedback pipeline and multiple 4-to-1 PMUX banks","user supplied 2026-10-26"
+pmux_case03_crossbar.v,pmux_case03_crossbar,user_case03,"Two-lane arithmetic crossbar with four 4-to-1 PMUX banks and an 8-to-1 final selector","user supplied 2026-10-26"
+pmux_case04_feedback.v,pmux_case04_feedback,user_case04,"Two-lane feedback network with nested PMUX paths and conditional DFF enable","user supplied 2026-10-26"
+pmux_case05_nested.v,pmux_case05_nested,user_case05,"Nested procedural case statements with up to three PMUX levels","user supplied 2026-10-26"

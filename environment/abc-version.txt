@@ -1,0 +1,4 @@
+Cannot open file "abc.rc".
+Cannot open file "..\abc.rc".
+Cannot open file "..\..\abc.rc".
+UC Berkeley, ABC 1.01 (compiled Sep 22 2026 05:53:02)

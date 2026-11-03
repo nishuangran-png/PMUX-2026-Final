@@ -1,0 +1,3 @@
+read_verilog "%PMUX_ROOT%/cases/five/pmux_case03_crossbar.v"
+synth_intel -family cycloneiv -top pmux_case03_crossbar
+stat

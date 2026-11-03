@@ -1,0 +1,33 @@
+{
+  "protocol": {
+    "repeats": 5,
+    "order_each_round": "baseline then candidate",
+    "warmup": "baseline then candidate once per case",
+    "wall_clock": "time.perf_counter around process launch and full completion",
+    "memory": "GetProcessMemoryInfo PeakWorkingSetSize read after process exit; no polling",
+    "same_workdir": "%PMUX_ROOT%\\logs\\performance\\recheck-test2\\shared-work",
+    "same_script_per_case": true,
+    "same_abc": "%PMUX_ROOT%\\candidate\\yosys-abc.exe"
+  },
+  "cases": [
+    {
+      "suite": "official",
+      "case": "test2",
+      "baseline_wall_mean_s": 0.2887689399998635,
+      "candidate_wall_mean_s": 0.2624178999569267,
+      "wall_ratio_mean": 0.9087469724307979,
+      "baseline_wall_median_s": 0.2888344000093639,
+      "candidate_wall_median_s": 0.2932784000877291,
+      "wall_ratio_median": 1.0153859792262319,
+      "baseline_cpu_mean_s": 0.0625,
+      "candidate_cpu_mean_s": 0.05625,
+      "cpu_ratio_mean": 0.9,
+      "baseline_mem_median_bytes": 15192064,
+      "candidate_mem_median_bytes": 15650816,
+      "memory_ratio_median": 1.0301968185494743
+    }
+  ],
+  "worst_wall_ratio_mean": 0.9087469724307979,
+  "worst_wall_ratio_median": 1.0153859792262319,
+  "worst_memory_ratio_median": 1.0301968185494743
+}

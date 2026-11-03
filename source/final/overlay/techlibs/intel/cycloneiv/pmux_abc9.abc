@@ -1,0 +1,5 @@
+&scorr
+&sweep
+&dc2
+&dch -f -r
+&if -W 300 -a -v

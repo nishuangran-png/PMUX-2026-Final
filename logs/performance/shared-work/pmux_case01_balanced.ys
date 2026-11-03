@@ -1,0 +1,3 @@
+read_verilog "%PMUX_ROOT%/cases/five/pmux_case01_balanced.v"
+synth_intel -family cycloneiv -top pmux_case01_balanced
+stat

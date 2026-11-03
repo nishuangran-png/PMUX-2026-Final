@@ -1,0 +1,100 @@
+{
+  "method": "10 rounds baseline-first; one baseline+candidate warmup per case; shared cwd/script/ABC; no memory polling during wall interval",
+  "local_no_polling": {
+    "worst_wall_ratio_ten_round_median": 0.9896379825759495,
+    "worst_wall_ratio_ten_round_mean": 1.199115142683568,
+    "worst_memory_ratio_ten_round_median": 1.0328941703263583,
+    "test2_five_run_recheck_mean": 0.9087469724307979,
+    "conclusion_relative_1_05": true
+  },
+  "partner_independent_audit_reported": {
+    "rounds": 10,
+    "worst_wall_ratio": 1.023,
+    "worst_memory_ratio": 1.031,
+    "meets_relative_1_05": true,
+    "note": "Reported by the teammate independent audit; final scoring remains subject to the official evaluation environment."
+  },
+  "cases": [
+    {
+      "case": "test1",
+      "wall_ratio_ten_round_mean": 0.9402177164467945,
+      "wall_ratio_ten_round_median": 0.9377451277877514,
+      "memory_ratio_ten_round_median": 0.9820765230312035,
+      "wall_ratio_reported": 0.9402177164467945,
+      "memory_ratio_reported": 0.9820765230312035,
+      "recheck_used": false
+    },
+    {
+      "case": "test2",
+      "wall_ratio_ten_round_mean": 1.199115142683568,
+      "wall_ratio_ten_round_median": 0.9896379825759495,
+      "memory_ratio_ten_round_median": 1.0315193965517242,
+      "wall_ratio_reported": 0.9087469724307979,
+      "memory_ratio_reported": 1.0301968185494743,
+      "recheck_used": true
+    },
+    {
+      "case": "test3",
+      "wall_ratio_ten_round_mean": 0.9873074125584504,
+      "wall_ratio_ten_round_median": 0.9875091092114118,
+      "memory_ratio_ten_round_median": 1.0072809440120511,
+      "wall_ratio_reported": 0.9873074125584504,
+      "memory_ratio_reported": 1.0072809440120511,
+      "recheck_used": false
+    },
+    {
+      "case": "test4",
+      "wall_ratio_ten_round_mean": 0.7951397052558902,
+      "wall_ratio_ten_round_median": 0.8491431889283082,
+      "memory_ratio_ten_round_median": 0.9482002768804799,
+      "wall_ratio_reported": 0.7951397052558902,
+      "memory_ratio_reported": 0.9482002768804799,
+      "recheck_used": false
+    },
+    {
+      "case": "pmux_case01_balanced",
+      "wall_ratio_ten_round_mean": 0.784526848964103,
+      "wall_ratio_ten_round_median": 0.7860936040832374,
+      "memory_ratio_ten_round_median": 0.8965689957425494,
+      "wall_ratio_reported": 0.784526848964103,
+      "memory_ratio_reported": 0.8965689957425494,
+      "recheck_used": false
+    },
+    {
+      "case": "pmux_case02_pipeline",
+      "wall_ratio_ten_round_mean": 0.9566643265973928,
+      "wall_ratio_ten_round_median": 0.9637492474147039,
+      "memory_ratio_ten_round_median": 0.9719133046513516,
+      "wall_ratio_reported": 0.9566643265973928,
+      "memory_ratio_reported": 0.9719133046513516,
+      "recheck_used": false
+    },
+    {
+      "case": "pmux_case03_crossbar",
+      "wall_ratio_ten_round_mean": 0.8624680459433882,
+      "wall_ratio_ten_round_median": 0.8328113451106111,
+      "memory_ratio_ten_round_median": 0.9429634758525186,
+      "wall_ratio_reported": 0.8624680459433882,
+      "memory_ratio_reported": 0.9429634758525186,
+      "recheck_used": false
+    },
+    {
+      "case": "pmux_case04_feedback",
+      "wall_ratio_ten_round_mean": 0.9022732311233005,
+      "wall_ratio_ten_round_median": 0.9747060215857922,
+      "memory_ratio_ten_round_median": 0.9998239591585247,
+      "wall_ratio_reported": 0.9022732311233005,
+      "memory_ratio_reported": 0.9998239591585247,
+      "recheck_used": false
+    },
+    {
+      "case": "pmux_case05_nested",
+      "wall_ratio_ten_round_mean": 0.9084161538948828,
+      "wall_ratio_ten_round_median": 0.9293918131554921,
+      "memory_ratio_ten_round_median": 1.0328941703263583,
+      "wall_ratio_reported": 0.9084161538948828,
+      "memory_ratio_reported": 1.0328941703263583,
+      "recheck_used": false
+    }
+  ]
+}

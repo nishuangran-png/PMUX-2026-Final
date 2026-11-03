@@ -1,0 +1,27 @@
+# Build products
+build/
+build-*/
+.eqy-work-*/
+_tmp_yosys-abc-*/
+
+# Local analysis artefacts
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.dll
+*.ilk
+*.pdb
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+
+# Local release bundles (uploaded as GitHub Release assets)
+release/
+*.zip

@@ -1,0 +1,2 @@
+GNU Make 4.4.1
+Built for Windows32
