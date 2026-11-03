@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="timeline-title timeline-desc">
+  <title id="timeline-title">PMUX 算法演进时间线</title>
+  <desc id="timeline-desc">从官方基线、自研 PMUX 重写、test4 修复、泛化审计，到统一 ABC9 和冻结交付的六个阶段。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="0.55" stop-color="#0B1728"/>
+      <stop offset="1" stop-color="#101D31"/>
+    </linearGradient>
+    <linearGradient id="timeline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="0.34" stop-color="#60A5FA"/>
+      <stop offset="0.67" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#142338"/>
+      <stop offset="1" stop-color="#0E192A"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="920" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#334155" stroke-width="1">
+    <path d="M0 80H1600M0 160H1600M0 240H1600M0 320H1600M0 400H1600M0 480H1600M0 560H1600M0 640H1600M0 720H1600M0 800H1600"/>
+    <path d="M80 0V920M160 0V920M240 0V920M320 0V920M400 0V920M480 0V920M560 0V920M640 0V920M720 0V920M800 0V920M880 0V920M960 0V920M1040 0V920M1120 0V920M1200 0V920M1280 0V920M1360 0V920M1440 0V920M1520 0V920"/>
+  </g>
+
+  <rect x="58" y="54" width="7" height="84" rx="3.5" fill="#4FD1C5"/>
+  <text x="90" y="92" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="38" font-weight="750" letter-spacing="0.5">PMUX 算法演进</text>
+  <text x="90" y="124" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">从可测基线到 v1.0.0-final · 六个阶段 · 每一次收益都有证据</text>
+
+  <g>
+    <rect x="1294" y="62" width="248" height="44" rx="22" fill="#0C2A25" stroke="#2DD4BF" stroke-width="1.2"/>
+    <circle cx="1320" cy="84" r="6" fill="#34D399"/>
+    <text x="1338" y="90" fill="#BBF7D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="650">FROZEN · 2026-11-02</text>
+  </g>
+
+  <rect x="116" y="249" width="1368" height="3" rx="1.5" fill="url(#timeline)"/>
+  <path d="M1484 250.5L1470 242V259L1484 250.5Z" fill="#34D399"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#64748B">
+    <text x="116" y="230">START</text>
+    <text x="1418" y="230">RELEASE</text>
+  </g>
+
+  <g>
+    <circle cx="150" cy="250" r="18" fill="#0B1728" stroke="#38BDF8" stroke-width="4"/>
+    <circle cx="150" cy="250" r="6" fill="#38BDF8"/>
+    <path d="M150 268V306" stroke="#38BDF8" stroke-width="2" opacity="0.7"/>
+    <rect x="40" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="40" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#24405F"/>
+    <rect x="40" y="308" width="220" height="5" rx="2.5" fill="#38BDF8"/>
+    <text x="58" y="340" fill="#38BDF8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.09.22–09.24</text>
+    <text x="58" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">建立可测基线</text>
+    <text x="58" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">Yosys 0.68 初测</text>
+    <text x="58" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">确认 $pmux 生成条件</text>
+    <text x="58" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">锁定 LCELL + $not</text>
+    <rect x="58" y="520" width="116" height="30" rx="15" fill="#10283B" stroke="#1D4D6B"/>
+    <text x="75" y="540" fill="#7DD3FC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">口径统一</text>
+    <text x="58" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">先证明问题可测，再写算法</text>
+  </g>
+
+  <g>
+    <circle cx="406" cy="250" r="18" fill="#0B1728" stroke="#60A5FA" stroke-width="4"/>
+    <circle cx="406" cy="250" r="6" fill="#60A5FA"/>
+    <path d="M406 268V306" stroke="#60A5FA" stroke-width="2" opacity="0.7"/>
+    <rect x="296" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="296" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#24405F"/>
+    <rect x="296" y="308" width="220" height="5" rx="2.5" fill="#60A5FA"/>
+    <text x="314" y="340" fill="#60A5FA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.13–10.21</text>
+    <text x="314" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">自研结构重写</text>
+    <text x="314" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">pmux_opt 编入主流程</text>
+    <text x="314" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">选择总线 + 数据关系</text>
+    <text x="314" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">优先级 / 稀疏 / 门控</text>
+    <text x="314" y="480" fill="#93C5FD" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">10.13 切至 Yosys 0.69</text>
+    <rect x="314" y="520" width="92" height="30" rx="15" fill="#13243D" stroke="#284D7B"/>
+    <text x="333" y="540" fill="#93C5FD" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">v1 → v2</text>
+    <text x="314" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">四题全等价，test4 仍为 0</text>
+  </g>
+
+  <g>
+    <circle cx="662" cy="250" r="18" fill="#0B1728" stroke="#F59E0B" stroke-width="4"/>
+    <circle cx="662" cy="250" r="6" fill="#F59E0B"/>
+    <path d="M662 268V306" stroke="#F59E0B" stroke-width="2" opacity="0.7"/>
+    <rect x="552" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="552" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#4A3A27"/>
+    <rect x="552" y="308" width="220" height="5" rx="2.5" fill="#F59E0B"/>
+    <text x="570" y="340" fill="#FBBF24" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.23–10.25</text>
+    <text x="570" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">打通 test4</text>
+    <text x="570" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">proc_rom 先吞掉 PMUX</text>
+    <text x="570" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">常量 ROM 降为 LUT</text>
+    <text x="570" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">延迟 techmap + folding</text>
+    <rect x="570" y="520" width="144" height="30" rx="15" fill="#322412" stroke="#6B4E1D"/>
+    <text x="588" y="540" fill="#FCD34D" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">顺序依赖链</text>
+    <text x="570" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">根因是阶段顺序，不是规则失效</text>
+  </g>
+
+  <g>
+    <circle cx="918" cy="250" r="18" fill="#0B1728" stroke="#F472B6" stroke-width="4"/>
+    <circle cx="918" cy="250" r="6" fill="#F472B6"/>
+    <path d="M918 268V306" stroke="#F472B6" stroke-width="2" opacity="0.7"/>
+    <rect x="808" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="808" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#4B2D45"/>
+    <rect x="808" y="308" width="220" height="5" rx="2.5" fill="#F472B6"/>
+    <text x="826" y="340" fill="#F9A8D4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.26–10.28</text>
+    <text x="826" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">泛化与同源审计</text>
+    <text x="826" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">新增五例统一规则</text>
+    <text x="826" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">双 PMUX / 密集译码</text>
+    <text x="826" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">二维转置仅 balanced 命中</text>
+    <rect x="826" y="520" width="132" height="30" rx="15" fill="#351D2E" stroke="#74365D"/>
+    <text x="844" y="540" fill="#F9A8D4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">结构而非特判</text>
+    <text x="826" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">不读取用例名、文件名、固定位宽</text>
+  </g>
+
+  <g>
+    <circle cx="1174" cy="250" r="18" fill="#0B1728" stroke="#A78BFA" stroke-width="4"/>
+    <circle cx="1174" cy="250" r="6" fill="#A78BFA"/>
+    <path d="M1174 268V306" stroke="#A78BFA" stroke-width="2" opacity="0.7"/>
+    <rect x="1064" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="1064" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#3E3566"/>
+    <rect x="1064" y="308" width="220" height="5" rx="2.5" fill="#A78BFA"/>
+    <text x="1082" y="340" fill="#C4B5FD" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.28–10.30</text>
+    <text x="1082" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">统一 ABC9 收敛</text>
+    <text x="1082" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">A / B / C 同源消融</text>
+    <text x="1082" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">新增五题 13.02 → 22.28%</text>
+    <text x="1082" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">nested 回退清零</text>
+    <rect x="1082" y="520" width="126" height="30" rx="15" fill="#282046" stroke="#5D4D94"/>
+    <text x="1100" y="540" fill="#DDD6FE" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">0 regression</text>
+    <text x="1082" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">宁可持平，也不为单题制造回退</text>
+  </g>
+
+  <g>
+    <circle cx="1430" cy="250" r="18" fill="#0B1728" stroke="#34D399" stroke-width="4"/>
+    <circle cx="1430" cy="250" r="6" fill="#34D399"/>
+    <path d="M1430 268V306" stroke="#34D399" stroke-width="2" opacity="0.7"/>
+    <rect x="1320" y="314" width="220" height="304" rx="18" fill="#000000" opacity="0.25" filter="url(#shadow)"/>
+    <rect x="1320" y="308" width="220" height="304" rx="18" fill="url(#panel)" stroke="#245344"/>
+    <rect x="1320" y="308" width="220" height="5" rx="2.5" fill="#34D399"/>
+    <text x="1338" y="340" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.30–11.03</text>
+    <text x="1338" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">冻结与交付</text>
+    <text x="1338" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">Windows 十轮复测</text>
+    <text x="1338" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">形式等价 9 / 9</text>
+    <text x="1338" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">GitHub Release 发布</text>
+    <rect x="1338" y="520" width="132" height="30" rx="15" fill="#12342A" stroke="#2C6B56"/>
+    <text x="1356" y="540" fill="#A7F3D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">v1.0.0-final</text>
+    <text x="1338" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">源码、日志、哈希与运行包一起冻结</text>
+  </g>
+
+  <g>
+    <rect x="58" y="658" width="1484" height="196" rx="22" fill="#0B1525" stroke="#23324A"/>
+    <text x="88" y="696" fill="#E2E8F0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">FINAL SNAPSHOT</text>
+    <line x1="88" y1="712" x2="1512" y2="712" stroke="#1E293B"/>
+
+    <text x="88" y="758" fill="#38BDF8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">9</text>
+    <text x="88" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">官方与新增用例</text>
+
+    <text x="374" y="758" fill="#A78BFA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">26.20%</text>
+    <text x="374" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">九题平均面积缩减</text>
+
+    <text x="660" y="758" fill="#F472B6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">31.09%</text>
+    <text x="660" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">官方四题平均缩减</text>
+
+    <text x="946" y="758" fill="#34D399" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">0</text>
+    <text x="946" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">面积回退 / DFF 增加</text>
+
+    <text x="1232" y="758" fill="#FBBF24" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">9 / 9</text>
+    <text x="1232" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">形式等价通过</text>
+
+    <line x1="88" y1="810" x2="1512" y2="810" stroke="#1E293B"/>
+    <text x="88" y="833" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">Windows 独立十轮审计：最大墙钟比 1.023 · 最大内存比 1.031 · 两臂使用同一个 ABC</text>
+    <text x="1512" y="833" text-anchor="end" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">全部结构改写位于 ABC9 之前</text>
+  </g>
+
+  <text x="58" y="890" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">SOURCE: FINAL_VERSION.json · logs/synthesis · logs/performance · logs/eqy · docs/DEVELOPMENT_TIMELINE.md</text>
+  <text x="1542" y="890" text-anchor="end" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">NO CASE-NAME BRANCHING · NO POST-ABC LUT REWRITE</text>
+</svg>

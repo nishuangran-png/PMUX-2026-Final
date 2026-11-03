@@ -5,6 +5,16 @@
 逻辑等价、DFF 数量不增加和不使用 legacy ABC 的前提下降低
 `cycloneiv_lcell_comb + $not` 面积。
 
+## 算法演进
+
+![PMUX 算法演进时间线](docs/assets/development-timeline.svg)
+
+从官方基线、自研 PMUX 重写、`test4` 根因定位，到统一 ABC9、
+形式验证与 Windows 冻结交付的六个阶段，以及关键纠错和 A/B/C 消融，
+见 [`docs/DEVELOPMENT_TIMELINE.md`](docs/DEVELOPMENT_TIMELINE.md)。
+
+时间线依据真实工作日志和冻结证据整理；Git 发布树没有补造历史提交。
+
 ## 结果
 
 以下是最终冻结的 Windows 测量结果。面积口径为

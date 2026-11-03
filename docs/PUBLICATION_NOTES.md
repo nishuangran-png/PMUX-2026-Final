@@ -14,6 +14,9 @@ package.
   GitHub Release rather than committed to Git.
 - A repository README, third-party notice and repository-level ignore rules
   were added.
+- An evidence-backed development timeline and SVG overview were added for
+  official review. The timeline is a curated record of the real development
+  stages; it does not create retrospective Git commits.
 
 ## What did not change
 
@@ -23,6 +26,12 @@ package.
 - Performance measurements.
 - EQY/equivalence conclusions.
 - Frozen binary SHA-256 values.
+
+The later documentation-only revision changes `README.md`,
+`docs/PUBLICATION_NOTES.md`, and the two new timeline files. It does not change
+RTL, source overlay, patches, binaries, synthesis logs, performance samples,
+EQY results, or `FINAL_VERSION.json`. `SHA256SUMS` is regenerated after the
+publication documentation update.
 
 The original package remains the authoritative evidence source. This public
 copy is intended to make review and reproduction straightforward without
