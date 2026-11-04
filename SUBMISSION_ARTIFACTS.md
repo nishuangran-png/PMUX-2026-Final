@@ -7,13 +7,16 @@ Release 附件误认为三个不同版本。
 
 - 文件名：`PMUX-2026-Final-v1.0.0-final-repro.zip`
 - 包内根目录：`PMUX_final_repro/`
-- 文件大小：`67,465,315` 字节
-- SHA-256：`74e622dfacf4fafdc1c371a24ef5b2c89ee372a7028066d7ce067a95eccf960c`
-- 来源：以最终 `PMUX_final_repro(4)` 为冻结标准；仅优化包内 README，
-  并重新生成 `MANIFEST.sha256`。候选源码、RTL、二进制、综合日志、性能
-  采样、EQY 结果和测量值均未修改。
+- 文件大小：`67,450,398` 字节
+- SHA-256：`1b112daf6c7e8ca779770458a4aa26c3f726813fd0916f8279656374f26801c3`
+- 来源：以最终 `PMUX_final_repro(4)` 为冻结标准；本轮只替换包内
+  `README.md`，并据此重新生成 `MANIFEST.sha256`。候选源码、RTL、二进制、
+  综合日志、性能采样、EQY 结果和测量值均未修改。
 - 完整性：ZIP 结构校验通过；包内 `MANIFEST.sha256` 共 771 项，771/771
   全部匹配。
+- README 身份：仓库根目录与包内 `PMUX_final_repro/README.md` 字节一致，
+  SHA-256 均为
+  `6a8ff9197771468a8b080a01c12944a29b1f59f7537a71136d3e90c7d69e8e05`。
 
 `FINAL_VERSION.json` 中的内部包名仍为 `PMUX_final_repro.zip`。这只是冻结
 包内部的版本标识；对外分发的文件名改为上述名称，不改变包内容或成绩。
