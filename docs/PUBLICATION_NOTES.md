@@ -21,6 +21,10 @@ package.
   2026-09-22 to 2026-10-30. The original commit objects are connected to the
   publication repository's `main` graph; their dates, SHAs and messages are
   not rewritten. The final tree remains the frozen delivery tree.
+- `SUBMISSION_ARTIFACTS.md` defines the single authoritative runnable ZIP,
+  its byte size and SHA-256, and the permitted differences between the
+  submission package and this source/evidence repository. The GitHub Release
+  attachment is required to be the same bytes as the submission package.
 
 ## What did not change
 
@@ -33,10 +37,10 @@ package.
 
 The later documentation-only revisions change `README.md`,
 `DEVELOPMENT_LOG.md`, `docs/DEVELOPMENT_TIMELINE.md`,
-`docs/PUBLICATION_NOTES.md`, and the timeline asset. They do not change RTL,
-source overlay, patches, binaries, synthesis logs, performance samples, EQY
-results, or `FINAL_VERSION.json`. `SHA256SUMS` is regenerated after the
-publication documentation update.
+`docs/PUBLICATION_NOTES.md`, `SUBMISSION_ARTIFACTS.md`, and the timeline
+asset. They do not change RTL, source overlay, patches, binaries, synthesis
+logs, performance samples, EQY results, or `FINAL_VERSION.json`.
+`SHA256SUMS` is regenerated after the publication documentation update.
 
 The original package remains the authoritative evidence source. This public
 copy is intended to make review and reproduction straightforward without

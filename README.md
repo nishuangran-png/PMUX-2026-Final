@@ -97,9 +97,16 @@ source/patches/           相对官方提交的统一补丁
 source/baseline_source_tree.tar.gz  官方基线源码树归档
 ```
 
-Git 仓库不保存体积较大的 Windows 可执行文件。冻结的
-`yosys.exe`、`yosys-abc.exe` 和运行库随 GitHub Release
-`v1.0.0-final` 发布。
+Git 仓库不保存体积较大的 Windows 可执行文件。唯一权威运行包为
+`PMUX-2026-Final-v1.0.0-final-repro.zip`，大小 `67,465,315` 字节，
+SHA-256 为
+`74e622dfacf4fafdc1c371a24ef5b2c89ee372a7028066d7ce067a95eccf960c`。
+GitHub Release `v1.0.0-final` 只发布与它字节一致的同一个附件；仓库则是
+源码与证据审阅副本。对应关系和差异边界见
+[`SUBMISSION_ARTIFACTS.md`](SUBMISSION_ARTIFACTS.md)。
+
+压缩包以最终 `PMUX_final_repro(4)` 为冻结标准，仅优化包内 README 并
+重新生成清单；包内 771 项校验全部通过。
 
 ## 复现
 
