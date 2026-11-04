@@ -9,8 +9,8 @@ Warning: Feature 'synth_intel' is experimental.
 
 2. Executing SYNTH_INTEL pass.
 
-2.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/cycloneiv/cells_sim.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/cycloneiv/cells_sim.v' to AST representation.
+2.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/cycloneiv/cells_sim.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/cycloneiv/cells_sim.v' to AST representation.
 Generating RTLIL representation for module `\VCC'.
 Generating RTLIL representation for module `\GND'.
 Generating RTLIL representation for module `\cycloneiv_io_ibuf'.
@@ -20,13 +20,13 @@ Generating RTLIL representation for module `\dffeas'.
 Generating RTLIL representation for module `\cycloneiv_pll'.
 Successfully finished Verilog frontend.
 
-2.2. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/m9k_bb.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/m9k_bb.v' to AST representation.
+2.2. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/m9k_bb.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/m9k_bb.v' to AST representation.
 Generating RTLIL representation for module `\altsyncram'.
 Successfully finished Verilog frontend.
 
-2.3. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/altpll_bb.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/altpll_bb.v' to AST representation.
+2.3. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/altpll_bb.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/altpll_bb.v' to AST representation.
 Successfully finished Verilog frontend.
 
 2.4. Executing HIERARCHY pass (managing design hierarchy).
@@ -84,7 +84,6 @@ Promoted 24 assignments to connections.
 
 2.5.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
-<suppressed ~32 debug messages>
 
 2.5.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
 Creating decoders for process `\pmux_case02_pipeline.$proc$pmux_case02_pipeline.v:76$76'.
@@ -255,7 +254,6 @@ Cleaned up 32 empty switches.
 
 2.5.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module pmux_case02_pipeline.
-<suppressed ~24 debug messages>
 
 2.6. Executing CHECK pass (checking for obvious problems).
 Checking module pmux_case02_pipeline...
@@ -277,7 +275,6 @@ Found and reported 0 problems.
 2.12. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \pmux_case02_pipeline..
 Removed 0 unused cells and 96 unused wires.
-<suppressed ~1 debug messages>
 
 2.13. Executing OPT pass (performing simple optimizations).
 
@@ -296,7 +293,6 @@ Running muxtree optimizer on module \pmux_case02_pipeline..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~48 debug messages>
 
 2.13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \pmux_case02_pipeline.
@@ -357,7 +353,6 @@ Running muxtree optimizer on module \pmux_case02_pipeline..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~48 debug messages>
 
 2.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \pmux_case02_pipeline.
@@ -390,7 +385,6 @@ Adding EN signal on $auto$ff.cc:337:slice$262 ($sdff) from module pmux_case02_pi
 2.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \pmux_case02_pipeline..
 Removed 16 unused cells and 16 unused wires.
-<suppressed ~17 debug messages>
 
 2.16.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module pmux_case02_pipeline.
@@ -403,7 +397,6 @@ Running muxtree optimizer on module \pmux_case02_pipeline..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~32 debug messages>
 
 2.16.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \pmux_case02_pipeline.
@@ -495,18 +488,16 @@ Removed cell pmux_case02_pipeline.$procmux$238_CMP0 ($eq).
 2.20. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \pmux_case02_pipeline..
 Removed 16 unused cells and 64 unused wires.
-<suppressed ~17 debug messages>
 
 2.21. Executing TECHMAP pass (map to technology primitives).
 
-2.21.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/cmp2lut.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/cmp2lut.v' to AST representation.
+2.21.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/cmp2lut.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/cmp2lut.v' to AST representation.
 Generating RTLIL representation for module `\_90_lut_cmp_'.
 Successfully finished Verilog frontend.
 
 2.21.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~6 debug messages>
 
 2.22. Executing OPT_EXPR pass (perform const folding).
 Optimizing module pmux_case02_pipeline.
@@ -631,7 +622,6 @@ Running muxtree optimizer on module \pmux_case02_pipeline..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~64 debug messages>
 
 2.25.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \pmux_case02_pipeline.
@@ -687,14 +677,13 @@ Finding unused cells or wires in module \pmux_case02_pipeline..
 
 2.29. Executing TECHMAP pass (map to technology primitives).
 
-2.29.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/brams_map_m9k.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/brams_map_m9k.v' to AST representation.
+2.29.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/brams_map_m9k.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/brams_map_m9k.v' to AST representation.
 Generating RTLIL representation for module `$__M9K_ALTSYNCRAM_SINGLEPORT_FULL'.
 Successfully finished Verilog frontend.
 
 2.29.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~3 debug messages>
 
 2.30. Executing OPT pass (performing simple optimizations).
 
@@ -733,7 +722,6 @@ Running muxtree optimizer on module \pmux_case02_pipeline..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~64 debug messages>
 
 2.32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \pmux_case02_pipeline.
@@ -758,8 +746,8 @@ pmux_opt: deferred LUTs=0
 
 2.33. Executing TECHMAP pass (map to technology primitives).
 
-2.33.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/techmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/techmap.v' to AST representation.
+2.33.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/techmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -802,13 +790,11 @@ Using template $paramod\_90_lcu_brent_kung\WIDTH=32'0000000000000000000000000000
 Using extmapper simplemap for cells of type $or.
 Using extmapper simplemap for cells of type $and.
 No more expansions possible.
-<suppressed ~904 debug messages>
 
 2.34. Executing OPT pass (performing simple optimizations).
 
 2.34.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module pmux_case02_pipeline.
-<suppressed ~528 debug messages>
 
 2.34.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\pmux_case02_pipeline'.
@@ -816,7 +802,6 @@ Computing hashes of 952 cells of `\pmux_case02_pipeline'.
 Finding duplicate cells in `\pmux_case02_pipeline'.
 Computing hashes of 928 cells of `\pmux_case02_pipeline'.
 Finding duplicate cells in `\pmux_case02_pipeline'.
-<suppressed ~72 debug messages>
 Removed a total of 24 cells.
 
 2.34.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
@@ -842,7 +827,6 @@ Removed a total of 0 cells.
 2.34.8. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \pmux_case02_pipeline..
 Removed 120 unused cells and 1312 unused wires.
-<suppressed ~121 debug messages>
 
 2.34.9. Executing OPT_EXPR pass (perform const folding).
 Optimizing module pmux_case02_pipeline.
@@ -884,20 +868,14 @@ Removed 0 unused cells and 33 unused wires.
 
 2.37. Executing TECHMAP pass (map to technology primitives).
 
-2.37.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/ff_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/ff_map.v' to AST representation.
+2.37.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/ff_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/common/ff_map.v' to AST representation.
 Generating RTLIL representation for module `$_DFFE_PN0P_'.
 Successfully finished Verilog frontend.
 
-2.37.2. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/ff_map_pn1.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/common/ff_map_pn1.v' to AST representation.
-Generating RTLIL representation for module `$_DFFE_PN1P_'.
-Successfully finished Verilog frontend.
-
-2.37.3. Continuing TECHMAP pass.
+2.37.2. Continuing TECHMAP pass.
 Using template $paramod$_DFFE_PN0P_\_TECHMAP_WIREINIT_Q_=1'x for cells of type $_DFFE_PN0P_.
 No more expansions possible.
-<suppressed ~37 debug messages>
 
 2.38. Executing PMUX_OPT pass.
 pmux_opt: folded 0 NOT cell(s) into LUTs.
@@ -921,8 +899,8 @@ Found 0 SCCs.
 
 2.39.5. Executing TECHMAP pass (map to technology primitives).
 
-2.39.5.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/techmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/techmap.v' to AST representation.
+2.39.5.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/techmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -952,7 +930,6 @@ Successfully finished Verilog frontend.
 
 2.39.5.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~86 debug messages>
 
 2.39.6. Executing OPT pass (performing simple optimizations).
 
@@ -980,16 +957,15 @@ Removed a total of 0 cells.
 
 2.39.7. Executing TECHMAP pass (map to technology primitives).
 
-2.39.7.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_map.v' to AST representation.
+2.39.7.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_map.v' to AST representation.
 Successfully finished Verilog frontend.
 
 2.39.7.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~2 debug messages>
 
-2.39.8. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_model.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_model.v' to AST representation.
+2.39.8. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_model.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_model.v' to AST representation.
 Generating RTLIL representation for module `$__ABC9_DELAY'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
@@ -999,7 +975,6 @@ Successfully finished Verilog frontend.
 2.39.9. Executing ABC9_OPS pass (helper functions for ABC9).
 
 2.39.10. Executing ABC9_OPS pass (helper functions for ABC9).
-<suppressed ~2 debug messages>
 
 2.39.11. Executing AIGMAP pass (map logic to AIG).
 Module pmux_case02_pipeline: replaced 560 cells with 3512 new cells, skipped 296 cells.
@@ -1015,7 +990,6 @@ Module pmux_case02_pipeline: replaced 560 cells with 3512 new cells, skipped 296
 2.39.11.1. Executing ABC9_OPS pass (helper functions for ABC9).
 
 2.39.11.2. Executing XAIGER backend.
-<suppressed ~5 debug messages>
 Extracted 1576 AND gates and 3949 wires from module `pmux_case02_pipeline' to a netlist network with 139 inputs and 36 outputs.
 
 2.39.11.3. Executing ABC9_EXE pass (technology mapping using ABC9).
@@ -1031,44 +1005,41 @@ ABC: <abc-temp-dir>/input : i/o =    139/     36  and =    1432  lev =   19 (  1
 ABC: + source <yosys-exe-dir>/share/intel/cycloneiv/pmux_abc9.abc 
 ABC: Warning: The network is combinational.
 ABC: K = 4. Memory (bytes): Truth =    0. Cut =   64. Obj =  144. Set =  672. CutMin = no
-ABC: Node =    2213.  Ch =   264.  Total mem =    0.36 MB. Peak cut mem =    0.05 MB.
-ABC: D:  Del = 1806.00.  Ar =     404.0.  Edge =     1401.  Cut =    12203.  T =     0.00 sec
-ABC: F:  Del = 2408.00.  Ar =     409.0.  Edge =     1416.  Cut =    12838.  T =     0.00 sec
-ABC: A:  Del = 2408.00.  Ar =     375.0.  Edge =     1325.  Cut =    12837.  T =     0.00 sec
-ABC: A:  Del = 2408.00.  Ar =     375.0.  Edge =     1325.  Cut =    12858.  T =     0.00 sec
+ABC: Node =    2211.  Ch =   257.  Total mem =    0.36 MB. Peak cut mem =    0.05 MB.
+ABC: D:  Del = 1806.00.  Ar =     405.0.  Edge =     1396.  Cut =    12016.  T =     0.00 sec
+ABC: F:  Del = 2408.00.  Ar =     408.0.  Edge =     1409.  Cut =    12679.  T =     0.00 sec
+ABC: A:  Del = 2107.00.  Ar =     376.0.  Edge =     1318.  Cut =    12804.  T =     0.00 sec
+ABC: A:  Del = 2107.00.  Ar =     376.0.  Edge =     1318.  Cut =    12822.  T =     0.00 sec
 ABC: Total time =     0.01 sec
 ABC: + &ps -l 
-ABC: <abc-temp-dir>/input : i/o =    139/     36  and =    1609  lev =   14 (   8.08)  mem = 0.02 MB  box = 0  bb = 0
-ABC: Mapping (K=4)  :  lut =    375  edge =    1325  lev =    8 (4.08)  mem = 0.01 MB
-ABC: LUT = 375 : 2=57 15.2 %  3=61 16.3 %  4=257 68.5 %  Ave = 3.53
+ABC: <abc-temp-dir>/input : i/o =    139/     36  and =    1593  lev =   14 (   8.17)  mem = 0.02 MB  box = 0  bb = 0
+ABC: Mapping (K=4)  :  lut =    376  edge =    1318  lev =    7 (4.22)  mem = 0.01 MB
+ABC: LUT = 376 : 2=56 14.9 %  3=74 19.7 %  4=246 65.4 %  Ave = 3.51
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &verify 
-ABC: Networks are equivalent.  Time =     0.09 sec
+ABC: Networks are equivalent.  Time =     0.19 sec
 ABC: + time 
-ABC: elapse: 0.33 seconds, total: 0.33 seconds
+ABC: elapse: 0.65 seconds, total: 0.65 seconds
 
 2.39.11.5. Executing AIGER frontend.
-<suppressed ~8 debug messages>
-Removed 2617 unused cells and 2780 unused wires.
+Removed 2605 unused cells and 2768 unused wires.
 
 2.39.11.6. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
-ABC RESULTS:              $lut cells:      375
+ABC RESULTS:              $lut cells:      376
 ABC RESULTS:           input signals:        9
 ABC RESULTS:          output signals:       25
-<suppressed ~350 debug messages>
 Removing temp directory.
 
 2.39.12. Executing TECHMAP pass (map to technology primitives).
 
-2.39.12.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_unmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/abc9_unmap.v' to AST representation.
+2.39.12.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_unmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/abc9_unmap.v' to AST representation.
 Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Successfully finished Verilog frontend.
 
 2.39.12.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~5 debug messages>
 Removed 0 unused cells and 4310 unused wires.
 
 2.40. Executing OPT pass (performing simple optimizations).
@@ -1078,7 +1049,7 @@ Optimizing module pmux_case02_pipeline.
 
 2.40.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\pmux_case02_pipeline'.
-Computing hashes of 399 cells of `\pmux_case02_pipeline'.
+Computing hashes of 400 cells of `\pmux_case02_pipeline'.
 Finding duplicate cells in `\pmux_case02_pipeline'.
 Removed a total of 0 cells.
 
@@ -1090,91 +1061,95 @@ Finding unused cells or wires in module \pmux_case02_pipeline..
 2.40.5. Finished fast OPT passes.
 
 2.41. Executing AUTONAME pass.
-Renamed 774 objects in module pmux_case02_pipeline.
-<suppressed ~774 debug messages>
+Renamed 776 objects in module pmux_case02_pipeline.
 
 2.42. Executing TECHMAP pass (map to technology primitives).
 
-2.42.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/cycloneiv/cells_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\candidate\share/intel/cycloneiv/cells_map.v' to AST representation.
+2.42.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/cycloneiv/cells_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\candidate\share/intel/cycloneiv/cells_map.v' to AST representation.
 Generating RTLIL representation for module `$__inpad'.
 Generating RTLIL representation for module `$__outpad'.
 Generating RTLIL representation for module `$lut'.
 Successfully finished Verilog frontend.
 
 2.42.2. Continuing TECHMAP pass.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0100 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0001 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0100 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0010 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1000 for cells of type $lut.
 Using template $paramod$15942ac7be0dd725beac7480dcc74ee28533af66$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11010100 for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1001 for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0110 for cells of type $lut.
-Using template $paramod$5e7bd6288e5b7407feff45c6e90557a411d3560a$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10110010 for cells of type $lut.
-Using template $paramod$8d7e631403a80aa650e318c82a10887417c8ada0$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010111 for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10010110 for cells of type $lut.
-Using template $paramod$4b74c84e030a2954990a38b85df486ab821c03a4$lut for cells of type $lut.
 Using template $paramod$640f0b255c4baeb1d5ed3ee07d5b4acf52609838$lut for cells of type $lut.
+Using template $paramod$8d7e631403a80aa650e318c82a10887417c8ada0$lut for cells of type $lut.
 Using template $paramod$0de052767abdccc3aefc818722bdc3c7850d25d6$lut for cells of type $lut.
-Using template $paramod$a1d323730045824cfc84bb9f4ee8031f1c4dcc9e$lut for cells of type $lut.
-Using template $paramod$ac0496fcebb0f2011b0bd8f43e25017a354391ee$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010010 for cells of type $lut.
-Using template $paramod$e786f6a96f40ad99986509ff36cbedff4b58521e$lut for cells of type $lut.
-Using template $paramod$d7eb1830d8dcaec27392f8f94c7b3222613622ea$lut for cells of type $lut.
-Using template $paramod$20ba583962918fa0136fc97b1558cc45cc91cc29$lut for cells of type $lut.
-Using template $paramod$ec731ba0b03f9a8c2f9a148aad53e934d7e8d215$lut for cells of type $lut.
-Using template $paramod$b56ca10f02a7950021c8429ce64d343e920f699c$lut for cells of type $lut.
-Using template $paramod$084922b40d1a933b2b6e59d69b8b649bfa1bca01$lut for cells of type $lut.
-Using template $paramod$7793af14a1d1a9df09b7264353e3dfaa774cd044$lut for cells of type $lut.
-Using template $paramod$e6885375a37295d84d5ace80fd24ba64b7aaf24e$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001011 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0110 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010111 for cells of type $lut.
 Using template $paramod$542cd123b979cc06016d6f98e7b189a1ce741609$lut for cells of type $lut.
-Using template $paramod$5766b753e513aa2393ffc25ef94ebc79dc098484$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1001 for cells of type $lut.
+Using template $paramod$e786f6a96f40ad99986509ff36cbedff4b58521e$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10010110 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01101001 for cells of type $lut.
-Using template $paramod$28a803459746781dfe705b209851cea844beba97$lut for cells of type $lut.
-Using template $paramod$1fb7cbea5f6fb3c0ee2c201e038a48f23658ab13$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010010 for cells of type $lut.
+Using template $paramod$a1d323730045824cfc84bb9f4ee8031f1c4dcc9e$lut for cells of type $lut.
+Using template $paramod$ec731ba0b03f9a8c2f9a148aad53e934d7e8d215$lut for cells of type $lut.
+Using template $paramod$ac0496fcebb0f2011b0bd8f43e25017a354391ee$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010100 for cells of type $lut.
-Using template $paramod$0fb3437f3229691986674bbb93ca3e579291b720$lut for cells of type $lut.
-Using template $paramod$c65acfd61ae70b5ce04c0aafaf2a256ff80af4df$lut for cells of type $lut.
-Using template $paramod$5a490b0e00aeb3aa961ff44c01138435d4948c4d$lut for cells of type $lut.
-Using template $paramod$84703685dd660e8070a03d91f140d249b7ff21b0$lut for cells of type $lut.
-Using template $paramod$84abafac600770dbecbd08e858f90b0a8d019d50$lut for cells of type $lut.
-Using template $paramod$9506ecf18c91672f3dae4008b6ad1f2863e8019f$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01110010 for cells of type $lut.
-Using template $paramod$524c229446842908cf59b914e9b6cb78948ff703$lut for cells of type $lut.
-Using template $paramod$1fed9e1f67af1d146eb882dde0fdb32e9c515f6d$lut for cells of type $lut.
-Using template $paramod$165be24785e4097ccfb74473951770165dd92dfc$lut for cells of type $lut.
+Using template $paramod$8eeae6b5737a673a1e57268785899c563b908210$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00110010 for cells of type $lut.
+Using template $paramod$20ba583962918fa0136fc97b1558cc45cc91cc29$lut for cells of type $lut.
+Using template $paramod$0fb3437f3229691986674bbb93ca3e579291b720$lut for cells of type $lut.
+Using template $paramod$5a490b0e00aeb3aa961ff44c01138435d4948c4d$lut for cells of type $lut.
+Using template $paramod$d7eb1830d8dcaec27392f8f94c7b3222613622ea$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01110010 for cells of type $lut.
+Using template $paramod$1fb7cbea5f6fb3c0ee2c201e038a48f23658ab13$lut for cells of type $lut.
+Using template $paramod$ea50dbdecb23313ea51f5a64c26c1a3ae6c6e7c2$lut for cells of type $lut.
+Using template $paramod$c65acfd61ae70b5ce04c0aafaf2a256ff80af4df$lut for cells of type $lut.
+Using template $paramod$084922b40d1a933b2b6e59d69b8b649bfa1bca01$lut for cells of type $lut.
+Using template $paramod$b56ca10f02a7950021c8429ce64d343e920f699c$lut for cells of type $lut.
+Using template $paramod$524c229446842908cf59b914e9b6cb78948ff703$lut for cells of type $lut.
+Using template $paramod$71923fbcd4bfda101a495ad186409e3771ed0105$lut for cells of type $lut.
+Using template $paramod$9506ecf18c91672f3dae4008b6ad1f2863e8019f$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001011 for cells of type $lut.
+Using template $paramod$5dff531f8fb77ebfe853eeca615cd074d42d0720$lut for cells of type $lut.
+Using template $paramod$c4c148354f86d2131dbfed31e2e01cbbb5aefda7$lut for cells of type $lut.
 Using template $paramod$4beade702c2f387a77c3f89db4f631e06b3ae32d$lut for cells of type $lut.
-Using template $paramod$7e8d331d1e06632d29fbdf6c3afc2de1856d3c67$lut for cells of type $lut.
-Using template $paramod$ececc55fe721b2d80098bfc00a6005f1af14b6e5$lut for cells of type $lut.
-Using template $paramod$15d3dd50cc31557057274aea687fe2a8296cd155$lut for cells of type $lut.
-Using template $paramod$70a6f8b5e7c26d543ee5df54b2e21d28a007a4bc$lut for cells of type $lut.
-Using template $paramod$3ccc23db184ad4ca7ed34ebe2511de41d5d97e78$lut for cells of type $lut.
-Using template $paramod$baa9d2fb2d21010939721b85aa9f11effe0b53c4$lut for cells of type $lut.
-Using template $paramod$e51a8a571bee774247b38f52d6e85fd62ae52cea$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00000001 for cells of type $lut.
-Using template $paramod$3085bb83c254eeafa7ffb644c70b0e604d4413a6$lut for cells of type $lut.
-Using template $paramod$712505941a295086314c22735153725461a87f4a$lut for cells of type $lut.
-Using template $paramod$8cac5452d526045503c5864c3a1dac0121c7053e$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001000 for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11011000 for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01000101 for cells of type $lut.
+Using template $paramod$84abafac600770dbecbd08e858f90b0a8d019d50$lut for cells of type $lut.
+Using template $paramod$28a803459746781dfe705b209851cea844beba97$lut for cells of type $lut.
+Using template $paramod$48919ef3b7976e5a25423f1a25c447a40c3002e9$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11000100 for cells of type $lut.
-Using template $paramod$fca001e3e0b52158a872e76e56c01ec10dfbb1de$lut for cells of type $lut.
-Using template $paramod$79364b9974cfc81fb54c164d10340bf9c7bccd7f$lut for cells of type $lut.
-Using template $paramod$ab8bb87959c5d7cfa27886cee1355b38e054a61a$lut for cells of type $lut.
+Using template $paramod$70a6f8b5e7c26d543ee5df54b2e21d28a007a4bc$lut for cells of type $lut.
+Using template $paramod$baa9d2fb2d21010939721b85aa9f11effe0b53c4$lut for cells of type $lut.
+Using template $paramod$75d5c453cca75cc7a7ca320c4fb7be0932b6aaa7$lut for cells of type $lut.
+Using template $paramod$df6b12cebabc3b2db650658c5e894d03a346e968$lut for cells of type $lut.
+Using template $paramod$165be24785e4097ccfb74473951770165dd92dfc$lut for cells of type $lut.
+Using template $paramod$3ccc23db184ad4ca7ed34ebe2511de41d5d97e78$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01010100 for cells of type $lut.
+Using template $paramod$7793af14a1d1a9df09b7264353e3dfaa774cd044$lut for cells of type $lut.
+Using template $paramod$84703685dd660e8070a03d91f140d249b7ff21b0$lut for cells of type $lut.
+Using template $paramod$dd6d490ff2fda6761e25bd4380c31bddd25e4044$lut for cells of type $lut.
+Using template $paramod$5766b753e513aa2393ffc25ef94ebc79dc098484$lut for cells of type $lut.
+Using template $paramod$de0cfbf042671e74ccda8afd309cd5db894ca1a6$lut for cells of type $lut.
+Using template $paramod$cad45b6c9da81941161a13849773fe2ed4bc1c6f$lut for cells of type $lut.
+Using template $paramod$32abbd1d449a67fb913b4733374e345d4c17175b$lut for cells of type $lut.
+Using template $paramod$e51a8a571bee774247b38f52d6e85fd62ae52cea$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001000 for cells of type $lut.
+Using template $paramod$3085bb83c254eeafa7ffb644c70b0e604d4413a6$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11010000 for cells of type $lut.
+Using template $paramod$6be53ab59e0a69757fc32adb071ddcb64e8c87b6$lut for cells of type $lut.
+Using template $paramod$44c6e72b8b9fd45a13a1c0d9a081c38b5c08eabf$lut for cells of type $lut.
+Using template $paramod$fca001e3e0b52158a872e76e56c01ec10dfbb1de$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11001000 for cells of type $lut.
+Using template $paramod$e6a488add0b5a2d742e2ae29f62ce7616e04271d$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01000101 for cells of type $lut.
 Using template $paramod$1be3a10aca64bc8b3d140a9dcfb9bac7a6744be9$lut for cells of type $lut.
-Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11100000 for cells of type $lut.
+Using template $paramod$a50bbaf70b48eb6d78317eddf4f7e11e8988acec$lut for cells of type $lut.
+Using template $paramod$ea79e410ad0f4fc3326666c891e1f3992816d636$lut for cells of type $lut.
 Using template $paramod$03da3dcc7c75ea9c9148a6fc634f76a9d0cbefef$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11100000 for cells of type $lut.
 Using template $paramod$cd6c4b4da6d8737b72fd2dc8f5d83d8967445809$lut for cells of type $lut.
 No more expansions possible.
-<suppressed ~1139 debug messages>
-Removed 0 unused cells and 750 unused wires.
+Removed 0 unused cells and 752 unused wires.
 
 2.43. Executing HIERARCHY pass (managing design hierarchy).
 Attribute `top' found on module `pmux_case02_pipeline'. Setting top module to pmux_case02_pipeline.
@@ -1192,14 +1167,14 @@ Removed 0 unused modules.
 
         +----------Local Count, excluding submodules.
         | 
-      385 wires
-      514 wire bits
-      385 public wires
-      514 public wire bits
+      386 wires
+      515 wire bits
+      386 public wires
+      515 public wire bits
         6 ports
       127 port bits
-      399 cells
-      375   cycloneiv_lcell_comb
+      400 cells
+      376   cycloneiv_lcell_comb
        24   dffeas
 
 2.45. Executing CHECK pass (checking for obvious problems).
@@ -1212,20 +1187,20 @@ Found and reported 0 problems.
 
         +----------Local Count, excluding submodules.
         | 
-      385 wires
-      514 wire bits
-      385 public wires
-      514 public wire bits
+      386 wires
+      515 wire bits
+      386 public wires
+      515 public wire bits
         6 ports
       127 port bits
-      399 cells
-      375   cycloneiv_lcell_comb
+      400 cells
+      376   cycloneiv_lcell_comb
        24   dffeas
 
 Warnings: 1 unique messages, 1 total
 Warnings: 1 experimental features used (not excluded with -x).
-End of script. Logfile hash: e19375709a
-Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, GNU %WORK_ROOT%/gccshim/gxx-wrap.exe 16.2.0)
+End of script. Logfile hash: 420408b362
+Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, Clang C:/Users/dell/Documents/Codex/2026-09-17/ni-s/outputs/strict_compliance_20261104/tools/zigcxx.bat 21.1.0)
 Time spent: 1% 21x opt_expr (0 sec), 1% 20x id_gc (0 sec), ...
 
 EXIT_CODE=0

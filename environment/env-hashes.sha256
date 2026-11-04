@@ -1,9 +1,4 @@
-fe03455c28ab0c69f1adb0ccde202124091f01d02b0c0ede8578f606063cc894  g++.exe  %LOCAL_HOME%\Downloads\EDA\tools\mingw64\bin\g++.exe
-ab37c11763fdcb3bf6f809b5d033a31ebeb77f10ba5934c72fa37287ee56144f  gcc.exe  %LOCAL_HOME%\Downloads\EDA\tools\mingw64\bin\gcc.exe
-218b3c2a49ebbd8d68f2e5f054fb3b3a8a4b63eb903388edc77a74b8635d0e38  mingw32-make.exe  %LOCAL_HOME%\Downloads\EDA\tools\mingw64\bin\mingw32-make.exe
-3b1b2b6508d7ebf66649405c42d30f073ce34ac0180f2cc03c08303e06c2a477  cmake.exe  %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\work\cmake-tool\mingw64\bin\cmake.exe
-2853b346861abc98f37f38cdcd4b5001b0261a487051b06f0f0f6109bd593638  python3.exe  %LOCAL_HOME%\Downloads\EDA\oss-cad-suite\lib\python3.exe
-4a69fb580fc223d395caf319b63b7c03c61d88af5540dfe9eccbbb70014a515f  baseline/yosys.exe
-0b68124a65638a13067d72716c337d5a6a0166da423d7d153225cff82471ff24  candidate/yosys.exe
+6dfc56ee3f7f2f0c50e85004d4d88783053ed680101ec693b0a2f5ff2f8cfd0b  baseline/yosys.exe
 e7161f996329320af6dfacf178813df0ee3c1a6fa82e7cd2216d37a4b7a828a7  baseline/yosys-abc.exe
+42210dfd5b5f354fa09fbf1251a48698aafa9301ba4d9b0428b135aca56a4d4c  candidate/yosys.exe
 e7161f996329320af6dfacf178813df0ee3c1a6fa82e7cd2216d37a4b7a828a7  candidate/yosys-abc.exe

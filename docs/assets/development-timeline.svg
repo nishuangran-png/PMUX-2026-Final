@@ -30,12 +30,12 @@
 
   <rect x="58" y="54" width="7" height="84" rx="3.5" fill="#4FD1C5"/>
   <text x="90" y="92" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="38" font-weight="750" letter-spacing="0.5">PMUX 算法演进</text>
-  <text x="90" y="124" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">从可测基线到 v1.0.0-final · 六个阶段 · 每一次收益都有证据</text>
+  <text x="90" y="124" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">从可测基线到 v1.0.2-final · 六个阶段 · 每一次收益都有证据</text>
 
   <g>
     <rect x="1294" y="62" width="248" height="44" rx="22" fill="#0C2A25" stroke="#2DD4BF" stroke-width="1.2"/>
     <circle cx="1320" cy="84" r="6" fill="#34D399"/>
-    <text x="1338" y="90" fill="#BBF7D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="650">FROZEN · 2026-11-02</text>
+    <text x="1338" y="90" fill="#BBF7D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="650">FROZEN · 2026-11-04</text>
   </g>
 
   <rect x="116" y="249" width="1368" height="3" rx="1.5" fill="url(#timeline)"/>
@@ -125,7 +125,7 @@
     <text x="1082" y="340" fill="#C4B5FD" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="650">2026.10.28–10.30</text>
     <text x="1082" y="371" fill="#F8FAFC" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="720">统一 ABC9 收敛</text>
     <text x="1082" y="405" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">A / B / C 同源消融</text>
-    <text x="1082" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">新增五题 13.02 → 22.28%</text>
+    <text x="1082" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">新增五题 13.02 → 22.62%</text>
     <text x="1082" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">nested 回退清零</text>
     <rect x="1082" y="520" width="126" height="30" rx="15" fill="#282046" stroke="#5D4D94"/>
     <text x="1100" y="540" fill="#DDD6FE" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">0 regression</text>
@@ -145,7 +145,7 @@
     <text x="1338" y="430" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">形式等价 9 / 9</text>
     <text x="1338" y="455" fill="#CBD5E1" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13.5">GitHub Release 发布</text>
     <rect x="1338" y="520" width="132" height="30" rx="15" fill="#12342A" stroke="#2C6B56"/>
-    <text x="1356" y="540" fill="#A7F3D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">v1.0.0-final</text>
+    <text x="1356" y="540" fill="#A7F3D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">v1.0.2-final</text>
     <text x="1338" y="587" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">源码、日志、哈希与运行包一起冻结</text>
   </g>
 
@@ -157,10 +157,10 @@
     <text x="88" y="758" fill="#38BDF8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">9</text>
     <text x="88" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">官方与新增用例</text>
 
-    <text x="374" y="758" fill="#A78BFA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">26.20%</text>
+    <text x="374" y="758" fill="#A78BFA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">26.80%</text>
     <text x="374" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">九题平均面积缩减</text>
 
-    <text x="660" y="758" fill="#F472B6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">31.09%</text>
+    <text x="660" y="758" fill="#F472B6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">32.04%</text>
     <text x="660" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">官方四题平均缩减</text>
 
     <text x="946" y="758" fill="#34D399" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="30" font-weight="760">0</text>
@@ -170,10 +170,10 @@
     <text x="1232" y="786" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">形式等价通过</text>
 
     <line x1="88" y1="810" x2="1512" y2="810" stroke="#1E293B"/>
-    <text x="88" y="833" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">Windows 独立十轮审计：最大墙钟比 1.023 · 最大内存比 1.031 · 两臂使用同一个 ABC</text>
+    <text x="88" y="833" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">Windows 同源五轮复测：最差墙钟均值比 1.0314 · 中位比 1.0332 · 内存比 1.0101</text>
     <text x="1512" y="833" text-anchor="end" fill="#64748B" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5">全部结构改写位于 ABC9 之前</text>
   </g>
 
-  <text x="58" y="890" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">SOURCE: FINAL_VERSION.json · logs/synthesis · logs/performance · logs/eqy · docs/DEVELOPMENT_TIMELINE.md</text>
+  <text x="58" y="890" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">SOURCE: FINAL_VERSION.json · logs/synthesis · logs/performance · logs/formal-yosys · docs/DEVELOPMENT_TIMELINE.md</text>
   <text x="1542" y="890" text-anchor="end" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">NO CASE-NAME BRANCHING · NO POST-ABC LUT REWRITE</text>
 </svg>

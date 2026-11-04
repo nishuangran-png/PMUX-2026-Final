@@ -1,3 +1,0 @@
-read_verilog "%PMUX_ROOT%/cases/official/test2/test2.v"
-synth_intel -family cycloneiv -top test2
-stat

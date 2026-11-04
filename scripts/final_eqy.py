@@ -83,7 +83,7 @@ def run_whole_miter(top: str, gold: Path, gate: Path, work: Path,
         "equiv_make gold gate equiv; hierarchy -top equiv; "
         "proc; async2sync; opt -fast; "
         "setundef -zero -init -undriven; equiv_simple -undef; "
-        "equiv_induct -undef; equiv_status -assert"
+        "equiv_induct -undef -seq 20; equiv_status -assert"
     )
     proc = subprocess.run(
         [str(baseline), "-Q", "-p", script], cwd=work, env=env,

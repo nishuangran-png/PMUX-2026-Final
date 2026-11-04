@@ -1,1 +1,1 @@
-Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, GNU %WORK_ROOT%/gccshim/gxx-wrap.exe 16.2.0)
+﻿Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, Clang C:/Users/dell/Documents/Codex/2026-09-17/ni-s/outputs/strict_compliance_20261104/tools/zigcxx.bat 21.1.0)

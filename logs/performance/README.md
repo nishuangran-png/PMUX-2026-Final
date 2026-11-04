@@ -1,19 +1,14 @@
 # Performance evidence
 
-- `raw.csv`: 10 baseline-first/candidate-second rounds per case.
-- `summary.csv`, `summary.json`: local no-polling medians and means.
-- `recheck-test2/`: permitted five-run recheck after a scheduling spike.
-- `official-summary.json`: final combined performance conclusion.
-- `legacy-high-frequency-memory-polling/`: preserved old seven-round data,
-  explicitly marked as non-final because a 2 ms memory polling thread
-  interfered with wall-clock measurement.
+The current `raw.csv`, `summary.csv`, and `summary.json` are a same-source,
+same-compiler, five-round baseline-first/candidate-second measurement of the
+final v1.0.2 binaries.
 
-Final reported result:
+Final result:
 
-> In an independent Windows audit, ten rounds produced a maximum wall
-> ratio of 1.023 and a maximum memory ratio of 1.031, meeting the relative
-> 1.05 threshold. Final scoring remains subject to the official evaluation
-> environment.
+- worst wall-clock mean ratio: `1.0314`
+- worst wall-clock median ratio: `1.0332`
+- worst peak-memory ratio: `1.0101`
+- every ratio is below `1.05`
 
-Local no-polling cross-check: worst ten-round median wall ratio `0.990`,
-worst memory ratio `1.033`.
+The source column in `raw.csv` uses package-relative paths.

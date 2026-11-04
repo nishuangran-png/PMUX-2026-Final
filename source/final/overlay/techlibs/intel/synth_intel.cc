@@ -276,13 +276,12 @@ struct SynthIntelPass : public ScriptPass {
 		}
 
 		if (check_label("map_ffs")) {
-			run("dfflegalize -cell $_DFFE_PN0P_ 01 -cell $_DFFE_PN1P_ 01");
-			run("techmap -map +/intel/common/ff_map.v -map +/intel/common/ff_map_pn1.v");
+			run("dfflegalize -cell $_DFFE_PN0P_ 01");
+			run("techmap -map +/intel/common/ff_map.v");
 			run("pmux_opt -fold_luts");
 		}
 
 		if (check_label("map_luts")) {
-			// Every design uses the same submitted ABC9 script.
 			run("abc9 -lut 4 -W 300 -script +/intel/cycloneiv/pmux_abc9.abc");
 			run("clean");
 			run("opt -fast");

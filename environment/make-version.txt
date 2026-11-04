@@ -1,2 +1,1 @@
-GNU Make 4.4.1
-Built for Windows32
+﻿No GNU Make was used; CMake Ninja build.

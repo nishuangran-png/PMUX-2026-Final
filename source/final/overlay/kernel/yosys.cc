@@ -640,13 +640,7 @@ void init_abc_executable_name()
 	if (std::getenv("ABC")) {
 		yosys_abc_executable = std::getenv("ABC");
 	} else {
-		// Release packages are relocatable: prefer an ABC executable shipped
-		// next to Yosys, while retaining the configured fallback.
-		std::string sibling = proc_self_dirname() + proc_program_prefix() + "yosys-abc";
-		if (check_file_exists(sibling + ".exe"))
-			yosys_abc_executable = sibling;
-		else
-			yosys_abc_executable = ABCEXTERNAL;
+		yosys_abc_executable = ABCEXTERNAL;
 	}
 #else
 	yosys_abc_executable = proc_self_dirname() + proc_program_prefix()+ "yosys-abc";

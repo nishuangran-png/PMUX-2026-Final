@@ -1,0 +1,4 @@
+6dfc56ee3f7f2f0c50e85004d4d88783053ed680101ec693b0a2f5ff2f8cfd0b  baseline/yosys.exe
+e7161f996329320af6dfacf178813df0ee3c1a6fa82e7cd2216d37a4b7a828a7  baseline/yosys-abc.exe
+42210dfd5b5f354fa09fbf1251a48698aafa9301ba4d9b0428b135aca56a4d4c  candidate/yosys.exe
+e7161f996329320af6dfacf178813df0ee3c1a6fa82e7cd2216d37a4b7a828a7  candidate/yosys-abc.exe

@@ -192,8 +192,12 @@ def main() -> int:
         for repetition in range(1, args.repeats + 1):
             for arm, binary in (("baseline", baseline), ("candidate", candidate)):
                 sample = run_once(binary, script, work_dir, args.timeout, env)
-                rows.append({
+                record_case = {
                     **case,
+                    "source": case["source"].relative_to(root).as_posix(),
+                }
+                rows.append({
+                    **record_case,
                     "arm": arm,
                     "repetition": repetition,
                     **sample,
@@ -249,9 +253,9 @@ def main() -> int:
             "warmup": "baseline then candidate once per case",
             "wall_clock": "time.perf_counter around process launch and full completion",
             "memory": "GetProcessMemoryInfo PeakWorkingSetSize read after process exit; no polling",
-            "same_workdir": str(work_dir),
+            "same_workdir": work_dir.relative_to(root).as_posix(),
             "same_script_per_case": True,
-            "same_abc": str(abc),
+            "same_abc": abc.relative_to(root).as_posix(),
         },
         "cases": summary,
         "worst_wall_ratio_mean": max(r["wall_ratio_mean"] for r in summary),

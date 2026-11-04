@@ -1,8 +1,5 @@
-Using built-in specs.
-COLLECT_GCC=%LOCAL_HOME%\Downloads\EDA\tools\mingw64\bin\g++.exe
-COLLECT_LTO_WRAPPER=%EDA_ROOT%/tools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/16.2.0/lto-wrapper.exe
-Target: x86_64-w64-mingw32
-Configured with: ../gcc-16.2.0/configure --prefix=/mingw64 --with-sysroot=/mingw64 --with-build-sysroot=D:/M/msys64/mingw64 --with-local-prefix=/local --with-native-system-header-dir=/include --libexecdir=/mingw64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-mingw-wildcard --enable-languages=c,c++,ada,fortran,lto,objc,obj-c++,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-tls --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-backtrace=yes --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/mingw64 --with-mpfr=/mingw64 --with-mpc=/mingw64 --with-isl=/mingw64 --with-pkgversion='Rev3, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --with-libstdcxx-zoneinfo=yes --disable-libstdcxx-debug --enable-lto --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
+Compiler wrapper: zigcxx.bat -> Zig 0.16.0 c++ / Clang 21.1.0
+
+clang version 21.1.0
+Target: x86_64-unknown-windows-gnu
 Thread model: posix
-Supported LTO compression algorithms: zlib zstd
-gcc version 16.2.0 (Rev3, Built by MSYS2 project) 

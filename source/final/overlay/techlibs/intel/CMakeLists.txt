@@ -39,7 +39,6 @@ yosys_pass(synth_intel
 		common/brams_m9k.txt
 		common/brams_map_m9k.v
 		common/ff_map.v
-		common/ff_map_pn1.v
 
 		max10/cells_sim.v
 		max10/cells_map.v

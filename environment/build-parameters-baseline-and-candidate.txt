@@ -1,11 +1,9 @@
-CMAKE_BUILD_TYPE=Release
+﻿BASELINE_UPSTREAM_COMMIT=d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a
+BUILD_TYPE=Release
 CMAKE_C_FLAGS_RELEASE=-O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG
 YOSYS_WITHOUT_SLANG=ON
-YOSYS_ABC_EXECUTABLE=baseline/yosys-abc.exe and candidate/yosys-abc.exe (same SHA-256)
-CMAKE_GENERATOR=MinGW Makefiles
-CMAKE_C_COMPILER=MSYS2 MinGW64 gcc 16.2.0 through environment-specific gcc wrapper
-CMAKE_CXX_COMPILER=MSYS2 MinGW64 g++ 16.2.0 through environment-specific g++ wrapper
-CMAKE_MAKE_PROGRAM=MSYS2 MinGW Make 4.4.1 through environment-specific make wrapper
-BASELINE_UPSTREAM_COMMIT=d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a
-CANDIDATE_SOURCE=baseline + source/patches/changes.patch
+YOSYS_ABC_EXECUTABLE=yosys-abc.exe
+SAME_COMPILER_FOR_BOTH_ARMS=true
+SAME_ABC_FOR_BOTH_ARMS=true
+ABCEXTERNAL=yosys-abc.exe

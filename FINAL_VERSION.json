@@ -1,53 +1,40 @@
 {
-  "package": "PMUX_final_repro.zip",
-  "frozen_date": "2026-11-02",
+  "package": "PMUX-2026-Final-v1.0.2-final-repro",
+  "archive_formats": [
+    "rar",
+    "zip"
+  ],
+  "version": "1.0.2-final",
+  "frozen_date": "2026-11-04",
   "baseline_yosys_commit": "d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a",
-  "superseded_commit_not_used": "9f75ca1f9834a39a863915b5dae0c7b1e33533bc",
-  "baseline_yosys_sha256": "4A69FB580FC223D395CAF319B63B7C03C61D88AF5540DFE9ECCBBB70014A515F",
-  "candidate_yosys_sha256": "0B68124A65638A13067D72716C337D5A6A0166DA423D7D153225CFF82471FF24",
-  "abc_exe_sha256": "E7161F996329320AF6DFACF178813DF0EE3C1A6FA82E7CD2216D37A4B7A828A7",
-  "abc_version": "UC Berkeley ABC 1.01, compiled 2026-09-22",
-  "abc_commit_note": "The prebuilt ABC binary does not embed its git commit. The exact runtime binary is pinned by SHA-256. The Yosys source tree's expected ABC submodule commit is 1e3d9abd7934ee0376a9fd474655a85780069776.",
-  "toolchain": {
-    "os": "Windows 10 10.0.26200, AMD64",
-    "environment": "MSYS2 MinGW64 / MSVCRT (not UCRT64)",
-    "gcc": "16.2.0 Rev3, Built by MSYS2 project",
-    "cmake": "4.4.4",
-    "python": "3.11.6",
-    "build_type": "Release",
-    "flags": "-O3 -DNDEBUG",
-    "yosys_without_slang": true
-  },
+  "baseline_yosys_sha256": "6dfc56ee3f7f2f0c50e85004d4d88783053ed680101ec693b0a2f5ff2f8cfd0b",
+  "candidate_yosys_sha256": "42210dfd5b5f354fa09fbf1251a48698aafa9301ba4d9b0428b135aca56a4d4c",
+  "abc_exe_sha256": "e7161f996329320af6dfacf178813df0ee3c1a6fa82e7cd2216d37a4b7a828a7",
+  "compiler": "Zig 0.16.0 / Clang 21.1.0",
+  "build_type": "Release",
   "cases": 9,
-  "overall_average_reduction_pct": 26.1963,
-  "official_average_reduction_pct": 31.0887,
-  "five_average_reduction_pct": 22.2824,
+  "official_average_reduction_pct": 32.039,
+  "five_average_reduction_pct": 22.6159,
+  "overall_average_reduction_pct": 26.8039,
   "area_regressions": 0,
   "dff_increases": 0,
   "unmapped_wide_luts": 0,
   "performance": {
-    "partner_independent_ten_round_max_wall_ratio": 1.023,
-    "partner_independent_ten_round_max_memory_ratio": 1.031,
-    "local_no_polling_ten_round_median_max_wall_ratio": 0.9896379825759495,
-    "local_no_polling_ten_round_median_max_memory_ratio": 1.0328941703263583,
-    "local_test2_five_run_recheck_wall_ratio_mean": 0.9087469724307979,
+    "rounds": 5,
+    "worst_wall_ratio_mean": 1.0314214180262098,
+    "worst_wall_ratio_median": 1.0332230223160903,
+    "worst_memory_ratio": 1.0101185313674472,
     "relative_1_05_pass": true,
-    "note": "Final scoring remains subject to the official evaluation environment."
+    "hard_limit_60s_2gib_pass": true
   },
-  "formal_equivalence_all_cases_pass": true,
-  "native_eqy_partition_pass_cases": [
-    "test1",
-    "test2",
-    "test3",
-    "test4"
-  ],
-  "whole_design_fallback_pass_cases": [
-    "pmux_case01_balanced",
-    "pmux_case02_pipeline",
-    "pmux_case03_crossbar",
-    "pmux_case04_feedback",
-    "pmux_case05_nested"
-  ],
-  "whole_design_fallback_reason": "The added five cases' EQY strategy failed because generated partition .sv files were not found at the expected relative path. The raw failure log is retained, and full-design equivalence subsequently proved all five.",
-  "frozen_statement": "以上 candidate 就是最终提交版本，冻结后未再修改。"
+  "formal": {
+    "whole_design_yosys_equivalence_pass": 9,
+    "whole_design_yosys_equivalence_total": 9,
+    "formal_model_sha256": "b46864a2fe1b1d1771bf06ed6e876b7ce5b7694a21c7c5095d7804c89c4355d0",
+    "test4_pre_map_luts": "34 -> 30",
+    "test4_final_area_metric": "38 -> 26"
+  },
+  "payload_identical_across_archive_formats": true,
+  "technical_document_included": false,
+  "technical_document_submission": "separate"
 }

@@ -9,8 +9,8 @@ Warning: Feature 'synth_intel' is experimental.
 
 2. Executing SYNTH_INTEL pass.
 
-2.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/cycloneiv/cells_sim.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/cycloneiv/cells_sim.v' to AST representation.
+2.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/cycloneiv/cells_sim.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/cycloneiv/cells_sim.v' to AST representation.
 Generating RTLIL representation for module `\VCC'.
 Generating RTLIL representation for module `\GND'.
 Generating RTLIL representation for module `\cycloneiv_io_ibuf'.
@@ -20,13 +20,13 @@ Generating RTLIL representation for module `\dffeas'.
 Generating RTLIL representation for module `\cycloneiv_pll'.
 Successfully finished Verilog frontend.
 
-2.2. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/m9k_bb.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/m9k_bb.v' to AST representation.
+2.2. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/m9k_bb.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/m9k_bb.v' to AST representation.
 Generating RTLIL representation for module `\altsyncram'.
 Successfully finished Verilog frontend.
 
-2.3. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/altpll_bb.v
-Parsing SystemVerilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/altpll_bb.v' to AST representation.
+2.3. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/altpll_bb.v
+Parsing SystemVerilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/altpll_bb.v' to AST representation.
 Successfully finished Verilog frontend.
 
 2.4. Executing HIERARCHY pass (managing design hierarchy).
@@ -62,7 +62,6 @@ Found async reset \reset in `\test1.$proc$test1.v:79$1'.
 
 2.5.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
-<suppressed ~2 debug messages>
 
 2.5.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
 Creating decoders for process `\test1.$proc$test1.v:67$4'.
@@ -145,7 +144,6 @@ Cleaned up 2 empty switches.
 
 2.5.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
-<suppressed ~44 debug messages>
 
 2.6. Executing CHECK pass (checking for obvious problems).
 Checking module test1...
@@ -167,7 +165,6 @@ Found and reported 0 problems.
 2.12. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 0 unused cells and 48 unused wires.
-<suppressed ~1 debug messages>
 
 2.13. Executing OPT pass (performing simple optimizations).
 
@@ -180,7 +177,6 @@ Computing hashes of 158 cells of `\test1'.
 Finding duplicate cells in `\test1'.
 Computing hashes of 78 cells of `\test1'.
 Finding duplicate cells in `\test1'.
-<suppressed ~240 debug messages>
 Removed a total of 80 cells.
 
 2.13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
@@ -189,7 +185,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~62 debug messages>
 
 2.13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -209,7 +204,6 @@ Removed a total of 0 cells.
 2.13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 0 unused cells and 80 unused wires.
-<suppressed ~1 debug messages>
 
 2.13.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
@@ -222,7 +216,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~62 debug messages>
 
 2.13.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -282,7 +275,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~62 debug messages>
 
 2.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -318,7 +310,6 @@ Adding EN signal on $procdff$443 ($dff) from module test1 (D = \Q2 [15:4], Q = \
 2.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 35 unused cells and 35 unused wires.
-<suppressed ~36 debug messages>
 
 2.15.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
@@ -331,7 +322,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~11 debug messages>
 
 2.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -345,7 +335,6 @@ Computing hashes of 63 cells of `\test1'.
 Finding duplicate cells in `\test1'.
 Computing hashes of 48 cells of `\test1'.
 Finding duplicate cells in `\test1'.
-<suppressed ~90 debug messages>
 Removed a total of 30 cells.
 
 2.15.13. Executing OPT_DFF pass (perform DFF optimizations).
@@ -353,7 +342,6 @@ Removed a total of 30 cells.
 2.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 0 unused cells and 30 unused wires.
-<suppressed ~1 debug messages>
 
 2.15.15. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
@@ -366,7 +354,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~11 debug messages>
 
 2.15.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -404,18 +391,16 @@ Removed top 3 bits (of 4) from wire test1.$procmux$25_Y.
 2.18. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 0 unused cells and 1 unused wires.
-<suppressed ~1 debug messages>
 
 2.19. Executing TECHMAP pass (map to technology primitives).
 
-2.19.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/cmp2lut.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/cmp2lut.v' to AST representation.
+2.19.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/cmp2lut.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/cmp2lut.v' to AST representation.
 Generating RTLIL representation for module `\_90_lut_cmp_'.
 Successfully finished Verilog frontend.
 
 2.19.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~6 debug messages>
 
 2.20. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
@@ -444,7 +429,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~11 debug messages>
 
 2.23.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -500,20 +484,18 @@ Finding unused cells or wires in module \test1..
 
 2.27. Executing TECHMAP pass (map to technology primitives).
 
-2.27.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/brams_map_m9k.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/brams_map_m9k.v' to AST representation.
+2.27.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/brams_map_m9k.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/brams_map_m9k.v' to AST representation.
 Generating RTLIL representation for module `$__M9K_ALTSYNCRAM_SINGLEPORT_FULL'.
 Successfully finished Verilog frontend.
 
 2.27.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~3 debug messages>
 
 2.28. Executing OPT pass (performing simple optimizations).
 
 2.28.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
-<suppressed ~6 debug messages>
 
 2.28.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\test1'.
@@ -526,7 +508,6 @@ Removed a total of 0 cells.
 2.28.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 2 unused cells and 5 unused wires.
-<suppressed ~3 debug messages>
 
 2.28.5. Finished fast OPT passes.
 
@@ -549,7 +530,6 @@ Running muxtree optimizer on module \test1..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~6 debug messages>
 
 2.30.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \test1.
@@ -573,8 +553,8 @@ Optimizing module test1.
 
 2.31. Executing TECHMAP pass (map to technology primitives).
 
-2.31.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/techmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/techmap.v' to AST representation.
+2.31.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/techmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -612,13 +592,11 @@ Using extmapper simplemap for cells of type $eq.
 Using extmapper simplemap for cells of type $logic_not.
 Using extmapper simplemap for cells of type $adff.
 No more expansions possible.
-<suppressed ~120 debug messages>
 
 2.32. Executing OPT pass (performing simple optimizations).
 
 2.32.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
-<suppressed ~152 debug messages>
 
 2.32.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\test1'.
@@ -632,7 +610,6 @@ Computing hashes of 1035 cells of `\test1'.
 Finding duplicate cells in `\test1'.
 Computing hashes of 1033 cells of `\test1'.
 Finding duplicate cells in `\test1'.
-<suppressed ~261 debug messages>
 Removed a total of 87 cells.
 
 2.32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
@@ -658,7 +635,6 @@ Removed a total of 0 cells.
 2.32.8. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \test1..
 Removed 0 unused cells and 150 unused wires.
-<suppressed ~1 debug messages>
 
 2.32.9. Executing OPT_EXPR pass (perform const folding).
 Optimizing module test1.
@@ -700,8 +676,8 @@ Removed 0 unused cells and 4 unused wires.
 
 2.35. Executing TECHMAP pass (map to technology primitives).
 
-2.35.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/ff_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/common/ff_map.v' to AST representation.
+2.35.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/ff_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/common/ff_map.v' to AST representation.
 Generating RTLIL representation for module `$_DFFE_PN0P_'.
 Successfully finished Verilog frontend.
 
@@ -709,7 +685,6 @@ Successfully finished Verilog frontend.
 Using template $paramod$_DFFE_PN0P_\_TECHMAP_WIREINIT_Q_=1'0 for cells of type $_DFFE_PN0P_.
 Using template $paramod$_DFFE_PN0P_\_TECHMAP_WIREINIT_Q_=1'x for cells of type $_DFFE_PN0P_.
 No more expansions possible.
-<suppressed ~243 debug messages>
 
 2.36. Executing ABC9 pass.
 
@@ -725,8 +700,8 @@ Found 0 SCCs.
 
 2.36.5. Executing TECHMAP pass (map to technology primitives).
 
-2.36.5.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/techmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/techmap.v' to AST representation.
+2.36.5.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/techmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -756,7 +731,6 @@ Successfully finished Verilog frontend.
 
 2.36.5.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~86 debug messages>
 
 2.36.6. Executing OPT pass (performing simple optimizations).
 
@@ -784,16 +758,15 @@ Removed a total of 0 cells.
 
 2.36.7. Executing TECHMAP pass (map to technology primitives).
 
-2.36.7.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_map.v' to AST representation.
+2.36.7.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_map.v' to AST representation.
 Successfully finished Verilog frontend.
 
 2.36.7.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~2 debug messages>
 
-2.36.8. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_model.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_model.v' to AST representation.
+2.36.8. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_model.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_model.v' to AST representation.
 Generating RTLIL representation for module `$__ABC9_DELAY'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
@@ -803,7 +776,6 @@ Successfully finished Verilog frontend.
 2.36.9. Executing ABC9_OPS pass (helper functions for ABC9).
 
 2.36.10. Executing ABC9_OPS pass (helper functions for ABC9).
-<suppressed ~2 debug messages>
 
 2.36.11. Executing AIGMAP pass (map logic to AIG).
 Module test1: replaced 426 cells with 1779 new cells, skipped 639 cells.
@@ -818,7 +790,6 @@ Module test1: replaced 426 cells with 1779 new cells, skipped 639 cells.
 2.36.11.1. Executing ABC9_OPS pass (helper functions for ABC9).
 
 2.36.11.2. Executing XAIGER backend.
-<suppressed ~5 debug messages>
 Extracted 840 AND gates and 2704 wires from module `test1' to a netlist network with 481 inputs and 87 outputs.
 
 2.36.11.3. Executing ABC9_EXE pass (technology mapping using ABC9).
@@ -837,55 +808,52 @@ ABC: + &sweep
 ABC: + &dc2 
 ABC: + &dch -f -r 
 ABC: + &ps 
-ABC: <abc-temp-dir>/input : i/o =    481/     87  and =    1127  lev =    7 (   2.17)  mem = 0.02 MB  ch =   51  box = 0  bb = 0
-ABC: cst =       0  cls =     27  lit =      51  unused =    1530  proof =     0
+ABC: <abc-temp-dir>/input : i/o =    481/     87  and =    1124  lev =    7 (   2.15)  mem = 0.02 MB  ch =   51  box = 0  bb = 0
+ABC: cst =       0  cls =     27  lit =      51  unused =    1527  proof =     0
 ABC: + &if -W 300 -v 
 ABC: K = 4. Memory (bytes): Truth =    0. Cut =   64. Obj =  144. Set =  672. CutMin = no
-ABC: Node =    1127.  Ch =    27.  Total mem =    0.26 MB. Peak cut mem =    0.02 MB.
-ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     6987.  T =     0.00 sec
-ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     6973.  T =     0.00 sec
-ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     6973.  T =     0.00 sec
-ABC: F:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     2615.  T =     0.00 sec
-ABC: A:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     2615.  T =     0.00 sec
-ABC: A:  Del = 1204.00.  Ar =     286.0.  Edge =     1092.  Cut =     2615.  T =     0.00 sec
+ABC: Node =    1124.  Ch =    27.  Total mem =    0.26 MB. Peak cut mem =    0.02 MB.
+ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     6930.  T =     0.00 sec
+ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     6929.  T =     0.00 sec
+ABC: P:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     6929.  T =     0.00 sec
+ABC: F:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     2594.  T =     0.00 sec
+ABC: A:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     2594.  T =     0.00 sec
+ABC: A:  Del = 1204.00.  Ar =     286.0.  Edge =     1091.  Cut =     2594.  T =     0.00 sec
 ABC: Total time =     0.00 sec
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &mfs 
 ABC: Timing manager is given but there is no GIA of boxes.
 ABC: Error: Abc_FrameUpdateGia(): Transformation has failed.
 ABC: + &ps -l 
-ABC: <abc-temp-dir>/input : i/o =    481/     87  and =     831  lev =    7 (   2.17)  mem = 0.02 MB  box = 0  bb = 0
-ABC: Mapping (K=4)  :  lut =    286  edge =    1092  lev =    4 (1.20)  mem = 0.01 MB
-ABC: LUT = 286 : 2=26 9.1 %  3=0 0.0 %  4=260 90.9 %  Ave = 3.82
+ABC: <abc-temp-dir>/input : i/o =    481/     87  and =     820  lev =    7 (   2.15)  mem = 0.02 MB  box = 0  bb = 0
+ABC: Mapping (K=4)  :  lut =    286  edge =    1091  lev =    4 (1.20)  mem = 0.01 MB
+ABC: LUT = 286 : 2=26 9.1 %  3=1 0.3 %  4=259 90.6 %  Ave = 3.81
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &verify 
-ABC: Networks are equivalent.  Time =     0.23 sec
+ABC: Networks are equivalent.  Time =     0.46 sec
 ABC: + time 
-ABC: elapse: 0.35 seconds, total: 0.35 seconds
+ABC: elapse: 0.70 seconds, total: 0.70 seconds
 
 2.36.11.5. Executing AIGER frontend.
-<suppressed ~8 debug messages>
-Removed 951 unused cells and 1464 unused wires.
+Removed 937 unused cells and 1450 unused wires.
 
 2.36.11.6. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
 ABC RESULTS:              $lut cells:      288
 ABC RESULTS:           input signals:       37
 ABC RESULTS:          output signals:       40
-<suppressed ~1136 debug messages>
 Removing temp directory.
 
 2.36.12. Executing TECHMAP pass (map to technology primitives).
 
-2.36.12.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_unmap.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/abc9_unmap.v' to AST representation.
+2.36.12.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_unmap.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/abc9_unmap.v' to AST representation.
 Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Successfully finished Verilog frontend.
 
 2.36.12.2. Continuing TECHMAP pass.
 No more expansions possible.
-<suppressed ~5 debug messages>
-Removed 27 unused cells and 4283 unused wires.
+Removed 26 unused cells and 4282 unused wires.
 
 2.37. Executing OPT pass (performing simple optimizations).
 
@@ -907,12 +875,11 @@ Finding unused cells or wires in module \test1..
 
 2.38. Executing AUTONAME pass.
 Renamed 773 objects in module test1.
-<suppressed ~773 debug messages>
 
 2.39. Executing TECHMAP pass (map to technology primitives).
 
-2.39.1. Executing Verilog-2005 frontend: %LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/cycloneiv/cells_map.v
-Parsing Verilog input from `%LOCAL_HOME%\Documents\Codex\2026-10-11\pmux-pmux-fpga-pmux-pmux-pmux\outputs\PMUX_final_repro\baseline\share/intel/cycloneiv/cells_map.v' to AST representation.
+2.39.1. Executing Verilog-2005 frontend: C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/cycloneiv/cells_map.v
+Parsing Verilog input from `C:\Users\dell\Documents\Codex\2026-09-17\ni-s\outputs\PMUX_final_repro_v1.0.2_20261104\baseline\share/intel/cycloneiv/cells_map.v' to AST representation.
 Generating RTLIL representation for module `$__inpad'.
 Generating RTLIL representation for module `$__outpad'.
 Generating RTLIL representation for module `$lut'.
@@ -920,32 +887,31 @@ Successfully finished Verilog frontend.
 
 2.39.2. Continuing TECHMAP pass.
 Using template $paramod$658b9ed803f0d3d335616d3858b53e0a2522f1e8$lut for cells of type $lut.
+Using template $paramod$a5516fc31d1e552de2435200bb732b4d4ad63a9c$lut for cells of type $lut.
+Using template $paramod$6d6beead1425af15cf78b27fd9b11b41b5d4bce8$lut for cells of type $lut.
 Using template $paramod$e51a8a571bee774247b38f52d6e85fd62ae52cea$lut for cells of type $lut.
 Using template $paramod$364c9ffbffac467d60dfec81bba4e18476c15602$lut for cells of type $lut.
 Using template $paramod$f9813472aa48e533b3838c6f2316dc2e78c66111$lut for cells of type $lut.
 Using template $paramod$47a8214374025465e226fa66bee690ff33268a25$lut for cells of type $lut.
-Using template $paramod$5e9374f44a27c3f8a1c38af244ec43ceb4fb8d4f$lut for cells of type $lut.
-Using template $paramod$272652f6c6fbe9a75eff76e45cc7e2788835518b$lut for cells of type $lut.
-Using template $paramod$101238f3d8d49ab12a9b49a2f01cd503b26e9c61$lut for cells of type $lut.
-Using template $paramod$6e238df02989b317f10820a22773676e71120644$lut for cells of type $lut.
-Using template $paramod$d6ca727e39f31d51d29072e0f33aa09c65e37336$lut for cells of type $lut.
-Using template $paramod$30305e55a780880b9c824fe3509a4d981acb0f2b$lut for cells of type $lut.
-Using template $paramod$a5516fc31d1e552de2435200bb732b4d4ad63a9c$lut for cells of type $lut.
-Using template $paramod$6d6beead1425af15cf78b27fd9b11b41b5d4bce8$lut for cells of type $lut.
 Using template $paramod$8e44661def013b6bf9fe6f8b049ef2c838d749f9$lut for cells of type $lut.
 Using template $paramod$c28a8b7ce0535d090c4cfb52e9c74affd52b110c$lut for cells of type $lut.
+Using template $paramod$d6ca727e39f31d51d29072e0f33aa09c65e37336$lut for cells of type $lut.
+Using template $paramod$30305e55a780880b9c824fe3509a4d981acb0f2b$lut for cells of type $lut.
+Using template $paramod$5e9374f44a27c3f8a1c38af244ec43ceb4fb8d4f$lut for cells of type $lut.
+Using template $paramod$272652f6c6fbe9a75eff76e45cc7e2788835518b$lut for cells of type $lut.
 Using template $paramod$571404c0889eaf57f492cb5e37f8acb5df5852f9$lut for cells of type $lut.
+Using template $paramod$101238f3d8d49ab12a9b49a2f01cd503b26e9c61$lut for cells of type $lut.
+Using template $paramod$6e238df02989b317f10820a22773676e71120644$lut for cells of type $lut.
 Using template $paramod$f8f63b209b7230e81958663ff24fef1613156af7$lut for cells of type $lut.
 Using template $paramod$873c285bdccf0ac2b60d2304ea5cd14bf211d2a6$lut for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0111 for cells of type $lut.
 Using template $paramod$b0b29b4c8f37261b391e055c304972b5b7234488$lut for cells of type $lut.
-Using template $paramod$309a7b6e35b0452e5c00f01ff4163637f4abaf24$lut for cells of type $lut.
 Using template $paramod$619b7c9a4d44585e10b42f7fb79b16304cca97c5$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01101010 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0001 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000001\LUT=2'01 for cells of type $lut.
 Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0100 for cells of type $lut.
 No more expansions possible.
-<suppressed ~568 debug messages>
 Removed 0 unused cells and 578 unused wires.
 
 2.40. Executing HIERARCHY pass (managing design hierarchy).
@@ -998,8 +964,8 @@ Found and reported 0 problems.
 
 Warnings: 1 unique messages, 1 total
 Warnings: 1 experimental features used (not excluded with -x).
-End of script. Logfile hash: fb574e1448
-Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, GNU %WORK_ROOT%/gccshim/gxx-wrap.exe 16.2.0)
+End of script. Logfile hash: f5c641747e
+Yosys 0.69+post (git sha1 d0e71cfb7bcafe2b437f3edc1789b69e99ecd55a, Release, Clang C:/Users/dell/Documents/Codex/2026-09-17/ni-s/outputs/strict_compliance_20261104/tools/zigcxx.bat 21.1.0)
 Time spent: 1% 21x opt_expr (0 sec), 1% 19x opt_clean (0 sec), ...
 
 EXIT_CODE=0

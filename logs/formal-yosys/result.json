@@ -1,0 +1,78 @@
+{
+  "method": "Yosys whole-design equivalence after ABC9 and before map_cells",
+  "cases": [
+    {
+      "suite": "official",
+      "name": "test1",
+      "top": "test1",
+      "gold_luts": 287,
+      "gate_luts": 179,
+      "status": "PASS"
+    },
+    {
+      "suite": "official",
+      "name": "test2",
+      "top": "test2",
+      "gold_luts": 25,
+      "gate_luts": 16,
+      "status": "PASS"
+    },
+    {
+      "suite": "official",
+      "name": "test3",
+      "top": "test3",
+      "gold_luts": 12,
+      "gate_luts": 10,
+      "status": "PASS"
+    },
+    {
+      "suite": "official",
+      "name": "test4",
+      "top": "test4",
+      "gold_luts": 34,
+      "gate_luts": 30,
+      "status": "PASS"
+    },
+    {
+      "suite": "five",
+      "name": "pmux_case01_balanced",
+      "top": "pmux_case01_balanced",
+      "gold_luts": 406,
+      "gate_luts": 255,
+      "status": "PASS"
+    },
+    {
+      "suite": "five",
+      "name": "pmux_case02_pipeline",
+      "top": "pmux_case02_pipeline",
+      "gold_luts": 402,
+      "gate_luts": 345,
+      "status": "PASS"
+    },
+    {
+      "suite": "five",
+      "name": "pmux_case03_crossbar",
+      "top": "pmux_case03_crossbar",
+      "gold_luts": 380,
+      "gate_luts": 294,
+      "status": "PASS"
+    },
+    {
+      "suite": "five",
+      "name": "pmux_case04_feedback",
+      "top": "pmux_case04_feedback",
+      "gold_luts": 364,
+      "gate_luts": 303,
+      "status": "PASS"
+    },
+    {
+      "suite": "five",
+      "name": "pmux_case05_nested",
+      "top": "pmux_case05_nested",
+      "gold_luts": 394,
+      "gate_luts": 338,
+      "status": "PASS"
+    }
+  ],
+  "pass": true
+}

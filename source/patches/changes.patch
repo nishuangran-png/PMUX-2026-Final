@@ -1,3 +1,19 @@
+--- a/passes/CMakeLists.txt
++++ b/passes/CMakeLists.txt
+@@ -4,6 +4,7 @@
+ add_subdirectory(hierarchy)
+ add_subdirectory(memory)
+ add_subdirectory(opt)
++add_subdirectory(pmux)
+ add_subdirectory(pmgen)
+ add_subdirectory(proc)
+ add_subdirectory(sat)
+--- /dev/null
++++ b/passes/pmux/CMakeLists.txt
+@@ -0,0 +1,3 @@
++yosys_pass(pmux_opt
++	pmux_opt.cc
++)
 --- /dev/null
 +++ b/passes/pmux/pmux_opt.cc
 @@ -0,0 +1,5010 @@
@@ -5011,22 +5027,32 @@
 +} PmuxOptPass;
 +
 +PRIVATE_NAMESPACE_END
+--- a/techlibs/intel/CMakeLists.txt
++++ b/techlibs/intel/CMakeLists.txt
+@@ -20,6 +20,7 @@
+ 		opt_clean
+ 		opt_expr
+ 		peepopt
++		pmux_opt
+ 		proc
+ 		read_verilog
+ 		setundef
+@@ -48,6 +49,7 @@
+ 
+ 		cycloneiv/cells_sim.v
+ 		cycloneiv/cells_map.v
++		cycloneiv/pmux_abc9.abc
+ 
+ 		cycloneive/cells_sim.v
+ 		cycloneive/cells_map.v
 --- /dev/null
-+++ b/passes/pmux/CMakeLists.txt
-@@ -0,0 +1,3 @@
-+yosys_pass(pmux_opt
-+	pmux_opt.cc
-+)
---- a/passes/CMakeLists.txt
-+++ b/passes/CMakeLists.txt
-@@ -4,6 +4,7 @@
- add_subdirectory(hierarchy)
- add_subdirectory(memory)
- add_subdirectory(opt)
-+add_subdirectory(pmux)
- add_subdirectory(pmgen)
- add_subdirectory(proc)
- add_subdirectory(sat)
++++ b/techlibs/intel/cycloneiv/pmux_abc9.abc
+@@ -0,0 +1,5 @@
++&scorr
++&sweep
++&dc2
++&dch -f -r
++&if -W 300 -a -v
 --- a/techlibs/intel/synth_intel.cc
 +++ b/techlibs/intel/synth_intel.cc
 @@ -208,7 +208,9 @@
@@ -5039,7 +5065,7 @@
  			run("wreduce");
  			run("peepopt");
  			run("opt_clean");
-@@ -251,19 +253,37 @@
+@@ -251,7 +253,23 @@
  			run("opt -fast -mux_undef -undriven -fine -full");
  			run("memory_map");
  			run("opt -undriven -fine");
@@ -5064,85 +5090,16 @@
  			run("opt -full");
  			run("clean -purge");
  			run("setundef -undriven -zero");
- 		}
- 
+@@ -260,10 +278,11 @@
  		if (check_label("map_ffs")) {
--			run("dfflegalize -cell $_DFFE_PN0P_ 01");
--			run("techmap -map +/intel/common/ff_map.v");
-+			run("dfflegalize -cell $_DFFE_PN0P_ 01 -cell $_DFFE_PN1P_ 01");
-+			run("techmap -map +/intel/common/ff_map.v -map +/intel/common/ff_map_pn1.v");
+ 			run("dfflegalize -cell $_DFFE_PN0P_ 01");
+ 			run("techmap -map +/intel/common/ff_map.v");
 +			run("pmux_opt -fold_luts");
  		}
  
  		if (check_label("map_luts")) {
 -			run("abc9 -lut 4 -W 300" + string(dff ? " -dff" : ""));
-+			// Every design uses the same submitted ABC9 script.
 +			run("abc9 -lut 4 -W 300 -script +/intel/cycloneiv/pmux_abc9.abc");
  			run("clean");
  			run("opt -fast");
  			run("autoname");
---- a/techlibs/intel/CMakeLists.txt
-+++ b/techlibs/intel/CMakeLists.txt
-@@ -20,6 +20,7 @@
- 		opt_clean
- 		opt_expr
- 		peepopt
-+		pmux_opt
- 		proc
- 		read_verilog
- 		setundef
-@@ -38,6 +39,7 @@
- 		common/brams_m9k.txt
- 		common/brams_map_m9k.v
- 		common/ff_map.v
-+		common/ff_map_pn1.v
- 
- 		max10/cells_sim.v
- 		max10/cells_map.v
-@@ -48,6 +50,7 @@
- 
- 		cycloneiv/cells_sim.v
- 		cycloneiv/cells_map.v
-+		cycloneiv/pmux_abc9.abc
- 
- 		cycloneive/cells_sim.v
- 		cycloneive/cells_map.v
---- /dev/null
-+++ b/techlibs/intel/common/ff_map_pn1.v
-@@ -0,0 +1,11 @@
-+// Async active-low reset DFF with reset/init value 1.
-+module  \$_DFFE_PN1P_ (input D, C, R, E, output Q);
-+   parameter _TECHMAP_WIREINIT_Q_ = 1'bx;
-+   generate if (_TECHMAP_WIREINIT_Q_ === 1'b1) begin
-+     dffeas #(.is_wysiwyg("TRUE"), .power_up("high")) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .clrn(1'b1), .prn(R), .ena(E), .asdata(1'b0), .aload(1'b0), .sclr(1'b0), .sload(1'b0));
-+   end else begin
-+     dffeas #(.is_wysiwyg("TRUE"), .power_up("low")) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .clrn(1'b1), .prn(R), .ena(E), .asdata(1'b0), .aload(1'b0), .sclr(1'b0), .sload(1'b0));
-+   end
-+   endgenerate
-+   wire _TECHMAP_REMOVEINIT_Q_ = 1;
-+endmodule
---- /dev/null
-+++ b/techlibs/intel/cycloneiv/pmux_abc9.abc
-@@ -0,0 +1,5 @@
-+&scorr
-+&sweep
-+&dc2
-+&dch -f -r
-+&if -W 300 -a -v
---- a/kernel/yosys.cc
-+++ b/kernel/yosys.cc
-@@ -640,7 +640,13 @@
- 	if (std::getenv("ABC")) {
- 		yosys_abc_executable = std::getenv("ABC");
- 	} else {
--		yosys_abc_executable = ABCEXTERNAL;
-+		// Release packages are relocatable: prefer an ABC executable shipped
-+		// next to Yosys, while retaining the configured fallback.
-+		std::string sibling = proc_self_dirname() + proc_program_prefix() + "yosys-abc";
-+		if (check_file_exists(sibling + ".exe"))
-+			yosys_abc_executable = sibling;
-+		else
-+			yosys_abc_executable = ABCEXTERNAL;
- 	}
- #else
- 	yosys_abc_executable = proc_self_dirname() + proc_program_prefix()+ "yosys-abc";

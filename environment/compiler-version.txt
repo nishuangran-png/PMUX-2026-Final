@@ -1,2 +1,1 @@
-g++.exe (Rev3, Built by MSYS2 project) 16.2.0
-Copyright (C) 2026 Free Software Foundation, Inc.
+﻿Zig 0.16.0 / Clang 21.1.0

@@ -1,3 +1,3 @@
-read_verilog "%PMUX_ROOT%/cases/five/pmux_case02_pipeline.v"
+read_verilog "C:/Users/dell/Documents/Codex/2026-09-17/ni-s/outputs/PMUX_final_repro_v1.0.2_20261104/cases/five/pmux_case02_pipeline.v"
 synth_intel -family cycloneiv -top pmux_case02_pipeline
 stat

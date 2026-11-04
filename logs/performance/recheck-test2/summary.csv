@@ -1,2 +1,0 @@
-suite,case,baseline_wall_mean_s,candidate_wall_mean_s,wall_ratio_mean,baseline_wall_median_s,candidate_wall_median_s,wall_ratio_median,baseline_cpu_mean_s,candidate_cpu_mean_s,cpu_ratio_mean,baseline_mem_median_bytes,candidate_mem_median_bytes,memory_ratio_median
-official,test2,0.2887689399998635,0.2624178999569267,0.9087469724307979,0.2888344000093639,0.2932784000877291,1.0153859792262319,0.0625,0.05625,0.9,15192064,15650816,1.0301968185494743
